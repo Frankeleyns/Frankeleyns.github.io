@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vim快捷操作 1. 拷贝 首先插入一些字符,随后按ESC进入命令模式，选定一行按yy，之后按p，按一次P，粘贴一次 效果如下：  随后，将光标移动到第一行，并按5yy（Linux的所有数字都是大键盘上的，小键盘的数字会产生其他效果）,随后按P   2.删除和拷贝语法类似，我们用5dd删除五行 效果如下:  3.查找进入命令模式，输入&#x2F; + [关键字] + 回车即可查询,按N查找下一个 效果如下：">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(1)vim学习.md">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;30&#x2F;1-vim%E5%AD%A6%E4%B9%A0-md&#x2F;index.html">
+<meta property="og:site_name" content="Growth Blog">
+<meta property="og:description" content="Vim快捷操作 1. 拷贝 首先插入一些字符,随后按ESC进入命令模式，选定一行按yy，之后按p，按一次P，粘贴一次 效果如下：  随后，将光标移动到第一行，并按5yy（Linux的所有数字都是大键盘上的，小键盘的数字会产生其他效果）,随后按P   2.删除和拷贝语法类似，我们用5dd删除五行 效果如下:  3.查找进入命令模式，输入&#x2F; + [关键字] + 回车即可查询,按N查找下一个 效果如下：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dtnweqdbj30q90f0gr2.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dubycqkbj307105zt8s.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7duf1mpdzj3063071dft.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dulepza4j308b02g744.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dumcpa0bj30530bajrl.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dusx4k7gj304406gdfu.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dv1j36y1j303w01ft8h.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dv20n1r3j305u0ag74k.jpg">
+<meta property="og:updated_time" content="2019-10-30T08:15:50.630Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;ws1.sinaimg.cn&#x2F;large&#x2F;007SzKTZgy1g7dtnweqdbj30q90f0gr2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'GrowthLj'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/30/1-vim学习-md/"/>
+
+
+
+
+
+  <title>(1)vim学习.md | Growth Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Growth Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/30/1-vim%E5%AD%A6%E4%B9%A0-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GrowthLj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2019/10/30/X7wecfjkrbhMDKH.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Growth Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">(1)vim学习.md</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T16:00:54+08:00">
+                2019-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/vim/" itemprop="url" rel="index">
+                    <span itemprop="name">vim</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Vim快捷操作"><a href="#Vim快捷操作" class="headerlink" title="Vim快捷操作"></a>Vim快捷操作</h3><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dtnweqdbj30q90f0gr2.jpg" alt=""></p>
+<h5 id="1-拷贝"><a href="#1-拷贝" class="headerlink" title="1. 拷贝"></a>1. 拷贝</h5><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dubycqkbj307105zt8s.jpg" alt=""></p>
+<p>首先插入一些字符,随后按<strong>ESC</strong>进入<strong>命令模式</strong>，选定一行按<strong>yy</strong>，之后按<strong>p</strong>，按一次<strong>P</strong>，粘贴一次</p>
+<p>效果如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7duf1mpdzj3063071dft.jpg" alt=""></p>
+<p>随后，将<strong>光标</strong>移动到第一行，并按<strong>5yy</strong>（Linux的所有数字都是大键盘上的，小键盘的数字会产生其他效果）,随后按<strong>P</strong></p>
+<p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dulepza4j308b02g744.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dumcpa0bj30530bajrl.jpg" alt=""></p>
+<h5 id="2-删除"><a href="#2-删除" class="headerlink" title="2.删除"></a>2.删除</h5><p>和拷贝语法类似，我们用<strong>5dd</strong>删除五行</p>
+<p>效果如下:</p>
+<p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dusx4k7gj304406gdfu.jpg" alt=""></p>
+<h5 id="3-查找"><a href="#3-查找" class="headerlink" title="3.查找"></a>3.查找</h5><p>进入<strong>命令模式</strong>，输入<strong>/ + [关键字] + 回车</strong>即可查询,按<strong>N</strong>查找下一个</p>
+<p>效果如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dv1j36y1j303w01ft8h.jpg" alt=""></p>
+<p>这里要注意Linux的查找字符是<strong>严格区分大小写</strong>的，我这里小写的sbdl就没匹配到😭</p>
+<p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dv20n1r3j305u0ag74k.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/30/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2019/10/30/X7wecfjkrbhMDKH.jpg"
+                alt="GrowthLj" />
+            
+              <p class="site-author-name" itemprop="name">GrowthLj</p>
+              <p class="site-description motion-element" itemprop="description">personal blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim快捷操作"><span class="nav-number">1.</span> <span class="nav-text">Vim快捷操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-拷贝"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 拷贝</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-删除"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-查找"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.查找</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GrowthLj</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

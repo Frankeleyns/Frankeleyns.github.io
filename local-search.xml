@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>docker操作</title>
+    <link href="undefined2019/11/01/docker%E6%93%8D%E4%BD%9C/"/>
+    <url>2019/11/01/docker%E6%93%8D%E4%BD%9C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vim与vi"><a href="#vim与vi" class="headerlink" title="vim与vi"></a>vim与vi</h1><h3 id="vi和vim的三种模式转化图如下"><a href="#vi和vim的三种模式转化图如下" class="headerlink" title="vi和vim的三种模式转化图如下:"></a>vi和vim的三种模式转化图如下:</h3><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dtbszrfgj30ik0a4whj.jpg" srcset="/img/loading.gif" alt=""></p><h4 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h4><pre><code class="linux">[root@localhost ~]# ll总用量 4-rw-------. 1 root root 1416 9月   4 20:36 anaconda-ks.cfg[root@localhost ~]# </code></pre><p>可以看出我没有Hello.java文件</p><p>使用命令</p><pre><code class="linux">[root@localhost ~]# vim Hello.java</code></pre><p>随后进入一般模式</p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7d1dy0j2nj30lf0tb3yo.jpg" srcset="/img/loading.gif" alt=""></p><p>此时还不能编辑，如果要编辑 需要按  <strong>Insert</strong> 或 按 <strong>i</strong> ，进入编辑模式</p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7d1gyfv0bj30ho0a5q2v.jpg" srcset="/img/loading.gif" alt=""></p><p>当左下角出现<strong>插入</strong>的时候才能开始编辑，如图</p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7d1jlvw60j30ib04i3ys.jpg" srcset="/img/loading.gif" alt=""></p><p>随后，如果要保存</p><blockquote><p><strong>Shift + ; + wq</strong>(wq是 写入(wirte)并退出(queit))</p></blockquote><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7d1mqs047j303p03gmwz.jpg" srcset="/img/loading.gif" alt=""></p><p><strong>:q!</strong>是不保存退出</p><h3 id="快捷操作"><a href="#快捷操作" class="headerlink" title="快捷操作"></a>快捷操作</h3><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dtnweqdbj30q90f0gr2.jpg" srcset="/img/loading.gif" alt=""></p><h5 id="1-拷贝"><a href="#1-拷贝" class="headerlink" title="1. 拷贝"></a>1. 拷贝</h5><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dubycqkbj307105zt8s.jpg" srcset="/img/loading.gif" alt=""></p><p>首先插入一些字符,随后按<strong>ESC</strong>进入<strong>命令模式</strong>，选定一行按<strong>yy</strong>，之后按<strong>p</strong>，按一次<strong>P</strong>，粘贴一次</p><p>效果如下：</p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7duf1mpdzj3063071dft.jpg" srcset="/img/loading.gif" alt=""></p><p>随后，将<strong>光标</strong>移动到第一行，并按<strong>5yy</strong>（Linux的所有数字都是大键盘上的，小键盘的数字会产生其他效果）,随后按<strong>P</strong></p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dulepza4j308b02g744.jpg" srcset="/img/loading.gif" alt=""></p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dumcpa0bj30530bajrl.jpg" srcset="/img/loading.gif" alt=""></p><h5 id="2-删除"><a href="#2-删除" class="headerlink" title="2.删除"></a>2.删除</h5><p>和拷贝语法类似，我们用<strong>5dd</strong>删除五行</p><p>效果如下:</p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dusx4k7gj304406gdfu.jpg" srcset="/img/loading.gif" alt=""></p><h5 id="3-查找"><a href="#3-查找" class="headerlink" title="3.查找"></a>3.查找</h5><p>进入<strong>命令模式</strong>，输入<strong>/ + [关键字] + 回车</strong>即可查询,按<strong>N</strong>查找下一个</p><p>效果如下：</p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dv1j36y1j303w01ft8h.jpg" srcset="/img/loading.gif" alt=""></p><p>这里要注意Linux的查找字符是<strong>严格区分大小写</strong>的，我这里小写的sbdl就没匹配到😭</p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dv20n1r3j305u0ag74k.jpg" srcset="/img/loading.gif" alt=""></p><h5 id="4-设置行号"><a href="#4-设置行号" class="headerlink" title="4.设置行号"></a>4.设置行号</h5><p>例行进入<strong>命令模式</strong>，输入 <strong>:set nu</strong></p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dvy3a60vj304o02e3yc.jpg" srcset="/img/loading.gif" alt=""></p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dvygdj6ej307008xq37.jpg" srcset="/img/loading.gif" alt=""></p><p>取消，行号<strong>:set nonu</strong></p><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dvzjksdfj305r023t8i.jpg" srcset="/img/loading.gif" alt=""><br><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dvzwzaktj3049081jrj.jpg" srcset="/img/loading.gif" alt=""></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>liunx</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="undefined2019/10/30/hello-world/"/>
+    <url>2019/10/30/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

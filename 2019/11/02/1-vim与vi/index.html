@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>docker操作 ~ Growth Blog</title>
+  <title>(1)vim与vi ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -66,10 +66,6 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">目录</a>
-          </li>
-        
           
           
           <li class="nav-item">
@@ -79,7 +75,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/about/">关于我</a>
+            <a class="nav-link" href="/about/">关于</a>
           </li>
         
         
@@ -96,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -108,7 +104,7 @@
 
             
               <br>
-              <p class="mt-3">Friday, November 1st 2019, 6:37 pm</p>
+              <p class="mt-3">Saturday, November 2nd 2019, 3:30 pm</p>
             
           </div>
 
@@ -129,7 +125,12 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h1 id="vim与vi"><a href="#vim与vi" class="headerlink" title="vim与vi"></a>vim与vi</h1><h3 id="vi和vim的三种模式转化图如下"><a href="#vi和vim的三种模式转化图如下" class="headerlink" title="vi和vim的三种模式转化图如下:"></a>vi和vim的三种模式转化图如下:</h3><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dtbszrfgj30ik0a4whj.jpg" srcset="/img/loading.gif" alt=""></p>
+            <h1 id="vim与vi"><a href="#vim与vi" class="headerlink" title="vim与vi"></a>vim与vi</h1><h3 id="什么是vim？"><a href="#什么是vim？" class="headerlink" title="什么是vim？"></a>什么是vim？</h3><blockquote>
+<p>Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
+<p>简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。</p>
+<p>连 vim 的官方网站 (<a href="http://www.vim.org/" target="_blank" rel="noopener">http://www.vim.org</a>) 自己也说 vim 是一个程序开发工具而不是文字处理软件。</p>
+</blockquote>
+<h3 id="vi和vim的三种模式转化图如下"><a href="#vi和vim的三种模式转化图如下" class="headerlink" title="vi和vim的三种模式转化图如下:"></a>vi和vim的三种模式转化图如下:</h3><p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dtbszrfgj30ik0a4whj.jpg" srcset="/img/loading.gif" alt=""></p>
 <h4 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h4><pre><code class="linux">[root@localhost ~]# ll
 总用量 4
 -rw-------. 1 root root 1416 9月   4 20:36 anaconda-ks.cfg
@@ -171,6 +172,18 @@
 <p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dvygdj6ej307008xq37.jpg" srcset="/img/loading.gif" alt=""></p>
 <p>取消，行号<strong>:set nonu</strong></p>
 <p><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dvzjksdfj305r023t8i.jpg" srcset="/img/loading.gif" alt=""><br><img src="https://ws1.sinaimg.cn/large/007SzKTZgy1g7dvzwzaktj3049081jrj.jpg" srcset="/img/loading.gif" alt=""></p>
+<h5 id="5-行尾和行首"><a href="#5-行尾和行首" class="headerlink" title="5.行尾和行首"></a>5.行尾和行首</h5><pre><code>[root@localhost ~]# vim /etc/profile</code></pre><p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20190927145402.png" srcset="/img/loading.gif" alt=""></p>
+<p>按下<strong>Shift + g</strong>，进入行尾</p>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20190927145504.png" srcset="/img/loading.gif" alt=""></p>
+<p>按下<strong>gg</strong>回到行首</p>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20190927145402.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="6-撤消"><a href="#6-撤消" class="headerlink" title="6.撤消"></a>6.撤消</h5><p>在<strong>编辑模式</strong>下乱输字符</p>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20190927145915.png" srcset="/img/loading.gif" alt=""></p>
+<p>随后,按<strong>ESC</strong>进入<strong>正常模式</strong>按<strong>u</strong></p>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20190927150026.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="7-移动光标"><a href="#7-移动光标" class="headerlink" title="7.移动光标"></a>7.移动光标</h5><p>第一步：进入<strong>编辑模式</strong>，设置行号， <strong>:set nu</strong></p>
+<p>第二步：进入<strong>正常模式</strong>，输入你要去的行数  10 + <strong>Shift + g</strong></p>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20190927153646.png" srcset="/img/loading.gif" alt=""></p>
 
             <hr>
           </div>
@@ -180,9 +193,9 @@
             <p>
               <i class="iconfont icon-tag"></i>
               
-                <a class="hover-with-bg" href="/tags/liunx">liunx</a>
+                <a class="hover-with-bg" href="/tags/Linux">Linux</a>
               
-              <span id="/2019/11/01/docker操作/" class="visitors leancloud_visitors" data-flag-title="docker操作">
+              <span id="/2019/11/02/1-vim与vi/" class="visitors leancloud_visitors" data-flag-title="(1)vim与vi">
                 <em id="visitors-text" class="post-meta-item-text"></em>
                 <i id="visitors-count"></i>
               </span>
@@ -197,7 +210,7 @@
     <div class="d-none d-lg-block col-lg-2 toc-container">
       
   <div id="toc">
-    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
     <div id="tocbot"></div>
   </div>
 
@@ -230,7 +243,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -239,7 +252,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -290,7 +303,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "docker操作&nbsp;",
+        "(1)vim与vi&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

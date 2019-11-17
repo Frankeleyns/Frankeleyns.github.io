@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="GrowthLj">
+  <meta name="keywords" content="">
+  <title>(3)实用指令 ~ Growth Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>GrowthLj Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Saturday, November 2nd 2019, 3:49 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="实用指令"><a href="#实用指令" class="headerlink" title="实用指令"></a>实用指令</h1><h3 id="Linux系统的运行级别"><a href="#Linux系统的运行级别" class="headerlink" title="Linux系统的运行级别"></a>Linux系统的运行级别</h3><pre><code class="bash">0:关机  
+1:单用户(找回丢失密码)
+2:多用户无网络服务
+3:多用户有网络服务
+4:保留
+5:图形界面
+6:重启
+
+命令 init [0||num]
+
+系统运行级别配置文件： /etc/inittab</code></pre>
+<p><img src="https://i.loli.net/2019/10/09/R9DjLcyuoXtGkFI.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="如何修改已经忘记密码"><a href="#如何修改已经忘记密码" class="headerlink" title="如何修改已经忘记密码"></a>如何修改已经忘记密码</h5><p><img src="https://i.loli.net/2019/10/09/rcNa2gMqbYtGkLe.png" srcset="/img/loading.gif" alt=""></p>
+<p>首先，在进入启动页面的时候按<strong>e</strong>键，然后会进入下面这个页面</p>
+<p><img src="https://i.loli.net/2019/10/09/g4j2GNFevKImaQn.png" srcset="/img/loading.gif" alt=""></p>
+<p>将光标移动到下图那一行</p>
+<p><img src="https://i.loli.net/2019/10/09/8k4sZdrAvRgEVno.png" srcset="/img/loading.gif" alt=""></p>
+<p>在行尾添加 <strong>init=/bin/sh</strong>,</p>
+<p><img src="https://i.loli.net/2019/10/09/LhdHGqYpItZvMAK.png" srcset="/img/loading.gif" alt=""></p>
+<p>添加完，按<strong>Ctrl + X</strong>执行，即可进入单用户模式</p>
+<p><img src="https://i.loli.net/2019/10/09/JBKHTxbWS5dGYIy.png" srcset="/img/loading.gif" alt=""></p>
+<p>然后，就可以<strong>修改密码</strong>了</p>
+<p><img src="https://i.loli.net/2019/10/09/4wbFxDeHrJGKBm8.png" srcset="/img/loading.gif" alt=""></p>
+<p>这里可以看见会字符不可见，你需要输入<strong>LANG=en</strong>，才能让字符可见</p>
+<p><img src="https://i.loli.net/2019/10/09/trswoihHCvd7JGu.png" srcset="/img/loading.gif" alt=""></p>
+<p>最后,执行<strong>exec /sbin/init</strong>即可退出单用户模式</p>
+<p><img src="https://i.loli.net/2019/10/09/gvKOq5eVhc3FwXd.png" srcset="/img/loading.gif" alt=""></p>
+<hr>
+<h3 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>当你对某个指令不收悉的时候，就可以使用帮助指令</p>
+<h4 id="获得帮助信息"><a href="#获得帮助信息" class="headerlink" title="获得帮助信息"></a>获得帮助信息</h4><ul>
+<li><p>语法</p>
+<pre><code class="bash">man [命令||配置文件]</code></pre>
+</li>
+<li><p>命令演示</p>
+<pre><code class="bash">[root@localhost ~]# man ls</code></pre>
+<p>输入命令按<strong>回车</strong>,</p>
+<p><img src="https://i.loli.net/2019/10/10/AnB285ODQH9RKLf.png" srcset="/img/loading.gif" alt=""></p>
+</li>
+</ul>
+<p>ls加-a可以<strong>显示隐藏文件</strong></p>
+<p><img src="https://i.loli.net/2019/10/10/mNfp1tGsEaX38D9.png" srcset="/img/loading.gif" alt=""></p>
+<p>ls加-l可以以<strong>另外的列表形式显示</strong></p>
+<p><img src="https://i.loli.net/2019/10/10/eOT45wiHoPu6gys.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="bash">[root@localhost home]# ls -a
+.  ..  crg  qy
+[root@localhost home]# ls -l
+总用量 0
+drwx------. 2 crg dw 62 9月  29 09:45 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy</code></pre>
+<p>命令选项不光可以单个用，也可以连用，</p>
+<pre><code class="bash">[root@localhost home]# ls -la
+总用量 0
+drwxr-xr-x.  4 root root  27 9月  29 09:45 .
+dr-xr-xr-x. 17 root root 224 9月   4 20:36 ..
+drwx------.  2 crg  dw    62 9月  29 09:45 crg
+drwx------.  2 qy   qy    83 9月  28 14:53 qy</code></pre>
+<h4 id="help-命令"><a href="#help-命令" class="headerlink" title="help 命令"></a>help 命令</h4><ul>
+<li><p>基本语法</p>
+<pre><code class="bash">help 命令</code></pre>
+</li>
+<li><p>实例演示</p>
+<pre><code class="bash">[root@localhost home]# help cd
+cd: cd [-L|[-P [-e]]] [dir]
+    Change the shell working directory.
+
+    Change the current directory to DIR.  The default DIR is the value of the
+    HOME shell variable.
+
+    The variable CDPATH defines the search path for the directory containing
+    DIR.  Alternative directory names in CDPATH are separated by a colon (:).
+    A null directory name is the same as the current directory.  If DIR begins
+    with a slash (/), then CDPATH is not used.
+
+    If the directory is not found, and the shell option `cdable_vars&#39; is set,
+    the word is assumed to be  a variable name.  If that variable has a value,
+    its value is used for DIR.
+
+    Options:
+        -L      force symbolic links to be followed
+        -P      use the physical directory structure without following symbolic
+        links
+        -e      if the -P option is supplied, and the current working directory
+        cannot be determined successfully, exit with a non-zero status
+
+    The default is to follow symbolic links, as if `-L&#39; were specified.
+
+    Exit Status:
+    Returns 0 if the directory is changed, and if $PWD is set successfully when
+    -P is used; non-zero otherwise.
+[root@localhost home]# </code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="查看目录类命令"><a href="#查看目录类命令" class="headerlink" title="查看目录类命令"></a>查看目录类命令</h3><h4 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h4><p><strong>这个命令用来显示当前工作的绝对路径</strong></p>
+<pre><code class="bash">[root@localhost ~]# pwd
+/root
+[root@localhost ~]# </code></pre>
+<h4 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h4><p><strong>该命令用来查看当前目录的所有内容</strong></p>
+<pre><code class="bash">ls [选项] [目录||文件]</code></pre>
+<pre><code class="bash">[root@localhost home]# ls
+crg  qy
+[root@localhost home]# ls -l
+总用量 0
+drwx------. 2 crg dw 62 9月  29 09:45 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy
+[root@localhost home]# ls -al
+总用量 0
+drwxr-xr-x.  4 root root  27 9月  29 09:45 .
+dr-xr-xr-x. 17 root root 224 9月   4 20:36 ..
+drwx------.  2 crg  dw    62 9月  29 09:45 crg
+drwx------.  2 qy   qy    83 9月  28 14:53 qy
+[root@localhost home]# 
+</code></pre>
+<h4 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h4><p><strong>用于切换目录</strong></p>
+<pre><code class="bash">cd [参数](指定目录)</code></pre>
+<pre><code class="bash">[root@localhost /]# ll
+总用量 16
+lrwxrwxrwx.   1 root root    7 9月   4 20:33 bin -&gt; usr/bin
+dr-xr-xr-x.   5 root root 4096 9月   4 20:37 boot
+drwxr-xr-x.  20 root root 3220 10月 10 09:01 dev
+drwxr-xr-x.  75 root root 8192 10月 10 09:01 etc
+drwxr-xr-x.   4 root root   27 9月  29 09:45 home
+lrwxrwxrwx.   1 root root    7 9月   4 20:33 lib -&gt; usr/lib
+lrwxrwxrwx.   1 root root    9 9月   4 20:33 lib64 -&gt; usr/lib64
+drwxr-xr-x.   2 root root    6 4月  11 2018 media
+drwxr-xr-x.   2 root root    6 4月  11 2018 mnt
+drwxr-xr-x.   2 root root    6 4月  11 2018 opt
+dr-xr-xr-x. 135 root root    0 10月 10 09:01 proc
+dr-xr-x---.   2 root root  151 10月  9 14:26 root
+drwxr-xr-x.  24 root root  720 10月 10 09:01 run
+lrwxrwxrwx.   1 root root    8 9月   4 20:33 sbin -&gt; usr/sbin
+drwxr-xr-x.   2 root root    6 4月  11 2018 srv
+dr-xr-xr-x.  13 root root    0 10月 10 09:01 sys
+drwxrwxrwt.  12 root root  265 10月 10 10:09 tmp
+drwxr-xr-x.  13 root root  144 9月  28 15:29 usr
+drwxr-xr-x.  19 root root  267 9月   4 20:37 var
+[root@localhost /]# cd /home
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg dw 62 9月  29 09:45 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy
+[root@localhost home]# </code></pre>
+<hr>
+<h3 id="操作文件类命令"><a href="#操作文件类命令" class="headerlink" title="操作文件类命令"></a>操作文件类命令</h3><h4 id="mkdir命令"><a href="#mkdir命令" class="headerlink" title="mkdir命令"></a>mkdir命令</h4><p><strong>用于创建目录</strong></p>
+<pre><code class="bash">mkdir [选项] 要创建的目录
+
+-p : 创建多级目录</code></pre>
+<pre><code class="bash">[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg dw 62 9月  29 09:45 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy
+[root@localhost home]# mkdir dog
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwxr-xr-x. 2 root root  6 10月 10 13:42 dog
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost home]# mkdir /home/animal/cat
+mkdir: 无法创建目录&quot;/home/animal/cat&quot;: 没有那个文件或目录
+[root@localhost home]# mkdir -p /home/animal/cat
+[root@localhost home]# ll
+总用量 0
+drwxr-xr-x. 3 root root 17 10月 10 13:46 animal
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwxr-xr-x. 2 root root  6 10月 10 13:42 dog
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost animal]# cd animal
+[root@localhost animal]# ll
+总用量 0
+drwxr-xr-x. 2 root root 6 10月 10 13:46 cat
+</code></pre>
+<h4 id="rmdir命令"><a href="#rmdir命令" class="headerlink" title="rmdir命令"></a>rmdir命令</h4><p><strong>rmdir命令用于删除空目录</strong></p>
+<pre><code class="bash">rmdir [目录]</code></pre>
+<p>删除dog目录</p>
+<pre><code class="bash">[root@localhost home]# ll
+总用量 0
+drwxr-xr-x. 3 root root 17 10月 10 13:48 animal
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwxr-xr-x. 2 root root  6 10月 10 13:42 dog
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost home]# rmdir dog
+[root@localhost home]# ll
+总用量 0
+drwxr-xr-x. 3 root root 17 10月 10 13:48 animal
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost home]# rmdir animal
+rmdir: 删除 &quot;animal&quot; 失败: 目录非空</code></pre>
+<p>如果要删除一个<strong>非空的目录</strong>需要用<strong>rm -rf</strong>命令</p>
+<pre><code class="bash">[root@localhost home]# rm -rf animal
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg dw 62 9月  29 09:45 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy
+[root@localhost home]# </code></pre>
+<h4 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h4><p><strong>创建一个空的文件</strong></p>
+<p>接下来，创建一个Hello.txt</p>
+<pre><code class="bash">[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg dw 62 9月  29 09:45 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy
+[root@localhost home]# touch hello.txt
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+-rw-r--r--. 1 root root  0 10月 10 15:14 hello.txt
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost home]# </code></pre>
+<p><strong>touch</strong>也可以创建多个文件</p>
+<pre><code class="bash">[root@localhost home]# touch sb.txt dl.txt
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+-rw-r--r--. 1 root root  0 10月 10 15:15 dl.txt
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+-rw-r--r--. 1 root root  0 10月 10 15:15 sb.txt
+[root@localhost home]# </code></pre>
+<h4 id="cp命令"><a href="#cp命令" class="headerlink" title="cp命令"></a>cp命令</h4><p><strong>拷贝文件到指定目录</strong></p>
+<pre><code class="bash">cp [选项] [待拷贝文件] [拷贝目标]
+
+-r: 拷贝整个文件夹</code></pre>
+<p>接下来,将a.txt<strong>拷贝到</strong>aaa目录</p>
+<pre><code class="bash">[root@localhost home]# ll
+总用量 0
+drwxr-xr-x. 2 root root 19 10月 10 15:23 aaa
+-rw-r--r--. 1 root root  0 10月 10 15:23 a.txt
+drwxr-xr-x. 2 root root  6 10月 10 15:25 bbb
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost home]# cp a.txt aaa
+[root@localhost home]# cd aaa
+[root@localhost aaa]# ll
+总用量 0
+-rw-r--r--. 1 root root 0 10月 10 15:23 a.txt
+[root@localhost aaa]# </code></pre>
+<p>如果，要将aaa目录拷贝到bbb目录下，</p>
+<pre><code class="bash">[root@localhost home]# cp aaa bbb
+cp: 略过目录&quot;aaa&quot;
+[root@localhost home]# </code></pre>
+<p>会提示一个错误，略过目录”aaa”，这个时候就需要加入选项<strong>-r</strong></p>
+<pre><code class="bash">[root@localhost home]# cp -r aaa bbb
+[root@localhost home]# cd bbb
+[root@localhost bbb]# ll
+总用量 0
+drwxr-xr-x. 2 root root 19 10月 10 15:29 aaa
+[root@localhost bbb]# </code></pre>
+<p>如果，再复制一次，会提示要不要覆盖，如果默认要覆盖可以使用<strong>\cp</strong></p>
+<pre><code class="bash">[root@localhost home]# cp -r aaa bbb
+cp：是否覆盖&quot;bbb/aaa/a.txt&quot;？ y
+[root@localhost home]# /cp -r aaa bbb
+-bash: /cp: 没有那个文件或目录
+[root@localhost home]# \cp -r aaa bbb
+[root@localhost home]# </code></pre>
+<p>这里注意是<strong>\cp</strong>，不仔细的话容易弄反</p>
+<h4 id="rm命令"><a href="#rm命令" class="headerlink" title="rm命令"></a>rm命令</h4><p><strong>用于移除文件或目录</strong></p>
+<pre><code class="bash">rm [文件||目录]
+
+-r : 递归删除整个文件夹
+-f : 强制删除不提示</code></pre>
+<p>删除<strong>/home/a.txt</strong>，</p>
+<pre><code class="bash">[root@localhost home]# rm a.txt
+rm：是否删除普通空文件 &quot;a.txt&quot;？y
+[root@localhost home]# </code></pre>
+<p>删除<strong>/home/aaa</strong></p>
+<pre><code class="bash">[root@localhost aaa]# rm /home/aaa
+rm: 无法删除&quot;/home/aaa&quot;: 是一个目录
+[root@localhost aaa]# rm -r /home/aaa
+rm：是否进入目录&quot;/home/aaa&quot;? y
+rm：是否删除普通空文件 &quot;/home/aaa/a.txt&quot;？y
+rm：是否删除目录 &quot;/home/aaa&quot;？y
+[root@localhost aaa]# </code></pre>
+<p>这里可以看出如果要删除目录，要对目录下所有文件确认是否删除，非常麻烦，所以，如果不想提示，加上<strong>-f</strong>命令强制删除<strong>/home/bbb</strong>，</p>
+<pre><code class="bash">[root@localhost home]# ll
+总用量 0
+drwxr-xr-x. 3 root root 17 10月 10 15:29 bbb
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost home]# rm -rf /home/bbb/
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg dw 62 9月  29 09:45 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy
+[root@localhost home]# </code></pre>
+<h4 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h4><p><strong>mv指令用于移动文件或重命名</strong></p>
+<pre><code class="bash">重命名 ： mv oldNameFile newNameFile
+移动 ： mv /oldPath /newPath</code></pre>
+<p>接下来，我们将<strong>/home/aaa.txt</strong>重命名为<strong>sz.txt</strong></p>
+<pre><code class="bash">[root@localhost home]# ll
+总用量 0
+drwxr-xr-x. 2 root root  6 10月 11 09:26 aaa.txt
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+[root@localhost home]# mv aaa.txt sz.txt
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+drwxr-xr-x. 2 root root  6 10月 11 09:26 sz.txt
+[root@localhost home]# </code></pre>
+<p>然后，将sz.txt移动到<strong>crg</strong>目录里面，</p>
+<pre><code class="bash">[root@localhost home]# ll
+总用量 0
+drwx------. 2 crg  dw   62 9月  29 09:45 crg
+drwx------. 2 qy   qy   83 9月  28 14:53 qy
+drwxr-xr-x. 2 root root  6 10月 11 09:26 sz.txt
+[root@localhost home]# mv /home/sz.txt/ /home/crg/
+[root@localhost home]# ll
+总用量 0
+drwx------. 3 crg dw 76 10月 11 09:34 crg
+drwx------. 2 qy  qy 83 9月  28 14:53 qy
+[root@localhost home]# cd crg
+[root@localhost crg]# ll
+总用量 0
+drwxr-xr-x. 2 root root 6 10月 11 09:26 sz.txt
+[root@localhost crg]# </code></pre>
+<hr>
+<h3 id="查看文件类命令"><a href="#查看文件类命令" class="headerlink" title="查看文件类命令"></a>查看文件类命令</h3><h4 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h4><p><strong>用来查看文件内容，以只读的方式</strong></p>
+<pre><code class="bash">cat [选项] [目标文件]</code></pre>
+<p>用cat的方式查看<strong>/etc/profile</strong></p>
+<pre><code class="bash">[root@localhost ~]# cat /etc/profile</code></pre>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20191012091155.png" srcset="/img/loading.gif" alt=""></p>
+<p>这里可以查看，但没有行号，我们给他设定一个行号,加上选项<strong>-n</strong></p>
+<pre><code class="bash">[root@localhost ~]# cat -n /etc/profile</code></pre>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20191012091429.png" srcset="/img/loading.gif" alt=""></p>
+<p>但是，cat命令每次都会直接跑到文件末尾，让你看不清，所以，一般还会给和<strong>| more</strong>连用，</p>
+<pre><code class="bash">[root@localhost ~]# cat -n /etc/profile | more</code></pre>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20191012091759.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>| more</strong>用来<strong>分页显示</strong>，按<strong>空格</strong>看下一页</p>
+<h4 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h4><p><strong>more命令是一个基于VI编辑器的文本过滤器，它以全屏幕的方式按页显示文本文件内容</strong></p>
+<p>用<strong>more命令</strong>查看文件,</p>
+<pre><code class="bash">[root@localhost ~]# more /etc/profile</code></pre>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20191012095423.png" srcset="/img/loading.gif" alt=""></p>
+<p>快捷键,</p>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20191012095608.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h4><p><strong>less命令和more命令类似，但它功能更强大，不会将整个文件加载完后再显示，比more效率更高，一般用于查看大型文件</strong></p>
+<p>接下来，用less命令查看<strong>/etc/services</strong></p>
+<pre><code class="bash">[root@localhost etc]# less /etc/services</code></pre>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/1570846827372.png" srcset="/img/loading.gif" alt=""></p>
+<p>可以看出，它只加载了这么多就不往下显示了，</p>
+<p><strong>less快捷键：</strong></p>
+<p><img src="https://raw.githubusercontent.com/201500317/markdown_upload/master/img/20191012102549.png" srcset="/img/loading.gif" alt=""></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Linux">Linux</a>
+              
+              <span id="/2019/11/02/3-实用指令/" class="visitors leancloud_visitors" data-flag-title="(3)实用指令">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "(3)实用指令&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

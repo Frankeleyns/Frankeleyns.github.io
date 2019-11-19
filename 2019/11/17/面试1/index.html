@@ -137,10 +137,10 @@
 <p>6.JAVA反射机制</p>
 <p>7.手画一个线程状态图</p>
 <p>8.手写三个线程交替打印ABC</p>
-<p>9.什么是TCP三次握手，为什么四次握手断开连接，为什么</p>
+<p>9.什么是TCP三次握手，为什么四次挥手断开连接，为什么</p>
 <p>10.手写一个冒泡算法</p>
 <p>11.SpringMVC是怎么运行的？</p>
-<p>12.索引类型</p>
+<p>12.索引类型及作用</p>
 </blockquote>
 <p>由于我太菜了，很多都没答出来，甚至连第一个题都能写错，真是服了我自己了，不过这是第一次面试可以给自己长长教训。</p>
 <p>下面面试答案：</p>
@@ -263,7 +263,56 @@ public class SysaAbcThread implements Runnable{
 
 
 }</code></pre>
-
+<h2 id="9-什么是TCP三次握手，为什么四次挥手断开连接"><a href="#9-什么是TCP三次握手，为什么四次挥手断开连接" class="headerlink" title="9.什么是TCP三次握手，为什么四次挥手断开连接"></a>9.什么是TCP三次握手，为什么四次挥手断开连接</h2><p><strong>三此握手(Three-way Handshake)是指建立一个TCP连接时</strong>，需要客户端和服务端总共发送三个包。</p>
+<p>三次握手的目的是连接服务器指定端口，建立TCP连接，并同步连接双方的序列号和确认号，交换TCP窗口大小信息。</p>
+<ul>
+<li><p>第一次握手(SYN=1,seq=x):   <strong>客户端=&gt;服务端</strong></p>
+<p>客户端发送一个TCP的SYN标志位置1得1包，指明客户端打算连接的服务器的端口，以及初始序号X，保存在包头的序列号(Sequence Number)字段里。</p>
+<p>发送完毕客户端进入<strong>SYN_SEND</strong>状态。</p>
+</li>
+</ul>
+<ul>
+<li><p>第二次握手(SYN=1,ACK=1,seq=y,ACKnum=x+1):  <strong>服务端=&gt;客户端</strong></p>
+<p>服务器发回确认包(ACK)应答。即SYN标志和ACK标志位均为1。服务器端选择自己的ISN序列号，放到Seq域里，同时将确认序号(Acknowledgement Number)设置为客户的ISN加1，即X+1。发送完毕后，服务器端进入<strong>SYN_RCVD</strong>状态。</p>
+</li>
+</ul>
+<ul>
+<li><p>第三次握手(ACK=1,ACKnum=y+1)：<strong>客户端=&gt;服务端</strong></p>
+<p>客户端再次发回确认包(ACK)，SYN标志位为0，ACK标志为1，并把服务器发来ACK的序号字段+1，放在确定字段中发送给对方，并且在数据段放写INS的+1</p>
+<p>发送完毕后，客户端进入<strong>ESTABLISHED</strong>状态，当服务器端接收到这个包时，也进入<strong>ESTABLISHED</strong>状态，TCP握手结束。</p>
+</li>
+</ul>
+<p><strong>四次挥手(Four-Way Wavehand)是指断开一个TCP连接时</strong>，需要客户端和服务端发送四个包确认连接断开。客户端或服务端均可主动发起挥手动作。</p>
+<ul>
+<li><p>第一次挥手(FIN=1，seq=x)</p>
+<p>假设客户端想要关闭连接，客户端发送一个FIN标志位置为1的包，表示自己已经没有数据可以发送了，但是仍然可以接受数据。</p>
+<p>发送完毕后，客户端进入<strong>FIN_WAIT_1</strong>状态</p>
+</li>
+</ul>
+<ul>
+<li><p>第二次挥手(ACK=1，ACKnum=x+1)</p>
+<p>服务器端确认客户端发送的FIN包，发送一个确认包，表明自己接收到了客户端关闭连接的请求，但还没有准备好关闭连接。</p>
+<p>发送完毕后，服务器端进入<strong>CLOSE_WAIT</strong>状态，客户端接收到这个确认包之后，进入<strong>FIN_WAIT_2</strong>状态，等待服务器关闭连接。</p>
+</li>
+</ul>
+<ul>
+<li><p>第三次挥手(FIN=1，seq=y)</p>
+<p>服务器端准备好关闭连接时，向客户端发送结束连接的请求，FIN设置为1.</p>
+<p>发送完毕后，服务端进入<strong>LAST_ACK</strong>状态，等待来自客户端的最后一个ACK。</p>
+</li>
+</ul>
+<ul>
+<li><p>第四次挥手(ACK=1，ACKnum=y+1)</p>
+<p>客户端接收来自服务器端的关闭请求，发送一个确认包，并进入<strong>TIME_WAIT</strong>状态，等待可能出现的要求重传的ACK包。</p>
+<p>服务器端接收到这个确认包之后，关闭连接，进入<strong>CLOSED</strong>状态。</p>
+<p>客户端等待了某个固定时间（两个最大生命周期，2MSL，2 Maximum Segment Lifetime）之后，没收到服务器端的ACK，认为服务器端已经正常关闭连接，于是自己也关闭连接，进入<strong>CLOSED</strong>状态</p>
+</li>
+</ul>
+<h2 id="10-手写一个冒泡算法"><a href="#10-手写一个冒泡算法" class="headerlink" title="10.手写一个冒泡算法"></a>10.手写一个冒泡算法</h2><pre><code class="java">for 
+    for 
+</code></pre>
+<h2 id="11-SpringMVC是怎么运行的？"><a href="#11-SpringMVC是怎么运行的？" class="headerlink" title="11.SpringMVC是怎么运行的？"></a>11.SpringMVC是怎么运行的？</h2><pre><code class="java"></code></pre>
+<h2 id="12-索引类型及作用"><a href="#12-索引类型及作用" class="headerlink" title="12.索引类型及作用"></a>12.索引类型及作用</h2>
             <hr>
           </div>
           <br>

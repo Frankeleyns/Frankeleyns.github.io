@@ -148,7 +148,11 @@
 浮点型:  float--4字节    double--8字节
 字符型:  char--2字节
 布尔型:  boolean--1字节</code></pre>
-<h2 id="2-单例模式的三种实现"><a href="#2-单例模式的三种实现" class="headerlink" title="2.单例模式的三种实现"></a>2.单例模式的三种实现</h2><pre><code class="JAVA">//1.懒汉式,默认不实例化，什么时候用什么时候创建对象
+<h2 id="2-单例模式的三种实现"><a href="#2-单例模式的三种实现" class="headerlink" title="2.单例模式的三种实现"></a>2.单例模式的三种实现</h2><pre><code class="JAVA">/**
+* 1.懒汉式,默认不实例化，什么时候用什么时候创建对象
+* 优点：懒加载启动快，资源占用小，使用时才实例化，无锁。
+* 缺点：非线程安全。
+*/
 public class Singleton{
 
     private static Singleton instance;
@@ -165,7 +169,13 @@ public class Singleton{
 }
 
 
-//2.饿汉式，类加载的时候就实例化
+
+/*
+* 2.饿汉式，类加载的时候就实例化
+* 优点：饿汉模式天生是线程安全的，使用时没有延迟。
+* 缺点：启动时即创建实例，启动慢，有可能造成资源浪费。
+*/
+
 public class Singleton{
 
     private Singleton(){}
@@ -179,7 +189,11 @@ public class Singleton{
 }
 
 
-//3.静态内部类
+
+/*
+* 3.静态内部类
+* 优点：将懒加载和线程安全完美结合的一种方式（无锁）。（推荐）
+*/
 public class Singleton{
 
     private Singleton(){}
@@ -195,7 +209,10 @@ public class Singleton{
 </code></pre>
 <h2 id="3-ArrayList和LinkList的区别"><a href="#3-ArrayList和LinkList的区别" class="headerlink" title="3.ArrayList和LinkList的区别"></a>3.ArrayList和LinkList的区别</h2><pre><code class="JAVA">ArrayList是基于数组实现的，查询快，更新慢。
 LinkList是基于链表实现的，插入，删除快，查询慢</code></pre>
-<h2 id="4-HashSet原理"><a href="#4-HashSet原理" class="headerlink" title="4.HashSet原理"></a>4.HashSet原理</h2><pre><code class="JAVA">HashSet实现Set接口，由一个HashMap实例支持。不保证set的迭代顺序;不保证舒徐恒久不变。此类允许使用null</code></pre>
+<h2 id="4-HashSet原理"><a href="#4-HashSet原理" class="headerlink" title="4.HashSet原理"></a>4.HashSet原理</h2><pre><code class="JAVA">HashSet实现Set接口，由一个HashMap实例支持。不保证set的迭代顺序;不保证舒徐恒久不变。此类允许使用null
+
+private transient HashMap&lt;E,Object&gt; map;  //map集合，HashSet存放元素的容器
+private static final Object PRESENT = new Object(); //map，中键对应的value值</code></pre>
 <h2 id="5-常用的Linux命令"><a href="#5-常用的Linux命令" class="headerlink" title="5.常用的Linux命令"></a>5.常用的Linux命令</h2><pre><code class="bash">ll ls cd pwd mkdir touch rm -rf grep less</code></pre>
 <h2 id="6-JAVA反射机制"><a href="#6-JAVA反射机制" class="headerlink" title="6.JAVA反射机制"></a>6.JAVA反射机制</h2><pre><code class="java">java反射机制是指在运行时，对任意一个类，都能知道这个类的所有属性和方法；对于任意一个对象，都能调用它的任意一个方法和属性；这种动态获取对象信息及动态调用方法的功能称为JAVA反射机制。通过Class.forName(包名.类名)获得类对象Class，通过操作Class对象达到运行时操作类</code></pre>
 <h2 id="7-手画一个线程状态图"><a href="#7-手画一个线程状态图" class="headerlink" title="7.手画一个线程状态图"></a>7.手画一个线程状态图</h2><pre><code class="java">线程有五个状态：新建态(new)、就绪态(runnable)、运行态(running)、阻塞态(blocked)、死亡态(dead)</code></pre>
@@ -267,13 +284,13 @@ public class SysaAbcThread implements Runnable{
 <p>三次握手的目的是连接服务器指定端口，建立TCP连接，并同步连接双方的序列号和确认号，交换TCP窗口大小信息。</p>
 <ul>
 <li><p>第一次握手(SYN=1,seq=x):   <strong>客户端=&gt;服务端</strong></p>
-<p>客户端发送一个TCP的SYN标志位置1得1包，指明客户端打算连接的服务器的端口，以及初始序号X，保存在包头的序列号(Sequence Number)字段里。</p>
+<p>客户端发送一个TCP的SYN标志位置为1的包，指明客户端打算连接的服务器的端口，以及初始序号X，保存在包头的序列号(Sequence Number)字段里。</p>
 <p>发送完毕客户端进入<strong>SYN_SEND</strong>状态。</p>
 </li>
 </ul>
 <ul>
 <li><p>第二次握手(SYN=1,ACK=1,seq=y,ACKnum=x+1):  <strong>服务端=&gt;客户端</strong></p>
-<p>服务器发回确认包(ACK)应答。即SYN标志和ACK标志位均为1。服务器端选择自己的ISN序列号，放到Seq域里，同时将确认序号(Acknowledgement Number)设置为客户的ISN加1，即X+1。发送完毕后，服务器端进入<strong>SYN_RCVD</strong>状态。</p>
+<p>服务器发回确认包(ACK)应答。即SYN标志和ACK标志位均为1。服务器端选择自己的ISN序列号，放到Seq域里，同时将确认序号(Acknowledgement Number)设置为客户端的ISN加1，即X+1。发送完毕后，服务器端进入<strong>SYN_RCVD</strong>状态。</p>
 </li>
 </ul>
 <ul>
@@ -308,11 +325,41 @@ public class SysaAbcThread implements Runnable{
 <p>客户端等待了某个固定时间（两个最大生命周期，2MSL，2 Maximum Segment Lifetime）之后，没收到服务器端的ACK，认为服务器端已经正常关闭连接，于是自己也关闭连接，进入<strong>CLOSED</strong>状态</p>
 </li>
 </ul>
-<h2 id="10-手写一个冒泡算法"><a href="#10-手写一个冒泡算法" class="headerlink" title="10.手写一个冒泡算法"></a>10.手写一个冒泡算法</h2><pre><code class="java">for 
-    for 
-</code></pre>
-<h2 id="11-SpringMVC是怎么运行的？"><a href="#11-SpringMVC是怎么运行的？" class="headerlink" title="11.SpringMVC是怎么运行的？"></a>11.SpringMVC是怎么运行的？</h2><pre><code class="java"></code></pre>
-<h2 id="12-索引类型及作用"><a href="#12-索引类型及作用" class="headerlink" title="12.索引类型及作用"></a>12.索引类型及作用</h2>
+<h2 id="10-手写一个冒泡算法"><a href="#10-手写一个冒泡算法" class="headerlink" title="10.手写一个冒泡算法"></a>10.手写一个冒泡算法</h2><pre><code class="java">    public int[] sort(int[] arr){
+
+        int length = arr.length;
+
+        for(int i=0;i&lt;length;i++){
+            for(int j=i;j&lt;length;j++){
+                if(arr[i] &gt; arr[j]){
+                    int temp = arr[j];
+                    arr[j] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+        }
+        return arr;
+
+    }   </code></pre>
+<h2 id="11-SpringMVC是怎么运行的？"><a href="#11-SpringMVC是怎么运行的？" class="headerlink" title="11.SpringMVC是怎么运行的？"></a>11.SpringMVC是怎么运行的？</h2><p>（1）用户发送请求至前端控制器<strong>DispatcherServlet</strong></p>
+<p>（2）<strong>DispatcherServlet</strong>收到请求后，调用<strong>HandlerMapping</strong>处理映射器，请求获取Handle;</p>
+<p>（3）处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有就生成)，一并返回给<strong>DispatcherServlet</strong></p>
+<p>（4）<strong>DispatcherServlet</strong>调用<strong>HandlerAdapter</strong>处理适配器</p>
+<p>（5）<strong>HandlerAdapter</strong>经过适配调用具体处理器(Handler，也叫后端控制器)；</p>
+<p>（6）<strong>Handler</strong>执行完成返回<strong>ModelAndView</strong>；</p>
+<p>（7）<strong>HandlerAdapter</strong>将Handler执行结果<strong>ModelAndView</strong>返回给<strong>DispatcherServlet</strong></p>
+<p>（8）<strong>DispatcherServlet</strong>将<strong>ModelAndView</strong>传给<strong>ViewResolver</strong>视图解析器进行解析</p>
+<p>（9）<strong>ViewResolver</strong>解析后返回具体的<strong>view</strong></p>
+<p>（10）<strong>DispatcherServlet</strong>对<strong>View</strong>进行渲染试图</p>
+<p>（11）<strong>DispatcherServlet</strong>响应用户</p>
+<p><img src="https://img-blog.csdn.net/20180708224853769?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E3NDUyMzM3MDA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" alt=""></p>
+<h2 id="12-索引类型及作用"><a href="#12-索引类型及作用" class="headerlink" title="12.索引类型及作用"></a>12.索引类型及作用</h2><ol>
+<li><strong>主键索引：</strong>数据记录里面不能有null，数据内容不能重复，在一张表里不能有多个主键索引</li>
+<li><strong>普通索引：</strong>使用字段关键字建立索引，提高查询质量</li>
+<li><strong>唯一索引：</strong>字段数据是唯一的，可以为null，在一张表里，是可以添加多个唯一索引</li>
+<li><strong>全文索引：</strong>对文本内容进行分词，进行搜索</li>
+</ol>
+
             <hr>
           </div>
           <br>
@@ -338,7 +385,7 @@ public class SysaAbcThread implements Runnable{
     <div class="d-none d-lg-block col-lg-2 toc-container">
       
   <div id="toc">
-    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
     <div id="tocbot"></div>
   </div>
 
@@ -371,7 +418,7 @@ public class SysaAbcThread implements Runnable{
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -380,7 +427,7 @@ public class SysaAbcThread implements Runnable{
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

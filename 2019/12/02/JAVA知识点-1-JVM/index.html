@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>Archive ~ Growth Blog</title>
+  <title>JAVA知识点(一):JVM ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -40,7 +40,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -92,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -102,6 +102,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Monday, December 2nd 2019, 4:05 pm</p>
             
           </div>
 
@@ -113,53 +116,68 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">7 posts in total.</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/11/17/%E9%9D%A2%E8%AF%95(1)/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">面试(一)</span>
-      <span style="float: right;">11-17</span>
-    </a>
-  
-    
-    <a href="/2019/11/02/Linux-3-%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux(三):实用指令</span>
-      <span style="float: right;">11-02</span>
-    </a>
-  
-    
-    <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux(二):用户管理</span>
-      <span style="float: right;">11-02</span>
-    </a>
-  
-    
-    <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux(一):vim与vi</span>
-      <span style="float: right;">11-02</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><p><strong>JVM(Java Virtual Machine)</strong>是用于运行Java字节码的虚拟机包括一个<strong>类加载器子系统（Class Loader SubSystem）</strong>、<strong>运行时数据区（Runtime Data Area）</strong>、执行引擎和<strong>本地接口库（Native Interface Library）</strong>。本地接口库通过调用<strong>本地方法库（Native Method Library）</strong>与操作系统交互，如图：</p>
+<p><img src="https://i.loli.net/2019/12/02/ikFsOqoJ98NbCKe.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li><strong>Java堆（Heap）：</strong>是Java虚拟机所管理的内存最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的<strong>唯一目的就是存放对象实例</strong>，几乎所有的对象实例都在这里分配内存。</li>
+<li><strong>方法区（Method Area）：</strong>与java堆一样，是各个线程共享的内存区域，它用于<strong>存储</strong>已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li>
+<li><strong>程序计数器（Program Counter Register）：</strong>是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。</li>
+<li><strong>JVM栈（JVM Stacks）：</strong>与程序计数器一样，<strong>java虚拟机栈（Java Virtual Machine Stacks）</strong>也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是java方法执行的内存模型：每个方法被创建的时候都会创建一个<strong>栈帧(Stack Frame)</strong>用于存储局部变量表、操作栈、动态链接、方法出口等信息。</li>
+<li><strong>本地方法栈（Native Method Stacks）：</strong>本地方法栈与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行JAVA方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</li>
+</ul>
 
-              </div>
-            </div>
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
+              
+              <span id="/2019/12/02/JAVA知识点-1-JVM/" class="visitors leancloud_visitors" data-flag-title="JAVA知识点(一):JVM">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -214,6 +232,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -230,7 +253,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "JAVA知识点(一):JVM&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

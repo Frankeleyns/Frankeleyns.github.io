@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>JAVA知识点(一):JVM ~ Growth Blog</title>
+  <title>JAVA知识点(2):集合 ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -104,7 +104,7 @@
 
             
               <br>
-              <p class="mt-3">Monday, December 2nd 2019, 4:05 pm</p>
+              <p class="mt-3">Wednesday, December 4th 2019, 10:02 am</p>
             
           </div>
 
@@ -125,12 +125,45 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><p><strong>JVM(Java Virtual Machine)</strong>是用于运行Java字节码的虚拟机包括一个<strong>类加载器子系统（Class Loader SubSystem）</strong>、<strong>运行时数据区（Runtime Data Area）</strong>、执行引擎和<strong>本地接口库（Native Interface Library）</strong>。本地接口库通过调用<strong>本地方法库（Native Method Library）</strong>与操作系统交互，如图：</p>
-<p><img src="https://i.loli.net/2019/12/02/ikFsOqoJ98NbCKe.png" srcset="/img/loading.gif" alt=""></p>
-<ul>
-<li><strong>Java堆（Heap）：</strong>是Java虚拟机所管理的内存最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的<strong>唯一目的就是存放对象实例</strong>，几乎所有的对象实例都在这里分配内存。</li>
-<li><strong>方法区（Method Area）：</strong>与java堆一样，是各个线程共享的内存区域，它用于<strong>存储</strong>已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li>
-</ul>
+            <h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><p>JAVA的集合类被定义在Java.util包中，主要有4种集合，分别为<strong>List、Queue、Set、Map</strong>，每种集合的具体分类如图：</p>
+<p><img src="https://i.loli.net/2019/12/04/XAyEQ4fDdN35sCz.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><h3 id="1-ArrayList：基于数组实现，增删慢，查询快，线程不安全"><a href="#1-ArrayList：基于数组实现，增删慢，查询快，线程不安全" class="headerlink" title="1.ArrayList：基于数组实现，增删慢，查询快，线程不安全"></a>1.ArrayList：基于数组实现，增删慢，查询快，线程不安全</h3><p>因为是基于数组实现，所以当需要<strong>插入</strong>或<strong>删除</strong>一个节点时，需要移动其他所有节点，代价较高，因此，ArrayList不适合更新操作。</p>
+<p>ArrayList不需要定义数组长度，在默认长度（默认长度为10）不够时，ArrayList会创建一个新的更大数组并将已有的数据复制到新数组中，通过调用一个native方法<strong>System.arraycopy</strong>实现</p>
+<h3 id="2-Vector-基于数组实现，增删慢，查询快，线程安全"><a href="#2-Vector-基于数组实现，增删慢，查询快，线程安全" class="headerlink" title="2.Vector: 基于数组实现，增删慢，查询快，线程安全"></a>2.Vector: 基于数组实现，增删慢，查询快，线程安全</h3><p>Vector的数据结构与ArrayList一样，都是基于数组实现，不同的是Vector支持线程同步，以保证多线程环境下数据的一致性，但由于频繁的加锁和释放锁操作，Vector整体独写效率比ArrayList低。</p>
+<h3 id="3-LinkedList-基于双向链表实现，增删快，查询慢，线程不安全"><a href="#3-LinkedList-基于双向链表实现，增删快，查询慢，线程不安全" class="headerlink" title="3.LinkedList: 基于双向链表实现，增删快，查询慢，线程不安全"></a>3.LinkedList: 基于双向链表实现，增删快，查询慢，线程不安全</h3><p>LinkedList采用双向链表结构存储元素，在对LinkedList插入和删除时，只需要将上一个节点的指针指向要操作的节点即可，数据改动较小，因此更新效率高。但对LinkedList进行访问时，需要从链表头部一直遍历到需要访问的节点，因此查询的效率很慢。除此之外，LinkedList还定义了用于<strong>操作链表头和尾部</strong>的元素，因此有时可以当作堆栈、队列和双向队列使用。</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="1-HashMap：数组-链表实现，线程不安全"><a href="#1-HashMap：数组-链表实现，线程不安全" class="headerlink" title="1.HashMap：数组 + 链表实现，线程不安全"></a>1.HashMap：数组 + 链表实现，线程不安全</h3><p>HashMap基于键的HashCode值唯一标识一条数据，同时<strong>基于HashCode进行数据的存取</strong>，因此可以快速更新和查找数据，但遍历顺序不保证一样，HashMap的key和valu允许为null.</p>
+<p>HashMap不是线程安全的，如果同一时刻多个线程操作HashMap会导致数据不一致，使HashMap造成环形链表。如果需要线程安全可以使用Collections的synchronizedMap方法使HashMap具有线程安全的能力，或使用ConcurrentHashMap.</p>
+<p>HashMap的结构如图所示，</p>
+<p><img src="https://i.loli.net/2019/12/10/aEwPsmeXMQuCp2y.png" srcset="/img/loading.gif" alt=""></p>
+<p>其内部是一个<strong>数组</strong>，数组中的<strong>每个元素都是一个单向链表</strong>，链表中的每个元素都是Node类实例，Node类包含4个属性：<strong>key、value、hash和用于指向下一个元素的next</strong></p>
+<pre><code class="JAVA">    /**
+     * 初始化数组容量，默认为16，可以扩容，扩容后数组大小为当前的两倍，该值使用为2^n次方
+     */
+    static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16
+
+    transient Node&lt;K,V&gt;[] table;
+
+    static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+        final int hash;
+        final K key;
+        V value;
+        Node&lt;K,V&gt; next;
+    }</code></pre>
+<p>HashMap在查找数据时，根据HashMap的Hash值可以快速定位到数组下标，但是我们在找到数组下标后需要对链表进行遍历直到找到需要的数据，时间复杂度为O(n).</p>
+<p>为了减小俩表遍历的开销，Java8对HashMap进行了优化，将数据结构修改为<strong>数组+链表或红黑树</strong>。在链表中元素超过8后，HashMap会将链表转为红黑树结构以提高查询效率，因此其时间复杂度为O(logN)。如图</p>
+<p><img src="https://i.loli.net/2019/12/10/voKyxMumfpiF6zt.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="JAVA">    /**
+     * 使用树的阈值，如果链表长度超过此值，则链表转为红黑树
+     */
+    static final int TREEIFY_THRESHOLD = 8;
+
+    static final class TreeNode&lt;K,V&gt; extends LinkedHashMap.Entry&lt;K,V&gt; {
+        TreeNode&lt;K,V&gt; parent;  
+        TreeNode&lt;K,V&gt; left;
+        TreeNode&lt;K,V&gt; right;
+        TreeNode&lt;K,V&gt; prev;
+        boolean red;
+    }</code></pre>
 
             <hr>
           </div>
@@ -142,7 +175,7 @@
               
                 <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
               
-              <span id="/2019/12/02/JAVA知识点(1)-JVM/" class="visitors leancloud_visitors" data-flag-title="JAVA知识点(一):JVM">
+              <span id="/2019/12/04/JAVA知识点-2-集合/" class="visitors leancloud_visitors" data-flag-title="JAVA知识点(2):集合">
                 <em id="visitors-text" class="post-meta-item-text"></em>
                 <i id="visitors-count"></i>
               </span>
@@ -250,7 +283,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "JAVA知识点(一):JVM&nbsp;",
+        "JAVA知识点(2):集合&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

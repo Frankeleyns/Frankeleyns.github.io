@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>JAVA压力测试（一）:Jmeter初体验</title>
+    <link href="undefined2019/12/19/JAVA%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95-1/"/>
+    <url>2019/12/19/JAVA%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Jmeter初体验"><a href="#Jmeter初体验" class="headerlink" title="Jmeter初体验"></a>Jmeter初体验</h1><p>校园博客的项目需要上线，所以要进行压力测试，于是就开始了测试初体验</p><h2 id="下载与安装"><a href="#下载与安装" class="headerlink" title="下载与安装"></a>下载与安装</h2><p>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/</a></p><p><img src="https://i.loli.net/2019/12/19/OYQVBDkJ3idjo6m.png" srcset="/img/loading.gif" alt=""></p><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><h4 id="1-配置JMETER-HOME"><a href="#1-配置JMETER-HOME" class="headerlink" title="1.配置JMETER_HOME"></a>1.配置JMETER_HOME</h4><p>打开系统变量新建变量<strong>JMETER_HOME</strong>,然后，填写你的jmeter安装目录</p><p><img src="https://i.loli.net/2019/12/19/j5RmbN3ey4KQVud.png" srcset="/img/loading.gif" alt=""></p><h4 id="2-配置path"><a href="#2-配置path" class="headerlink" title="2.配置path"></a>2.配置path</h4><p>在path变量加入 <strong>%JMETER_HOME%\bin</strong></p><h3 id="确认安装"><a href="#确认安装" class="headerlink" title="确认安装"></a>确认安装</h3><p>随便找个地方，打开cmd，输入 <strong>jmeter</strong>能打开jmeter就算配置完成</p><p><img src="https://i.loli.net/2019/12/19/V8kNMaqAKmZyUYb.png" srcset="/img/loading.gif" alt=""></p><h2 id="测试实例"><a href="#测试实例" class="headerlink" title="测试实例"></a>测试实例</h2><p>进入jmeter的bin目录下,打开 jmeter.bat文件</p><p><img src="https://i.loli.net/2019/12/19/ctOTD7Y4BpvxVLF.png" srcset="/img/loading.gif" alt=""></p><p>打开<strong>Options</strong>，选择<strong>Choose Language</strong>中的<strong>Chinese(Simplified)</strong>可以切换成简体中文</p><p><img src="https://i.loli.net/2019/12/19/cQ1MkaDhzIrmufl.png" srcset="/img/loading.gif" alt=""></p><p>右键一个test plan 点击 添加 线程 线程组</p><p><img src="https://i.loli.net/2019/12/19/S8c1LB5ZpjWVeFR.png" srcset="/img/loading.gif" alt=""></p><p><img src="https://i.loli.net/2019/12/19/UGqAbLdYHrzmOha.png" srcset="/img/loading.gif" alt=""></p><p><strong>线程数：</strong>虚拟用户数。一个虚拟用户占用一个进程或线程。设置多少虚拟用户数在这里也就是设置多少个线程数。</p><p><strong>Ramp-Up Period(in seconds)准备时长：</strong>设置的虚拟用户数需要多长时间全部启动。如果线程数为10，准备时长为2，那么需要2秒钟启动10个线程，也就是每秒钟启动5个线程。</p><p><strong>循环次数：</strong>每个线程发送请求的次数。如果线程数为10，循环次数为100，那么每个线程发送100次请求。总请求数为10*100=1000 。如果勾选了“永远”，那么所有线程会一直发送请求，一到选择停止运行脚本。</p><p>将要测试的接口的信息填上，这里我的接口是：<strong><a href="http://localhsot:10002/api/post" target="_blank" rel="noopener">http://localhsot:10002/api/post</a></strong></p><p><img src="https://i.loli.net/2019/12/19/QD1mWkcZn6lBX3N.png" srcset="/img/loading.gif" alt=""></p><p>随后，将测试计划保存到一个目录</p><p><img src="https://i.loli.net/2019/12/19/gue35fmwZFjTvHt.png" srcset="/img/loading.gif" alt=""></p><p>接着到执行计划保存目录，用命令执行测试计划</p><p>非GUI并生成html报告：</p><p>jmeter -n -t <test JMX file> -l <test log file> -e -o <Path to output folder></p><p>非GUI并生成html报告：</p><pre><code class="bash">E:\apache-jmeter\TestPlan&gt;jmeter -n -t &quot;post all.jmx&quot; -l read.jtl -e -o E:\apache-jmeter\TestPlan\Report</code></pre><p><img src="https://raw.githubusercontent.com/GrowthLj/markdown_upload/master/img/20191219110258.png" srcset="/img/loading.gif" alt=""></p><p>然后就会jmeter会帮你生成报告文件</p><p><img src="https://raw.githubusercontent.com/GrowthLj/markdown_upload/master/img/20191219110444.png" srcset="/img/loading.gif" alt=""></p><p>随后打开Repost下index.html查看结果</p><p><img src="https://raw.githubusercontent.com/GrowthLj/markdown_upload/master/img/20191219110541.png" srcset="/img/loading.gif" alt=""></p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol><li><p>由于我是在pc上测的，内存和cpu都比不上服务器，这样的测试结果不准确</p></li><li><p>命令生成报告的时候，比如我的是Report目录，如果这个目录<strong>不为空</strong>，JMeter就会报错</p></li><li><p>重新打开JMeter，它的设置会恢复默认，重新变成英文的了¿¿¿  </p></li><li><p>重新打开JMeter执行计划也不见了，可以导入之前的执行计划。</p></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>JAVA</tag>
+      
+      <tag>压力测试</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JAVA知识点(二):集合</title>
     <link href="undefined2019/12/04/JAVA%E7%9F%A5%E8%AF%86%E7%82%B9-2-%E9%9B%86%E5%90%88/"/>
     <url>2019/12/04/JAVA%E7%9F%A5%E8%AF%86%E7%82%B9-2-%E9%9B%86%E5%90%88/</url>

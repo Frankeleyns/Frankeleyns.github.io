@@ -126,37 +126,49 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/12/28/hello-world/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/nX3Fb7NerqkQYxt.jpg" srcset="/img/loading.gif" alt="Hello World" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
+          <img src="http://ww1.sinaimg.cn/large/007SzKTZgy1gb6mqgn6p5j31z4140gpa.jpg" srcset="/img/loading.gif" alt="Node安装与配置" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/28/hello-world/">
-        <p class="h4 index-header">Hello World</p>
+      <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Node安装与配置</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-More info: Writing
-Run server$ hexo server
-More info: Server
-Generate static files$ hexo generate
-More info: Generating
-Deploy to remote sites$ hexo deploy
-More info: Deployment
-</div>
+          <div class="index-text mb-1">Node环境搭建简单的说，node就是一个前端程序员看后端不爽，用JavaScript写出来的后端。
+下载地址：
+https://nodejs.org/zh-cn/download/
+
+选择自己系统对应的版本下载，然后一键安装，小白看教程：
+https://www.runoob.com/nodejs/nodejs-install-setup.html
+打开CMD，输入node -v和npm -v，如果显示了版本，则安装完成
+
+Node配置这里node的配置主要是配置npm，简单来说npm就相当于Java中的Maven，或者说它就是前端开发中的Maven
+镜像配置node也和Maven一样有着默认镜像，默认镜像访问速度较慢，下面是它原本的镜像
+npm get registry //获取镜像
+
+我们要将默认镜像切换为淘宝镜像
+npm config set registry https://registry.npm.taobao.org        //设置镜像
+
+上面已经切换成淘宝镜像了，如果想国内镜像和国外镜像一起使用的也可以，通过cnpm
+npm install -g cnpm --</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-28&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-23&nbsp;&nbsp;
         
         
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Node">Node</a>&nbsp;
+          
         
       </div>
     </div>
@@ -542,6 +554,46 @@ Shift + ; + wq(wq是 写入</div>
           
             <a href="/tags/Linux">Linux</a>&nbsp;
           
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/10/30/hello-world/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/nX3Fb7NerqkQYxt.jpg" srcset="/img/loading.gif" alt="Hello World" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/10/30/hello-world/">
+        <p class="h4 index-header">Hello World</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
+More info: Writing
+Run server$ hexo server
+More info: Server
+Generate static files$ hexo generate
+More info: Generating
+Deploy to remote sites$ hexo deploy
+More info: Deployment
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-30&nbsp;&nbsp;
+        
+        
         
       </div>
     </div>

@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>JAVA知识点(一):JVM ~ Growth Blog</title>
+  <title>Hadoop(一):初识Hadoop ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -92,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
+         style="background: url('https://i.loli.net/2020/02/26/HZ4fj7WNVUbQ3g5.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -104,7 +104,7 @@
 
             
               <br>
-              <p class="mt-3">Monday, December 2nd 2019, 4:05 pm</p>
+              <p class="mt-3">Wednesday, February 26th 2020, 10:14 pm</p>
             
           </div>
 
@@ -125,14 +125,24 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><p><strong>JVM(Java Virtual Machine)</strong>是用于运行Java字节码的虚拟机包括一个<strong>类加载器子系统（Class Loader SubSystem）</strong>、<strong>运行时数据区（Runtime Data Area）</strong>、执行引擎和<strong>本地接口库（Native Interface Library）</strong>。本地接口库通过调用<strong>本地方法库（Native Method Library）</strong>与操作系统交互，如图：</p>
-<p><img src="https://i.loli.net/2019/12/02/ikFsOqoJ98NbCKe.png" srcset="/img/loading.gif" alt=""></p>
+            <h1 id="初识Hadoop"><a href="#初识Hadoop" class="headerlink" title="初识Hadoop"></a>初识Hadoop</h1><h2 id="Hadoop名字怎么来的？"><a href="#Hadoop名字怎么来的？" class="headerlink" title="Hadoop名字怎么来的？"></a>Hadoop名字怎么来的？</h2><p>Hadoop之父的名字叫<strong>Doug Cutting</strong>，就是下图那位儒雅随和的男人，他不仅仅是Hadoop的创始人，同时也是<strong>nutch(一个开源Java实现的搜索引擎)</strong>的创始人，而Hadoop这个名字<strong>其实是他孩子一个玩具的名字</strong>，就是下图那个那个小黄象，这个玩具也是<strong>Hadoop的Logo</strong>，小朋友们起名字确实很厉害，类似的还有大名鼎鼎<strong>Google</strong>这个名字就是<strong>由美国数学家 Edward Kasner 九岁的侄子 Milton Sirotta 发明的</strong></p>
+<p><img src="https://i.loli.net/2020/02/26/76KYFDEqloJRUmV.jpg" srcset="/img/loading.gif" alt="hadoopFather"></p>
+<h2 id="Hadoop是干什么的？"><a href="#Hadoop是干什么的？" class="headerlink" title="Hadoop是干什么的？"></a>Hadoop是干什么的？</h2><p><img src="https://i.loli.net/2020/02/26/mwleA3x86Pdc7bY.png" srcset="/img/loading.gif" alt="Hadoop-introduce.png"></p>
+<p>这是Hadoop的官网(<a href="https://hadoop.apache.org/" target="_blank" rel="noopener">https://hadoop.apache.org/</a>) 的介绍，简单来说，Hadoop就是一个开源的，可靠的，可扩展的分布式计算框架，它用来对海量数据进行<strong>分布式存储和计算</strong>，就是传说中的<strong>大数据</strong>。</p>
+<h2 id="Hadoop有几个模块"><a href="#Hadoop有几个模块" class="headerlink" title="Hadoop有几个模块?"></a>Hadoop有几个模块?</h2><p><img src="https://i.loli.net/2020/02/26/AqvmgxCGbW81RSi.png" srcset="/img/loading.gif" alt="hadoop-modules.png"></p>
 <ul>
-<li><strong>Java堆（Heap）：</strong>是Java虚拟机所管理的内存最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的<strong>唯一目的就是存放对象实例</strong>，几乎所有的对象实例都在这里分配内存。</li>
-<li><strong>方法区（Method Area）：</strong>与java堆一样，是各个线程共享的内存区域，它用于<strong>存储</strong>已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li>
-<li><strong>程序计数器（Program Counter Register）：</strong>是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。</li>
-<li><strong>JVM栈（JVM Stacks）：</strong>与程序计数器一样，<strong>java虚拟机栈（Java Virtual Machine Stacks）</strong>也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是java方法执行的内存模型：每个方法被创建的时候都会创建一个<strong>栈帧(Stack Frame)</strong>用于存储局部变量表、操作栈、动态链接、方法出口等信息。</li>
-<li><strong>本地方法栈（Native Method Stacks）：</strong>本地方法栈与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行JAVA方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</li>
+<li><p><strong>Hadoop Common：</strong> 公共的模块，用来给其他模块调用</p>
+</li>
+<li><p><strong>Hadoop分布式存储系统(HDFS)：</strong>提供对应用程序数据的<strong>高吞吐量</strong>访问的分布式文件系统</p>
+</li>
+<li><p><strong>Hadoop YARN：</strong>一个用来作业调度和群集资源管理的<strong>框架</strong>。</p>
+</li>
+<li><p><strong>Hadoop MapReduce：</strong>基于<strong>YARN</strong>可在很多机器上进行<strong>分布式并行计算</strong></p>
+</li>
+<li><p><strong>Hadoop Ozone：</strong>Hadoop的对象存储</p>
+</li>
+<li><p><strong>Hadoop Submarine：</strong>一个Hadoop的<strong>机器学习</strong>框架</p>
+</li>
 </ul>
 
             <hr>
@@ -143,9 +153,11 @@
             <p>
               <i class="iconfont icon-tag"></i>
               
-                <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
+                <a class="hover-with-bg" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>
               
-              <span id="/2019/12/02/JAVA知识点-1-JVM/" class="visitors leancloud_visitors" data-flag-title="JAVA知识点(一):JVM">
+                <a class="hover-with-bg" href="/tags/Hadoop">Hadoop</a>
+              
+              <span id="/2020/02/26/Hadoop-1-初识Hadoop/" class="visitors leancloud_visitors" data-flag-title="Hadoop(一):初识Hadoop">
                 <em id="visitors-text" class="post-meta-item-text"></em>
                 <i id="visitors-count"></i>
               </span>
@@ -253,7 +265,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "JAVA知识点(一):JVM&nbsp;",
+        "Hadoop(一):初识Hadoop&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

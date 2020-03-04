@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Linux(四):安装JAVA环境(jdk1.8)</title>
+    <link href="undefined2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/"/>
+    <url>2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="安装-JAVA环境-jdk1-8"><a href="#安装-JAVA环境-jdk1-8" class="headerlink" title="安装 JAVA环境(jdk1.8)"></a>安装 JAVA环境(jdk1.8)</h1><h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p><strong>下载jdk1.8</strong></p><p>进入Oracle官网下载页面</p><p><img src="https://i.loli.net/2020/03/04/SIwEvHBJ56gzUtr.png" srcset="/img/loading.gif" alt=""></p><p>如果你下的很慢的话，我给你贴心的准备好了我下好了的    <a href="https://pan.baidu.com/s/1_toI_omzKLYwinFo60BpRA" target="_blank" rel="noopener">点我(提取码：guk0)</a></p><p>下好后可以用<strong>WinScp</strong>或<strong>XFTP</strong>自行上传到自己的服务器目录，如果不会的话，我建议你<strong>百度</strong></p><p>我这里将JDK传到了我的<strong>~/software</strong>目录，我建议你们也可以自己建个software目录专门存放要安装的软件包</p><p><img src="https://i.loli.net/2020/03/04/Twra1WCDXcSZkoN.png" srcset="/img/loading.gif" alt="linux"></p><p>这里可以看到我的<strong>software</strong>目录已经有我上传的jdk了</p><h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p><strong>解压</strong>已经传到服务器的jdk文件</p><p>使用<strong>tar</strong>命令将software目录下的jdk解压到app目录</p><pre><code class="bash">tar -zvxf jdk-8u241-linux-x64.tar.gz  -C ~/app</code></pre><p>解压完进入查看一下</p><pre><code class="bash">[hadoop@hadoop000 ~]$ lsapp   Desktop    Downloads  maven_resp  Pictures  README.txt  software   t.txtdata  Documents  lib        Music       Public    shell       Templates  Videos[hadoop@hadoop000 ~]$ cd app[hadoop@hadoop000 app]$ lshadoop-2.6.0-cdh5.15.1  hive-1.1.0-cdh5.15.1  jdk1.8.0_241  tmp[hadoop@hadoop000 app]$ cd jdk1.8.0_241/[hadoop@hadoop000 jdk1.8.0_241]$ pwd/home/hadoop/app/jdk1.8.0_241</code></pre><p>可以看到我的jdk已经解压到app目录了，路径是<strong>/home/hadoop/app/jdk1.8.0_241</strong></p><h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p><strong>配置环境变量</strong></p><p>编辑环境变量文件</p><pre><code class="bash">vim ~/.bash_profile</code></pre><p>找个地方，添加下面这段</p><pre><code class="bash">export JAVA_HOME=/home/hadoop/app/jdk1.8.0_241export PATH=$JAVA_HOME/bin:$PATH</code></pre><p><img src="https://i.loli.net/2020/03/04/FZrAkKRNPIL71XT.png" srcset="/img/loading.gif" alt=""></p><p>使环境变量生效</p><pre><code class="bash"> source ~/.bash_profile</code></pre><p>使用java命令，验证生效情况</p><pre><code class="bash">java</code></pre><p><img src="https://i.loli.net/2020/03/04/P3ncaNAEDtiUqrb.png" srcset="/img/loading.gif" alt=""></p><p>出现，如图所示情况，安装成功😀</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在配置环境变量的时候，一般网上都是</p><pre><code class="bash">vim /etc/profile</code></pre><p>而我的是<strong>.bash_profile</strong>，这两者的区别再去</p><p><strong>/etc/profile：</strong>这个配置文件是对<strong>所有系统用户</strong>生效</p><p><strong>.bash_profile：</strong>这个配置文件是对<strong>当前登录</strong>生效</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>弹钢琴吗？用键盘的那种(一):The Game is On</title>
     <link href="undefined2020/02/28/Pinao-1-TheGameIsOn/"/>
     <url>2020/02/28/Pinao-1-TheGameIsOn/</url>

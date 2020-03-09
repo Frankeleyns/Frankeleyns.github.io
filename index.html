@@ -126,6 +126,56 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/">
+        <p class="h4 index-header">Linux(五)：SSH免密登录</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">SSH免密登录SSH(Secure Shell)是一种网络协议，用于计算机之间的加密登录。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。
+想进一步了解的话可以，参考阮一峰老师的博客
+一.配置Hosts配置你的hosts，不配置会导致ssh登录无效
+$ sudo vim /etc/hosts
+添加服务器所对应的IP和主机名
+
+二.生成密钥在hadoop000用命令生成SSH密钥，接着，按三下回车就好
+$ ssh-keygen -t rsa
+
+然后，进入.ssh文件夹，查看目录，会发现多了两个文件，id_rsa(私钥)和id_rsa.pub(公钥)
+
+三.公钥登录用ssh-copy-id命令，将hadoop000生成的公钥传到hadoop8，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录
+$ ssh-copy-id hadoop@192.168.1.8
+hadoop8的.ssh目录会多出来一个authorized_keys的文件，然后设置一下权限
+$ chmod 600 auth</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-09&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Linux">Linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" target="_self">
           <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(四):安装JAVA环境(jdk1.8)" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -611,60 +661,6 @@ ls加-l可以以另外的列表形式显示
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(二):用户管理" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
-        <p class="h4 index-header">Linux(二):用户管理</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">用户管理Linux用户基本介绍
- Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 
-用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。
-每个用户账号都拥有一个唯一的用户名和各自的口令。
-用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录
-
-
-添加用户useradd [选项] 用户名
-接下来，添加一个用户 dl
-[root@localhost ~]# useradd dl
-可能界面看不出什么效果，其实系统已经创建了一个叫dl的用户并创建了同名的组和 /home/dl目录
-
-[root@localhost /]# cd /home/
-[root@localhost home]# ll
-总用量 0
-drwx------. 2 dl dl 62 9月  27 16:08 dl
-drwx------. 2 lj lj 83 9月   5 09:02 lj
-
-如果你不想创建在home目录下，你</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -673,7 +669,7 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/2/#board">下一页</a>
+          <a class="page-link" href="/page/2/#board">Next</a>
         </li>
       
     </ul>
@@ -701,7 +697,7 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -710,7 +706,7 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

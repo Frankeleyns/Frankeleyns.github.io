@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Linux(五)：SSH免密登录</title>
+    <link href="undefined2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/"/>
+    <url>2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/</url>
+    
+    <content type="html"><![CDATA[<h1 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a>SSH免密登录</h1><p><strong>SSH(Secure Shell)</strong>是一种<strong>网络协议</strong>，用于计算机之间的<strong>加密登录</strong>。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。</p><p>想进一步了解的话可以，参考阮一峰老师的<a href="https://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html" target="_blank" rel="noopener">博客</a></p><h2 id="一-配置Hosts"><a href="#一-配置Hosts" class="headerlink" title="一.配置Hosts"></a>一.配置Hosts</h2><p>配置你的hosts，不配置会导致ssh登录无效</p><pre><code class="bash">$ sudo vim /etc/hosts</code></pre><p>添加服务器所对应的IP和主机名</p><p><img src="https://i.loli.net/2020/03/09/6zhtRGrVs2laPAT.png" srcset="/img/loading.gif" alt="ssh-hosts.png"></p><h2 id="二-生成密钥"><a href="#二-生成密钥" class="headerlink" title="二.生成密钥"></a>二.生成密钥</h2><p>在<strong>hadoop000</strong>用命令生成<strong>SSH密钥</strong>，接着，按三下回车就好</p><pre><code class="bash">$ ssh-keygen -t rsa</code></pre><p><img src="https://i.loli.net/2020/03/06/lGMkCYLPdoV8yni.png" srcset="/img/loading.gif" alt="ssh-keygen"></p><p>然后，进入<strong>.ssh</strong>文件夹，查看目录，会发现多了两个文件，<strong>id_rsa(私钥)</strong>和<strong>id_rsa.pub(公钥)</strong></p><p><img src="https://i.loli.net/2020/03/06/rl7G81CyxpAumYg.png" srcset="/img/loading.gif" alt=""></p><h2 id="三-公钥登录"><a href="#三-公钥登录" class="headerlink" title="三.公钥登录"></a>三.公钥登录</h2><p>用<strong>ssh-copy-id</strong>命令，将<strong>hadoop000</strong>生成的公钥传到<strong>hadoop8</strong>，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录</p><pre><code class="bash">$ ssh-copy-id hadoop@192.168.1.8</code></pre><p><strong>hadoop8</strong>的<strong>.ssh</strong>目录会多出来一个<strong>authorized_keys</strong>的文件，然后设置一下权限</p><pre><code class="bash">$ chmod 600 authorized_keys #如果不设置，可能会因为权限问题不能免密登录</code></pre><p>用<strong>hadoop000</strong>ssh登录<strong>hadoop8</strong>，登录的时候不用输入密码了，<strong>SSH配置成功</strong></p><p><img src="https://i.loli.net/2020/03/09/ZSRxlpLfwJuk8Kt.png" srcset="/img/loading.gif" alt="ssh-success.png"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux(四):安装JAVA环境(jdk1.8)</title>
     <link href="undefined2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/"/>
     <url>2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/</url>

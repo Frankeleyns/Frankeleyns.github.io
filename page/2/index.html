@@ -126,6 +126,60 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(二):用户管理" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+        <p class="h4 index-header">Linux(二):用户管理</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">用户管理Linux用户基本介绍
+ Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 
+用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。
+每个用户账号都拥有一个唯一的用户名和各自的口令。
+用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录
+
+
+添加用户useradd [选项] 用户名
+接下来，添加一个用户 dl
+[root@localhost ~]# useradd dl
+可能界面看不出什么效果，其实系统已经创建了一个叫dl的用户并创建了同名的组和 /home/dl目录
+
+[root@localhost /]# cd /home/
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 dl dl 62 9月  27 16:08 dl
+drwx------. 2 lj lj 83 9月   5 09:02 lj
+
+如果你不想创建在home目录下，你</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Linux">Linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/" target="_self">
           <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(一):vim与vi" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -227,7 +281,7 @@ More info: Deployment
       
       
         <li class="page-item">
-          <a class="page-link" href="/#board">上一页</a>
+          <a class="page-link" href="/#board">Previous</a>
         </li>
       
       
@@ -256,7 +310,7 @@ More info: Deployment
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -265,7 +319,7 @@ More info: Deployment
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

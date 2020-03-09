@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>Category ~ Growth Blog</title>
+  <title>Linux(五)：SSH免密登录 ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -40,7 +40,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -92,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -102,6 +102,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Monday, March 9th 2020, 10:14 pm</p>
             
           </div>
 
@@ -113,22 +116,76 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a>SSH免密登录</h1><p><strong>SSH(Secure Shell)</strong>是一种<strong>网络协议</strong>，用于计算机之间的<strong>加密登录</strong>。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。</p>
+<p>想进一步了解的话可以，参考阮一峰老师的<a href="https://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html" target="_blank" rel="noopener">博客</a></p>
+<h2 id="一-配置Hosts"><a href="#一-配置Hosts" class="headerlink" title="一.配置Hosts"></a>一.配置Hosts</h2><p>配置你的hosts，不配置会导致ssh登录无效</p>
+<pre><code class="bash">$ sudo vim /etc/hosts</code></pre>
+<p>添加服务器所对应的IP和主机名</p>
+<p><img src="https://i.loli.net/2020/03/09/6zhtRGrVs2laPAT.png" srcset="/img/loading.gif" alt="ssh-hosts.png"></p>
+<h2 id="二-生成密钥"><a href="#二-生成密钥" class="headerlink" title="二.生成密钥"></a>二.生成密钥</h2><p>在<strong>hadoop000</strong>用命令生成<strong>SSH密钥</strong>，接着，按三下回车就好</p>
+<pre><code class="bash">$ ssh-keygen -t rsa</code></pre>
+<p><img src="https://i.loli.net/2020/03/06/lGMkCYLPdoV8yni.png" srcset="/img/loading.gif" alt="ssh-keygen"></p>
+<p>然后，进入<strong>.ssh</strong>文件夹，查看目录，会发现多了两个文件，<strong>id_rsa(私钥)</strong>和<strong>id_rsa.pub(公钥)</strong></p>
+<p><img src="https://i.loli.net/2020/03/06/rl7G81CyxpAumYg.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="三-公钥登录"><a href="#三-公钥登录" class="headerlink" title="三.公钥登录"></a>三.公钥登录</h2><p>用<strong>ssh-copy-id</strong>命令，将<strong>hadoop000</strong>生成的公钥传到<strong>hadoop8</strong>，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录</p>
+<pre><code class="bash">$ ssh-copy-id hadoop@192.168.1.8</code></pre>
+<p><strong>hadoop8</strong>的<strong>.ssh</strong>目录会多出来一个<strong>authorized_keys</strong>的文件，然后设置一下权限</p>
+<pre><code class="bash">$ chmod 600 authorized_keys #如果不设置，可能会因为权限问题不能免密登录</code></pre>
+<p>用<strong>hadoop000</strong>ssh登录<strong>hadoop8</strong>，登录的时候不用输入密码了，<strong>SSH配置成功</strong></p>
+<p><img src="https://i.loli.net/2020/03/09/ZSRxlpLfwJuk8Kt.png" srcset="/img/loading.gif" alt="ssh-success.png"></p>
 
-
-
-              </div>
-            </div>
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Linux">Linux</a>
+              
+              <span id="/2020/03/09/Linux-5-安装SSH/" class="visitors leancloud_visitors" data-flag-title="Linux(五)：SSH免密登录">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -183,6 +240,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -199,7 +261,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Category&nbsp;",
+        "Linux(五)：SSH免密登录&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

@@ -126,6 +126,220 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/">
+        <p class="h4 index-header">Linux(五)：SSH免密登录</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">SSH免密登录SSH(Secure Shell)是一种网络协议，用于计算机之间的加密登录。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。
+想进一步了解的话可以，参考阮一峰老师的博客
+一.配置Hosts配置你的hosts，不配置会导致ssh登录无效
+$ sudo vim /etc/hosts
+添加服务器所对应的IP和主机名
+
+二.生成密钥在hadoop000用命令生成SSH密钥，接着，按三下回车就好
+$ ssh-keygen -t rsa
+
+然后，进入.ssh文件夹，查看目录，会发现多了两个文件，id_rsa(私钥)和id_rsa.pub(公钥)
+
+三.公钥登录用ssh-copy-id命令，将hadoop000生成的公钥传到hadoop8，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录
+$ ssh-copy-id hadoop@192.168.1.8
+hadoop8的.ssh目录会多出来一个authorized_keys的文件，然后设置一下权限
+$ chmod 600 auth</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-09&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Linux">Linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(四):安装JAVA环境(jdk1.8)" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/">
+        <p class="h4 index-header">Linux(四):安装JAVA环境(jdk1.8)</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">安装 JAVA环境(jdk1.8)第一步下载jdk1.8
+进入Oracle官网下载页面
+
+如果你下的很慢的话，我给你贴心的准备好了我下好了的    点我(提取码：guk0)
+下好后可以用WinScp或XFTP自行上传到自己的服务器目录，如果不会的话，我建议你百度
+我这里将JDK传到了我的~/software目录，我建议你们也可以自己建个software目录专门存放要安装的软件包
+
+这里可以看到我的software目录已经有我上传的jdk了
+第二步解压已经传到服务器的jdk文件
+使用tar命令将software目录下的jdk解压到app目录
+tar -zvxf jdk-8u241-linux-x64.tar.gz  -C ~/app
+
+解压完进入查看一下
+[hadoop@hadoop000 ~]$ ls
+app   Desktop    Downloads  maven_resp  Pictures  README.txt  software   t.txt
+data  Documents  lib        Music       Public    shell       Tem</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-04&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Linux">Linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/02/28/Pinao-1-TheGameIsOn/" target="_self">
+          <img src="https://i.loli.net/2020/02/28/viCsxN2XtMmD8FT.jpg" srcset="/img/loading.gif" alt="弹钢琴吗？用键盘的那种(一):The Game is On" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/02/28/Pinao-1-TheGameIsOn/">
+        <p class="h4 index-header">弹钢琴吗？用键盘的那种(一):The Game is On</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">The game is on钢琴曲谱概述 本曲用于在自由钢琴弹奏，帮助同志们在闲暇之余，接受艺术的洗礼，陶冶自己的情操，升华自己的灵魂😀
+
+按键
+
+        
+            
+                描述
+                语法
+            
+        
+        
+            
+                白键
+                0-9 a-z (小写字母)
+            
+            
+                黑键，需要按住Shift键
+                !@$%^*( 和 A-Z (大写字母)
+            
+            
+                同时按下abc三个键
+                [abc]
+            
+            
+                以一定间隔按下a b c 三个键
+                a b c
+            
+         </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-28&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E9%92%A2%E7%90%B4">钢琴</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/" target="_self">
+          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(一):初识Hadoop" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/">
+        <p class="h4 index-header">Hadoop(一):初识Hadoop</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">初识HadoopHadoop名字怎么来的？Hadoop之父的名字叫Doug Cutting，就是下图那位儒雅随和的男人，他不仅仅是Hadoop的创始人，同时也是nutch(一个开源Java实现的搜索引擎)的创始人，而Hadoop这个名字其实是他孩子一个玩具的名字，就是下图那个那个小黄象，这个玩具也是Hadoop的Logo，小朋友们起名字确实很厉害，类似的还有大名鼎鼎Google这个名字就是由美国数学家 Edward Kasner 九岁的侄子 Milton Sirotta 发明的
+
+Hadoop是干什么的？
+这是Hadoop的官网(https://hadoop.apache.org/) 的介绍，简单来说，Hadoop就是一个开源的，可靠的，可扩展的分布式计算框架，它用来对海量数据进行分布式存储和计算，就是传说中的大数据。
+Hadoop有几个模块?
+
+Hadoop Common： 公共的模块，用来给其他模块调用
+
+Hadoop分布式存储系统(HDFS)：提供对应用程序数据的高吞吐量访问的分布式文件系统
+
+Hadoop YARN：一个用来作业调度和群集资源管理的框架。
+
+Hadoop Map</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-26&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
+          
+            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
           <img src="https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg" srcset="/img/loading.gif" alt="Node安装与配置" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -454,158 +668,6 @@ ls加-l可以以另外的列表形式显示
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(二):用户管理" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
-        <p class="h4 index-header">Linux(二):用户管理</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">用户管理Linux用户基本介绍
- Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 
-用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。
-每个用户账号都拥有一个唯一的用户名和各自的口令。
-用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录
-
-
-添加用户useradd [选项] 用户名
-接下来，添加一个用户 dl
-[root@localhost ~]# useradd dl
-可能界面看不出什么效果，其实系统已经创建了一个叫dl的用户并创建了同名的组和 /home/dl目录
-
-[root@localhost /]# cd /home/
-[root@localhost home]# ll
-总用量 0
-drwx------. 2 dl dl 62 9月  27 16:08 dl
-drwx------. 2 lj lj 83 9月   5 09:02 lj
-
-如果你不想创建在home目录下，你</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(一):vim与vi" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/">
-        <p class="h4 index-header">Linux(一):vim与vi</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">vim与vi什么是vim？
-Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。
-简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。
-连 vim 的官方网站 (http://www.vim.org) 自己也说 vim 是一个程序开发工具而不是文字处理软件。
-
-vi和vim的三种模式转化图如下:
-实际操作[root@localhost ~]# ll
-总用量 4
--rw-------. 1 root root 1416 9月   4 20:36 anaconda-ks.cfg
-[root@localhost ~]# 
-
-可以看出我没有Hello.java文件
-使用命令
-[root@localhost ~]# vim Hello.java
-随后进入一般模式
-
-此时还不能编辑，如果要编辑 需要按  Insert 或 按 i ，进入编辑模式
-
-当左下角出现插入的时候才能开始编辑，如图
-
-随后，如果要保存
-
-Shift + ; + wq(wq是 写入</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/10/30/hello-world/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/nX3Fb7NerqkQYxt.jpg" srcset="/img/loading.gif" alt="Hello World" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/30/hello-world/">
-        <p class="h4 index-header">Hello World</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-More info: Writing
-Run server$ hexo server
-More info: Server
-Generate static files$ hexo generate
-More info: Generating
-Deploy to remote sites$ hexo deploy
-More info: Deployment
-</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-30&nbsp;&nbsp;
-        
-        
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -613,9 +675,13 @@ More info: Deployment
       
       
         <li class="page-item">
-          <a class="page-link" href="/#board">Previous</a>
+          <a class="page-link" href="/#board">上一页</a>
         </li>
       
+      
+        <li class="page-item">
+          <a class="page-link" href="/page/3/#board">下一页</a>
+        </li>
       
     </ul>
   </nav>
@@ -642,7 +708,7 @@ More info: Deployment
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -651,7 +717,7 @@ More info: Deployment
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

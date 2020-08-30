@@ -126,6 +126,57 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_self">
+          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(二):Hadoop单节点环境搭建" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Hadoop(二):Hadoop单节点环境搭建</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Hadoopd单节点环境搭建Hadoop运行环境
+操作系统：Linux(CentOS 7) 
+Java环境：jdk1.8+
+Hadoop环境：CDH5.x.x
+SSH
+
+如果你没服务器，可以自己用VMware搭一个Linux CentOS 7系统环境
+虽然，Hadoop是一个分布式框架，但是我们学习的时候没必要一上来就一定要搭个集群，这样到时候还没开始学，搭集群环境的报错就先让你放弃了，可谓，从入门到放弃，这里建议，先学单节点(一台服务器)的Hadoop，等你学会了之后，你再去搭集群操作，就会发现原来也不是很难，千万不要一口吃成大肥仔🐷
+安装JAVA环境请参考这篇文章：Linux安装JAVA环境(jdk1.8)
+安装SSH请参考这篇文章：SSH免密登录
+这里要注意的是，因为配置的是单机版的Hadoop，所以你要免密登录本机
+$ ssh localhost
+安装CDH这里有的小朋友可能就要问了，这个CDH是个什么东西？
+众所周知Hadoop是一个开源软件，而CDH是Cloudera公司在原有的Hadoop基础上，加了一些东西，使它比原有的Apache Hadoop更稳定，更好用的版本，</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-19&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
+          
+            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
           <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -587,87 +638,6 @@ publ</div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-3-%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(三):实用指令" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-3-%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/">
-        <p class="h4 index-header">Linux(三):实用指令</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">实用指令Linux系统的运行级别0:关机  
-1:单用户(找回丢失密码)
-2:多用户无网络服务
-3:多用户有网络服务
-4:保留
-5:图形界面
-6:重启
-
-命令 init [0||num]
-
-系统运行级别配置文件： /etc/inittab
-
-如何修改已经忘记密码
-首先，在进入启动页面的时候按e键，然后会进入下面这个页面
-
-将光标移动到下图那一行
-
-在行尾添加 init=/bin/sh,
-
-添加完，按Ctrl + X执行，即可进入单用户模式
-
-然后，就可以修改密码了
-
-这里可以看见会字符不可见，你需要输入LANG=en，才能让字符可见
-
-最后,执行exec /sbin/init即可退出单用户模式
-
-
-帮助命令介绍当你对某个指令不收悉的时候，就可以使用帮助指令
-获得帮助信息
-语法
-man [命令||配置文件]
-
-命令演示
-[root@localhost ~]# man ls
-输入命令按回车,
-
-
-
-ls加-a可以显示隐藏文件
-
-ls加-l可以以另外的列表形式显示
-
-[root@localhost home]# ls -a
-.  ..  crg  qy
-[root@localhost hom</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -675,12 +645,12 @@ ls加-l可以以另外的列表形式显示
       
       
         <li class="page-item">
-          <a class="page-link" href="/#board">上一页</a>
+          <a class="page-link" href="/#board">Previous</a>
         </li>
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/3/#board">下一页</a>
+          <a class="page-link" href="/page/3/#board">Next</a>
         </li>
       
     </ul>
@@ -708,7 +678,7 @@ ls加-l可以以另外的列表形式显示
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -717,7 +687,7 @@ ls加-l可以以另外的列表形式显示
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

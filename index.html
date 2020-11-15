@@ -126,43 +126,47 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/10/25/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-20/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（二十）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_self">
+          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(二):Hadoop单节点环境搭建" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/10/25/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-20/">
-        <p class="h4 index-header">成功日记（二十）</p>
+      <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Hadoop(二):Hadoop单节点环境搭建</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（二十）恢复更新昨天我做了一个梦：
-梦里我站在一个金碧辉煌的地方，头顶是以红色五角星为中心的巨型吊灯；脚下是柔软并带有金色秀刺的红色地毯；眼前是黑压压的，数不清的人，我看不清他们的脸，但我能感觉到他们的目光都集中在我脸上，接着，我对着面前的话筒一字一顿的说：
-我宣布，中华人民共和国公民GrowthLj 的《成功日记》这周恢复更新！！！
-然后，全场爆发出热烈的掌声，那掌声宛如天雷，振聋发聩，希望在未来的某一天我真的可以站在那个地方讲话。
-附上梦里场景图（有人认识吗？）：
+          <div class="index-text mb-1">Hadoopd单节点环境搭建Hadoop运行环境
+操作系统：Linux(CentOS 7) 
+Java环境：jdk1.8+
+Hadoop环境：CDH5.x.x
+SSH
 
-上周日我要自考，考的就是前几篇日记里的《计算机网络原理》，国庆的时间都在复习刷题，所以就断更了（其实就是懒）。
-这周三我一个好朋友过来给我催更，没想到竟然还有人给我催更，当时眼泪就流了下来，感谢这位好朋友，那我就这周更新吧！
-
-新的阅读方法我在网上无意中看到一种读书方法叫做—RIA阅读法，该读书方法来自于《这样读书就够了》，网上很多人推荐。
-R：Reading，找书中一段原文并摘抄下来。
-I：Interpretation，使用自己的语言对书中的原文进行描述，最好不要大段引用原文，多用自己的语言和表达方式，有助于</div>
+如果你没服务器，可以自己用VMware搭一个Linux CentOS 7系统环境
+虽然，Hadoop是一个分布式框架，但是我们学习的时候没必要一上来就一定要搭个集群，这样到时候还没开始学，搭集群环境的报错就先让你放弃了，可谓，从入门到放弃，这里建议，先学单节点(一台服务器)的Hadoop，等你学会了之后，你再去搭集群操作，就会发现原来也不是很难，千万不要一口吃成大肥仔🐷
+安装JAVA环境请参考这篇文章：Linux安装JAVA环境(jdk1.8)
+安装SSH请参考这篇文章：SSH免密登录
+这里要注意的是，因为配置的是单机版的Hadoop，所以你要免密登录本机
+$ ssh localhost
+安装CDH这里有的小朋友可能就要问了，这个CDH是个什么东西？
+众所周知Hadoop是一个开源软件，而CDH是Cloudera公司在原有的Hadoop基础上，加了一些东西，使它比原有的Apache Hadoop更稳定，更好用的版本，</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-10-25&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-19&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
+          
+            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
           
         
       </div>
@@ -173,45 +177,46 @@ I：Interpretation，使用自己的语言对书中的原文进行描述，最�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/09/26/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-19/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十九）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/09/26/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-19/">
-        <p class="h4 index-header">成功日记（十九）</p>
+      <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/">
+        <p class="h4 index-header">Linux(五)：SSH免密登录</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十九）《经济学原理》进度：第十二章 税制的设计
-公司需要交两次税首先，政府会根据公司的利润让公司交公司所得税，其次，当公司用利润向股东支付股息时，股东们要交个人所得税。
-税收的平等能力纳税原则：根据一个人所能承受的负担对这个人征税。由这个原则分出了横向平等和纵向平等。
-横向平等：有相似支付能力的纳税人应该缴纳相等的量。
-纵向平等：能力大的纳税人应该缴纳更大的量。
-税制类型比例的：所有纳税人都支付同样的收入比例。
-累退的：高收入纳税人支付的税收量大，但只占他们收入的小部分。
-累进的：高收入纳税人支付他们收入中较大的比例。
-《穷查理宝典》进度：查理十一讲 第六讲 一流基金的投资实践
-基金投资书中原文：
+          <div class="index-text mb-1">SSH免密登录SSH(Secure Shell)是一种网络协议，用于计算机之间的加密登录。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。
+想进一步了解的话可以，参考阮一峰老师的博客
+一.配置Hosts配置你的hosts，不配置会导致ssh登录无效
+$ sudo vim /etc/hosts
+添加服务器所对应的IP和主机名
 
-假设基金是赌徒，它们每年交给赌场荷官的费用是起始资金的3%，所有股票投资者将必须忍受这样的情况：他们每年赚的钱有一部分落进了荷官的口袋。这是不可避免的命运。同样不可避免的还有，在支付了荷官费用之后，正好有一半的投资者的收益率将会低于平均线，而这条平均线(未来)完全有可能落在一般和糟糕之间。
+二.生成密钥在hadoop000用命令生成SSH密钥，接着，按三下回车就好
+$ ssh-keygen -t rsa
 
-基金投资，无论你赚还是亏都必须缴纳一定费用（交易税，印花税之类的），这些固定费用养活了一</div>
+然后，进入.ssh文件夹，查看目录，会发现多了两个文件，id_rsa(私钥)和id_rsa.pub(公钥)
+
+三.公钥登录用ssh-copy-id命令，将hadoop000生成的公钥传到hadoop8，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录
+$ ssh-copy-id hadoop@192.168.1.8
+hadoop8的.ssh目录会多出来一个authorized_keys的文件，然后设置一下权限
+$ chmod 600 auth</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-26&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-09&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/Linux">Linux</a>&nbsp;
           
         
       </div>
@@ -222,35 +227,47 @@ I：Interpretation，使用自己的语言对书中的原文进行描述，最�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/09/20/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-18/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十八）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(四):安装JAVA环境(jdk1.8)" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/09/20/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-18/">
-        <p class="h4 index-header">成功日记（十八）</p>
+      <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/">
+        <p class="h4 index-header">Linux(四):安装JAVA环境(jdk1.8)</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十八）《自控力》进度：第三章 累到无力抵抗：自控力和肌肉一样有极限？
-自控的肌肉模式罗伊·鲍迈斯特（Roy Baumeister，佛罗里达州立大学心理学家）在过去的15里，他一直在做实验室中做意志力的实验，比如用意志力拒绝饼干、排除干扰、抑制怒火、把手放在冰水里。他通过数不清的实验发现，无论是什么任务，人们的自控力总会随着时间的推移而消失殆尽。鲍迈斯特做了一个有趣的假设：自控力就像肌肉一样有极限。它被使用之后会渐渐疲惫。
-为什么自控力存在局限马修·加略特（Matthew Gailliot）是一名年轻的心理学家，他和鲍迈斯特一起工作。他好奇大脑疲惫是不是因为缺少能量。自控对于大脑来说需要很多能量，为了找到答案，他做了一个实验，他把人们带进试验室，布置一系列自控力任务，比如集中注意力和控制自己情绪。他在做任务前后分别测量人们的血糖含量。被试者在完成任务后血糖含量降得越多，他们在下一个任务表现越差。于是加略特给每人一杯柠檬水。一半人拿含糖的，一般人拿的是人工调剂的，不提供能量。接着发现，喝含糖柠檬水的人表现出了更强的意志力，而拿人工调剂柠檬水的人意志力继续减弱。
-自控力是否真的有”</div>
+          <div class="index-text mb-1">安装 JAVA环境(jdk1.8)第一步下载jdk1.8
+进入Oracle官网下载页面
+
+如果你下的很慢的话，我给你贴心的准备好了我下好了的    点我(提取码：guk0)
+下好后可以用WinScp或XFTP自行上传到自己的服务器目录，如果不会的话，我建议你百度
+我这里将JDK传到了我的~/software目录，我建议你们也可以自己建个software目录专门存放要安装的软件包
+
+这里可以看到我的software目录已经有我上传的jdk了
+第二步解压已经传到服务器的jdk文件
+使用tar命令将software目录下的jdk解压到app目录
+tar -zvxf jdk-8u241-linux-x64.tar.gz  -C ~/app
+
+解压完进入查看一下
+[hadoop@hadoop000 ~]$ ls
+app   Desktop    Downloads  maven_resp  Pictures  README.txt  software   t.txt
+data  Documents  lib        Music       Public    shell       Tem</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-20&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-04&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/Linux">Linux</a>&nbsp;
           
         
       </div>
@@ -261,43 +278,59 @@ I：Interpretation，使用自己的语言对书中的原文进行描述，最�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/09/13/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-17/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十七）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/02/28/Pinao-1-TheGameIsOn/" target="_self">
+          <img src="https://i.loli.net/2020/02/28/viCsxN2XtMmD8FT.jpg" srcset="/img/loading.gif" alt="弹钢琴吗？用键盘的那种(一):The Game is On" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/09/13/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-17/">
-        <p class="h4 index-header">成功日记（十七）</p>
+      <a href="/2020/02/28/Pinao-1-TheGameIsOn/">
+        <p class="h4 index-header">弹钢琴吗？用键盘的那种(一):The Game is On</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十七）《穷查理宝典》进度：第五讲 需要多元学科技能教育
-职业人士需要多学科知识萧伯纳说过：“所谓职业，不过是蒙骗外行人的阴谋。”在我们潜意识层面的思想倾向会导致可怕的后果，其中有两个倾向最突出：
+          <div class="index-text mb-1">The game is on钢琴曲谱概述 本曲用于在自由钢琴弹奏，帮助同志们在闲暇之余，接受艺术的洗礼，陶冶自己的情操，升华自己的灵魂😀
 
-动机引起的偏见（inventive-caaused bias），这是一种先天的认知倾向，认为对职业有利的东西必将对客户或其他事物有利。
-锤子倾向（man-with-a-hammer-tendency），来自那个芒格经常提到的谚语：“对于一个拿着锤子的人来说，他眼中的问题都像钉子。”
+按键
 
-如果一个人懂得多学科知识，掌握多种工具，这会限制由于锤子倾向带来的认知偏差。如果不想使自己认知过于主观，避免人生走向偏离的轨道，必须毕生都与上述两种倾向做斗争，这样就会在通往智慧的道路上，更近一步。
-高效率教育模型文中查理以飞行员教育为例，列出六因素系统
-
-所接受的正规教育的广度足以让飞行员应付飞行实践中几乎所有可能遇上的问题
-所接受的必要的专业教育不仅能让他顺利通过一两项测试，而且能够让他应付自如的地实践问题，甚至能同时处理一至两个复杂的危险情况
-必须学会正向和逆向思考，还必须学会何时把注意力放在期</div>
+        
+            
+                描述
+                语法
+            
+        
+        
+            
+                白键
+                0-9 a-z (小写字母)
+            
+            
+                黑键，需要按住Shift键
+                !@$%^*( 和 A-Z (大写字母)
+            
+            
+                同时按下abc三个键
+                [abc]
+            
+            
+                以一定间隔按下a b c 三个键
+                a b c
+            
+         </div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-13&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-28&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/%E9%92%A2%E7%90%B4">钢琴</a>&nbsp;
           
         
       </div>
@@ -308,45 +341,46 @@ I：Interpretation，使用自己的语言对书中的原文进行描述，最�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/09/06/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-16/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十六）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/" target="_self">
+          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(一):初识Hadoop" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/09/06/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-16/">
-        <p class="h4 index-header">成功日记（十六）</p>
+      <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/">
+        <p class="h4 index-header">Hadoop(一):初识Hadoop</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十六）自考这周最开心的事莫过于得知我的自考过了三科(芜湖~ 起飞🛫)。
-由于疫情原因这次自考从原本的4月推迟到了8月，多给了4个月时间，但考前我还是没有把握，尤其是陌生的管理经济学，非常厚的一本书。最离谱的是我在考试时才发现，原来经济学考试是可以带计算器的（只有加减乘除功能的计算器），别人都是做足准备，就我一人傻傻的在这一根一根数手指的慢慢算。
-经济学算是打开了我新世界的大门，给了我看世界的另外一种方式，以后我要接触更多的学科，像查理·芒格一样可以用多维度，跨学科的方式来处理事物。
-下面附上我考的非常吉利的成绩👇
+          <div class="index-text mb-1">初识HadoopHadoop名字怎么来的？Hadoop之父的名字叫Doug Cutting，就是下图那位儒雅随和的男人，他不仅仅是Hadoop的创始人，同时也是nutch(一个开源Java实现的搜索引擎)的创始人，而Hadoop这个名字其实是他孩子一个玩具的名字，就是下图那个那个小黄象，这个玩具也是Hadoop的Logo，小朋友们起名字确实很厉害，类似的还有大名鼎鼎Google这个名字就是由美国数学家 Edward Kasner 九岁的侄子 Milton Sirotta 发明的
 
-《经济学原理》这周看到了第九章： 国际贸易
-出口国的自由贸易以一个国家的钢铁为例，首先假设这个国家国内的钢铁价格格低于世界价格，允许自由贸易，国内价格上升到等于世界价格，没有一个钢铁卖者接受低于世界价格的价格，没有一个买者支付高于世界价格的价格。
-当国内钢铁供给量大于国内需求量，这个国家就成为了一个钢铁出口国。
+Hadoop是干什么的？
+这是Hadoop的官网(https://hadoop.apache.org/) 的介绍，简单来说，Hadoop就是一个开源的，可靠的，可扩展的分布式计算框架，它用来对海量数据进行分布式存储和计算，就是传说中的大数据。
+Hadoop有几个模块?
 
-上图为出口国的国际贸易供求图，我们再用一个表来看福利变动情况
+Hadoop Common： 公共的模块，用来给其他模块调用
 
-由此可以得出结论：
+Hadoop分布式存储系统(HDFS)：提供对应用程序数据的高吞吐量访问的分布式文件系统
 
-当一国允许贸易并成为一种物品的出口者时，该物品的国内生产者状况</div>
+Hadoop YARN：一个用来作业调度和群集资源管理的框架。
+
+Hadoop Map</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-06&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-26&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
+          
+            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
           
         
       </div>
@@ -357,37 +391,48 @@ I：Interpretation，使用自己的语言对书中的原文进行描述，最�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/30/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-15/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十五）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
+          <img src="https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg" srcset="/img/loading.gif" alt="Node安装与配置" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/08/30/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-15/">
-        <p class="h4 index-header">成功日记（十五）</p>
+      <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Node安装与配置</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十五）《穷查理宝典》目前已看到查理十一讲中的第三讲 论基本的、普世的智慧（修正稿）
-掌握跨学科方法查理认为想要获得普世的智慧，那么掌握各种思维模型，让知识融汇贯通是比绝大多数方法都有效的。像巴菲特和通用电气CEO 杰克·韦尔奇，他们都是掌握这种方法的人，杰克·韦尔奇拥有工程学博士学位，巴菲特了解很多学科的专业知识。不要理会学科的法定界限，因为世界的组成是多种多样的，而实际上世界是一个整体，只是人们为了方便理解事物人为划分为了很多学科。掌握多学科思维模型，不需要你去了解所有的知识，只要吸取各个学科的精华部分就好。
+          <div class="index-text mb-1">Node环境搭建简单的说，node就是一个前端程序员看后端不爽，用JavaScript写出来的后端。
+下载地址：
+https://nodejs.org/zh-cn/download/
 
-如果我们试图理解一样看似独立存在的东西，我们将会发现它和宇宙间的其他一切都有联系。                                                                                                                                                       ——约翰·缪尔
+选择自己系统对应的版本下载，然后一键安装，小白看教程：
+https://www.runoob.com/nodejs/nodejs-install-setup.html
+打开CMD，输入node -v和npm -v，如果显示了版本，则安装完成
 
-要远离极端的意识形态严重的意识形态会扭曲人的思想，像中东的恐怖分子，</div>
+Node配置这里node的配置主要是配置npm，简单来说npm就相当于Java中的Maven，或者说它就是前端开发中的Maven
+镜像配置node也和Maven一样有着默认镜像，默认镜像访问速度较慢，下面是它原本的镜像
+npm get registry //获取镜像
+
+我们要将默认镜像切换为淘宝镜像
+npm config set registry https://registry.npm.taobao.org        //设置镜像
+
+上面已经切换成淘宝镜像了，如果想国内镜像和国外镜像一起使用的也可以，通过cnpm
+npm install -g cnpm --</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-30&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-23&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/Node">Node</a>&nbsp;
           
         
       </div>
@@ -398,39 +443,50 @@ I：Interpretation，使用自己的语言对书中的原文进行描述，最�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/22/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-14/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十四）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/12/19/JAVA%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95-1/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="JAVA压力测试:Jmeter初体验" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/08/22/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-14/">
-        <p class="h4 index-header">成功日记（十四）</p>
+      <a href="/2019/12/19/JAVA%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95-1/">
+        <p class="h4 index-header">JAVA压力测试:Jmeter初体验</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十四）《穷查理宝典》已看到查理十一讲中的 第二讲 论基本的、普世的智慧，及其与投资管理和商业的关系
-要掌握多种思维模型可以理解为用多学科的方式来理解事物，如果你只会一两个，你看问题将会扭曲现实，有句谚语”在在手里拿着铁锤的人看来，任何问题都像钉子“。
-下面是文中有具体提出过的思维模型
-复利原理、排列组合原理、工程学类的思维模型（断裂点原则）、生物学/生理学模型、心理学模型（误判心理学）、微观经济学
-其中只有微观经济学和心理学的书我看过一点，剩下其他的基本没怎么接触过，学海无涯，这么多模型怕是有的学了，有目标总比无头苍蝇好。
-伯克希尔哈撒韦的投资哲学伯克希尔哈撒韦不投高科技行业，查理表示很难理解高科技、芯片等行业发展的实质。高科技行业的改朝换代非常快，像苹果和诺基亚，原本诺基亚已经统治了手机市场，结果乔布斯的苹果一发布，直接把诺基亚拉下神坛。巴菲特不投高科技行业的原因，有一部分可能是因为高科技行业这种颠覆性。
-将股市比作赛马场，股票的未来的回报率相当于赛马赌博的赔率，他们会仔细的分析，看哪只“马”的赔率高，等待机会然后下重注，其他时间则按兵不动。
-伯克希尔哈撒韦喜欢投资优质企业</div>
+          <div class="index-text mb-1">Jmeter初体验校园博客的项目需要上线，所以要进行压力测试，于是就开始了测试初体验
+下载与安装下载地址：https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/
+
+环境配置1.配置JMETER_HOME打开系统变量新建变量JMETER_HOME,然后，填写你的jmeter安装目录
+
+2.配置path在path变量加入 %JMETER_HOME%\bin
+确认安装随便找个地方，打开cmd，输入 jmeter能打开jmeter就算配置完成
+
+测试实例进入jmeter的bin目录下,打开 jmeter.bat文件
+
+打开Options，选择Choose Language中的Chinese(Simplified)可以切换成简体中文
+
+右键一个test plan 点击 添加 线程 线程组
+
+
+线程数：虚拟用户数。一个虚拟用户占用一个进程或线程。设置多少虚拟用户数在这里也就是设置多少个线程数。
+Ramp-Up Period(in seconds)准备时长：设置的虚拟用户数需要多长时间全部启动。如果线程数为10，准备时长为2，那么需</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-22&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-19&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
+          
+            <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95">压力测试</a>&nbsp;
           
         
       </div>
@@ -441,44 +497,37 @@ I：Interpretation，使用自己的语言对书中的原文进行描述，最�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/17/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-13/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十三）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/12/04/JAVA%E5%9F%BA%E7%A1%80-2-%E9%9B%86%E5%90%88/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="JAVA知识点(二):集合" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/08/17/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-13/">
-        <p class="h4 index-header">成功日记（十三）</p>
+      <a href="/2019/12/04/JAVA%E5%9F%BA%E7%A1%80-2-%E9%9B%86%E5%90%88/">
+        <p class="h4 index-header">JAVA知识点(二):集合</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十三）1.Java小技巧建造者模式也可以适用于类的层次结构
-比如，用类的层次根部的一个抽象类表示各种披萨:
-public abstract class Pizza {
-    //HAM:火腿，MUSHROOM: 蘑菇，ONION:洋葱，PEPPER:胡椒，SAUSAGE:香肠
-    public enum Topping { HAM, MUSHROOM, ONION, PEPPER, SAUSAGE }
-    Set&lt;Topping&gt; toppings;
+          <div class="index-text mb-1">JAVA 集合JAVA的集合类被定义在Java.util包中，主要有4种集合，分别为List、Queue、Set、Map，每种集合的具体分类如图：
 
-    abstract static class Builder&lt;T extends Builder&lt;T&gt;&gt; {
-        /**
-         * 创建一个枚举Set集合里面元素为Topping
-         * EnumSet.noneOf(Topping.class)输出:[]
-         * EnumSet.allOf(Topping.class)输出：[HAM, MUSHROOM, ONION, PEPPER, SAUSAGE]
-         *</div>
+List：加强版数组1.ArrayList：基于数组实现，增删慢，查询快，线程不安全因为是基于数组实现，所以当需要插入或删除一个节点时，需要移动其他所有节点，代价较高，因此，ArrayList不适合更新操作。
+ArrayList不需要定义数组长度，在默认长度（默认长度为10）不够时，ArrayList会创建一个新的更大数组并将已有的数据复制到新数组中，通过调用一个native方法System.arraycopy实现
+2.Vector: 基于数组实现，增删慢，查询快，线程安全Vector的数据结构与ArrayList一样，都是基于数组实现，不同的是Vector支持线程同步，以保证多线程环境下数据的一致性，但由于频繁的加锁和释放锁操作，Vector整体独写效率比ArrayList低。
+3.LinkedList: 基于双向链表实现，增删快，查询慢，线程不安全LinkedList采用双向链表结构存储元素，在对LinkedList插入和删除时，只需</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-17&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-04&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
           
         
       </div>
@@ -489,41 +538,38 @@ public abstract class Pizza {
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/08/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-12/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（十二）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/12/02/JAVA%E5%9F%BA%E7%A1%80-1-JVM/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="JAVA知识点(一):JVM" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/08/08/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-12/">
-        <p class="h4 index-header">成功日记（十二）</p>
+      <a href="/2019/12/02/JAVA%E5%9F%BA%E7%A1%80-1-JVM/">
+        <p class="h4 index-header">JAVA知识点(一):JVM</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（十二）1.《穷查理宝典：查理·芒格的智慧箴言录》
+          <div class="index-text mb-1">JVMJVM(Java Virtual Machine)是用于运行Java字节码的虚拟机包括一个类加载器子系统（Class Loader SubSystem）、运行时数据区（Runtime Data Area）、执行引擎和本地接口库（Native Interface Library）。本地接口库通过调用本地方法库（Native Method Library）与操作系统交互，如图：
 
-查理·芒格巴菲特的黄金搭档，是股神身后的男人，伯克希尔哈撒韦的副主席。
-他有着百科全书般的知识，分析事情喜欢用多学科的方式来看待问题，对问题进行降维打击。巴菲特称有个“两分钟效应”，查理具有的敏锐的眼光和洞察力，即使是面对陌生的领域，他也能一眼看穿事物的本质。感觉这个人就是快达到了经济学中“绝对理性人”的存在。
-这本书我觉得能算一本哲学书，我称之为《查理·芒格主义》，目前才刚看，开头几章就已经让我感到惊艳，书中对芒格的思维描述非常精彩，都不像在读书，像走进了这个老头的脑子里一样。
-其中有一段关于查理·芒格逆向思维的描述，让我感觉到仿佛有一道光照在了我的混沌的脑袋上
 
-查理思考问题总是从逆向开始。如果要明白人生如何才能得到幸福，查理首先会研究人生如何才能变得痛苦；要研究企业如何做强做大，查理首先研究企业是如何衰败的；大部分人更关心如何在股市投资上成功，查理最关心的却是为什么在股市投资上大部分人都失败了。他的这种思考方法来源于下面这句农夫谚语中所蕴含的哲理：我只想知道将来我会死在什么地方，这样我就永远不去那儿了。 
-
-什么是学习</div>
+Java堆（Heap）：是Java虚拟机所管理的内存最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。
+方法区（Method Area）：与java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。
+程序计数器（Program Counter Register）：是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。
+JVM栈（JVM Stacks）：与程序计数器一样，java虚拟机栈（Java Virtual Machin</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-08&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-02&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
           
         
       </div>
@@ -534,41 +580,58 @@ public abstract class Pizza {
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/06/27/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-6/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（六）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/11/17/%E9%9D%A2%E8%AF%95-1/" target="_self">
+          <img src="https://i.loli.net/2019/11/17/HubsPjzmlQtqX2c.jpg" srcset="/img/loading.gif" alt="面试题(一)" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/06/27/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-6/">
-        <p class="h4 index-header">成功日记（六）</p>
+      <a href="/2019/11/17/%E9%9D%A2%E8%AF%95-1/">
+        <p class="h4 index-header">面试题(一)</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（六）1.《经济学原理》读后笔记经济一词源于希腊语，意为“管理家庭的人”，事实上，家庭和经济有着许多共同之处。
-经济学领域很广，但可以用一些中心思想统一这个领域，那就是
-经济学十大原理
-原理一：人们面临交替关系
-每个人都有的宝贵资源——时间，你可以用一小时去学习经济学，也可以用这一小时去学习心理学，当你用一小时拿来学习，你就不能去刷抖音，看综艺或为爱豆打榜，这就是我们面临的交替关系。
-原理二：某种东西的成本是为了得到它而放弃的东西
-这个原理对应经济学一个专有名词叫做机会成本，到了读大学年龄的运动员，如果退学去参加职业比赛就能赚几百万，而去读书不一定有机会能赚到这么多钱，所以他们去读书的机会成本是很高的。
-原理三：理性人考虑边际量
-生活中许多决策涉及对现有行动计划进行微小的增量调整。这些调整被称为边际变动
-航空公司，每个乘客的成本为500元，假设一个飞机在即将起飞时，仍有10个空位，那么航空公司能不能以300元价格卖一张票呢？一般都认为不可以，因为低于500元就会亏本，但其实是可以的，因为多增加一名乘客的成本是微乎其微的，边际成本为一顿飞机餐加一罐饮料的成本(50元)。只要等退票</div>
+          <div class="index-text mb-1">面试题我一个好朋友，在BOSS上投简历收到了面试邀请，这是他面试回来说的面试题，我整理了一下并查了答案，以免自己去面试的时候不会
+下面是面试问题：
+
+1.JAVA数据类型以及所占字节
+2.手写三个单例模式
+3.ArrayList与LinkList区别
+4.HashSet原理
+5.常用的Linux命令
+6.JAVA反射机制
+7.手画一个线程状态图
+8.手写三个线程交替打印ABC
+9.什么是TCP三次握手，为什么四次挥手断开连接，为什么
+10.手写一个冒泡算法
+11.SpringMVC是怎么运行的？
+12.索引类型及作用
+
+下面面试答案：
+1.JAVA数据类型及所占字节整型:  byte--1字节    short--2字节    int--4字节    long--8字节
+浮点型:  float--4字节    double--8字节
+字符型:  char--2字节
+布尔型:  boolean--1字节
+2.单例模式的三种实现/**
+* 1.懒汉式,默认不实例化，什么时候用什么时候创建对象
+* 优点：懒加载启动快，资源占用小，使用时才实例化，无锁。
+* 缺点：非线程安全。
+*/
+publ</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-27&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-17&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
+            <a href="/tags/%E9%9D%A2%E8%AF%95">面试</a>&nbsp;
           
         
       </div>
@@ -583,7 +646,7 @@ public abstract class Pizza {
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/2/#board">下一页</a>
+          <a class="page-link" href="/page/2/#board">Next</a>
         </li>
       
     </ul>
@@ -611,7 +674,7 @@ public abstract class Pizza {
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -620,7 +683,7 @@ public abstract class Pizza {
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

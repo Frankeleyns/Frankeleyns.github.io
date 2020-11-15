@@ -126,339 +126,71 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/06/14/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-5/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（五）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/11/02/Linux-3-%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(三):实用指令" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/06/14/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-5/">
-        <p class="h4 index-header">成功日记（五）</p>
+      <a href="/2019/11/02/Linux-3-%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/">
+        <p class="h4 index-header">Linux(三):实用指令</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（五）1.《富爸爸穷爸爸》阅后小笔记这本书内容比较少，我在通勤的地铁上就给他读完了。
-书里面一直在强调一个概念，财商(Financial IQ)，这是一种由会计、投资、了解市场和法律相关知识所构成的综合能力。有了财商你才能更好的去赚钱，不过我个人感觉里面的财商算一种钻空子的行为，作者举得最多的例子就是倒卖房子，基本每次提到房地产还会顺带出现川普老师的名字，作者还表示要像川老师一样思考，我打算多看看川老师推特，看看能不能从他的只言片语中悟出致富之道，毕竟没有人比川老师更懂什么是富人
+          <div class="index-text mb-1">实用指令Linux系统的运行级别0:关机  
+1:单用户(找回丢失密码)
+2:多用户无网络服务
+3:多用户有网络服务
+4:保留
+5:图形界面
+6:重启
 
-    
+命令 init [0||num]
+
+系统运行级别配置文件： /etc/inittab
+
+如何修改已经忘记密码
+首先，在进入启动页面的时候按e键，然后会进入下面这个页面
+
+将光标移动到下图那一行
+
+在行尾添加 init=/bin/sh,
+
+添加完，按Ctrl + X执行，即可进入单用户模式
+
+然后，就可以修改密码了
+
+这里可以看见会字符不可见，你需要输入LANG=en，才能让字符可见
+
+最后,执行exec /sbin/init即可退出单用户模式
+
+
+帮助命令介绍当你对某个指令不收悉的时候，就可以使用帮助指令
+获得帮助信息
+语法
+man [命令||配置文件]
+
+命令演示
+[root@localhost ~]# man ls
+输入命令按回车,
 
 
 
-如果你想致富，你就多购买资产，如果你想变穷你就多购买负债
+ls加-a可以显示隐藏文件
 
-资产是能把钱放进你口袋里的东西
-负债是能把钱从你空袋里拿走的东西                    ——《富爸爸穷爸爸》第二课
+ls加-l可以以另外的列表形式显示
 
-书中有一种现金流图，直观的表示了穷人，中产和富人三个阶级的钱的流动方向
-穷人：
-
-中产：
-
-富人：
-
-贷款买房，很多人可能认为这是一种资产，但你其实买的是抵押贷款(负债)，而非真正的房产，因为它会把钱从你的口袋里拿走。
-这本书里面我觉得最有意思的一部分就是介绍 富人的秘密—拥有自己的公司。
-有</div>
+[root@localhost home]# ls -a
+.  ..  crg  qy
+[root@localhost hom</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-14&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/06/07/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-4/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（四）" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/06/07/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-4/">
-        <p class="h4 index-header">成功日记（四）</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（四）1.坚持夜读一周上周的成功日记（三）里我提出要进行夜读，我没食言，坚持了一周夜读。
-因为八月份要自考的关系，所以我夜读都在复习自考的知识，我还打算将我所学的知识写进成功日记里面，之后可能会每一本书要给它整理成一篇单独的笔记发布到我的博客和公众号内。
-咱不能白买了这些书对吧，不获得点什么我会觉得自己亏。
-
-2.《爱的博弈》阅读笔记信任重建(出轨后的救赎)：弥补、协调、接触
-
-弥补：
-这个阶段也可称之为“赎罪”。出轨的一方要持续表现出后悔之意且要直面伴侣的怀疑。有了这个作为基础才有重建信任的可能。此时，出轨一方必须保持耐心不能申辩，要接受伴侣的一切指责，承担一切责任。要倾听伴侣诉说的痛苦，并尽力去理解。如果出轨的一方不能承担所有责任，为自己找借口或申辩，那么双方就很难再重建信任了。
-弥补三步骤：
-1.坦白
-背叛一方若被伴侣责问，必须如实回答。问题可能有，为什么是他/她？她比我漂亮吗？出轨是怎么开始的？怎么进行的？这个时候背叛的一方必须详细描述每一次幽会的时间，地点等细节。这种全盘交代可能会使双方不安，如果不想加深伤害，全盘交代是十分必要的。
-2.行为转变、透明和验证
-意味着背</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-07&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/05/31/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-3/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（三）" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/05/31/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-3/">
-        <p class="h4 index-header">成功日记（三）</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（三）1.梦想储蓄罐周四的时候，我的梦想储蓄罐终于迎来了第一笔储蓄，虽然不多，但这第一笔储蓄意义重大，代表我拥有了钞能力（管理钱的能力）。
-很庆幸因为梦想储蓄罐的存在，没有使自己变成所谓的精致穷，掉入资本主义的消费陷阱当中。
-人可以有欲望，欲望是人类的本能，但我们要学会的是控制欲望，不能被欲望主导自己的行动，看到想看的东西就要买，看到想吃的东西就要吃，实在想买，也不要用花呗，借呗之类的贷款应用，透支自己未来，然后变成精致穷。可以开个梦想储蓄罐，然后自己存钱到梦想储蓄罐，钱够再买，就像自己给自己分期贷款一样，还不要付利息，自己成为自己债主，这种主宰自己的感觉不是很爽吗？
-绝不当韭浪！！！
-
-2.购买基金基金：你把钱投给某个基金机构，然后由这个机构的基金经理人来购买金融资产如股票、债券、外汇、期货等，众筹买资产，盈利了大家就分红。
-购买基金的好处是什么呢？
-假设你用1000￥以每股100￥的价格购买了10股腾讯的股票。但现在这只股票跌了40%，于是你不能再以每股100￥，而只能以每股60￥(60% x 100￥)卖出去，如果你把它全卖了，那么你就只剩下600￥了。
-而股票型基金则至</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-31&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/05/24/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-2/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（二）" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/05/24/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-2/">
-        <p class="h4 index-header">成功日记（二）</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（二）1.规划自己的理财计划首先，收入的50%拿来养我的鹅，如果不知道鹅是什么，请参考我的成功日记(一)，
-剩下的50%中减1200￥每月的生活开支，这还是没付房租的情况，如果自己租房起码还得再加1000￥，变成2200￥
-最后剩下的钱，放进梦想储蓄罐中
-这里有的朋友可能就要问了那什么是梦想储蓄罐呢？
-
-“随便拿一个罐子，作为储蓄罐。然后在这个罐子上写上你的梦想。要为每一个梦想准备一个储蓄罐，一旦储蓄罐准备好，你就应当把省下的每一分钱放进去。”———摘自《小狗钱钱》第二章
-
-我不会真的傻傻的真拿瓶瓶罐罐来，我自己用微信收藏功能建了一篇笔记，用来当我的梦想储蓄罐，一篇笔记对应一个梦储蓄罐，并配上梦想相册(也是小狗钱钱里的概念)：
-
-2.《爱的博弈》阅读分享
-这本书讲教你如何经营婚恋关系，以及处理婚姻问题。
-（关注公众号“成长的青年”，回复：爱的博弈，即可获取电子书）
-下面分享一些概念：
-滑动门时刻(sliding door moment)：当一个人表达出联结的需要时，另一个人的反应可以是拉开门走过去，也可以是关上门转身离开。这是发展亲密关系的关键时刻。
-
-“我看起来怎么样？” （</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-24&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/05/16/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-1/" target="_self">
-          <img src="https://i.loli.net/2020/05/14/nbsRNlMKUdCDfyP.png" srcset="/img/loading.gif" alt="成功日记（一）" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/05/16/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0-1/">
-        <p class="h4 index-header">成功日记（一）</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">成功日记（一）1.阅读完《小狗钱钱》这是本好书。
-完。
-开个小玩笑，下面我要开始BB了
-这本书是欧美最畅销的财富启蒙书籍，归类为童话书籍，是给孩子看的，这本书要表达的观点也很简单，让你自己变的富有吧！
-故事讲的是一个叫吉娅的小女孩，她有一条会说话的狗叫——钱钱，然后吉娅在钱钱的帮助下达到人生巅峰，变成了一个富婆！！！
-总结起来就是这么简单。
-
-从小到大我周围的人他们都告诉我，有钱人都是坏人。他们剥削劳动人民；他们爱装，喜欢炫富；他们欺骗消费者；他们还老是出轨（并没有针对强东的意思）；总之，他们无恶不作。每个人都在骂有钱人，但每个人又都想成为有钱人。
-《小狗钱钱》这本书虽然只是一本童话书籍，但里面涉及到的概念却是成年人看了都受益匪浅。
-
-正确的金钱观
-钱是中性的，钱本身没有属性，它不会让一个人变得幸福，也不会带来不幸，但它会暴露一个人的本性。
-比如，小马哥和我，同时获得一个亿，且获得这一个亿是完全无代价的不需要向富婆卖身，我可能会用这一个亿去买豪宅、开豪车、把英雄联盟和王者荣耀全英雄全皮肤都给他买了、请个米其林厨师团伙专门做饭给我吃、还要去澳门赌场看美女荷官在线发牌、请美女女仆在家拖地，</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-16&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0">成功日记</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_self">
-          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(二):Hadoop单节点环境搭建" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
-        <p class="h4 index-header">Hadoop(二):Hadoop单节点环境搭建</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Hadoopd单节点环境搭建Hadoop运行环境
-操作系统：Linux(CentOS 7) 
-Java环境：jdk1.8+
-Hadoop环境：CDH5.x.x
-SSH
-
-如果你没服务器，可以自己用VMware搭一个Linux CentOS 7系统环境
-虽然，Hadoop是一个分布式框架，但是我们学习的时候没必要一上来就一定要搭个集群，这样到时候还没开始学，搭集群环境的报错就先让你放弃了，可谓，从入门到放弃，这里建议，先学单节点(一台服务器)的Hadoop，等你学会了之后，你再去搭集群操作，就会发现原来也不是很难，千万不要一口吃成大肥仔🐷
-安装JAVA环境请参考这篇文章：Linux安装JAVA环境(jdk1.8)
-安装SSH请参考这篇文章：SSH免密登录
-这里要注意的是，因为配置的是单机版的Hadoop，所以你要免密登录本机
-$ ssh localhost
-安装CDH这里有的小朋友可能就要问了，这个CDH是个什么东西？
-众所周知Hadoop是一个开源软件，而CDH是Cloudera公司在原有的Hadoop基础上，加了一些东西，使它比原有的Apache Hadoop更稳定，更好用的版本，</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-19&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
-          
-            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/">
-        <p class="h4 index-header">Linux(五)：SSH免密登录</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">SSH免密登录SSH(Secure Shell)是一种网络协议，用于计算机之间的加密登录。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。
-想进一步了解的话可以，参考阮一峰老师的博客
-一.配置Hosts配置你的hosts，不配置会导致ssh登录无效
-$ sudo vim /etc/hosts
-添加服务器所对应的IP和主机名
-
-二.生成密钥在hadoop000用命令生成SSH密钥，接着，按三下回车就好
-$ ssh-keygen -t rsa
-
-然后，进入.ssh文件夹，查看目录，会发现多了两个文件，id_rsa(私钥)和id_rsa.pub(公钥)
-
-三.公钥登录用ssh-copy-id命令，将hadoop000生成的公钥传到hadoop8，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录
-$ ssh-copy-id hadoop@192.168.1.8
-hadoop8的.ssh目录会多出来一个authorized_keys的文件，然后设置一下权限
-$ chmod 600 auth</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-09&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
         
         
         
@@ -475,41 +207,44 @@ $ chmod 600 auth</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(四):安装JAVA环境(jdk1.8)" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(二):用户管理" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/">
-        <p class="h4 index-header">Linux(四):安装JAVA环境(jdk1.8)</p>
+      <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+        <p class="h4 index-header">Linux(二):用户管理</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">安装 JAVA环境(jdk1.8)第一步下载jdk1.8
-进入Oracle官网下载页面
+          <div class="index-text mb-1">用户管理Linux用户基本介绍
+ Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 
+用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。
+每个用户账号都拥有一个唯一的用户名和各自的口令。
+用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录
 
-如果你下的很慢的话，我给你贴心的准备好了我下好了的    点我(提取码：guk0)
-下好后可以用WinScp或XFTP自行上传到自己的服务器目录，如果不会的话，我建议你百度
-我这里将JDK传到了我的~/software目录，我建议你们也可以自己建个software目录专门存放要安装的软件包
 
-这里可以看到我的software目录已经有我上传的jdk了
-第二步解压已经传到服务器的jdk文件
-使用tar命令将software目录下的jdk解压到app目录
-tar -zvxf jdk-8u241-linux-x64.tar.gz  -C ~/app
+添加用户useradd [选项] 用户名
+接下来，添加一个用户 dl
+[root@localhost ~]# useradd dl
+可能界面看不出什么效果，其实系统已经创建了一个叫dl的用户并创建了同名的组和 /home/dl目录
 
-解压完进入查看一下
-[hadoop@hadoop000 ~]$ ls
-app   Desktop    Downloads  maven_resp  Pictures  README.txt  software   t.txt
-data  Documents  lib        Music       Public    shell       Tem</div>
+[root@localhost /]# cd /home/
+[root@localhost home]# ll
+总用量 0
+drwx------. 2 dl dl 62 9月  27 16:08 dl
+drwx------. 2 lj lj 83 9月   5 09:02 lj
+
+如果你不想创建在home目录下，你</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-04&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
         
         
         
@@ -526,59 +261,54 @@ data  Documents  lib        Music       Public    shell       Tem</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/02/28/Pinao-1-TheGameIsOn/" target="_self">
-          <img src="https://i.loli.net/2020/02/28/viCsxN2XtMmD8FT.jpg" srcset="/img/loading.gif" alt="弹钢琴吗？用键盘的那种(一):The Game is On" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(一):vim与vi" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/02/28/Pinao-1-TheGameIsOn/">
-        <p class="h4 index-header">弹钢琴吗？用键盘的那种(一):The Game is On</p>
+      <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/">
+        <p class="h4 index-header">Linux(一):vim与vi</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">The game is on钢琴曲谱概述 本曲用于在自由钢琴弹奏，帮助同志们在闲暇之余，接受艺术的洗礼，陶冶自己的情操，升华自己的灵魂😀
+          <div class="index-text mb-1">vim与vi什么是vim？
+Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。
+简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。
+连 vim 的官方网站 (http://www.vim.org) 自己也说 vim 是一个程序开发工具而不是文字处理软件。
 
-按键
+vi和vim的三种模式转化图如下:
+实际操作[root@localhost ~]# ll
+总用量 4
+-rw-------. 1 root root 1416 9月   4 20:36 anaconda-ks.cfg
+[root@localhost ~]# 
 
-        
-            
-                描述
-                语法
-            
-        
-        
-            
-                白键
-                0-9 a-z (小写字母)
-            
-            
-                黑键，需要按住Shift键
-                !@$%^*( 和 A-Z (大写字母)
-            
-            
-                同时按下abc三个键
-                [abc]
-            
-            
-                以一定间隔按下a b c 三个键
-                a b c
-            
-         </div>
+可以看出我没有Hello.java文件
+使用命令
+[root@localhost ~]# vim Hello.java
+随后进入一般模式
+
+此时还不能编辑，如果要编辑 需要按  Insert 或 按 i ，进入编辑模式
+
+当左下角出现插入的时候才能开始编辑，如图
+
+随后，如果要保存
+
+Shift + ; + wq(wq是 写入</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-28&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E9%92%A2%E7%90%B4">钢琴</a>&nbsp;
+            <a href="/tags/Linux">Linux</a>&nbsp;
           
         
       </div>
@@ -589,47 +319,37 @@ data  Documents  lib        Music       Public    shell       Tem</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/" target="_self">
-          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(一):初识Hadoop" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/10/30/hello-world/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/nX3Fb7NerqkQYxt.jpg" srcset="/img/loading.gif" alt="Hello World" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/">
-        <p class="h4 index-header">Hadoop(一):初识Hadoop</p>
+      <a href="/2019/10/30/hello-world/">
+        <p class="h4 index-header">Hello World</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">初识HadoopHadoop名字怎么来的？Hadoop之父的名字叫Doug Cutting，就是下图那位儒雅随和的男人，他不仅仅是Hadoop的创始人，同时也是nutch(一个开源Java实现的搜索引擎)的创始人，而Hadoop这个名字其实是他孩子一个玩具的名字，就是下图那个那个小黄象，这个玩具也是Hadoop的Logo，小朋友们起名字确实很厉害，类似的还有大名鼎鼎Google这个名字就是由美国数学家 Edward Kasner 九岁的侄子 Milton Sirotta 发明的
-
-Hadoop是干什么的？
-这是Hadoop的官网(https://hadoop.apache.org/) 的介绍，简单来说，Hadoop就是一个开源的，可靠的，可扩展的分布式计算框架，它用来对海量数据进行分布式存储和计算，就是传说中的大数据。
-Hadoop有几个模块?
-
-Hadoop Common： 公共的模块，用来给其他模块调用
-
-Hadoop分布式存储系统(HDFS)：提供对应用程序数据的高吞吐量访问的分布式文件系统
-
-Hadoop YARN：一个用来作业调度和群集资源管理的框架。
-
-Hadoop Map</div>
+          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
+More info: Writing
+Run server$ hexo server
+More info: Server
+Generate static files$ hexo generate
+More info: Generating
+Deploy to remote sites$ hexo deploy
+More info: Deployment
+</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-26&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-30&nbsp;&nbsp;
         
         
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
-          
-            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
-          
         
       </div>
     </div>
@@ -642,13 +362,9 @@ Hadoop Map</div>
       
       
         <li class="page-item">
-          <a class="page-link" href="/#board">上一页</a>
+          <a class="page-link" href="/#board">Previous</a>
         </li>
       
-      
-        <li class="page-item">
-          <a class="page-link" href="/page/3/#board">下一页</a>
-        </li>
       
     </ul>
   </nav>
@@ -675,7 +391,7 @@ Hadoop Map</div>
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -684,7 +400,7 @@ Hadoop Map</div>
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

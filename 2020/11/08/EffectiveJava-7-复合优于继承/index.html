@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="GrowthLj">
+  <meta name="keywords" content="">
+  <title>Effective Java(七)：复合优于继承 ~ Growth Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>GrowthLj Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Sunday, November 8th 2020, 10:02 am</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="复合优于继承"><a href="#复合优于继承" class="headerlink" title="复合优于继承"></a>复合优于继承</h2><p>继承（extends）是实现代码重用的有力手段，但它并非永远是完成这项工作的最佳工具。使用不当会导致应用变的脆弱。下面我举一个例子，我需要查询<strong>HashSet</strong>看看它被创建以来添加过多少个元素。为了实现该功能，我会继承该类，增加一个<strong>addCount</strong>属性来记录元素插入数量，还有一个访问该数值的方法，并覆盖<strong>add</strong>、<strong>addAll</strong>这两个增加元素的方法。</p>
+<pre><code class="java">//Broken - inappropriate use of inheritance!
+public class InstrumentedHashSet&lt;E&gt; extends HashSet&lt;E&gt; {
+    //The number of attempted element insertions
+    private int addCount = 0;
+
+    public InstrumentedHashSet(){}
+
+    public InstrumentedHashSet(int initCap, float loadFactor){
+        super(initCap,loadFactor);
+    }
+
+    @Override
+    public boolean add(E e) {
+        addCount++;
+        return super.add(e);
+    }
+
+    @Override
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        addCount += c.size();
+        return super.addAll(c);
+    }
+
+    public int getCount(){
+        return addCount;
+    }
+}</code></pre>
+<p>然后，创建一个实例运行试试：</p>
+<pre><code class="java">    public static void main(String[] args) {
+        List&lt;String&gt; list = Arrays.asList(&quot;Snap&quot;, &quot;Crackle&quot;, &quot;Pop&quot;);
+        InstrumentedHashSet&lt;String&gt; ihashSert = new InstrumentedHashSet&lt;String&gt;();
+        ihashSert.addAll(list);
+        System.out.println(ihashSert.getCount());    //输出： 6
+    }</code></pre>
+<p>我只添加了3个元素，然而实际结果却返回6，为什么呢？请看下面的<strong>HashSet</strong>的<strong>addAll</strong>方法的实现：</p>
+<pre><code class="java">    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        boolean modified = false;
+        for (E e : c)
+            if (add(e))        //调用add方法
+                modified = true;
+        return modified;
+    }</code></pre>
+<p>原来<strong>HashSet</strong>的<strong>addAll</strong>方法是基于<strong>add</strong>方法来实现的，但这在它的文档里并没有说明，我们<strong>InstrumentedHashSet</strong>类中的<strong>addAll</strong>方法，首先给<strong>addCount</strong>增加3，然后当进入<strong>super.addAll</strong>来调用<strong>HashSet</strong>的<strong>addAll</strong>实现的时候，Bug出现了，这时又会调用三次add方法，每个元素调用一次，给<strong>addCount</strong>又增加了3，所以总共增加了6。</p>
+<p>下面我们使用<strong>复合（composition）</strong>来解决这个继承产生的坑。</p>
+<pre><code class="java">//Wrapper class - uses composition in place of extends
+public class ForwardingSet&lt;E&gt; implements Set&lt;E&gt; {
+
+    private final Set&lt;E&gt; s;
+
+    public ForwardingSet(Set&lt;E&gt; s) {
+        this.s = s;
+    }
+
+    @Override
+    public void clear() {
+        s.clear();
+    }
+
+    @Override
+    public int size() {
+        return s.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return s.isEmpty();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return s.contains(o);
+    }
+
+    @Override
+    public Iterator&lt;E&gt; iterator() {
+        return s.iterator();
+    }
+
+    @Override
+    public Object[] toArray() {
+        return s.toArray();
+    }
+
+    @Override
+    public &lt;T&gt; T[] toArray(T[] a) {
+        return s.toArray(a);
+    }
+
+    @Override
+    public boolean add(E e) {
+        return s.add(e);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return s.remove(o);
+    }
+
+    @Override
+    public boolean containsAll(Collection&lt;?&gt; c) {
+        return s.containsAll(c);
+    }
+
+    @Override
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        return s.addAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection&lt;?&gt; c) {
+        return s.retainAll(c);
+    }
+
+    @Override
+    public boolean removeAll(Collection&lt;?&gt; c) {
+        return s.removeAll(c);
+    }
+
+}</code></pre>
+<pre><code class="java">//Reusable forwarding class
+public class InstrumentedSet&lt;E&gt; extends ForwardingSet&lt;E&gt;{
+
+    private int addCount = 0;
+
+    public InstrumentedSet(Set&lt;E&gt; s) {
+        super(s);
+    }
+
+    @Override
+    public boolean add(E e) {
+        addCount++;
+        return super.add(e);
+    }
+
+    @Override
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        addCount += c.size();
+        return super.addAll(c);
+    }
+
+    public int getAddCount(){
+        return addCount;
+    }
+}</code></pre>
+<p>创建实例测试一下：</p>
+<pre><code class="java">    public static void main(String[] args) {
+        List&lt;String&gt; list = Arrays.asList(&quot;Snap&quot;, &quot;Crackle&quot;, &quot;Pop&quot;);
+        InstrumentedSet&lt;String&gt; s = new InstrumentedSet&lt;&gt;(new HashSet&lt;&gt;());
+        s.addAll(list);
+        System.out.println(s.getAddCount());    //输出： 3
+    }</code></pre>
+<p><strong>ForwardingSet</strong>类中的每个实例方法都可以调用被包含的现有类<strong>Set</strong>实例中的对应方法，并返回它的结果，这被称为转发（forwarding），<strong>ForwardingSet</strong>中的方法被称为<strong>转发方法(forwarding method)</strong>，这样得到的方法非常稳固，不依赖于现有类的实现细节，所以就不会出现像继承<strong>HashSet</strong>时的Bug。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
+              
+              <span id="/2020/11/08/EffectiveJava-7-复合优于继承/" class="visitors leancloud_visitors" data-flag-title="Effective Java(七)：复合优于继承">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Effective Java(七)：复合优于继承&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>Tag ~ Growth Blog</title>
+  <title>Effective Java(六)：使可变性最小 ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -40,7 +40,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -92,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/11/01/f9v53Kg2bt4OX8I.jpg')no-repeat center center;
+         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -102,6 +102,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Saturday, September 26th 2020, 10:02 am</p>
             
           </div>
 
@@ -113,22 +116,129 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/JAVA/" style="font-size: 50px; color: #337ab7">JAVA</a> <a href="/tags/Linux/" style="font-size: 45px; color: #779bd3">Linux</a> <a href="/tags/Node/" style="font-size: 40px; color: #bbe">Node</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 40px; color: #bbe">面试</a>
-</div>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="使可变性最小"><a href="#使可变性最小" class="headerlink" title="使可变性最小"></a>使可变性最小</h2><p><strong>Java</strong>类库包含许多不可变类，其中有<strong>String</strong>、基本类型的包装类、<strong>BigInteger</strong>和<strong>BigDecimal</strong>。这些不可变类比可变类更加易于设计、实现和使用。</p>
+<p>使类要不可变，有五条原则：</p>
+<ol>
+<li><p><strong>不要提供任何会修改对象状态的方法(也称设值的方法，比如Setter)</strong>。</p>
+</li>
+<li><p><strong>保证类不会被扩展。</strong></p>
+</li>
+<li><p><strong>声明所有的域都是final的。</strong></p>
+</li>
+<li><p><strong>声明所有的域都是私有的。</strong></p>
+</li>
+<li><p><strong>确保对于任何可变组件的互斥访问。</strong></p>
+</li>
+</ol>
+<p>下面举一个例子：</p>
+<pre><code class="java">public final class Complex {
+    private final double re;
+    private final double im;
+
+    public Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+
+    public double realPart(){ return re; }
+    public double imaginaryPart(){ return im; }
+
+    public Complex plus(Complex c){
+        return new Complex(re + c.re, im + c.im);
+    }
+
+    public Complex minus(Complex c){
+        return new Complex(re - c.re, im - c.im);
+    }
+
+    public Complex times(Complex c){
+        return new Complex(re * c.re - im * c.im,
+                           re * c.im + im * c.re);
+    }
+
+    public Complex dividedBy(Complex c){
+        double tmp = c.re * c.re + c.im * c.im;
+        return new Complex((re * c.re + im * c.im) / tmp,
+                               (im * c.re - re * c.im) / tmp);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Complex)) return false;
+        Complex c = (Complex) o;
+        return Double.compare(c.re, re) == 0 &amp;&amp; Double.compare(c.im, im) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * Double.hashCode(re) + Double.hashCode(im);
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Complex{&quot; +
+                &quot;re=&quot; + re +
+                &quot;, im=&quot; + im +
+                &#39;}&#39;;
+    }
+
+}</code></pre>
+<p>这个类表示一个<strong>复数</strong>（complex number，有实部和虚部）。里面有四个基本算术运算：加、减、乘、除。需要注意的是这些算术运算都是<strong>返回新的实例，而不是修改现有的实例</strong>。这种方式被称为<strong>函数的（functional）</strong>的方法，这些方法返回的是一个函数的结果，这些函数对操作数运算但不修改它。</p>
+<p>​    <strong>不可变对象本质上是线程安全的，它们不要求同步。</strong>当多个线程并发访问这样的对象时，它们不会遭到破坏。这无疑是获得线程安全最容易的办法。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
+              
+              <span id="/2020/09/26/EffectiveJava-6-使可变性最小/" class="visitors leancloud_visitors" data-flag-title="Effective Java(六)：使可变性最小">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -183,6 +293,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -199,7 +314,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Tag&nbsp;",
+        "Effective Java(六)：使可变性最小&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

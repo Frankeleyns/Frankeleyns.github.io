@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>Tag ~ Growth Blog</title>
+  <title>Effective Java(四)：try-with-resources优于try-finally ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -40,7 +40,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -92,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/11/01/f9v53Kg2bt4OX8I.jpg')no-repeat center center;
+         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -102,6 +102,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Sunday, August 30th 2020, 10:02 am</p>
             
           </div>
 
@@ -113,22 +116,146 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/JAVA/" style="font-size: 50px; color: #337ab7">JAVA</a> <a href="/tags/Linux/" style="font-size: 45px; color: #779bd3">Linux</a> <a href="/tags/Node/" style="font-size: 40px; color: #bbe">Node</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 40px; color: #bbe">面试</a>
-</div>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="try-with-resources优于try-finally"><a href="#try-with-resources优于try-finally" class="headerlink" title="try-with-resources优于try-finally"></a>try-with-resources优于try-finally</h2><p>许多java类库中都有通过调用<strong>close</strong>方法来手工关闭资源。比如<strong>java.sql.Connection</strong>、<strong>InputStream</strong>、<strong>OutputStream</strong>。</p>
+<p>通常我们都是使用<strong>try-finally</strong>来关闭资源：</p>
+<pre><code class="java">    /**
+     * 读取任意文件第一行
+     * @param path 文件路径
+     * @return  文件内容
+     * @throws IOException 抛出异常
+     */
+    public static String  firstLineOfFile(String path) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        try {
+            return br.readLine();
+        } finally {
+            br.close();
+        }
+    }</code></pre>
+<p>看起来也不是很麻烦，如果你引用两个资源呢？</p>
+<pre><code class="java">    /**
+     * 拷贝文件
+     * @param src   源文件路径
+     * @param dst   目标文件路径
+     * @throws IOException  抛出异常
+     */
+    public static void copy(String src,String dst) throws IOException {
+        InputStream in = new FileInputStream(src);
+        try{
+            OutputStream out = new FileOutputStream(dst);
+            try{
+                byte[] buf = new byte[5];
+                int n;
+                while((n = in.read(buf)) &gt;= 0 )
+                    out.write(buf,0,n);
+            } finally {
+                out.close();
+            }
+        } finally {
+            in.close();
+        }
+    }</code></pre>
+<p>这看起来和写<strong>if-else</strong>没啥区别，破坏了代码的可读性，当我们使用了<strong>try-with-resources</strong>，这个问题迎刃而解。</p>
+<p>使用<strong>try-with-resources</strong>第一个例子</p>
+<pre><code class="java">    public static String firstLineOfFile(String path) throws IOException {
+        try(BufferedReader br = new BufferedReader(
+                new FileReader(path)
+        )){
+            return br.readLine();
+        }
+    }</code></pre>
+<p>使用<strong>try-with-resources</strong>第二个例子</p>
+<pre><code class="java">    public static void copy(String src,String dst) throws IOException {
+        try(InputStream in = new FileInputStream(src);
+            OutputStream out = new FileOutputStream(dst)
+                ){
+            byte[] buf = new byte[5];
+            int n;
+            while ((n = in.read(buf)) &gt;= 0)
+                out.write(buf,0,n);
+        }
+    }</code></pre>
+<p>发现了吗？使用<strong>try-with-resources</strong>的好处就是不用再去手动<strong>close</strong>资源，使代码变得简洁易懂。书上形容这种写法<strong>short and sweet</strong>。我们依然还可以在<strong>try-with-resources</strong>增加<strong>catch</strong>子句来处理发生异常后的流程。</p>
+<p><strong>try-with-resources</strong>不仅可以使用jdk内置类，开发者也可以通过实现<strong>java.lang.AutoCloseable</strong>接口，然后使自己的类可以在<strong>try-with-resources</strong>生效：</p>
+<p><strong>AutoCloseable</strong>就一个方法：</p>
+<pre><code class="java">public interface AutoClosable{
+    public void close() throws Exception;
+}</code></pre>
+<p>下面自己写一个简单的例子</p>
+<pre><code class="java">public class MyClose implements AutoCloseable {
+
+    public void doSomething(){
+        System.out.println(&quot;MyClose Do Something！&quot;);
+    }
+
+    @Override
+    public void close() throws Exception {
+        System.out.println(&quot;MyClose Closed!&quot;);
+    }
+}</code></pre>
+<p>这样我们也能在<strong>try-with-resources</strong>使用自己的类了：</p>
+<pre><code class="java">    public static void myAutoClose() throws Exception {
+        try(MyClose myClose = new MyClose()){
+            myClose.doSomething();
+        }
+    }
+
+输出：    MyClose Do Something！
+      MyClose Closed!</code></pre>
+<p>结论：在处理必须关闭的资源时，始终要优先考虑使用<strong>try-with-resources</strong>，而不是复杂的<strong>try-finally</strong>。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
+              
+              <span id="/2020/08/30/EffectiveJava-4-try-with-resources优于try-finally/" class="visitors leancloud_visitors" data-flag-title="Effective Java(四)：try-with-resources优于try-finally">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -183,6 +310,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -199,7 +331,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Tag&nbsp;",
+        "Effective Java(四)：try-with-resources优于try-finally&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

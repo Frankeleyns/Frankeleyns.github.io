@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>Tag ~ Growth Blog</title>
+  <title>Effective Java(一)：遇到多个构造器参数考虑使用Builder模式 ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -40,7 +40,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -92,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/11/01/f9v53Kg2bt4OX8I.jpg')no-repeat center center;
+         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -102,6 +102,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Saturday, August 8th 2020, 10:02 am</p>
             
           </div>
 
@@ -113,22 +116,127 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/JAVA/" style="font-size: 50px; color: #337ab7">JAVA</a> <a href="/tags/Linux/" style="font-size: 45px; color: #779bd3">Linux</a> <a href="/tags/Node/" style="font-size: 40px; color: #bbe">Node</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 40px; color: #bbe">面试</a>
-</div>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="遇到多个构造器参数考虑使用Builder模式"><a href="#遇到多个构造器参数考虑使用Builder模式" class="headerlink" title="遇到多个构造器参数考虑使用Builder模式"></a>遇到多个构造器参数考虑使用Builder模式</h2><p>我们经常遇到一个开发场景，就是一个实体类的参数很多，你要创建它的对象然后给它赋值。</p>
+<p>第一种方法，使用类的构造方法</p>
+<pre><code class="java">public User(String id,String account,String password,String sex,String name,String phone){
+       this.id        = id;
+       this.account   = account;
+       ...
+   }</code></pre>
+<p>创建实例</p>
+<pre><code class="java">User user = new User(UUID,&quot;123456&quot;,&quot;123456&quot;,&quot;男&quot;,&quot;会飞的猪&quot;,&quot;10010&quot;);</code></pre>
+<p>这样的过多的参数会使你眼花缭乱，值很多不知道什么意思，有时候还容易弄错属性的顺序，可读性不太好。</p>
+<p>第二种方法，就是使用JavaBeans模式，也就是Getter Setter</p>
+<pre><code class="java">public void setId(String id) {this.id = id;}
+public void setAccount(String account){this.account = account;}
+  ....</code></pre>
+<p>创建对象</p>
+<pre><code class="java">User user = new User();
+user.setId(UUID);
+user.setAccount(&quot;123456&quot;);
+...</code></pre>
+<p>绝大部分人肯定用的都是这种方式，可惜的是这种方式其实是有缺点的。因为有很多set，所以构造过程被拆分成好几个调用，在构造过程中会导致JavaBeans可能处于<strong>不一致状态</strong>，于是你就需要额外写代码来保持线程安全。</p>
+<p>   第三种方法，既可以像构造器模式那样安全，也可以像JavaBeans模式那样可读性好。这就是<strong>建造者模式(Builder Pattern)</strong></p>
+<pre><code class="java">public class User {
+    private String id;
+    private String account;
+    private String password;
+    private String sex;
+    private String name;
+    private String phone;
+
+    public static class Builder{
+        private String id;
+        private String account;
+        private String password;
+        private String sex;
+        private String name;
+        private String phone;
+
+        public Builder id(String var){ id = var;   return this; }
+        public Builder account(String var){ account = var;return this;};
+        public Builder password(String var){
+        password = var;  return this; };
+        public Builder sex(String var){ sex = var;  return this; };
+        public Builder name(String var){ name = var;  return this; };
+        public Builder phone(String var){ phone = var;  return this; };
+
+        //将构造器的值赋给实体类
+        public User build(){
+            return new User(this);
+        }
+    }
+
+    //私有类的构造方法保证安全性(类似单例模式)
+    private User(Builder builder){
+        this.id = builder.id;
+        this.account = builder.account;
+        this.password = builder.password;
+        this.sex = builder.sex;
+        this.name = builder.name;
+        this.phone = builder.phone;
+    }
+
+}</code></pre>
+<p>创建对象</p>
+<pre><code class="java">User user = new  User.Builder()
+    .id(&quot;1As5w86a1d&quot;).account(&quot;123456&quot;)
+    .password(&quot;123456&quot;).sex(&quot;男&quot;)
+    .name(&quot;轩辕狂傲&quot;).phone(&quot;111111&quot;).build();</code></pre>
+<p>这样既可以像构造器模式那样安全，也可以像JavaBeans模式那样可读性好，一举两得！</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
+              
+              <span id="/2020/08/08/EffectiveJava-1-多个参数使用Builder模式/" class="visitors leancloud_visitors" data-flag-title="Effective Java(一)：遇到多个构造器参数考虑使用Builder模式">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -183,6 +291,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -199,7 +312,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Tag&nbsp;",
+        "Effective Java(一)：遇到多个构造器参数考虑使用Builder模式&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

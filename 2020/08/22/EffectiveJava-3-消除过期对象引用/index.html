@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="GrowthLj">
   <meta name="keywords" content="">
-  <title>Tag ~ Growth Blog</title>
+  <title>Effective Java(三)：消除过期的对象引用 ~ Growth Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -40,7 +40,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -92,7 +92,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/11/01/f9v53Kg2bt4OX8I.jpg')no-repeat center center;
+         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -102,6 +102,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Saturday, August 22nd 2020, 10:02 am</p>
             
           </div>
 
@@ -113,22 +116,126 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/JAVA/" style="font-size: 50px; color: #337ab7">JAVA</a> <a href="/tags/Linux/" style="font-size: 45px; color: #779bd3">Linux</a> <a href="/tags/Node/" style="font-size: 40px; color: #bbe">Node</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 40px; color: #bbe">面试</a>
-</div>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="消除过期的对象引用"><a href="#消除过期的对象引用" class="headerlink" title="消除过期的对象引用"></a>消除过期的对象引用</h2><p>Java比C好用的地方，就是java有<strong>GC</strong>（Carbge Collection），不用的对象系统会自动帮你回收，C用完内存需要程序员手工管理。这方便了程序员们工作，但你不能认为你不用考虑<strong>内存管理</strong>的事情。</p>
+<p>看一下用java实现简单的栈：</p>
+<pre><code class="java">public class Stack {
+    private Object[] elements;
+    private int top = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 3;
+
+    public Stack(){
+        elements = new Object[DEFAULT_INITIAL_CAPACITY];
+    }
+
+    public void push(Object e){
+        ensureCapacity();
+        elements[top++] = e;
+    }
+
+    public Object pop(){
+        if(top == 0)
+            throw new EmptyStackException();
+        Object result = elements[--top];
+        return result;
+    }
+
+    /**
+     *  保证每次新增元素都有足够空间
+     */
+    private void ensureCapacity(){
+        if(elements.length == top)
+            elements = Arrays.copyOf(elements,2 * top + 1);
+    }
+
+}</code></pre>
+<p>这样写看起来好像没啥问题，但是当你调用的时候就发现——靠北，问题大了！</p>
+<pre><code class="java">        Stack stack = new Stack();
+        stack.push(&quot;a&quot;); 
+        stack.push(&quot;b&quot;);
+        stack.pop();
+        stack.pop();
+
+输出：
+        Stack{elements=[a, null, null], top=1}
+        Stack{elements=[a, b, null], top=2}
+        Stack{elements=[a, b, null], top=1}
+        Stack{elements=[a, b, null], top=0}</code></pre>
+<p>你会发现<strong>pop()</strong>不起作用，我明明不用这个对象了，为啥java不把他回收呢？那是因为栈内部维护着这些对象的<strong>过期引用(obsolete reference)</strong>，而过期引用是永远不会被回收的。</p>
+<p>因为你的Stack类是自己管理着内存，开发人员知道，<strong>elements</strong>里数组下标<strong>小于top</strong>的对象重要，其余的需要回收，但是垃圾回收器不懂，他认为整个<strong>elements</strong>里的元素都是一视同仁的，都是有用的。于是就造成了<strong>过期引用</strong>，<strong>只要是类自己管理内存，程序员就要警惕内存泄漏问题。</strong></p>
+<p>解决的办法也很简单就是<strong>手动清空</strong>。</p>
+<pre><code class="java">    public Object pop(){
+        if(top == 0)
+            throw new EmptyStackException();
+        Object result = elements[--top];
+        elements[top] = null; /* 手动清空 */
+        return result;
+    }</code></pre>
+<p>因为JDK也有Stack类,所以我去翻了翻JDK<strong>java.util.Stack</strong>的源码，看看它是怎么做的，下面是JDK的Stack类的pop方法：</p>
+<pre><code class="java">    public synchronized E pop() {
+        E       obj;
+        int     len = size();
+
+        obj = peek();
+        removeElementAt(len - 1);
+
+        return obj;
+    }</code></pre>
+<p>这里面调用了一个<strong>removeElementAt()</strong>方法，这是<strong>java.util.Vector</strong>的方法，而JDK里的Stack类继承自<strong>Vector</strong>类，进去<strong>Vector.removeElementAt()</strong>你就会看见下面这句话：</p>
+<pre><code class="java">        elementData[elementCount] = null; /* to let gc do its work */</code></pre>
+<p>JDK的Stack也是用的手动清空的方式来回收内存！</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JAVA">JAVA</a>
+              
+              <span id="/2020/08/22/EffectiveJava-3-消除过期对象引用/" class="visitors leancloud_visitors" data-flag-title="Effective Java(三)：消除过期的对象引用">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -183,6 +290,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -199,7 +311,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Tag&nbsp;",
+        "Effective Java(三)：消除过期的对象引用&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

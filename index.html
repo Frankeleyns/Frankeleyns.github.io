@@ -126,47 +126,352 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_self">
-          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(二):Hadoop单节点环境搭建" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2020/11/08/EffectiveJava-7-%E5%A4%8D%E5%90%88%E4%BC%98%E4%BA%8E%E7%BB%A7%E6%89%BF/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(七)：复合优于继承" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/04/19/Hadoop-2-Hadoop%E5%8D%95%E8%8A%82%E7%82%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
-        <p class="h4 index-header">Hadoop(二):Hadoop单节点环境搭建</p>
+      <a href="/2020/11/08/EffectiveJava-7-%E5%A4%8D%E5%90%88%E4%BC%98%E4%BA%8E%E7%BB%A7%E6%89%BF/">
+        <p class="h4 index-header">Effective Java(七)：复合优于继承</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">Hadoopd单节点环境搭建Hadoop运行环境
-操作系统：Linux(CentOS 7) 
-Java环境：jdk1.8+
-Hadoop环境：CDH5.x.x
-SSH
+          <div class="index-text mb-1">复合优于继承继承（extends）是实现代码重用的有力手段，但它并非永远是完成这项工作的最佳工具。使用不当会导致应用变的脆弱。下面我举一个例子，我需要查询HashSet看看它被创建以来添加过多少个元素。为了实现该功能，我会继承该类，增加一个addCount属性来记录元素插入数量，还有一个访问该数值的方法，并覆盖add、addAll这两个增加元素的方法。
+//Broken - inappropriate use of inheritance!
+public class InstrumentedHashSet&lt;E&gt; extends HashSet&lt;E&gt; {
+    //The number of attempted element insertions
+    private int addCount = 0;
 
-如果你没服务器，可以自己用VMware搭一个Linux CentOS 7系统环境
-虽然，Hadoop是一个分布式框架，但是我们学习的时候没必要一上来就一定要搭个集群，这样到时候还没开始学，搭集群环境的报错就先让你放弃了，可谓，从入门到放弃，这里建议，先学单节点(一台服务器)的Hadoop，等你学会了之后，你再去搭集群操作，就会发现原来也不是很难，千万不要一口吃成大肥仔🐷
-安装JAVA环境请参考这篇文章：Linux安装JAVA环境(jdk1.8)
-安装SSH请参考这篇文章：SSH免密登录
-这里要注意的是，因为配置的是单机版的Hadoop，所以你要免密登录本机
-$ ssh localhost
-安装CDH这里有的小朋友可能就要问了，这个CDH是个什么东西？
-众所周知Hadoop是一个开源软件，而CDH是Cloudera公司在原有的Hadoop基础上，加了一些东西，使它比原有的Apache Hadoop更稳定，更好用的版本，</div>
+    public InstrumentedHashSet(){}
+
+    public InstrumentedHashSet(int initCap, float loadFactor){
+        super(initCap,loadFac</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-19&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-11-08&nbsp;&nbsp;
         
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
           
-            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/09/26/EffectiveJava-6-%E4%BD%BF%E5%8F%AF%E5%8F%98%E6%80%A7%E6%9C%80%E5%B0%8F/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(六)：使可变性最小" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/09/26/EffectiveJava-6-%E4%BD%BF%E5%8F%AF%E5%8F%98%E6%80%A7%E6%9C%80%E5%B0%8F/">
+        <p class="h4 index-header">Effective Java(六)：使可变性最小</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">使可变性最小Java类库包含许多不可变类，其中有String、基本类型的包装类、BigInteger和BigDecimal。这些不可变类比可变类更加易于设计、实现和使用。
+使类要不可变，有五条原则：
+
+不要提供任何会修改对象状态的方法(也称设值的方法，比如Setter)。
+
+保证类不会被扩展。
+
+声明所有的域都是final的。
+
+声明所有的域都是私有的。
+
+确保对于任何可变组件的互斥访问。
+
+
+下面举一个例子：
+public final class Complex {
+    private final double re;
+    private final double im;
+
+    public Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+
+    public double realPart(){ return re; }
+    public double imaginaryPart(){ return im; }
+
+    public Complex</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-26&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/09/20/EffectiveJava-5-%E8%A6%86%E7%9B%96equals%E6%97%B6%E8%AF%B7%E9%81%B5%E5%AE%88%E7%BA%A6%E5%AE%9A/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(五)：覆盖equals时请遵守约定" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/09/20/EffectiveJava-5-%E8%A6%86%E7%9B%96equals%E6%97%B6%E8%AF%B7%E9%81%B5%E5%AE%88%E7%BA%A6%E5%AE%9A/">
+        <p class="h4 index-header">Effective Java(五)：覆盖equals时请遵守约定</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">覆盖equals时请遵守约定在你覆盖类的equals方法时需要遵守一定的约定：
+
+自反性（reflexive）：对于任何非null的引用值x,x.equals(x)必须返回true。
+对称性（symmetric）：对于任何非null的引用值x和y，当且仅当y.equals(x)返回true时，x.equals(y)必须返回true。
+传递性（transitive）：对于任何非null的引用值x,y **和z，如果x.equals(y)返回true，并且y.equals(z)也返回true，那么x.equals(z)也必须返回true**。
+一致性（consistent）：对于任何非null的引用值x和y，只要equals的比较操作在对象中所用的信息没有被修改，多次调用x.equals(y)就会一致的返回true，或一致的返回false。
+对于任何非null的引用值x，x.equals(null)必须返回false。
+
+下面有一个破坏对称性的例子：
+//Broken - violates symmetry
+public final class CaseInsensitiveString </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-20&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/30/EffectiveJava-4-try-with-resources%E4%BC%98%E4%BA%8Etry-finally/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(四)：try-with-resources优于try-finally" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/30/EffectiveJava-4-try-with-resources%E4%BC%98%E4%BA%8Etry-finally/">
+        <p class="h4 index-header">Effective Java(四)：try-with-resources优于try-finally</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">try-with-resources优于try-finally许多java类库中都有通过调用close方法来手工关闭资源。比如java.sql.Connection、InputStream、OutputStream。
+通常我们都是使用try-finally来关闭资源：
+    /**
+     * 读取任意文件第一行
+     * @param path 文件路径
+     * @return  文件内容
+     * @throws IOException 抛出异常
+     */
+    public static String  firstLineOfFile(String path) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        try {
+            return br.readLine();
+        } finally {
+            br.close();
+        }
+    }
+看</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-30&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/22/EffectiveJava-3-%E6%B6%88%E9%99%A4%E8%BF%87%E6%9C%9F%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(三)：消除过期的对象引用" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/22/EffectiveJava-3-%E6%B6%88%E9%99%A4%E8%BF%87%E6%9C%9F%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8/">
+        <p class="h4 index-header">Effective Java(三)：消除过期的对象引用</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">消除过期的对象引用Java比C好用的地方，就是java有GC（Carbge Collection），不用的对象系统会自动帮你回收，C用完内存需要程序员手工管理。这方便了程序员们工作，但你不能认为你不用考虑内存管理的事情。
+看一下用java实现简单的栈：
+public class Stack {
+    private Object[] elements;
+    private int top = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 3;
+
+    public Stack(){
+        elements = new Object[DEFAULT_INITIAL_CAPACITY];
+    }
+
+    public void push(Object e){
+        ensureCapacity();
+        elements[top++] = e;
+    }
+
+    public Object pop(){
+        if(top == 0)
+            </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-22&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/17/EffectiveJava-2-%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8%E6%88%96%E6%9E%9A%E4%B8%BE%E5%BC%BA%E5%8C%96Singleton%E5%B1%9E%E6%80%A7/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(二)：使用私有构造器或枚举强化Singleton属性" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/17/EffectiveJava-2-%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8%E6%88%96%E6%9E%9A%E4%B8%BE%E5%BC%BA%E5%8C%96Singleton%E5%B1%9E%E6%80%A7/">
+        <p class="h4 index-header">Effective Java(二)：使用私有构造器或枚举强化Singleton属性</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">使用私有构造器或枚举强化Singleton属性实现单例模式的常用方法都是，保持构造器私有，然后导出公有静态成员
+public class FakeInstance {
+
+    public static final FakeInstance INSTANCE = new FakeInstance();
+
+    private FakeInstance(){}
+}
+但这种单例模式是可以被反射攻击的
+    public static void fakeInstance() throws Exception {
+        Class&lt;FakeInstance&gt; clazz = FakeInstance.class;
+        Constructor&lt;FakeInstance&gt; constructor = clazz.getDeclaredConstructor(null);
+        constructor.setAccessible(true);
+        FakeInstance fakeInstance = constructor.</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-17&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/08/EffectiveJava-1-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8Builder%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(一)：遇到多个构造器参数考虑使用Builder模式" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/08/EffectiveJava-1-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8Builder%E6%A8%A1%E5%BC%8F/">
+        <p class="h4 index-header">Effective Java(一)：遇到多个构造器参数考虑使用Builder模式</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">遇到多个构造器参数考虑使用Builder模式我们经常遇到一个开发场景，就是一个实体类的参数很多，你要创建它的对象然后给它赋值。
+第一种方法，使用类的构造方法
+public User(String id,String account,String password,String sex,String name,String phone){
+       this.id        = id;
+       this.account   = account;
+       ...
+   }
+创建实例
+User user = new User(UUID,&quot;123456&quot;,&quot;123456&quot;,&quot;男&quot;,&quot;会飞的猪&quot;,&quot;10010&quot;);
+这样的过多的参数会使你眼花缭乱，值很多不知道什么意思，有时候还容易弄错属性的顺序，可读性不太好。
+第二种方法，就是使用JavaBeans模式，也就是Getter Setter
+public void setId(String id) {this.id = id;}
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-08&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JAVA">JAVA</a>&nbsp;
           
         
       </div>
@@ -278,119 +583,6 @@ data  Documents  lib        Music       Public    shell       Tem</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/02/28/Pinao-1-TheGameIsOn/" target="_self">
-          <img src="https://i.loli.net/2020/02/28/viCsxN2XtMmD8FT.jpg" srcset="/img/loading.gif" alt="弹钢琴吗？用键盘的那种(一):The Game is On" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/02/28/Pinao-1-TheGameIsOn/">
-        <p class="h4 index-header">弹钢琴吗？用键盘的那种(一):The Game is On</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">The game is on钢琴曲谱概述 本曲用于在自由钢琴弹奏，帮助同志们在闲暇之余，接受艺术的洗礼，陶冶自己的情操，升华自己的灵魂😀
-
-按键
-
-        
-            
-                描述
-                语法
-            
-        
-        
-            
-                白键
-                0-9 a-z (小写字母)
-            
-            
-                黑键，需要按住Shift键
-                !@$%^*( 和 A-Z (大写字母)
-            
-            
-                同时按下abc三个键
-                [abc]
-            
-            
-                以一定间隔按下a b c 三个键
-                a b c
-            
-         </div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-28&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E9%92%A2%E7%90%B4">钢琴</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/" target="_self">
-          <img src="https://i.loli.net/2020/02/26/NsZICmGpDnwbXK5.jpg" srcset="/img/loading.gif" alt="Hadoop(一):初识Hadoop" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/02/26/Hadoop-1-%E5%88%9D%E5%A7%8BHadoop/">
-        <p class="h4 index-header">Hadoop(一):初识Hadoop</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">初识HadoopHadoop名字怎么来的？Hadoop之父的名字叫Doug Cutting，就是下图那位儒雅随和的男人，他不仅仅是Hadoop的创始人，同时也是nutch(一个开源Java实现的搜索引擎)的创始人，而Hadoop这个名字其实是他孩子一个玩具的名字，就是下图那个那个小黄象，这个玩具也是Hadoop的Logo，小朋友们起名字确实很厉害，类似的还有大名鼎鼎Google这个名字就是由美国数学家 Edward Kasner 九岁的侄子 Milton Sirotta 发明的
-
-Hadoop是干什么的？
-这是Hadoop的官网(https://hadoop.apache.org/) 的介绍，简单来说，Hadoop就是一个开源的，可靠的，可扩展的分布式计算框架，它用来对海量数据进行分布式存储和计算，就是传说中的大数据。
-Hadoop有几个模块?
-
-Hadoop Common： 公共的模块，用来给其他模块调用
-
-Hadoop分布式存储系统(HDFS)：提供对应用程序数据的高吞吐量访问的分布式文件系统
-
-Hadoop YARN：一个用来作业调度和群集资源管理的框架。
-
-Hadoop Map</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-26&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;
-          
-            <a href="/tags/Hadoop">Hadoop</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
           <img src="https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg" srcset="/img/loading.gif" alt="Node安装与配置" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -433,205 +625,6 @@ npm install -g cnpm --</div>
           <i class="iconfont icon-tag"></i>
           
             <a href="/tags/Node">Node</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/12/19/JAVA%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95-1/" target="_self">
-          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="JAVA压力测试:Jmeter初体验" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/19/JAVA%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95-1/">
-        <p class="h4 index-header">JAVA压力测试:Jmeter初体验</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Jmeter初体验校园博客的项目需要上线，所以要进行压力测试，于是就开始了测试初体验
-下载与安装下载地址：https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/
-
-环境配置1.配置JMETER_HOME打开系统变量新建变量JMETER_HOME,然后，填写你的jmeter安装目录
-
-2.配置path在path变量加入 %JMETER_HOME%\bin
-确认安装随便找个地方，打开cmd，输入 jmeter能打开jmeter就算配置完成
-
-测试实例进入jmeter的bin目录下,打开 jmeter.bat文件
-
-打开Options，选择Choose Language中的Chinese(Simplified)可以切换成简体中文
-
-右键一个test plan 点击 添加 线程 线程组
-
-
-线程数：虚拟用户数。一个虚拟用户占用一个进程或线程。设置多少虚拟用户数在这里也就是设置多少个线程数。
-Ramp-Up Period(in seconds)准备时长：设置的虚拟用户数需要多长时间全部启动。如果线程数为10，准备时长为2，那么需</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-19&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
-          
-            <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95">压力测试</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/12/04/JAVA%E5%9F%BA%E7%A1%80-2-%E9%9B%86%E5%90%88/" target="_self">
-          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="JAVA知识点(二):集合" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/04/JAVA%E5%9F%BA%E7%A1%80-2-%E9%9B%86%E5%90%88/">
-        <p class="h4 index-header">JAVA知识点(二):集合</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">JAVA 集合JAVA的集合类被定义在Java.util包中，主要有4种集合，分别为List、Queue、Set、Map，每种集合的具体分类如图：
-
-List：加强版数组1.ArrayList：基于数组实现，增删慢，查询快，线程不安全因为是基于数组实现，所以当需要插入或删除一个节点时，需要移动其他所有节点，代价较高，因此，ArrayList不适合更新操作。
-ArrayList不需要定义数组长度，在默认长度（默认长度为10）不够时，ArrayList会创建一个新的更大数组并将已有的数据复制到新数组中，通过调用一个native方法System.arraycopy实现
-2.Vector: 基于数组实现，增删慢，查询快，线程安全Vector的数据结构与ArrayList一样，都是基于数组实现，不同的是Vector支持线程同步，以保证多线程环境下数据的一致性，但由于频繁的加锁和释放锁操作，Vector整体独写效率比ArrayList低。
-3.LinkedList: 基于双向链表实现，增删快，查询慢，线程不安全LinkedList采用双向链表结构存储元素，在对LinkedList插入和删除时，只需</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-04&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/12/02/JAVA%E5%9F%BA%E7%A1%80-1-JVM/" target="_self">
-          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="JAVA知识点(一):JVM" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/02/JAVA%E5%9F%BA%E7%A1%80-1-JVM/">
-        <p class="h4 index-header">JAVA知识点(一):JVM</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">JVMJVM(Java Virtual Machine)是用于运行Java字节码的虚拟机包括一个类加载器子系统（Class Loader SubSystem）、运行时数据区（Runtime Data Area）、执行引擎和本地接口库（Native Interface Library）。本地接口库通过调用本地方法库（Native Method Library）与操作系统交互，如图：
-
-
-Java堆（Heap）：是Java虚拟机所管理的内存最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。
-方法区（Method Area）：与java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。
-程序计数器（Program Counter Register）：是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。
-JVM栈（JVM Stacks）：与程序计数器一样，java虚拟机栈（Java Virtual Machin</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/17/%E9%9D%A2%E8%AF%95-1/" target="_self">
-          <img src="https://i.loli.net/2019/11/17/HubsPjzmlQtqX2c.jpg" srcset="/img/loading.gif" alt="面试题(一)" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/17/%E9%9D%A2%E8%AF%95-1/">
-        <p class="h4 index-header">面试题(一)</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">面试题我一个好朋友，在BOSS上投简历收到了面试邀请，这是他面试回来说的面试题，我整理了一下并查了答案，以免自己去面试的时候不会
-下面是面试问题：
-
-1.JAVA数据类型以及所占字节
-2.手写三个单例模式
-3.ArrayList与LinkList区别
-4.HashSet原理
-5.常用的Linux命令
-6.JAVA反射机制
-7.手画一个线程状态图
-8.手写三个线程交替打印ABC
-9.什么是TCP三次握手，为什么四次挥手断开连接，为什么
-10.手写一个冒泡算法
-11.SpringMVC是怎么运行的？
-12.索引类型及作用
-
-下面面试答案：
-1.JAVA数据类型及所占字节整型:  byte--1字节    short--2字节    int--4字节    long--8字节
-浮点型:  float--4字节    double--8字节
-字符型:  char--2字节
-布尔型:  boolean--1字节
-2.单例模式的三种实现/**
-* 1.懒汉式,默认不实例化，什么时候用什么时候创建对象
-* 优点：懒加载启动快，资源占用小，使用时才实例化，无锁。
-* 缺点：非线程安全。
-*/
-publ</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-17&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E9%9D%A2%E8%AF%95">面试</a>&nbsp;
           
         
       </div>

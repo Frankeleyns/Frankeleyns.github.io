@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="Frankeleyn">
   <meta name="keywords" content="">
-  <title>Effective Java(六)：使可变性最小 ~ Frankeleyn Blog</title>
+  <title>Node安装与配置 ~ Frankeleyn Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -94,7 +94,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
+         style="background: url('https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -106,7 +106,7 @@
 
             
               <br>
-              <p class="mt-3">Saturday, September 26th 2020, 10:02 am</p>
+              <p class="mt-3">Thursday, January 23rd 2020, 5:38 pm</p>
             
           </div>
 
@@ -127,76 +127,44 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h2 id="使可变性最小"><a href="#使可变性最小" class="headerlink" title="使可变性最小"></a>使可变性最小</h2><p><strong>Java</strong>类库包含许多不可变类，其中有<strong>String</strong>、基本类型的包装类、<strong>BigInteger</strong>和<strong>BigDecimal</strong>。这些不可变类比可变类更加易于设计、实现和使用。</p>
-<p>使类要不可变，有五条原则：</p>
-<ol>
-<li><p><strong>不要提供任何会修改对象状态的方法(也称设值的方法，比如Setter)</strong>。</p>
-</li>
-<li><p><strong>保证类不会被扩展。</strong></p>
-</li>
-<li><p><strong>声明所有的域都是final的。</strong></p>
-</li>
-<li><p><strong>声明所有的域都是私有的。</strong></p>
-</li>
-<li><p><strong>确保对于任何可变组件的互斥访问。</strong></p>
-</li>
-</ol>
-<p>下面举一个例子：</p>
-<pre><code class="java">public final class Complex {
-    private final double re;
-    private final double im;
-
-    public Complex(double re, double im) {
-        this.re = re;
-        this.im = im;
-    }
-
-    public double realPart(){ return re; }
-    public double imaginaryPart(){ return im; }
-
-    public Complex plus(Complex c){
-        return new Complex(re + c.re, im + c.im);
-    }
-
-    public Complex minus(Complex c){
-        return new Complex(re - c.re, im - c.im);
-    }
-
-    public Complex times(Complex c){
-        return new Complex(re * c.re - im * c.im,
-                           re * c.im + im * c.re);
-    }
-
-    public Complex dividedBy(Complex c){
-        double tmp = c.re * c.re + c.im * c.im;
-        return new Complex((re * c.re + im * c.im) / tmp,
-                               (im * c.re - re * c.im) / tmp);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Complex)) return false;
-        Complex c = (Complex) o;
-        return Double.compare(c.re, re) == 0 &amp;&amp; Double.compare(c.im, im) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return 31 * Double.hashCode(re) + Double.hashCode(im);
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Complex{&quot; +
-                &quot;re=&quot; + re +
-                &quot;, im=&quot; + im +
-                &#39;}&#39;;
-    }
-
-}</code></pre>
-<p>这个类表示一个<strong>复数</strong>（complex number，有实部和虚部）。里面有四个基本算术运算：加、减、乘、除。需要注意的是这些算术运算都是<strong>返回新的实例，而不是修改现有的实例</strong>。这种方式被称为<strong>函数的（functional）</strong>的方法，这些方法返回的是一个函数的结果，这些函数对操作数运算但不修改它。</p>
-<p>​    <strong>不可变对象本质上是线程安全的，它们不要求同步。</strong>当多个线程并发访问这样的对象时，它们不会遭到破坏。这无疑是获得线程安全最容易的办法。</p>
+            <h1 id="Node环境搭建"><a href="#Node环境搭建" class="headerlink" title="Node环境搭建"></a>Node环境搭建</h1><p>简单的说，node就是一个前端程序员看后端不爽，用<strong>JavaScript</strong>写出来的后端。</p>
+<p><strong>下载地址：</strong></p>
+<p><a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/download/</a></p>
+<p><img src="https://i.loli.net/2020/01/29/4iNUcfwOZk7qVxQ.png" srcset="/img/loading.gif" alt="Photo_2020-01-23_10-20-25.png"></p>
+<p>选择自己系统对应的版本下载，然后一键安装，小白看教程：</p>
+<p><a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a></p>
+<p>打开<strong>CMD</strong>，输入<strong>node -v</strong>和<strong>npm -v</strong>，如果显示了版本，则安装完成</p>
+<p><img src="https://i.loli.net/2020/01/29/GU8cF6YdOTePqiL.png" srcset="/img/loading.gif" alt="Photo_2020-01-21_18-50-27.png"></p>
+<h2 id="Node配置"><a href="#Node配置" class="headerlink" title="Node配置"></a>Node配置</h2><p>这里node的配置主要是配置<strong>npm</strong>，简单来说<strong>npm</strong>就相当于<strong>Java中的Maven</strong>，或者说它就是前端开发中的Maven</p>
+<h3 id="镜像配置"><a href="#镜像配置" class="headerlink" title="镜像配置"></a>镜像配置</h3><p>node也和Maven一样有着默认镜像，默认镜像访问速度较慢，下面是它原本的镜像</p>
+<pre><code class="bash">npm get registry //获取镜像</code></pre>
+<p><img src="http://ww1.sinaimg.cn/large/007SzKTZgy1gb6amm6wulj30d6065jr9.jpg" srcset="/img/loading.gif" alt="Photo_2020-01-23_10-37-07.png"></p>
+<p>我们要将默认镜像切换为淘宝镜像</p>
+<pre><code class="bash">npm config set registry https://registry.npm.taobao.org        //设置镜像</code></pre>
+<p><img src="https://i.loli.net/2020/01/29/iGoHaKL9YCnPFBM.png" srcset="/img/loading.gif" alt="Photo_2020-01-23_10-40-17.png"></p>
+<p>上面已经切换成淘宝镜像了，如果想国内镜像和国外镜像一起使用的也可以，通过<strong>cnpm</strong></p>
+<pre><code class="bash">npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
+<p>这样以后使用，<strong>cnpm i <model_name></strong>就是使用国内镜像，<strong>npm i <model_name></strong>就是使用默认镜像</p>
+<h3 id="npm仓库地址"><a href="#npm仓库地址" class="headerlink" title="npm仓库地址"></a>npm仓库地址</h3><p>npm库拉到本地后，会默认存在你的<strong>C盘</strong>，占C盘空间</p>
+<h4 id="1-新建node-global和node-cache"><a href="#1-新建node-global和node-cache" class="headerlink" title="1.新建node_global和node_cache"></a>1.新建node_global和node_cache</h4><ul>
+<li><strong>node_globa</strong>为npm的全局安装路径，类似maven仓库地址</li>
+<li><strong>node_cache</strong>为缓存路径</li>
+</ul>
+<p>一般我习惯在我的nodejs安装目录下新建，如果你想放别的地方也可以</p>
+<p><img src="https://i.loli.net/2020/01/29/mzUkENQTleAZpu3.png" srcset="/img/loading.gif" alt="Photo_2020-01-23_10-53-07.png"></p>
+<h4 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h4><p>打开<strong>此电脑=&gt;属性=&gt;高级系统设置=&gt;环境变量</strong></p>
+<p><img src="https://i.loli.net/2020/01/29/FKaE7kC2lp6UxRz.png" srcset="/img/loading.gif" alt="Photo_2020-01-23_10-59-38.png"></p>
+<p>新建系统变量<strong>NODE_PATH</strong>，填写新建的<strong>node_global</strong>的路径</p>
+<p><img src="https://i.loli.net/2020/01/29/e1gQ7RcKPo3SYfE.png" srcset="/img/loading.gif" alt="Photo_2020-01-23_11-04-54.png"></p>
+<p>然后配置<strong>用户变量-&gt;Path</strong>，加入<strong>%NODE_PATH%</strong></p>
+<p><img src="https://i.loli.net/2020/01/29/ET2BuDXCVY8Oh5S.png" srcset="/img/loading.gif" alt="Photo_2020-01-23_11-10-35.png"></p>
+<h4 id="3-设置全局"><a href="#3-设置全局" class="headerlink" title="3.设置全局"></a>3.设置全局</h4><p>打开cmd，输入命令：</p>
+<pre><code class="bash">npm config set prefix &quot;F:\Node\node_global&quot;
+npm config set cache &quot;F:\Node\node_cache&quot;</code></pre>
+<h4 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h4><p>我们全局安装一下常用的<strong>express</strong>模块试一下</p>
+<pre><code class="bash">npm install express -g</code></pre>
+<p><img src="https://i.loli.net/2020/01/29/muvyVU29Jz5HjOA.png" srcset="/img/loading.gif" alt="Photo_2020-01-23_11-17-10.png"></p>
+<p>可以看到在node_global文件夹出现了express，配置完成😀</p>
 
             <hr>
           </div>
@@ -206,9 +174,9 @@
             <p>
               <i class="iconfont icon-tag"></i>
               
-                <a class="hover-with-bg" href="/tags/Java">Java</a>
+                <a class="hover-with-bg" href="/tags/Node">Node</a>
               
-              <span id="/2020/09/26/EffectiveJava-6-使可变性最小/" class="visitors leancloud_visitors" data-flag-title="Effective Java(六)：使可变性最小">
+              <span id="/2020/01/23/Node安装与配置 - 副本/" class="visitors leancloud_visitors" data-flag-title="Node安装与配置">
                 <em id="visitors-text" class="post-meta-item-text"></em>
                 <i id="visitors-count"></i>
               </span>
@@ -316,7 +284,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Effective Java(六)：使可变性最小&nbsp;",
+        "Node安装与配置&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

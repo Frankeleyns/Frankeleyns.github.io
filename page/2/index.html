@@ -128,6 +128,307 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/17/EffectiveJava-2-%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8%E6%88%96%E6%9E%9A%E4%B8%BE%E5%BC%BA%E5%8C%96Singleton%E5%B1%9E%E6%80%A7/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(二)：使用私有构造器或枚举强化Singleton属性" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/17/EffectiveJava-2-%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8%E6%88%96%E6%9E%9A%E4%B8%BE%E5%BC%BA%E5%8C%96Singleton%E5%B1%9E%E6%80%A7/">
+        <p class="h4 index-header">Effective Java(二)：使用私有构造器或枚举强化Singleton属性</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">使用私有构造器或枚举强化Singleton属性实现单例模式的常用方法都是，保持构造器私有，然后导出公有静态成员
+public class FakeInstance {
+
+    public static final FakeInstance INSTANCE = new FakeInstance();
+
+    private FakeInstance(){}
+}
+但这种单例模式是可以被反射攻击的
+    public static void fakeInstance() throws Exception {
+        Class&lt;FakeInstance&gt; clazz = FakeInstance.class;
+        Constructor&lt;FakeInstance&gt; constructor = clazz.getDeclaredConstructor(null);
+        constructor.setAccessible(true);
+        FakeInstance fakeInstance = constructor.</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-17&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/08/EffectiveJava-1-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8Builder%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(一)：遇到多个构造器参数考虑使用Builder模式" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/08/EffectiveJava-1-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8Builder%E6%A8%A1%E5%BC%8F/">
+        <p class="h4 index-header">Effective Java(一)：遇到多个构造器参数考虑使用Builder模式</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">遇到多个构造器参数考虑使用Builder模式我们经常遇到一个开发场景，就是一个实体类的参数很多，你要创建它的对象然后给它赋值。
+第一种方法，使用类的构造方法
+public User(String id,String account,String password,String sex,String name,String phone){
+       this.id        = id;
+       this.account   = account;
+       ...
+   }
+创建实例
+User user = new User(UUID,&quot;123456&quot;,&quot;123456&quot;,&quot;男&quot;,&quot;会飞的猪&quot;,&quot;10010&quot;);
+这样的过多的参数会使你眼花缭乱，值很多不知道什么意思，有时候还容易弄错属性的顺序，可读性不太好。
+第二种方法，就是使用JavaBeans模式，也就是Getter Setter
+public void setId(String id) {this.id = id;}
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-08&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/">
+        <p class="h4 index-header">Linux(五)：SSH免密登录</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">SSH免密登录SSH(Secure Shell)是一种网络协议，用于计算机之间的加密登录。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。
+想进一步了解的话可以，参考阮一峰老师的博客
+一.配置Hosts配置你的hosts，不配置会导致ssh登录无效
+$ sudo vim /etc/hosts
+添加服务器所对应的IP和主机名
+
+二.生成密钥在hadoop000用命令生成SSH密钥，接着，按三下回车就好
+$ ssh-keygen -t rsa
+
+然后，进入.ssh文件夹，查看目录，会发现多了两个文件，id_rsa(私钥)和id_rsa.pub(公钥)
+
+三.公钥登录用ssh-copy-id命令，将hadoop000生成的公钥传到hadoop8，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录
+$ ssh-copy-id hadoop@192.168.1.8
+hadoop8的.ssh目录会多出来一个authorized_keys的文件，然后设置一下权限
+$ chmod 600 auth</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-09&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Linux">Linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(四):安装JAVA环境(jdk1.8)" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/">
+        <p class="h4 index-header">Linux(四):安装JAVA环境(jdk1.8)</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">安装 JAVA环境(jdk1.8)第一步下载jdk1.8
+进入Oracle官网下载页面
+
+如果你下的很慢的话，我给你贴心的准备好了我下好了的    点我(提取码：guk0)
+下好后可以用WinScp或XFTP自行上传到自己的服务器目录，如果不会的话，我建议你百度
+我这里将JDK传到了我的~/software目录，我建议你们也可以自己建个software目录专门存放要安装的软件包
+
+这里可以看到我的software目录已经有我上传的jdk了
+第二步解压已经传到服务器的jdk文件
+使用tar命令将software目录下的jdk解压到app目录
+tar -zvxf jdk-8u241-linux-x64.tar.gz  -C ~/app
+
+解压完进入查看一下
+[hadoop@hadoop000 ~]$ ls
+app   Desktop    Downloads  maven_resp  Pictures  README.txt  software   t.txt
+data  Documents  lib        Music       Public    shell       Tem</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-04&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Linux">Linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%20-%20%E5%89%AF%E6%9C%AC/" target="_self">
+          <img src="https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg" srcset="/img/loading.gif" alt="Node安装与配置" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%20-%20%E5%89%AF%E6%9C%AC/">
+        <p class="h4 index-header">Node安装与配置</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Node环境搭建简单的说，node就是一个前端程序员看后端不爽，用JavaScript写出来的后端。
+下载地址：
+https://nodejs.org/zh-cn/download/
+
+选择自己系统对应的版本下载，然后一键安装，小白看教程：
+https://www.runoob.com/nodejs/nodejs-install-setup.html
+打开CMD，输入node -v和npm -v，如果显示了版本，则安装完成
+
+Node配置这里node的配置主要是配置npm，简单来说npm就相当于Java中的Maven，或者说它就是前端开发中的Maven
+镜像配置node也和Maven一样有着默认镜像，默认镜像访问速度较慢，下面是它原本的镜像
+npm get registry //获取镜像
+
+我们要将默认镜像切换为淘宝镜像
+npm config set registry https://registry.npm.taobao.org        //设置镜像
+
+上面已经切换成淘宝镜像了，如果想国内镜像和国外镜像一起使用的也可以，通过cnpm
+npm install -g cnpm --</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-23&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Node">Node</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
+          <img src="https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg" srcset="/img/loading.gif" alt="Node安装与配置" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Node安装与配置</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Node环境搭建简单的说，node就是一个前端程序员看后端不爽，用JavaScript写出来的后端。
+下载地址：
+https://nodejs.org/zh-cn/download/
+
+选择自己系统对应的版本下载，然后一键安装，小白看教程：
+https://www.runoob.com/nodejs/nodejs-install-setup.html
+打开CMD，输入node -v和npm -v，如果显示了版本，则安装完成
+
+Node配置这里node的配置主要是配置npm，简单来说npm就相当于Java中的Maven，或者说它就是前端开发中的Maven
+镜像配置node也和Maven一样有着默认镜像，默认镜像访问速度较慢，下面是它原本的镜像
+npm get registry //获取镜像
+
+我们要将默认镜像切换为淘宝镜像
+npm config set registry https://registry.npm.taobao.org        //设置镜像
+
+上面已经切换成淘宝镜像了，如果想国内镜像和国外镜像一起使用的也可以，通过cnpm
+npm install -g cnpm --</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-23&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Node">Node</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2019/12/04/Java%E5%9F%BA%E7%A1%80-%E9%9B%86%E5%90%88/" target="_self">
           <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Java基础：集合" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -158,7 +459,7 @@ ArrayList不需要定义数组长度，在默认长度（默认长度为10）不
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
+            <a href="/tags/Java">Java</a>&nbsp;
           
         
       </div>
@@ -362,64 +663,6 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(一):vim与vi" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/">
-        <p class="h4 index-header">Linux(一):vim与vi</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">vim与vi什么是vim？
-Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。
-简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。
-连 vim 的官方网站 (http://www.vim.org) 自己也说 vim 是一个程序开发工具而不是文字处理软件。
-
-vi和vim的三种模式转化图如下:
-实际操作[root@localhost ~]# ll
-总用量 4
--rw-------. 1 root root 1416 9月   4 20:36 anaconda-ks.cfg
-[root@localhost ~]# 
-
-可以看出我没有Hello.java文件
-使用命令
-[root@localhost ~]# vim Hello.java
-随后进入一般模式
-
-此时还不能编辑，如果要编辑 需要按  Insert 或 按 i ，进入编辑模式
-
-当左下角出现插入的时候才能开始编辑，如图
-
-随后，如果要保存
-
-Shift + ; + wq(wq是 写入</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -430,6 +673,10 @@ Shift + ; + wq(wq是 写入</div>
           <a class="page-link" href="/#board">Previous</a>
         </li>
       
+      
+        <li class="page-item">
+          <a class="page-link" href="/page/3/#board">Next</a>
+        </li>
       
     </ul>
   </nav>

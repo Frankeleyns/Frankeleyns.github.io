@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="Frankeleyn">
   <meta name="keywords" content="">
-  <title>Effective Java(六)：使可变性最小 ~ Frankeleyn Blog</title>
+  <title>MybatisPlus(二):基本用法 ~ Frankeleyn Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -94,7 +94,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
+         style="background: url('https://baomidou.com/img/relationship-with-mybatis.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -106,7 +106,7 @@
 
             
               <br>
-              <p class="mt-3">Saturday, September 26th 2020, 10:02 am</p>
+              <p class="mt-3">Tuesday, January 18th 2022, 7:11 pm</p>
             
           </div>
 
@@ -127,76 +127,137 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h2 id="使可变性最小"><a href="#使可变性最小" class="headerlink" title="使可变性最小"></a>使可变性最小</h2><p><strong>Java</strong>类库包含许多不可变类，其中有<strong>String</strong>、基本类型的包装类、<strong>BigInteger</strong>和<strong>BigDecimal</strong>。这些不可变类比可变类更加易于设计、实现和使用。</p>
-<p>使类要不可变，有五条原则：</p>
-<ol>
-<li><p><strong>不要提供任何会修改对象状态的方法(也称设值的方法，比如Setter)</strong>。</p>
-</li>
-<li><p><strong>保证类不会被扩展。</strong></p>
-</li>
-<li><p><strong>声明所有的域都是final的。</strong></p>
-</li>
-<li><p><strong>声明所有的域都是私有的。</strong></p>
-</li>
-<li><p><strong>确保对于任何可变组件的互斥访问。</strong></p>
-</li>
-</ol>
-<p>下面举一个例子：</p>
-<pre><code class="java">public final class Complex {
-    private final double re;
-    private final double im;
+            <h1 id="MybatisPlus-二-基本用法"><a href="#MybatisPlus-二-基本用法" class="headerlink" title="MybatisPlus(二)  基本用法"></a>MybatisPlus(二)  基本用法</h1><h2 id="一、通用-Mapper"><a href="#一、通用-Mapper" class="headerlink" title="一、通用 Mapper"></a>一、通用 Mapper</h2><p>在 <strong>Mybatis Plus</strong> 框架中不需要实现 xml 映射配置文件和对应的 sql，它默认有单表的增删改查，都已经在 <strong>BaseMapper&lt;T&gt;</strong> 中实现了，我们只需要声明一个 Mapper 接口，并继承它就能使用。</p>
+<h3 id="1-Insert"><a href="#1-Insert" class="headerlink" title="1. Insert"></a>1. Insert</h3><pre><code class="java">@Test
+public void testInsert() {
+    // 构造器模式创建 User 对象
+    User user = User.builder()
+        .name(&quot;Vincent&quot;)
+        .age(33)
+        .email(&quot;Vincent@qq.com&quot;).build();
 
-    public Complex(double re, double im) {
-        this.re = re;
-        this.im = im;
-    }
+    int row = userMapper.insert(user);
+    System.out.println(&quot;影响的行数：&quot; + row);
+    System.out.println(&quot;获取自动生成的 id: &quot; + user.getId());
+}</code></pre>
+<h3 id="2-Selete"><a href="#2-Selete" class="headerlink" title="2. Selete"></a>2. Selete</h3><pre><code class="java">@Test
+public void testSelect() {
+    // 根据 id 查询用户
+    User user1 = userMapper.selectById(1L);
+    System.out.println(user1);
 
-    public double realPart(){ return re; }
-    public double imaginaryPart(){ return im; }
+    // 根据 id 列表查询多个用户
+    List&lt;User&gt; userList = userMapper.selectBatchIds(Arrays.asList(2L, 3L, 4L));
+    userList.forEach(System.out::println);
 
-    public Complex plus(Complex c){
-        return new Complex(re + c.re, im + c.im);
-    }
+    // 根据 map 中的条件查询
+    Map map = new HashMap();
+    // map 的键使用数据库的字段名，不是类中的属性名
+    map.put(&quot;name&quot;, &quot;Franklin&quot;);
+    map.put(&quot;age&quot;, &quot;21&quot;);
+    List usersList = userMapper.selectByMap(map);
+    usersList.forEach(System.out::println);
+}</code></pre>
+<h3 id="3-Update"><a href="#3-Update" class="headerlink" title="3. Update"></a>3. Update</h3><pre><code class="java">@Test
+public void testUpdate() {
+    User user = userMapper.selectById(1L);
+    user.setAge(28);
 
-    public Complex minus(Complex c){
-        return new Complex(re - c.re, im - c.im);
-    }
+    // 更新 id 为 1的用户年龄为 28
+    int row = userMapper.updateById(user);
+    System.out.println(&quot;影响的行数： &quot; + row);
+}</code></pre>
+<h3 id="4-Delete"><a href="#4-Delete" class="headerlink" title="4. Delete"></a>4. Delete</h3><pre><code class="java">@Test
+public void testDelete() {
+    // 删除 id 为5的用户
+    int row = userMapper.deleteById(5);
+    System.out.println(&quot;影响的行数： &quot; + row);
+}</code></pre>
+<h2 id="二、通用-Service"><a href="#二、通用-Service" class="headerlink" title="二、通用 Service"></a>二、通用 Service</h2><p><strong>mybatis-plus</strong> 提供一个接口 <strong>IService</strong> 和其实现类 <strong>ServiceImpl</strong> ，封装了常见单表的业务层逻辑，也是 CRUD。</p>
+<h3 id="1-创建-Service-接口"><a href="#1-创建-Service-接口" class="headerlink" title="1. 创建 Service 接口"></a>1. 创建 Service 接口</h3><pre><code class="java">package com.frankeleyn.service;
 
-    public Complex times(Complex c){
-        return new Complex(re * c.re - im * c.im,
-                           re * c.im + im * c.re);
-    }
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.frankeleyn.entity.User;
 
-    public Complex dividedBy(Complex c){
-        double tmp = c.re * c.re + c.im * c.im;
-        return new Complex((re * c.re + im * c.im) / tmp,
-                               (im * c.re - re * c.im) / tmp);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Complex)) return false;
-        Complex c = (Complex) o;
-        return Double.compare(c.re, re) == 0 &amp;&amp; Double.compare(c.im, im) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return 31 * Double.hashCode(re) + Double.hashCode(im);
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Complex{&quot; +
-                &quot;re=&quot; + re +
-                &quot;, im=&quot; + im +
-                &#39;}&#39;;
-    }
+/**
+ * @author Frankeleyn
+ * @date 2022/1/17 10:15
+ */
+public interface UserService extends IService&lt;User&gt; {
 
 }</code></pre>
-<p>这个类表示一个<strong>复数</strong>（complex number，有实部和虚部）。里面有四个基本算术运算：加、减、乘、除。需要注意的是这些算术运算都是<strong>返回新的实例，而不是修改现有的实例</strong>。这种方式被称为<strong>函数的（functional）</strong>的方法，这些方法返回的是一个函数的结果，这些函数对操作数运算但不修改它。</p>
-<p>​    <strong>不可变对象本质上是线程安全的，它们不要求同步。</strong>当多个线程并发访问这样的对象时，它们不会遭到破坏。这无疑是获得线程安全最容易的办法。</p>
+<h3 id="2-创建-Service-实现类"><a href="#2-创建-Service-实现类" class="headerlink" title="2. 创建 Service 实现类"></a>2. 创建 Service 实现类</h3><pre><code class="java">package com.frankeleyn.service.impl;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.frankeleyn.entity.User;
+import com.frankeleyn.mapper.UserMapper;
+import com.frankeleyn.service.UserService;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/17 10:16
+ */
+@Service
+public class UserServiceImpl extends ServiceImpl&lt;UserMapper, User&gt; implements UserService {
+
+}</code></pre>
+<h3 id="3-创建测试类"><a href="#3-创建测试类" class="headerlink" title="3. 创建测试类"></a>3. 创建测试类</h3><pre><code class="java">package com.frankeleyn;
+
+import com.frankeleyn.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/17 10:19
+ */
+@SpringBootTest
+public class UserServiceTest {
+
+    @Autowired
+    private UserService userService;
+
+}</code></pre>
+<h3 id="4-获取总记录数"><a href="#4-获取总记录数" class="headerlink" title="4. 获取总记录数"></a>4. 获取总记录数</h3><pre><code class="java">@Test
+public void testAdd() {
+    // 获取数据库所有记录数
+    int count = userService.count();
+    System.out.println(count);
+}</code></pre>
+<h3 id="5-批量插入数据"><a href="#5-批量插入数据" class="headerlink" title="5. 批量插入数据"></a>5. 批量插入数据</h3><pre><code class="java">@Test
+public void testBatchAdd() {
+    // 测试批量插入数据
+    ArrayList&lt;User&gt; users = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 5; i++) {
+        User user = new User();
+        user.setName(&quot;Obama&quot; + i);
+        user.setAge(10 + i);
+        users.add(user);
+    }
+    userService.saveBatch(users);
+}</code></pre>
+<h2 id="三、自定义-Mapper"><a href="#三、自定义-Mapper" class="headerlink" title="三、自定义 Mapper"></a>三、自定义 Mapper</h2><p>如果通用 Mapper 不符号我们的需求，我们也可以像以前使用 Mybatis 一样，自定义接口方法并配置 xml 文件，写 sql 语句。</p>
+<h3 id="1-接口方法"><a href="#1-接口方法" class="headerlink" title="1. 接口方法"></a>1. 接口方法</h3><p>在 UserMapper 中定义一个方法 <strong>findUsersByName</strong></p>
+<pre><code class="java">public interface UserMapper extends BaseMapper&lt;User&gt; {
+    List&lt;User&gt; findUsersByName(String name);
+}</code></pre>
+<h3 id="2-创建配置文件"><a href="#2-创建配置文件" class="headerlink" title="2. 创建配置文件"></a>2. 创建配置文件</h3><p>在 resource 目录下新建 <strong>mapper</strong> 文件夹，创建 <strong>UserMapper.xml</strong></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/mybaties-plus-demo/main/img/2-3-2.png" srcset="/img/loading.gif" alt="2-3-2"></p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+&lt;mapper namespace=&quot;com.frankeleyn.mapper.UserMapper&quot;&gt;
+    &lt;select id=&quot;findUsersByName&quot; resultType=&quot;com.frankeleyn.entity.User&quot;&gt;
+        SELECT * FROM user
+        WHERE name like &quot;%&quot;#{name}&quot;%&quot;
+    &lt;/select&gt;
+&lt;/mapper&gt;</code></pre>
+<h3 id="3-测试自定义条件查询"><a href="#3-测试自定义条件查询" class="headerlink" title="3. 测试自定义条件查询"></a>3. 测试自定义条件查询</h3><pre><code class="java">@Test
+public void testFindUserByName() {
+    // 查询用户名字中带有 Obama 
+    List&lt;User&gt; userList = userMapper.findUsersByName(&quot;Obama&quot;);
+    userList.forEach(System.out::println);
+}</code></pre>
 
             <hr>
           </div>
@@ -208,7 +269,9 @@
               
                 <a class="hover-with-bg" href="/tags/Java">Java</a>
               
-              <span id="/2020/09/26/EffectiveJava-6-使可变性最小/" class="visitors leancloud_visitors" data-flag-title="Effective Java(六)：使可变性最小">
+                <a class="hover-with-bg" href="/tags/Mybatis">Mybatis</a>
+              
+              <span id="/2022/01/18/MybatisPlus-2-基本用法/" class="visitors leancloud_visitors" data-flag-title="MybatisPlus(二):基本用法">
                 <em id="visitors-text" class="post-meta-item-text"></em>
                 <i id="visitors-count"></i>
               </span>
@@ -316,7 +379,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Effective Java(六)：使可变性最小&nbsp;",
+        "MybatisPlus(二):基本用法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

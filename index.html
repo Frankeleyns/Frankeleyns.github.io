@@ -128,6 +128,271 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/01/18/MybatisPlus-5-%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" target="_self">
+          <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(五):条件构造器" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/01/18/MybatisPlus-5-%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/">
+        <p class="h4 index-header">MybatisPlus(五):条件构造器</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">MybatisPlus(五):条件构造器一、Wrapper 介绍Mybatis-Plus 提供条件构造器来执行较复杂的查询，条件构造器其实就是 where 语句的封装。
+1. Wrapper 家族 
+Wrapper ： 条件构造抽象类，最顶端父类  
+  AbstractWrapper ： 用于查询条件封装，生成 sql 的 where 条件
+​    QueryWrapper ： 查询条件封装
+​    UpdateWrapper ： Update 条件封装
+  AbstractLambdaWrapper ： 使用Lambda 语法
+​    LambdaQueryWrapper ：用于Lambda语法使用的查询Wrapper
+​    LambdaUpdateWrapper ： Lambda 更新封装Wrapper
+2. 创建测试类@SpringBootTest
+public class WrapperTest {
+
+    @Autowired
+    private UserMapper userMapper;
+}
+二、QueryWrapper1. 查询条件查询名字中包含 n，</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-18&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+            <a href="/tags/Mybatis">Mybatis</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/01/18/MybatisPlus-4-%E6%8F%92%E4%BB%B6/" target="_self">
+          <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(四):插件" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/01/18/MybatisPlus-4-%E6%8F%92%E4%BB%B6/">
+        <p class="h4 index-header">MybatisPlus(四):插件</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">MybatisPlus(四):插件一、分页插件1. 添加配置类package com.frankeleyn.config;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/17 15:22
+ */
+@Configuration
+public class MybatisPlusConfig {
+
+    @Bean
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-18&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+            <a href="/tags/Mybatis">Mybatis</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/01/18/MybatisPlus-3-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" target="_self">
+          <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(三):常用注解" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/01/18/MybatisPlus-3-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
+        <p class="h4 index-header">MybatisPlus(三):常用注解</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">MybatisPlus(三):常用注解一、 TableName表名，将实体类绑定到对应的数据库
+@TableName(&quot;t_user&quot;)
+public class User{
+
+}
+二、TableIdtype 属性type 属性用来指定主键策略
+
+AUTO，主键自增，Mysql 主键自增的最小值总是要大于现有数据的最大值
+@TableId(type = IdType.AUTO)
+private Long id;
+
+ASSIGN_ID，使用雪花算法生成主键，例: 1482xxxxxxxxxxx
+@TableId(type = IdType.ASSIGN_ID)
+private Long id;
+
+
+id 策略的选择
+一般小数据量，使用自增策略，当数据量超过千万级别后，涉及分库分表，需要使用雪花算法。
+三、TableField1. value 属性将数据库字段和实体类对应的属性绑定
+将字段 create_time 和 update_time 绑定到实体类的 createTime 和 updateTime 属性上
+
+@TableField(&quot;create_tim</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-18&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+            <a href="/tags/Mybatis">Mybatis</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/01/18/MybatisPlus-2-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" target="_self">
+          <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(二):基本用法" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/01/18/MybatisPlus-2-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
+        <p class="h4 index-header">MybatisPlus(二):基本用法</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">MybatisPlus(二)  基本用法一、通用 Mapper在 Mybatis Plus 框架中不需要实现 xml 映射配置文件和对应的 sql，它默认有单表的增删改查，都已经在 BaseMapper&lt;T&gt; 中实现了，我们只需要声明一个 Mapper 接口，并继承它就能使用。
+1. Insert@Test
+public void testInsert() {
+    // 构造器模式创建 User 对象
+    User user = User.builder()
+        .name(&quot;Vincent&quot;)
+        .age(33)
+        .email(&quot;Vincent@qq.com&quot;).build();
+
+    int row = userMapper.insert(user);
+    System.out.println(&quot;影响的行数：&quot; + row);
+    System.out.println(&quot;获取自动生成的 id: &quot; + user.getId());</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-18&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+            <a href="/tags/Mybatis">Mybatis</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/01/18/MybatisPlus-1-%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/" target="_self">
+          <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(一):入门案例" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/01/18/MybatisPlus-1-%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/">
+        <p class="h4 index-header">MybatisPlus(一):入门案例</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">MybatisPlus(一) 入门案例简介MyBatis-Plus （简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。
+
+1. 创建数据表 UserCREATE TABLE user
+(
+    id BIGINT(20) NOT NULL COMMENT &#39;主键ID&#39;,
+    name VARCHAR(30) NULL DEFAULT NULL COMMENT &#39;姓名&#39;,
+    age INT(11) NULL DEFAULT NULL COMMENT &#39;年龄&#39;,
+    email VARCHAR(50) NULL DEFAULT NULL COMMENT &#39;邮箱&#39;,
+    PRIMARY KEY (id)
+);
+INSERT INTO user (id, name, age, email) VALUES
+(1, &#39;Jone&#39;, 18, &#39;test1@baomidou.com&#39;),
+(2, &#39;Jack&</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-18&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+            <a href="/tags/Mybatis">Mybatis</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/11/08/EffectiveJava-7-%E5%A4%8D%E5%90%88%E4%BC%98%E4%BA%8E%E7%BB%A7%E6%89%BF/" target="_self">
           <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(七)：复合优于继承" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -162,7 +427,7 @@ public class InstrumentedHashSet&lt;E&gt; extends HashSet&lt;E&gt; {
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
+            <a href="/tags/Java">Java</a>&nbsp;
           
         
       </div>
@@ -225,7 +490,7 @@ public final class Complex {
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
+            <a href="/tags/Java">Java</a>&nbsp;
           
         
       </div>
@@ -271,7 +536,7 @@ public final class CaseInsensitiveString </div>
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
+            <a href="/tags/Java">Java</a>&nbsp;
           
         
       </div>
@@ -323,7 +588,7 @@ public final class CaseInsensitiveString </div>
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
+            <a href="/tags/Java">Java</a>&nbsp;
           
         
       </div>
@@ -377,256 +642,7 @@ public class Stack {
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/17/EffectiveJava-2-%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8%E6%88%96%E6%9E%9A%E4%B8%BE%E5%BC%BA%E5%8C%96Singleton%E5%B1%9E%E6%80%A7/" target="_self">
-          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(二)：使用私有构造器或枚举强化Singleton属性" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/08/17/EffectiveJava-2-%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8%E6%88%96%E6%9E%9A%E4%B8%BE%E5%BC%BA%E5%8C%96Singleton%E5%B1%9E%E6%80%A7/">
-        <p class="h4 index-header">Effective Java(二)：使用私有构造器或枚举强化Singleton属性</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">使用私有构造器或枚举强化Singleton属性实现单例模式的常用方法都是，保持构造器私有，然后导出公有静态成员
-public class FakeInstance {
-
-    public static final FakeInstance INSTANCE = new FakeInstance();
-
-    private FakeInstance(){}
-}
-但这种单例模式是可以被反射攻击的
-    public static void fakeInstance() throws Exception {
-        Class&lt;FakeInstance&gt; clazz = FakeInstance.class;
-        Constructor&lt;FakeInstance&gt; constructor = clazz.getDeclaredConstructor(null);
-        constructor.setAccessible(true);
-        FakeInstance fakeInstance = constructor.</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-17&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/08/EffectiveJava-1-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8Builder%E6%A8%A1%E5%BC%8F/" target="_self">
-          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(一)：遇到多个构造器参数考虑使用Builder模式" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/08/08/EffectiveJava-1-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8Builder%E6%A8%A1%E5%BC%8F/">
-        <p class="h4 index-header">Effective Java(一)：遇到多个构造器参数考虑使用Builder模式</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">遇到多个构造器参数考虑使用Builder模式我们经常遇到一个开发场景，就是一个实体类的参数很多，你要创建它的对象然后给它赋值。
-第一种方法，使用类的构造方法
-public User(String id,String account,String password,String sex,String name,String phone){
-       this.id        = id;
-       this.account   = account;
-       ...
-   }
-创建实例
-User user = new User(UUID,&quot;123456&quot;,&quot;123456&quot;,&quot;男&quot;,&quot;会飞的猪&quot;,&quot;10010&quot;);
-这样的过多的参数会使你眼花缭乱，值很多不知道什么意思，有时候还容易弄错属性的顺序，可读性不太好。
-第二种方法，就是使用JavaBeans模式，也就是Getter Setter
-public void setId(String id) {this.id = id;}
-</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-08&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JAVA">JAVA</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/">
-        <p class="h4 index-header">Linux(五)：SSH免密登录</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">SSH免密登录SSH(Secure Shell)是一种网络协议，用于计算机之间的加密登录。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。
-想进一步了解的话可以，参考阮一峰老师的博客
-一.配置Hosts配置你的hosts，不配置会导致ssh登录无效
-$ sudo vim /etc/hosts
-添加服务器所对应的IP和主机名
-
-二.生成密钥在hadoop000用命令生成SSH密钥，接着，按三下回车就好
-$ ssh-keygen -t rsa
-
-然后，进入.ssh文件夹，查看目录，会发现多了两个文件，id_rsa(私钥)和id_rsa.pub(公钥)
-
-三.公钥登录用ssh-copy-id命令，将hadoop000生成的公钥传到hadoop8，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录
-$ ssh-copy-id hadoop@192.168.1.8
-hadoop8的.ssh目录会多出来一个authorized_keys的文件，然后设置一下权限
-$ chmod 600 auth</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-09&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(四):安装JAVA环境(jdk1.8)" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/">
-        <p class="h4 index-header">Linux(四):安装JAVA环境(jdk1.8)</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">安装 JAVA环境(jdk1.8)第一步下载jdk1.8
-进入Oracle官网下载页面
-
-如果你下的很慢的话，我给你贴心的准备好了我下好了的    点我(提取码：guk0)
-下好后可以用WinScp或XFTP自行上传到自己的服务器目录，如果不会的话，我建议你百度
-我这里将JDK传到了我的~/software目录，我建议你们也可以自己建个software目录专门存放要安装的软件包
-
-这里可以看到我的software目录已经有我上传的jdk了
-第二步解压已经传到服务器的jdk文件
-使用tar命令将software目录下的jdk解压到app目录
-tar -zvxf jdk-8u241-linux-x64.tar.gz  -C ~/app
-
-解压完进入查看一下
-[hadoop@hadoop000 ~]$ ls
-app   Desktop    Downloads  maven_resp  Pictures  README.txt  software   t.txt
-data  Documents  lib        Music       Public    shell       Tem</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-04&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
-          <img src="https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg" srcset="/img/loading.gif" alt="Node安装与配置" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/01/23/Node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
-        <p class="h4 index-header">Node安装与配置</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Node环境搭建简单的说，node就是一个前端程序员看后端不爽，用JavaScript写出来的后端。
-下载地址：
-https://nodejs.org/zh-cn/download/
-
-选择自己系统对应的版本下载，然后一键安装，小白看教程：
-https://www.runoob.com/nodejs/nodejs-install-setup.html
-打开CMD，输入node -v和npm -v，如果显示了版本，则安装完成
-
-Node配置这里node的配置主要是配置npm，简单来说npm就相当于Java中的Maven，或者说它就是前端开发中的Maven
-镜像配置node也和Maven一样有着默认镜像，默认镜像访问速度较慢，下面是它原本的镜像
-npm get registry //获取镜像
-
-我们要将默认镜像切换为淘宝镜像
-npm config set registry https://registry.npm.taobao.org        //设置镜像
-
-上面已经切换成淘宝镜像了，如果想国内镜像和国外镜像一起使用的也可以，通过cnpm
-npm install -g cnpm --</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-23&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Node">Node</a>&nbsp;
+            <a href="/tags/Java">Java</a>&nbsp;
           
         
       </div>

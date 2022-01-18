@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>MybatisPlus(四):插件 ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://baomidou.com/img/relationship-with-mybatis.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Tuesday, January 18th 2022, 7:21 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="MybatisPlus-四-插件"><a href="#MybatisPlus-四-插件" class="headerlink" title="MybatisPlus(四):插件"></a>MybatisPlus(四):插件</h1><h2 id="一、分页插件"><a href="#一、分页插件" class="headerlink" title="一、分页插件"></a>一、分页插件</h2><h3 id="1-添加配置类"><a href="#1-添加配置类" class="headerlink" title="1. 添加配置类"></a>1. 添加配置类</h3><pre><code class="java">package com.frankeleyn.config;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/17 15:22
+ */
+@Configuration
+public class MybatisPlusConfig {
+
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        // 将分页插件放入容器
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        return interceptor;
+    }
+}</code></pre>
+<h3 id="2-测试分页"><a href="#2-测试分页" class="headerlink" title="2. 测试分页"></a>2. 测试分页</h3><p>新建一个测试类 <strong>InterceptorTest</strong></p>
+<pre><code class="java">@SpringBootTest
+public class InterceptorTest {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    public void testFindByPage() {
+        Page&lt;User&gt; page = new Page&lt;&gt;();
+        page.setCurrent(2); // 当前页数
+        page.setSize(3); // 每页条数
+
+        Page&lt;User&gt; userPage = userMapper.selectPage(page, null);
+
+        long total = userPage.getTotal(); // 总记录数
+        System.out.println(&quot;总记录数： &quot; + total);
+        List&lt;User&gt; records = userPage.getRecords();
+        records.forEach(System.out::println);
+    }
+
+}</code></pre>
+<h2 id="二、自定义分页"><a href="#二、自定义分页" class="headerlink" title="二、自定义分页"></a>二、自定义分页</h2><h3 id="1-定义接口方法"><a href="#1-定义接口方法" class="headerlink" title="1. 定义接口方法"></a>1. 定义接口方法</h3><pre><code class="java">public interface UserMapper extends BaseMapper&lt;User&gt; {
+    IPage&lt;User&gt; findUserPageByName(IPage&lt;User&gt; page, @Param(&quot;name&quot;) String name);
+}</code></pre>
+<h3 id="2-定义-XML"><a href="#2-定义-XML" class="headerlink" title="2. 定义 XML"></a>2. 定义 XML</h3><pre><code class="xml">&lt;select id=&quot;findUserPageByName&quot; resultType=&quot;com.frankeleyn.entity.User&quot;&gt;
+    SELECT * FROM user
+    WHERE name like &quot;%&quot;#{name}&quot;%&quot;
+&lt;/select&gt;</code></pre>
+<h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h3><pre><code class="java">@Test
+public void testDivPage() {
+    Page&lt;User&gt; page = new Page&lt;&gt;();
+    page.setCurrent(2); // 当前页数
+    page.setSize(2); // 每页条数
+
+    IPage&lt;User&gt; pages = userMapper.findUserPageByName(page, &quot;Obama&quot;);
+    pages.getRecords().forEach(System.out::println);
+}</code></pre>
+<h3 id="提别提醒"><a href="#提别提醒" class="headerlink" title="提别提醒"></a>提别提醒</h3><p>如果你用了自定义方法，<strong>@TableLogic</strong> 就不生效了，需要自己手动加你的逻辑删除语句。</p>
+<h2 id="三、乐观锁"><a href="#三、乐观锁" class="headerlink" title="三、乐观锁"></a>三、乐观锁</h2><h3 id="1-场景"><a href="#1-场景" class="headerlink" title="1. 场景"></a>1. 场景</h3><p>一件商品，成本价是80元，售价是100元。老板先是通知小李，说你去把商品价格增加50元。小李正在玩游戏，耽搁了一个小时。正好一个小时后，老板觉得商品价格增加到150元，价格太高，可能会影响销量。又通知小王，你把商品价格降低30元。</p>
+<p>此时，小李和小王同时操作商品后台系统。小李操作的时候，系统先取出商品价格100元；小王也在操作，取出的商品价格也是100元。小李将价格加了50元，并将100+50=150元存入了数据库；小王将商品减了30元，并将100-30=70元存入了数据库。是的，如果没有锁，小李的操作就完全被小王的覆盖了。</p>
+<ul>
+<li>创建商品表</li>
+</ul>
+<pre><code class="java">CREATE TABLE product
+(
+    id BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT &#39;主键ID&#39;,
+    name VARCHAR(30) NULL DEFAULT NULL COMMENT &#39;商品名称&#39;,
+    price INT(11) DEFAULT 0 COMMENT &#39;价格&#39;,
+    version INT(11) DEFAULT 0 COMMENT &#39;乐观锁版本号&#39;,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO product (id, NAME, price) VALUES (1, &#39;笔记本&#39;, 100);</code></pre>
+<ul>
+<li><p>创建实体类</p>
+<pre><code class="java">@Data
+public class Product {
+
+    private Long id;
+
+    private String name;
+
+    private Integer price;
+
+    private Integer version;
+}</code></pre>
+</li>
+<li><p>创建 Mapper</p>
+<pre><code class="java">public interface ProductMapper extends BaseMapper&lt;Product&gt; {
+
+}</code></pre>
+</li>
+<li><p>测试</p>
+<pre><code class="java">@Test
+public void testLocal() {
+    // 小李
+    Product li = productMapper.selectById(1L);
+    // 小王
+    Product wang = productMapper.selectById(1L);
+
+    // 小李将价格提高50元存入数据库
+    li.setPrice(li.getPrice() + 50);
+    productMapper.updateById(li);
+
+    // 小王将价格降低30元存入数据库
+    wang.setPrice(wang.getPrice() - 30);
+    productMapper.updateById(wang);
+
+    // 查询结果
+    Product product = productMapper.selectById(1L);
+    System.out.println(&quot;最后的结果：&quot; + product.getPrice()); // 最后的结果：70
+
+}</code></pre>
+</li>
+</ul>
+<p>等于 70 是肯定不行的，老板要的售价是 120。</p>
+<h3 id="2-Mybati-Plus-中的乐观锁实现"><a href="#2-Mybati-Plus-中的乐观锁实现" class="headerlink" title="2. Mybati-Plus 中的乐观锁实现"></a>2. Mybati-Plus 中的乐观锁实现</h3><h4 id="①-修改实体类"><a href="#①-修改实体类" class="headerlink" title="① 修改实体类"></a>① 修改实体类</h4><p>给实体类加上 <strong>@Version</strong> 注解</p>
+<pre><code class="java">@Version
+private Integer version;</code></pre>
+<h4 id="②-添加乐观锁插件"><a href="#②-添加乐观锁插件" class="headerlink" title="② 添加乐观锁插件"></a>② 添加乐观锁插件</h4><p>在 <strong>MybatisPlusConfig</strong> 加入下面这句代码：</p>
+<pre><code class="java">// 添加乐观锁插件
+interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());</code></pre>
+<h4 id="③-重新执行测试代码"><a href="#③-重新执行测试代码" class="headerlink" title="③ 重新执行测试代码"></a>③ 重新执行测试代码</h4><p>小王执行会失败，因为 <strong>version</strong> 已经被小李修改了。</p>
+<h4 id="④-优化流程"><a href="#④-优化流程" class="headerlink" title="④ 优化流程"></a>④ 优化流程</h4><p>让小王失败后重试</p>
+<pre><code class="java">    @Test
+    public void testLocal() {
+        // 小李
+        Product li = productMapper.selectById(1L);
+        // 小王
+        Product wang = productMapper.selectById(1L);
+
+        // 小李将价格提高50元存入数据库
+        li.setPrice(li.getPrice() + 50);
+        productMapper.updateById(li);
+
+        // 小王将价格降低30元存入数据库
+        wang.setPrice(wang.getPrice() - 30);
+        int row = productMapper.updateById(wang);
+
+        while (row == 0) {
+            // 小王执行失败，等待 1 秒后，重新执行
+            try {
+                Thread.sleep(1_000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Product wang2 = productMapper.selectById(1L);
+            wang2.setPrice(wang2.getPrice() - 30);
+            row = productMapper.updateById(wang2);
+        }
+
+        // 查询结果
+        Product product = productMapper.selectById(1L);
+        System.out.println(&quot;最后的结果：&quot; + product.getPrice()); // 最后的结果：120
+
+    }</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Java">Java</a>
+              
+                <a class="hover-with-bg" href="/tags/Mybatis">Mybatis</a>
+              
+              <span id="/2022/01/18/MybatisPlus-4-插件/" class="visitors leancloud_visitors" data-flag-title="MybatisPlus(四):插件">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MybatisPlus(四):插件&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

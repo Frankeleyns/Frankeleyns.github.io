@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>MybatisPlus(一):入门案例 ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://baomidou.com/img/relationship-with-mybatis.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Tuesday, January 18th 2022, 6:00 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="MybatisPlus-一-入门案例"><a href="#MybatisPlus-一-入门案例" class="headerlink" title="MybatisPlus(一) 入门案例"></a>MybatisPlus(一) 入门案例</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://baomidou.com/" target="_blank" rel="noopener">MyBatis-Plus </a>（简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/mybaties-plus-demo/main/img/banner.png" srcset="/img/loading.gif" alt="banner"></p>
+<h2 id="1-创建数据表-User"><a href="#1-创建数据表-User" class="headerlink" title="1. 创建数据表 User"></a>1. 创建数据表 User</h2><pre><code class="mysql">CREATE TABLE user
+(
+    id BIGINT(20) NOT NULL COMMENT &#39;主键ID&#39;,
+    name VARCHAR(30) NULL DEFAULT NULL COMMENT &#39;姓名&#39;,
+    age INT(11) NULL DEFAULT NULL COMMENT &#39;年龄&#39;,
+    email VARCHAR(50) NULL DEFAULT NULL COMMENT &#39;邮箱&#39;,
+    PRIMARY KEY (id)
+);
+INSERT INTO user (id, name, age, email) VALUES
+(1, &#39;Jone&#39;, 18, &#39;test1@baomidou.com&#39;),
+(2, &#39;Jack&#39;, 20, &#39;test2@baomidou.com&#39;),
+(3, &#39;Tom&#39;, 28, &#39;test3@baomidou.com&#39;),
+(4, &#39;Sandy&#39;, 21, &#39;test4@baomidou.com&#39;),
+(5, &#39;Billie&#39;, 24, &#39;test5@baomidou.com&#39;);</code></pre>
+<h2 id="2-创建-Spring-Boot-工程"><a href="#2-创建-Spring-Boot-工程" class="headerlink" title="2. 创建 Spring Boot 工程"></a>2. 创建 Spring Boot 工程</h2><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/mybaties-plus-demo/main/img/1-2-1.png" srcset="/img/loading.gif" alt="02"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/mybaties-plus-demo/main/img/1-2-2.png" srcset="/img/loading.gif" alt="03"></p>
+<h2 id="3-引入依赖"><a href="#3-引入依赖" class="headerlink" title="3. 引入依赖"></a>3. 引入依赖</h2><p>修改你的 pom 文件</p>
+<pre><code class="xml">    &lt;!-- 配置 Spring Boot 版本 --&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;dependencies&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;3.4.1&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+    &lt;/dependencies&gt;</code></pre>
+<h2 id="4-修改配置文件"><a href="#4-修改配置文件" class="headerlink" title="4. 修改配置文件"></a>4. 修改配置文件</h2><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/mybaties-plus-demo/main/img/1-4-1.png" srcset="/img/loading.gif" alt="4-1"></p>
+<pre><code class="properties"># 端口号
+server.port= 8082
+
+# ==================== 数据源设置 =========================
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false
+spring.datasource.username=root
+spring.datasource.password=123456
+
+# ================ mybatis 配置 =========================
+# 驼峰命名
+mybatis-plus.configuration.map-underscore-to-camel-case=true
+# 扫描映射配置文件
+mybatis-plus.mapper-locations=classpath:mapper/*Mapper.xml</code></pre>
+<h2 id="5-创建实体类"><a href="#5-创建实体类" class="headerlink" title="5. 创建实体类"></a>5. 创建实体类</h2><p>创建包 <strong>entity</strong> 并创建 <strong>User</strong> 实体类</p>
+<pre><code class="java">package com.frankeleyn.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/14 16:24
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User {
+
+    // 主键
+    private Long id;
+
+    // 名字
+    private String name;
+
+    // 年龄
+    private Integer age;
+
+    // 邮箱
+    private String email;
+
+}</code></pre>
+<h2 id="6-创建-Mapper-接口"><a href="#6-创建-Mapper-接口" class="headerlink" title="6. 创建 Mapper 接口"></a>6. 创建 Mapper 接口</h2><p>创建包 <strong>mapper</strong> 并创建 <strong>UserMapper</strong> 接口继承 <strong>BaseMapper</strong> 接口</p>
+<pre><code class="java">package com.frankeleyn.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.frankeleyn.entity.User;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/14 16:33
+ */
+public interface UserMapper extends BaseMapper&lt;User&gt; {
+
+}</code></pre>
+<h2 id="7-添加启动类注解"><a href="#7-添加启动类注解" class="headerlink" title="7. 添加启动类注解"></a>7. 添加启动类注解</h2><p>给启动类添加注解 <strong>@MapperScan</strong> ，要不然会报一个找不到 Mapper 的错误</p>
+<pre><code class="java">package com.frankeleyn;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan(&quot;com.frankeleyn.mapper&quot;)
+public class MybatisPlusDemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MybatisPlusDemoApplication.class, args);
+    }
+
+}</code></pre>
+<h2 id="8-添加测试类进行功能测试"><a href="#8-添加测试类进行功能测试" class="headerlink" title="8. 添加测试类进行功能测试"></a>8. 添加测试类进行功能测试</h2><pre><code class="java">package com.frankeleyn;
+
+import com.frankeleyn.mapper.UserMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/15 10:42
+ */
+@SpringBootTest
+public class UserDaoTest {
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    public void testFindAll() {
+        userMapper.selectList(null).forEach(System.out::println);
+    }
+}</code></pre>
+<p>打印结果：</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/mybaties-plus-demo/main/img/1-8-1.png" srcset="/img/loading.gif" alt="8-1"></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Java">Java</a>
+              
+                <a class="hover-with-bg" href="/tags/Mybatis">Mybatis</a>
+              
+              <span id="/2022/01/18/MybatisPlus-1-入门案例/" class="visitors leancloud_visitors" data-flag-title="MybatisPlus(一):入门案例">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MybatisPlus(一):入门案例&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

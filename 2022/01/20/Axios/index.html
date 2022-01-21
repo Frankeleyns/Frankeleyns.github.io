@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>Axios ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://s2.loli.net/2022/01/20/R3caWHpJiYUNB5E.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Thursday, January 20th 2022, 2:08 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h1><p>代码地址：<a href="https://githubfast.com/Frankeleyns/FrontEnd-demo" target="_blank" rel="noopener">Github</a></p>
+<h2 id="一、Axios-入门"><a href="#一、Axios-入门" class="headerlink" title="一、Axios 入门"></a>一、Axios 入门</h2><h3 id="1-Axios-的-作用"><a href="#1-Axios-的-作用" class="headerlink" title="1. Axios 的 作用"></a>1. Axios 的 作用</h3><p><a href="http://www.axios-js.com" target="_blank" rel="noopener">Axios</a> 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。</p>
+<h3 id="2-入门案例"><a href="#2-入门案例" class="headerlink" title="2. 入门案例"></a>2. 入门案例</h3><h5 id="①-添加后端接口"><a href="#①-添加后端接口" class="headerlink" title="① 添加后端接口"></a>① 添加后端接口</h5><p>自己建一个可以返回 json 数据的 SpringBoot 项目，指定端口号和地址。</p>
+<p>比如，我的地址是：<a href="http://localhost:8082/user/list" target="_blank" rel="noopener">http://localhost:8082/user/list</a></p>
+<h5 id="②-创建文件夹"><a href="#②-创建文件夹" class="headerlink" title="② 创建文件夹"></a>② 创建文件夹</h5><p>创建 <strong>03-axios-demo</strong> 文件夹</p>
+<h5 id="③-引入-axios-js"><a href="#③-引入-axios-js" class="headerlink" title="③ 引入 axios.js"></a>③ 引入 axios.js</h5><p>将 <strong>axios.js</strong> 引入 <strong>03-axios-demo</strong> 文件夹</p>
+<h5 id="④-测试"><a href="#④-测试" class="headerlink" title="④ 测试"></a>④ 测试</h5><p>创建 <strong>index.html</strong></p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;axios 案例&lt;/title&gt;
+    &lt;script src=&quot;axios.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Axios 案例&lt;/h1&gt;
+&lt;/body&gt;
+
+&lt;script&gt;
+    // 普通写法
+    axios({
+        method: &#39;get&#39;,
+        url: &#39;http://localhost:8082/user/list&#39;,
+    })
+    .then((response) =&gt; {
+        console.log(&#39;获取数据成功&#39;, response)
+    })
+    .catch((error) =&gt; {
+        console.log(&#39;获取数据失败&#39;, error)
+    })
+
+    // ES6 写法
+    axios.get(&#39;http://localhost:8082/user/list&#39;)
+         .then(res =&gt; {
+            console.log(&#39;获取数据成功：&#39; + res);
+         })
+         .catch(error =&gt; {
+            console.log(&#39;获取数据失败：&#39; + error);
+         })
+&lt;/script&gt;
+&lt;/html&gt;</code></pre>
+<h5 id="⑤-运行"><a href="#⑤-运行" class="headerlink" title="⑤ 运行"></a>⑤ 运行</h5><p>使用 <strong>Open with Live Server</strong>  运行(需要安装 Live Server 插件)，这样使用的就是 node 服务器运行的前端项目。</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/FrontEnd-demo/main/img/A-1-2-5-1.png" srcset="/img/loading.gif" alt="运行"></p>
+<p>运行之后你就发现，报错了，因为没有<strong>设置跨域</strong> (下文介绍跨域)</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/FrontEnd-demo/main/img/A-1-2-5-2.png" srcset="/img/loading.gif" alt="跨域失败"></p>
+<h2 id="二、跨域"><a href="#二、跨域" class="headerlink" title="二、跨域"></a>二、跨域</h2><h3 id="1-为什么出现跨域"><a href="#1-为什么出现跨域" class="headerlink" title="1. 为什么出现跨域"></a>1. 为什么出现跨域</h3><p><strong>跨域</strong> 是因为浏览器的<strong>同源策略</strong>限制所导致的。</p>
+<p><strong>同源</strong>（即指在同一个域）就是两个地址具有相同的协议（protocol）、主机（host）和端口号（port）</p>
+<p>以下情况都属于跨域：</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>跨域原因</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">域名不同</td>
+<td>jd.com 和 taobao.com</td>
+</tr>
+<tr>
+<td align="left">端口不同</td>
+<td><a href="http://www.qq.com:81" target="_blank" rel="noopener">www.qq.com:81</a> 和 <a href="http://www.qq.com:82" target="_blank" rel="noopener">www.qq.com:82</a></td>
+</tr>
+</tbody></table>
+<p>http和https也属于跨域。</p>
+<p><strong>同源策略会阻止一个域的 javascript 脚本和另外一个域的内容进行交互</strong>。</p>
+<p>我们是从 localhost:5500 端口去访问 localhost:8082 端口，这属于端口不同，跨域了。</p>
+<h3 id="2-解决跨域"><a href="#2-解决跨域" class="headerlink" title="2. 解决跨域"></a>2. 解决跨域</h3><p>① JsonP，利用 js 标签的一个漏洞</p>
+<p>② Nginx 反向代理，请求转发，将不跨域的请求转发到跨域请求上</p>
+<p>③ Cors, Http 允许跨域</p>
+<p>在后台的 controller上添加一个注解 <strong>@CrossOrigin</strong> 就可以了。</p>
+<h2 id="三、自定义配置"><a href="#三、自定义配置" class="headerlink" title="三、自定义配置"></a>三、自定义配置</h2><h3 id="1、配置axios实例"><a href="#1、配置axios实例" class="headerlink" title="1、配置axios实例"></a>1、配置axios实例</h3><p>可以对axios进行配置，简化代码的编写</p>
+<pre><code class="js">// 创建一个 axios 对象
+const request = axios.create({
+    baseURL: &#39;http://localhost:8082&#39;, //url前缀
+    timeout: 1000, //超时时间
+    headers: {&#39;jsessionid&#39;: &#39;frankeleyn&#39;}
+})</code></pre>
+<h3 id="2-配置请求参数"><a href="#2-配置请求参数" class="headerlink" title="2. 配置请求参数"></a>2. 配置请求参数</h3><p>远程接口的url地址可以修改成相对路径了</p>
+<pre><code class="js">// 发送 axios 请求
+request({
+    method:&#39;get&#39;,
+    url:&#39;/user/list&#39;
+}).then(response =&gt; {
+    console.log(&#39;获取数据成功&#39;, response.data[0].name)
+}).catch(error =&gt; {
+    console.log(&#39;获取数据失败&#39;, error)
+})
+
+// es6 写法
+request.get(&#39;/user/list&#39;)
+    .then(res =&gt; console.log(&#39;获取数据成功：&#39; + res.data[1].name))
+    .catch(error =&gt; console.log(&#39;获取数据失败：&#39; + error))</code></pre>
+<h2 id="四、拦截器"><a href="#四、拦截器" class="headerlink" title="四、拦截器"></a>四、拦截器</h2><p>在请求或响应被 then 或 catch 处理前拦截他们。</p>
+<p>在前后端分离的项目中，Session 是不共享的，于是我们就需要在请求到达之前 或 响应之后，拦截请求做一些操作。</p>
+<h3 id="1-请求拦截器"><a href="#1-请求拦截器" class="headerlink" title="1. 请求拦截器"></a>1. 请求拦截器</h3><p>在发送axios请求前，可以拦截请求，对请求做一些处理</p>
+<pre><code class="js">// 开启请求拦截器
+request.interceptors.request.use(
+  (config) =&gt; {
+    // 正常的请求
+    config.headers.token = &quot;user-frankeleyn&quot;
+    return config
+  },
+  (error) =&gt; {
+    // 错误的请求
+    return Promise.reject(error)
+  }
+)</code></pre>
+<p>发送请求时，就会携带这个你自定义的 token</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/FrontEnd-demo/main/img/A-4-1.png" srcset="/img/loading.gif" alt="request interceptors"></p>
+<h3 id="2-响应拦截器"><a href="#2-响应拦截器" class="headerlink" title="2. 响应拦截器"></a>2. 响应拦截器</h3><p>在发送完请求，获取到响应后，可以对响应做一些处理，再返回给前端用户</p>
+<pre><code class="js">// 返回结果拦截器
+request.interceptors.response.use(
+  (response) =&gt; {
+    console.log(&#39;返回结果拦截&#39;, response);
+    return response.data
+  },
+  (error) =&gt; {
+    return Promise.reject(error)
+  }
+)</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF">前端技术</a>
+              
+              <span id="/2022/01/20/Axios/" class="visitors leancloud_visitors" data-flag-title="Axios">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Axios&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

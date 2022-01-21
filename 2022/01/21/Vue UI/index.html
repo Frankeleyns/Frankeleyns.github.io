@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="Frankeleyn">
   <meta name="keywords" content="">
-  <title>Archive ~ Frankeleyn Blog</title>
+  <title>Vue UI 组件库 ~ Frankeleyn Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -42,7 +42,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -94,7 +94,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('https://s2.loli.net/2022/01/21/yTfIpO7HUvc6J1m.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -104,6 +104,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Friday, January 21st 2022, 10:32 pm</p>
             
           </div>
 
@@ -115,41 +118,94 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">27 posts in total.</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux(五)：SSH免密登录</span>
-      <span style="float: right;">03-09</span>
-    </a>
-  
-    
-    <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux(四):安装JAVA环境(jdk1.8)</span>
-      <span style="float: right;">03-04</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Vue-UI-组件库"><a href="#Vue-UI-组件库" class="headerlink" title="Vue UI 组件库"></a>Vue UI 组件库</h1><p>代码地址：<a href="https://githubfast.com/Frankeleyns/FrontEnd-demo" target="_blank" rel="noopener">Github</a></p>
+<h2 id="一、常见组件库"><a href="#一、常见组件库" class="headerlink" title="一、常见组件库"></a>一、常见组件库</h2><h3 id="1、Mint-UI"><a href="#1、Mint-UI" class="headerlink" title="1、Mint UI"></a>1、Mint UI</h3><p>主页：<a href="http://mint-ui.github.io/#!/zh-cn" target="_blank" rel="noopener">http://mint-ui.github.io/#!/zh-cn</a></p>
+<p>说明：饿了么开源的基于Vue的移动端UI组件库</p>
+<h3 id="2、Element-UI"><a href="#2、Element-UI" class="headerlink" title="2、Element-UI"></a>2、Element-UI</h3><p>主页：<a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">http://element-cn.eleme.io/#/zh-CN</a></p>
+<p>说明：饿了么开源的基于Vue的PC端UI组件库</p>
+<h2 id="二、Element-UI-案例"><a href="#二、Element-UI-案例" class="headerlink" title="二、Element-UI 案例"></a>二、Element-UI 案例</h2><p>创建文件夹 <strong>06-ui</strong>，创建 <strong>01-demo.html</strong></p>
+<h3 id="1-引入脚本"><a href="#1-引入脚本" class="headerlink" title="1. 引入脚本"></a>1. 引入脚本</h3><pre><code class="html">    &lt;script src=&quot;vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;axios.js&quot;&gt;&lt;/script&gt;
+    &lt;!-- 引入样式 --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/element-ui/lib/theme-chalk/index.css&quot; /&gt;
+    &lt;!-- 引入组件库 --&gt;
+    &lt;script src=&quot;https://unpkg.com/element-ui/lib/index.js&quot;&gt;&lt;/script&gt;</code></pre>
+<h3 id="2-渲染数据"><a href="#2-渲染数据" class="headerlink" title="2. 渲染数据"></a>2. 渲染数据</h3><pre><code class="html">&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;el-table :data=&quot;users&quot; stripe border style=&quot;width: 100%&quot; &gt;
+                &lt;el-table-column prop=&quot;name&quot; label=&quot;姓名&quot;&gt;&lt;/el-table-column&gt;
+                &lt;el-table-column prop=&quot;age&quot; label=&quot;年龄&quot;&gt;&lt;/el-table-column&gt;
+                &lt;el-table-column prop=&quot;skill&quot; label=&quot;技能&quot;&gt;&lt;/el-table-column&gt;
+        &lt;/el-table&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+    new Vue({
+        el: &quot;#app&quot;,
+        data: {
+            users: [
+                { name: &quot;亚索&quot;, age: 28, skill: &quot;狂风绝息斩&quot; },
+                { name: &quot;永恩&quot;, age: 29, skill: &quot;封尘绝念斩&quot; }
+            ]
+        }
+    })
+&lt;/script&gt;</code></pre>
+<h3 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3.运行结果"></a>3.运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/FrontEnd-demo/main/img/v-ui.png" srcset="/img/loading.gif" alt="v-ui"></p>
 
-              </div>
-            </div>
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF">前端技术</a>
+              
+                <a class="hover-with-bg" href="/tags/Vue">Vue</a>
+              
+              <span id="/2022/01/21/Vue UI/" class="visitors leancloud_visitors" data-flag-title="Vue UI 组件库">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -204,6 +260,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -220,7 +281,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "Vue UI 组件库&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

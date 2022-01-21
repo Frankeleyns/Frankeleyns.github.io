@@ -4,6 +4,48 @@
   
   
   <entry>
+    <title>Vue Router</title>
+    <link href="undefined2022/01/21/Vue%20Router/"/>
+    <url>2022/01/21/Vue%20Router/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue-Router"></a>Vue-Router</h1><p>代码地址：<a href="https://githubfast.com/Frankeleyns/FrontEnd-demo" target="_blank" rel="noopener">Github</a></p><h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>Vue.js 路由允许我们通过锚点定义不同的 URL， 达到访问不同的页面的目的，每个页面的内容通过延迟加载渲染出来。</p><p>通过 Vue.js 可以实现多视图的<strong>单页Web应用</strong>（single page web application，SPA）</p><h2 id="二、路由案例"><a href="#二、路由案例" class="headerlink" title="二、路由案例"></a>二、路由案例</h2><h3 id="1-创建文件夹和文件"><a href="#1-创建文件夹和文件" class="headerlink" title="1. 创建文件夹和文件"></a>1. 创建文件夹和文件</h3><p>创建文件夹 <strong>07-router</strong>，创建 <strong>index.html</strong></p><h3 id="2-引入-js"><a href="#2-引入-js" class="headerlink" title="2. 引入 js"></a>2. 引入 js</h3><pre><code class="html">&lt;script src=&quot;vue.js&quot;&gt;&lt;/script&gt;&lt;script src=&quot;vue-router.js&quot;&gt;&lt;/script&gt;</code></pre><h3 id="3-编写-html"><a href="#3-编写-html" class="headerlink" title="3. 编写 html"></a>3. 编写 html</h3><pre><code class="html">&lt;body&gt;    &lt;div id=&quot;app&quot;&gt;        &lt;h1&gt;Hello Vue Router!&lt;/h1&gt;        &lt;p&gt;            &lt;!-- &lt;router-link&gt; 默认会被渲染成一个 `&lt;a&gt;` 标签 --&gt;            &lt;!-- 通过传入 `to` 属性指定链接. --&gt;            &lt;router-link to=&quot;/&quot;&gt;首页&lt;/router-link&gt;            &lt;router-link to=&quot;/equip&quot;&gt;装备列表&lt;/router-link&gt;            &lt;router-link to=&quot;/heor&quot;&gt;英雄列表&lt;/router-link&gt;        &lt;/p&gt;        &lt;!-- 路由出口 --&gt;        &lt;!-- 路由匹配到的组件将渲染在这里 --&gt;        &lt;router-view&gt;&lt;/router-view&gt;    &lt;/div&gt;&lt;/body&gt;</code></pre><h3 id="4-编写-js"><a href="#4-编写-js" class="headerlink" title="4. 编写 js"></a>4. 编写 js</h3><pre><code class="html">&lt;script&gt;    // 1. 定义路由组件    const welcome = { template: &quot;&lt;div&gt;英雄联盟首页&lt;/div&gt;&quot; }    const equip = { template: &quot;&lt;div&gt;装备列表&lt;div&gt;&quot; }    const hero = {template: &quot;&lt;div&gt;英雄列表&lt;/div&gt;&quot; }    // 2. 定义路由集合    const routes = [        { path: &#39;/&#39;, redirect: &#39;/welcome&#39; }, // 默认的欢迎页面        { path: &#39;/welcome&#39;, component: welcome },        { path: &#39;/equip&#39;, component: equip },        { path: &#39;/hero&#39;, component: hero }    ]    // 3. 创建 router 实例，传入组件    const router = new VueRouter({        routes // 缩写，相当于 routes: routes    })    // 4. 加载 vue-router    new Vue({        el: &quot;#app&quot;,        data: {},        router    })&lt;/script&gt;</code></pre><h3 id="5-运行结果"><a href="#5-运行结果" class="headerlink" title="5. 运行结果"></a>5. 运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/FrontEnd-demo/main/img/v-router.png" srcset="/img/loading.gif" alt="router"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>前端技术</tag>
+      
+      <tag>Vue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Vue UI 组件库</title>
+    <link href="undefined2022/01/21/Vue%20UI/"/>
+    <url>2022/01/21/Vue%20UI/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Vue-UI-组件库"><a href="#Vue-UI-组件库" class="headerlink" title="Vue UI 组件库"></a>Vue UI 组件库</h1><p>代码地址：<a href="https://githubfast.com/Frankeleyns/FrontEnd-demo" target="_blank" rel="noopener">Github</a></p><h2 id="一、常见组件库"><a href="#一、常见组件库" class="headerlink" title="一、常见组件库"></a>一、常见组件库</h2><h3 id="1、Mint-UI"><a href="#1、Mint-UI" class="headerlink" title="1、Mint UI"></a>1、Mint UI</h3><p>主页：<a href="http://mint-ui.github.io/#!/zh-cn" target="_blank" rel="noopener">http://mint-ui.github.io/#!/zh-cn</a></p><p>说明：饿了么开源的基于Vue的移动端UI组件库</p><h3 id="2、Element-UI"><a href="#2、Element-UI" class="headerlink" title="2、Element-UI"></a>2、Element-UI</h3><p>主页：<a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">http://element-cn.eleme.io/#/zh-CN</a></p><p>说明：饿了么开源的基于Vue的PC端UI组件库</p><h2 id="二、Element-UI-案例"><a href="#二、Element-UI-案例" class="headerlink" title="二、Element-UI 案例"></a>二、Element-UI 案例</h2><p>创建文件夹 <strong>06-ui</strong>，创建 <strong>01-demo.html</strong></p><h3 id="1-引入脚本"><a href="#1-引入脚本" class="headerlink" title="1. 引入脚本"></a>1. 引入脚本</h3><pre><code class="html">    &lt;script src=&quot;vue.js&quot;&gt;&lt;/script&gt;    &lt;script src=&quot;axios.js&quot;&gt;&lt;/script&gt;    &lt;!-- 引入样式 --&gt;    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/element-ui/lib/theme-chalk/index.css&quot; /&gt;    &lt;!-- 引入组件库 --&gt;    &lt;script src=&quot;https://unpkg.com/element-ui/lib/index.js&quot;&gt;&lt;/script&gt;</code></pre><h3 id="2-渲染数据"><a href="#2-渲染数据" class="headerlink" title="2. 渲染数据"></a>2. 渲染数据</h3><pre><code class="html">&lt;body&gt;    &lt;div id=&quot;app&quot;&gt;        &lt;el-table :data=&quot;users&quot; stripe border style=&quot;width: 100%&quot; &gt;                &lt;el-table-column prop=&quot;name&quot; label=&quot;姓名&quot;&gt;&lt;/el-table-column&gt;                &lt;el-table-column prop=&quot;age&quot; label=&quot;年龄&quot;&gt;&lt;/el-table-column&gt;                &lt;el-table-column prop=&quot;skill&quot; label=&quot;技能&quot;&gt;&lt;/el-table-column&gt;        &lt;/el-table&gt;    &lt;/div&gt;&lt;/body&gt;&lt;script&gt;    new Vue({        el: &quot;#app&quot;,        data: {            users: [                { name: &quot;亚索&quot;, age: 28, skill: &quot;狂风绝息斩&quot; },                { name: &quot;永恩&quot;, age: 29, skill: &quot;封尘绝念斩&quot; }            ]        }    })&lt;/script&gt;</code></pre><h3 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3.运行结果"></a>3.运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/FrontEnd-demo/main/img/v-ui.png" srcset="/img/loading.gif" alt="v-ui"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>前端技术</tag>
+      
+      <tag>Vue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Vue</title>
     <link href="undefined2022/01/21/Vue/"/>
     <url>2022/01/21/Vue/</url>

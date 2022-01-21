@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="Frankeleyn">
   <meta name="keywords" content="">
-  <title>Archive ~ Frankeleyn Blog</title>
+  <title>Vue Router ~ Frankeleyn Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -42,7 +42,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -94,7 +94,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('https://s2.loli.net/2022/01/21/yTfIpO7HUvc6J1m.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -104,6 +104,9 @@
               
             </span>
 
+            
+              <br>
+              <p class="mt-3">Friday, January 21st 2022, 10:38 pm</p>
             
           </div>
 
@@ -115,41 +118,109 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">27 posts in total.</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux(五)：SSH免密登录</span>
-      <span style="float: right;">03-09</span>
-    </a>
-  
-    
-    <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux(四):安装JAVA环境(jdk1.8)</span>
-      <span style="float: right;">03-04</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue-Router"></a>Vue-Router</h1><p>代码地址：<a href="https://githubfast.com/Frankeleyns/FrontEnd-demo" target="_blank" rel="noopener">Github</a></p>
+<h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>Vue.js 路由允许我们通过锚点定义不同的 URL， 达到访问不同的页面的目的，每个页面的内容通过延迟加载渲染出来。</p>
+<p>通过 Vue.js 可以实现多视图的<strong>单页Web应用</strong>（single page web application，SPA）</p>
+<h2 id="二、路由案例"><a href="#二、路由案例" class="headerlink" title="二、路由案例"></a>二、路由案例</h2><h3 id="1-创建文件夹和文件"><a href="#1-创建文件夹和文件" class="headerlink" title="1. 创建文件夹和文件"></a>1. 创建文件夹和文件</h3><p>创建文件夹 <strong>07-router</strong>，创建 <strong>index.html</strong></p>
+<h3 id="2-引入-js"><a href="#2-引入-js" class="headerlink" title="2. 引入 js"></a>2. 引入 js</h3><pre><code class="html">&lt;script src=&quot;vue.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;vue-router.js&quot;&gt;&lt;/script&gt;</code></pre>
+<h3 id="3-编写-html"><a href="#3-编写-html" class="headerlink" title="3. 编写 html"></a>3. 编写 html</h3><pre><code class="html">&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;h1&gt;Hello Vue Router!&lt;/h1&gt;
+        &lt;p&gt;
+            &lt;!-- &lt;router-link&gt; 默认会被渲染成一个 `&lt;a&gt;` 标签 --&gt;
+            &lt;!-- 通过传入 `to` 属性指定链接. --&gt;
+            &lt;router-link to=&quot;/&quot;&gt;首页&lt;/router-link&gt;
+            &lt;router-link to=&quot;/equip&quot;&gt;装备列表&lt;/router-link&gt;
+            &lt;router-link to=&quot;/heor&quot;&gt;英雄列表&lt;/router-link&gt;
+        &lt;/p&gt;
+        &lt;!-- 路由出口 --&gt;
+        &lt;!-- 路由匹配到的组件将渲染在这里 --&gt;
+        &lt;router-view&gt;&lt;/router-view&gt;
+    &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<h3 id="4-编写-js"><a href="#4-编写-js" class="headerlink" title="4. 编写 js"></a>4. 编写 js</h3><pre><code class="html">&lt;script&gt;
+    // 1. 定义路由组件
+    const welcome = { template: &quot;&lt;div&gt;英雄联盟首页&lt;/div&gt;&quot; }
+    const equip = { template: &quot;&lt;div&gt;装备列表&lt;div&gt;&quot; }
+    const hero = {template: &quot;&lt;div&gt;英雄列表&lt;/div&gt;&quot; }
 
-              </div>
-            </div>
+    // 2. 定义路由集合
+    const routes = [
+        { path: &#39;/&#39;, redirect: &#39;/welcome&#39; }, // 默认的欢迎页面
+        { path: &#39;/welcome&#39;, component: welcome },
+        { path: &#39;/equip&#39;, component: equip },
+        { path: &#39;/hero&#39;, component: hero }
+    ]
+
+    // 3. 创建 router 实例，传入组件
+    const router = new VueRouter({
+        routes // 缩写，相当于 routes: routes
+    })
+
+    // 4. 加载 vue-router
+    new Vue({
+        el: &quot;#app&quot;,
+        data: {},
+        router
+    })
+&lt;/script&gt;</code></pre>
+<h3 id="5-运行结果"><a href="#5-运行结果" class="headerlink" title="5. 运行结果"></a>5. 运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/FrontEnd-demo/main/img/v-router.png" srcset="/img/loading.gif" alt="router"></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF">前端技术</a>
+              
+                <a class="hover-with-bg" href="/tags/Vue">Vue</a>
+              
+              <span id="/2022/01/21/Vue Router/" class="visitors leancloud_visitors" data-flag-title="Vue Router">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -204,6 +275,11 @@
   <script src="/js/lazyload.js" ></script>
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
@@ -220,7 +296,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "Vue Router&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

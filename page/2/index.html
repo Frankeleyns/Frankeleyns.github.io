@@ -128,6 +128,51 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/11/08/EffectiveJava-7-%E5%A4%8D%E5%90%88%E4%BC%98%E4%BA%8E%E7%BB%A7%E6%89%BF/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(七)：复合优于继承" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/11/08/EffectiveJava-7-%E5%A4%8D%E5%90%88%E4%BC%98%E4%BA%8E%E7%BB%A7%E6%89%BF/">
+        <p class="h4 index-header">Effective Java(七)：复合优于继承</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">复合优于继承继承（extends）是实现代码重用的有力手段，但它并非永远是完成这项工作的最佳工具。使用不当会导致应用变的脆弱。下面我举一个例子，我需要查询HashSet看看它被创建以来添加过多少个元素。为了实现该功能，我会继承该类，增加一个addCount属性来记录元素插入数量，还有一个访问该数值的方法，并覆盖add、addAll这两个增加元素的方法。
+//Broken - inappropriate use of inheritance!
+public class InstrumentedHashSet&lt;E&gt; extends HashSet&lt;E&gt; {
+    //The number of attempted element insertions
+    private int addCount = 0;
+
+    public InstrumentedHashSet(){}
+
+    public InstrumentedHashSet(int initCap, float loadFactor){
+        super(initCap,loadFac</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-11-08&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/09/26/EffectiveJava-6-%E4%BD%BF%E5%8F%AF%E5%8F%98%E6%80%A7%E6%9C%80%E5%B0%8F/" target="_self">
           <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(六)：使可变性最小" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -590,47 +635,6 @@ npm install -g cnpm --</div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/12/04/Java%E5%9F%BA%E7%A1%80-%E9%9B%86%E5%90%88/" target="_self">
-          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Java基础：集合" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/04/Java%E5%9F%BA%E7%A1%80-%E9%9B%86%E5%90%88/">
-        <p class="h4 index-header">Java基础：集合</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Java基础：集合JAVA的集合类被定义在Java.util包中，主要有4种集合，分别为List、Queue、Set、Map，每种集合的具体分类如图：
-
-List：加强版数组1.ArrayList：基于数组实现，增删慢，查询快，线程不安全因为是基于数组实现，所以当需要插入或删除一个节点时，需要移动其他所有节点，代价较高，因此，ArrayList不适合更新操作。
-ArrayList不需要定义数组长度，在默认长度（默认长度为10）不够时，ArrayList会创建一个新的更大数组并将已有的数据复制到新数组中，通过调用一个native方法System.arraycopy实现
-2.Vector: 基于数组实现，增删慢，查询快，线程安全Vector的数据结构与ArrayList一样，都是基于数组实现，不同的是Vector支持线程同步，以保证多线程环境下数据的一致性，但由于频繁的加锁和释放锁操作，Vector整体独写效率比ArrayList低。
-3.LinkedList: 基于双向链表实现，增删快，查询慢，线程不安全LinkedList采用双向链表结构存储元素，在对LinkedList插入和删除时，</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-04&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Java">Java</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -638,12 +642,12 @@ ArrayList不需要定义数组长度，在默认长度（默认长度为10）不
       
       
         <li class="page-item">
-          <a class="page-link" href="/#board">上一页</a>
+          <a class="page-link" href="/#board">Previous</a>
         </li>
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/3/#board">下一页</a>
+          <a class="page-link" href="/page/3/#board">Next</a>
         </li>
       
     </ul>
@@ -671,7 +675,7 @@ ArrayList不需要定义数组长度，在默认长度（默认长度为10）不
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -680,7 +684,7 @@ ArrayList不需要定义数组长度，在默认长度（默认长度为10）不
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

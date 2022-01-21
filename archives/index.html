@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="Frankeleyn">
   <meta name="keywords" content="">
-  <title>归档 ~ Frankeleyn Blog</title>
+  <title>Archive ~ Frankeleyn Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -124,12 +124,18 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 24 篇文章</p>
+  <p class="h4">25 posts in total.</p>
   <hr>
   
     
       
       <p class="h5">2022</p>
+    
+    <a href="/2022/01/21/Vue/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Vue</span>
+      <span style="float: right;">01-21</span>
+    </a>
+  
     
     <a href="/2022/01/20/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">模块化</span>
@@ -184,15 +190,6 @@
       <span style="float: right;">01-18</span>
     </a>
   
-    
-      
-      <p class="h5">2020</p>
-    
-    <a href="/2020/11/08/EffectiveJava-7-%E5%A4%8D%E5%90%88%E4%BC%98%E4%BA%8E%E7%BB%A7%E6%89%BF/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Effective Java(七)：复合优于继承</span>
-      <span style="float: right;">11-08</span>
-    </a>
-  
 </div>
 
   <nav aria-label="index posts navigation">
@@ -201,7 +198,7 @@
       
       
         <li class="page-item">
-          <a class="page-link" href="/archives/page/2/#board">下一页</a>
+          <a class="page-link" href="/archives/page/2/#board">Next</a>
         </li>
       
     </ul>
@@ -228,7 +225,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -237,7 +234,7 @@
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -283,7 +280,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "Archive&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

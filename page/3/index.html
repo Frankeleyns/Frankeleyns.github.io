@@ -128,6 +128,56 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/" target="_self">
+          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(五)：SSH免密登录" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/03/09/Linux-5-%E5%AE%89%E8%A3%85SSH/">
+        <p class="h4 index-header">Linux(五)：SSH免密登录</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">SSH免密登录SSH(Secure Shell)是一种网络协议，用于计算机之间的加密登录。 如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。
+想进一步了解的话可以，参考阮一峰老师的博客
+一.配置Hosts配置你的hosts，不配置会导致ssh登录无效
+$ sudo vim /etc/hosts
+添加服务器所对应的IP和主机名
+
+二.生成密钥在hadoop000用命令生成SSH密钥，接着，按三下回车就好
+$ ssh-keygen -t rsa
+
+然后，进入.ssh文件夹，查看目录，会发现多了两个文件，id_rsa(私钥)和id_rsa.pub(公钥)
+
+三.公钥登录用ssh-copy-id命令，将hadoop000生成的公钥传到hadoop8，@前面是目标用户名，@后面为目标服务器IP，如果用户名不同，还是要密码登录
+$ ssh-copy-id hadoop@192.168.1.8
+hadoop8的.ssh目录会多出来一个authorized_keys的文件，然后设置一下权限
+$ chmod 600 auth</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-09&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Linux">Linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/03/04/Linux-4-%E5%AE%89%E8%A3%85JAVA%E7%8E%AF%E5%A2%83/" target="_self">
           <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(四):安装JAVA环境(jdk1.8)" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -532,7 +582,7 @@ Shift + ; + wq(wq是 写入</div>
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/2/#board">Previous</a>
+          <a class="page-link" href="/page/2/#board">上一页</a>
         </li>
       
       
@@ -561,7 +611,7 @@ Shift + ; + wq(wq是 写入</div>
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -570,7 +620,7 @@ Shift + ; + wq(wq是 写入</div>
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

@@ -128,6 +128,73 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/01/22/Srb-1-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/" target="_self">
+          <img src="https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png" srcset="/img/loading.gif" alt="Srb(一):项目介绍" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/01/22/Srb-1-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/">
+        <p class="h4 index-header">Srb(一):项目介绍</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Srb (一): 项目介绍项目介绍尚融宝 ( Srb ) 是一个用来学习的前后端分离 P2P 金融项目
+项目从0到1全过程都会写在博客中
+项目架构
+项目开发环境基础环境
+jdk1.8
+
+maven
+
+idea
+
+
+后台技术栈Spring Boot
+Spring Cloud
+Mybatis Plus：持久层框架
+Lombok：简化代码
+Swagger2：自动生成 Api 接口工具
+Logback：日志
+alibaba-easyexcel：Excel 读写
+Spring Data Redis：访问 Redis
+HttpClient：基于 Http 协议的客户端，可发送 Http 请求
+Spring Task： 定时任务
+数据库和中间件MySql 5.7：关系型数据库
+Redis：内存数据库
+RabbitMQ：消息中间件
+第三方接口阿里云短信
+阿里云 OSS
+资金托管平台 API 对接 汇付宝
+前端技术栈Node.js： JavaScript 运行环境
+ES6：JavaScript的模块化版本
+axios：一个发送Ajax请求的工具
+Vue.js：web 界面的渐进式框架
+Element-U</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-22&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Srb">Srb</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2022/01/21/Vue%20Router/" target="_self">
           <img src="https://s2.loli.net/2022/01/21/yTfIpO7HUvc6J1m.png" srcset="/img/loading.gif" alt="Vue Router" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -580,66 +647,6 @@ public class MybatisPlusConfig {</div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2022/01/18/MybatisPlus-3-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" target="_self">
-          <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(三):常用注解" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2022/01/18/MybatisPlus-3-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
-        <p class="h4 index-header">MybatisPlus(三):常用注解</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">MybatisPlus(三):常用注解代码地址：Github
-一、 TableName表名，将实体类绑定到对应的数据库
-@TableName(&quot;t_user&quot;)
-public class User{
-
-}
-二、TableIdtype 属性type 属性用来指定主键策略
-
-AUTO，主键自增，Mysql 主键自增的最小值总是要大于现有数据的最大值
-@TableId(type = IdType.AUTO)
-private Long id;
-
-ASSIGN_ID，使用雪花算法生成主键，例: 1482xxxxxxxxxxx
-@TableId(type = IdType.ASSIGN_ID)
-private Long id;
-
-
-id 策略的选择
-一般小数据量，使用自增策略，当数据量超过千万级别后，涉及分库分表，需要使用雪花算法。
-三、TableField1. value 属性将数据库字段和实体类对应的属性绑定
-将字段 create_time 和 update_time 绑定到实体类的 createTime 和 updateTime 属性上
-
-@TableField(&quo</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-18&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Java">Java</a>&nbsp;
-          
-            <a href="/tags/Mybatis">Mybatis</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -648,7 +655,7 @@ id 策略的选择
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/2/#board">Next</a>
+          <a class="page-link" href="/page/2/#board">下一页</a>
         </li>
       
     </ul>
@@ -676,7 +683,7 @@ id 策略的选择
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -685,7 +692,7 @@ id 策略的选择
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

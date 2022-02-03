@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>Srb(二):后端工程搭建 ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Thursday, February 3rd 2022, 3:29 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Srb-二-后端工程搭建"><a href="#Srb-二-后端工程搭建" class="headerlink" title="Srb(二):后端工程搭建"></a>Srb(二):后端工程搭建</h1><h1 id="01-后台接口工程搭建"><a href="#01-后台接口工程搭建" class="headerlink" title="01-后台接口工程搭建"></a>01-后台接口工程搭建</h1><h2 id="基础框架结构"><a href="#基础框架结构" class="headerlink" title="基础框架结构"></a>基础框架结构</h2><p><strong>Srb：</strong> 总工程，父依赖</p>
+<p><strong>srb-common：</strong>工程通用包依赖，其他的工程都引入这个通用工程 ( 非微服务 )</p>
+<p><strong>service-base：</strong>持久层的依赖 ( 非微服务 )</p>
+<p><strong>service-core：</strong>核心业务 ( 具体的微服务 )</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/architecture.png" srcset="/img/loading.gif" alt="基础框架结构图"></p>
+<h2 id="一、创建父工程-Srb"><a href="#一、创建父工程-Srb" class="headerlink" title="一、创建父工程 Srb"></a>一、创建父工程 Srb</h2><h3 id="1-新建一个文件夹-取名-Srb"><a href="#1-新建一个文件夹-取名-Srb" class="headerlink" title="1. 新建一个文件夹 取名 Srb"></a>1. 新建一个文件夹 取名 Srb</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/1.png" srcset="/img/loading.gif" alt="srb"></p>
+<h3 id="2-添加一个pom-xml"><a href="#2-添加一个pom-xml" class="headerlink" title="2. 添加一个pom.xml"></a>2. 添加一个pom.xml</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.frankeleyn&lt;/groupId&gt;
+    &lt;artifactId&gt;srb&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+
+    &lt;!-- 打包方式 --&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+
+
+    &lt;!-- 配置 Spring Boot 版本 --&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+    &lt;/parent&gt;
+
+
+    &lt;!-- 配置 pom 依赖版本号 --&gt;
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+        &lt;spring-cloud-alibaba.version&gt;2.2.2.RELEASE&lt;/spring-cloud-alibaba.version&gt;
+        &lt;spring-cloud.version&gt;Hoxton.SR8&lt;/spring-cloud.version&gt;
+        &lt;mybatis-plus.version&gt;3.4.1&lt;/mybatis-plus.version&gt;
+        &lt;velocity.version&gt;2.0&lt;/velocity.version&gt;
+        &lt;swagger.version&gt;2.9.2&lt;/swagger.version&gt;
+        &lt;swagger-bootstrap-ui.version&gt;1.9.2&lt;/swagger-bootstrap-ui.version&gt;
+        &lt;commons-lang3.version&gt;3.9&lt;/commons-lang3.version&gt;
+        &lt;commons-fileupload.version&gt;1.3.1&lt;/commons-fileupload.version&gt;
+        &lt;commons-io.version&gt;2.6&lt;/commons-io.version&gt;
+        &lt;alibaba.easyexcel.version&gt;2.1.1&lt;/alibaba.easyexcel.version&gt;
+        &lt;apache.xmlbeans.version&gt;3.1.0&lt;/apache.xmlbeans.version&gt;
+        &lt;fastjson.version&gt;1.2.28&lt;/fastjson.version&gt;
+        &lt;gson.version&gt;2.8.2&lt;/gson.version&gt;
+        &lt;json.version&gt;20170516&lt;/json.version&gt;
+        &lt;aliyun-java-sdk-core.version&gt;4.3.3&lt;/aliyun-java-sdk-core.version&gt;
+        &lt;aliyun-sdk-oss.version&gt;3.10.2&lt;/aliyun-sdk-oss.version&gt;
+        &lt;jodatime.version&gt;2.10.1&lt;/jodatime.version&gt;
+        &lt;jwt.version&gt;0.7.0&lt;/jwt.version&gt;
+        &lt;httpclient.version&gt;4.5.1&lt;/httpclient.version&gt;
+    &lt;/properties&gt;
+
+    &lt;!-- 配置 pom 依赖--&gt;
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+
+            &lt;!--Spring Cloud--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--Spring Cloud Alibaba--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-alibaba-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud-alibaba.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--mybatis-plus--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+                &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+                &lt;version&gt;${mybatis-plus.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!--mybatis-plus 代码生成器--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+                &lt;artifactId&gt;mybatis-plus-generator&lt;/artifactId&gt;
+                &lt;version&gt;${mybatis-plus.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!-- Mybatis Plus 代码生成器模板引擎,  --&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.apache.velocity&lt;/groupId&gt;
+                &lt;artifactId&gt;velocity-engine-core&lt;/artifactId&gt;
+                &lt;version&gt;${velocity.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--swagger--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+                &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+                &lt;version&gt;${swagger.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!--swagger ui--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+                &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+                &lt;version&gt;${swagger.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!--swagger-bootstrap-ui--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;
+                &lt;artifactId&gt;swagger-bootstrap-ui&lt;/artifactId&gt;
+                &lt;version&gt;${swagger-bootstrap-ui.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--commons-lang3--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+                &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
+                &lt;version&gt;${commons-lang3.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--文件上传--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+                &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+                &lt;version&gt;${commons-fileupload.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--commons-io--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;commons-io&lt;/groupId&gt;
+                &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+                &lt;version&gt;${commons-io.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--excel解析--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+                &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;
+                &lt;version&gt;${alibaba.easyexcel.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!--excel解析依赖--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.apache.xmlbeans&lt;/groupId&gt;
+                &lt;artifactId&gt;xmlbeans&lt;/artifactId&gt;
+                &lt;version&gt;${apache.xmlbeans.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--json--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+                &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+                &lt;version&gt;${fastjson.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.json&lt;/groupId&gt;
+                &lt;artifactId&gt;json&lt;/artifactId&gt;
+                &lt;version&gt;${json.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;
+                &lt;artifactId&gt;gson&lt;/artifactId&gt;
+                &lt;version&gt;${gson.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--阿里云SDK远程调用--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+                &lt;artifactId&gt;aliyun-java-sdk-core&lt;/artifactId&gt;
+                &lt;version&gt;${aliyun-java-sdk-core.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--阿里云文件管理--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.aliyun.oss&lt;/groupId&gt;
+                &lt;artifactId&gt;aliyun-sdk-oss&lt;/artifactId&gt;
+                &lt;version&gt;${aliyun-sdk-oss.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--日期时间工具--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;joda-time&lt;/groupId&gt;
+                &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+                &lt;version&gt;${jodatime.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--jwt工具--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+                &lt;artifactId&gt;jjwt&lt;/artifactId&gt;
+                &lt;version&gt;${jwt.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+            &lt;!--httpclient--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;
+                &lt;artifactId&gt;httpclient&lt;/artifactId&gt;
+                &lt;version&gt;${httpclient.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+
+&lt;/project&gt;</code></pre>
+<h2 id="二、创建模块-srb-common"><a href="#二、创建模块-srb-common" class="headerlink" title="二、创建模块 srb-common"></a>二、创建模块 srb-common</h2><h3 id="1-创建-Maven-模块"><a href="#1-创建-Maven-模块" class="headerlink" title="1. 创建 Maven 模块"></a>1. 创建 Maven 模块</h3><p>在 Srb 父工程下，创建一个 Maven 模块</p>
+<p>Group: <strong>com.frankeleyn</strong></p>
+<p>Artifact: <strong>srb-common</strong></p>
+<h3 id="2-配置-pom"><a href="#2-配置-pom" class="headerlink" title="2.  配置 pom"></a>2.  配置 pom</h3><pre><code class="xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+    &lt;!--lombok用来简化实体类：需要安装lombok插件--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+<h2 id="三、创建模块-service-base"><a href="#三、创建模块-service-base" class="headerlink" title="三、创建模块 service-base"></a>三、创建模块 service-base</h2><h3 id="1-创建-Maven-模块-1"><a href="#1-创建-Maven-模块-1" class="headerlink" title="1. 创建 Maven 模块"></a>1. 创建 Maven 模块</h3><p>Group: <strong>com.frankeleyn</strong></p>
+<p>Artifact: <strong>service-base</strong></p>
+<h3 id="2-配置-pom-1"><a href="#2-配置-pom-1" class="headerlink" title="2. 配置 pom"></a>2. 配置 pom</h3><pre><code class="xml">&lt;dependencies&gt;
+    &lt;!-- 引入 common 项目--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.frankeleyn&lt;/groupId&gt;
+        &lt;artifactId&gt;srb-common&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!--swagger--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+        &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!--swagger ui--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+        &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+    &lt;!--mysql--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!--mybatis-plus--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!--mybatis-plus 代码生成器--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-plus-generator&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!-- Mybatis Plus 代码生成器模板引擎,  --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.velocity&lt;/groupId&gt;
+        &lt;artifactId&gt;velocity-engine-core&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;</code></pre>
+<h2 id="四、创建模块-service-core"><a href="#四、创建模块-service-core" class="headerlink" title="四、创建模块 service-core"></a>四、创建模块 service-core</h2><h3 id="1-创建-Maven-模块-2"><a href="#1-创建-Maven-模块-2" class="headerlink" title="1. 创建 Maven 模块"></a>1. 创建 Maven 模块</h3><p>Group: <strong>com.frankeleyn</strong></p>
+<p>Artifact: <strong>service-core</strong></p>
+<h3 id="2-配置-pom-2"><a href="#2-配置-pom-2" class="headerlink" title="2. 配置 pom"></a>2. 配置 pom</h3><pre><code class="xml">&lt;dependencies&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.frankeleyn&lt;/groupId&gt;
+        &lt;artifactId&gt;service-base&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;</code></pre>
+<h2 id="五、启动应用程序"><a href="#五、启动应用程序" class="headerlink" title="五、启动应用程序"></a>五、启动应用程序</h2><p>进入 <strong>service-core</strong> 项目中</p>
+<h3 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1. 配置文件"></a>1. 配置文件</h3><p>创建 <strong>application.properties</strong></p>
+<pre><code class="properties"># 端口号
+server.port= 8110
+
+# ==================== 数据源设置 =========================
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/srb_core?serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false
+spring.datasource.username=root
+spring.datasource.password=123456
+
+# ================ mybatis 配置 =========================
+# 驼峰命名
+mybatis-plus.configuration.map-underscore-to-camel-case=true
+# 扫描映射配置文件
+mybatis-plus.mapper-locations=classpath:mapper/*Mapper.xml
+# 打印 sql
+mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl</code></pre>
+<h3 id="2-创建启动类"><a href="#2-创建启动类" class="headerlink" title="2. 创建启动类"></a>2. 创建启动类</h3><pre><code class="java">package com.frankeleyn.srb.core;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/21 11:53
+ */
+@SpringBootApplication
+public class ServiceCoreApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceCoreApplication.class, args);
+    }
+}</code></pre>
+<h3 id="3-创建-Mybatis-Plus-配置文件"><a href="#3-创建-Mybatis-Plus-配置文件" class="headerlink" title="3. 创建 Mybatis Plus 配置文件"></a>3. 创建 Mybatis Plus 配置文件</h3><p>创建一个 <strong>config</strong> 包，创建类 <strong>MybatisPlusConfig</strong></p>
+<pre><code class="java">package com.frankeleyn.srb.core.config;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/17 15:22
+ */
+@Configuration
+@EnableTransactionManagement
+@MapperScan(&quot;com.frankeleyn.srb.core.mapper&quot;)
+public class MybatisPlusConfig {
+
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        // 将分页插件放入容器
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        // 添加乐观锁插件
+        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        return interceptor;
+    }
+}</code></pre>
+<h2 id="六、代码生成器"><a href="#六、代码生成器" class="headerlink" title="六、代码生成器"></a>六、代码生成器</h2><h3 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h3><p>创建数据库 <strong>srb_core</strong></p>
+<p>并执行 sql 脚本初始化数据结构和数据</p>
+<h3 id="2-创建代码生成器"><a href="#2-创建代码生成器" class="headerlink" title="2. 创建代码生成器"></a>2. 创建代码生成器</h3><p>在 <strong>test</strong> 目录中创建测试用例，并执行</p>
+<pre><code class="java">package com.frankeleyn.srb.core;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/21 14:03
+ */
+@SpringBootTest
+public class GeneratorTest {
+
+    @Test
+    public void generate() {
+        // 创建 mp 代码生成器
+        AutoGenerator autoGenerator = new AutoGenerator();
+
+        // 1 全局配置, 如命名规则，主键策略等
+        GlobalConfig gc = new GlobalConfig();
+        String projectPath = System.getProperty(&quot;user.dir&quot;);
+        gc.setOutputDir(projectPath + &quot;/src/main/java&quot;);
+        gc.setAuthor(&quot;Frankeleyn&quot;);
+        // 生成后是否打开资源管理器
+        gc.setOpen(false);
+        // 去掉Service接口的首字母I
+        gc.setServiceName(&quot;%sService&quot;);
+        // 主键策略
+        gc.setIdType(IdType.AUTO);
+        // 开启Swagger2模式
+        gc.setSwagger2(true); 
+        autoGenerator.setGlobalConfig(gc);
+
+        // 2 数据源配置
+        DataSourceConfig dataSourceConfig = new DataSourceConfig();
+        dataSourceConfig.setUrl(&quot;jdbc:mysql://localhost:3306/srb_core?serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false&quot;);
+        dataSourceConfig.setUsername(&quot;root&quot;);
+        dataSourceConfig.setPassword(&quot;123456&quot;);
+        dataSourceConfig.setDriverName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+        dataSourceConfig.setDbType(DbType.MYSQL);
+        autoGenerator.setDataSource(dataSourceConfig);
+
+        // 3 生成映射代码类的包配置
+        PackageConfig packageConfig = new PackageConfig();
+        packageConfig.setParent(&quot;com.frankeleyn.srb.core&quot;);
+        packageConfig.setEntity(&quot;pojo.entity&quot;);
+        autoGenerator.setPackageInfo(packageConfig);
+
+        // 4 其他配置，如下划线，是否逻辑删除等
+        StrategyConfig strategy = new StrategyConfig();
+        //数据库表映射到实体的命名策略
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        //数据库表字段映射到实体的命名策略
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        // lombok, 就是添加一个 @Data
+        strategy.setEntityLombokModel(true);
+        //逻辑删除字段名
+        strategy.setLogicDeleteFieldName(&quot;is_deleted&quot;);
+        //去掉布尔值的is_前缀（确保tinyint(1)）
+        strategy.setEntityBooleanColumnRemoveIsPrefix(true);
+        //restful api风格控制器
+        strategy.setRestControllerStyle(true); 
+        autoGenerator.setStrategy(strategy);
+
+        // 执行 mp 代码生成器
+        autoGenerator.execute();
+    }
+}</code></pre>
+<h3 id="3-执行结果"><a href="#3-执行结果" class="headerlink" title="3. 执行结果"></a>3. 执行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/generator.png" srcset="/img/loading.gif" alt="自动生成"></p>
+<h1 id="02-积分等级-CRUD"><a href="#02-积分等级-CRUD" class="headerlink" title="02-积分等级 CRUD"></a>02-积分等级 CRUD</h1><h2 id="一、积分等级列表接口"><a href="#一、积分等级列表接口" class="headerlink" title="一、积分等级列表接口"></a>一、积分等级列表接口</h2><h3 id="1-编写积分等级管理接口"><a href="#1-编写积分等级管理接口" class="headerlink" title="1. 编写积分等级管理接口"></a>1. 编写积分等级管理接口</h3><p>在 <strong>controller</strong> 包中新建 <strong>admin</strong> 包，将自动生成的类 <strong>IntegralGradeController</strong> 移动到该包</p>
+<pre><code class="java">@CrossOrigin
+@RestController
+@RequestMapping(&quot;/admin/core/integralGrade&quot;)
+public class IntegralGradeController {
+
+    @Autowired
+    private IntegralGradeService integralGradeService;
+
+    @GetMapping(&quot;/list&quot;)
+    public List&lt;IntegralGrade&gt; findAll() {
+        return integralGradeService.list();
+    }
+
+    @DeleteMapping(&quot;/remove/{id}&quot;)
+    public boolean removeById(@PathVariable Long id) {
+        return integralGradeService.removeById(id);
+    }
+
+    @PostMapping(&quot;/save&quot;)
+    public boolean save(@ReqestBody IntegralGrade integralGrade ) {
+        return integralGradeService.save(integralGrade);
+    }
+
+    @PutMapping(&quot;/update&quot;)
+    public boolean update(@ReqestBody IntegralGrade integralGrade ) {
+        return integralGradeService.updateById(integralGrade);
+    }
+
+}</code></pre>
+<h3 id="2-测试"><a href="#2-测试" class="headerlink" title="2. 测试"></a>2. 测试</h3><p>访问：<a href="http://localhost:8110/admin/core/integralGrade/list" target="_blank" rel="noopener">http://localhost:8110/admin/core/integralGrade/list</a> 查看 json 结果</p>
+<h2 id="二、配置-Swagger2"><a href="#二、配置-Swagger2" class="headerlink" title="二、配置 Swagger2"></a>二、配置 Swagger2</h2><p>Swagger 是一个根据接口自动生成 api 文档和对应测试的 web 页面</p>
+<h3 id="1-Swagger2-配置文件"><a href="#1-Swagger2-配置文件" class="headerlink" title="1. Swagger2 配置文件"></a>1. Swagger2 配置文件</h3><p>新建 <strong>config</strong> 文件夹，然后新建 <strong>Swagger2Config</strong> 类</p>
+<pre><code class="java">package com.frankeleyn.srb.core.config;
+
+import com.google.common.base.Predicates;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/21 15:03
+ */
+@EnableSwagger2
+@Configuration
+public class Swagger2Config {
+
+    @Bean
+    public Docket coreApiConfig() {
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+                  .apiInfo(adminApiInfo())
+                  .groupName(&quot;adminApi&quot;)
+                  .select()
+                   // 扫描 Controller 下面的 admin 包
+                  .paths(Predicates.and(PathSelectors.regex(&quot;/admin/.*&quot;)))
+                  .build();
+        return docket;
+    }
+
+    private ApiInfo adminApiInfo(){
+
+        return new ApiInfoBuilder()
+                .title(&quot;尚融宝后台管理系统-API文档&quot;)
+                .description(&quot;本文档描述了尚融宝后台管理系统接口&quot;)
+                .version(&quot;1.0&quot;)
+                .contact(new Contact(&quot;Frankeleyn&quot;, &quot;https://githubfast.com/Frankeleyns/&quot;, &quot;2582726641@qq.com&quot;))
+                .build();
+    }
+
+}</code></pre>
+<h3 id="2-移动-Controller"><a href="#2-移动-Controller" class="headerlink" title="2. 移动 Controller"></a>2. 移动 Controller</h3><p>在 <strong>controller</strong> 包下，新建 <strong>admin</strong> 包，将 <strong>IntegralGradeController</strong> 移动到 admin 文件夹下</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/02-2-2-1.png" srcset="/img/loading.gif" alt="移动 Controller"></p>
+<h3 id="3-Swagger-常用注解"><a href="#3-Swagger-常用注解" class="headerlink" title="3. Swagger 常用注解"></a>3. Swagger 常用注解</h3><p><strong>实体类注解：</strong>entity的实体类中可以添加一些自定义设置</p>
+<pre><code class="java">@ApiModelProperty(value = &quot;创建时间&quot;, example = &quot;2019-01-01 8:00:00&quot;)
+private LocalDateTime createTime;
+
+@ApiModelProperty(value = &quot;更新时间&quot;, example = &quot;2019-01-01 8:00:00&quot;)
+private LocalDateTime updateTime;</code></pre>
+<p><strong>controller</strong> 注解</p>
+<p>定义在类上：</p>
+<pre><code class="java">@Api(tags = &quot;积分等级管理 Api&quot;)</code></pre>
+<p>定义在方法上：</p>
+<pre><code class="java">@ApiOperation(value = &quot;根据 id 删除积分等级&quot;, notes = &quot;逻辑删除&quot;)</code></pre>
+<p>定义在参数上：</p>
+<pre><code class="java">@ApiParam(value = &quot;数据id&quot;, required = true, example = &quot;100&quot;)</code></pre>
+<h3 id="4-查看-Swagger-文档"><a href="#4-查看-Swagger-文档" class="headerlink" title="4. 查看 Swagger 文档"></a>4. 查看 Swagger 文档</h3><p>重启服务器查看接口文档：<a href="http://localhost:8110/swagger-ui.html" target="_blank" rel="noopener">http://localhost:8110/swagger-ui.html</a></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/swagger.png" srcset="/img/loading.gif" alt="swaager 文档"></p>
+<h1 id="03-统一返回结果"><a href="#03-统一返回结果" class="headerlink" title="03-统一返回结果"></a>03-统一返回结果</h1><h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>通常项目中我们会将响应结果封装成 json 返回，一般我们会将所有接口的数据格式统一， 使前端工程师调用我们项目的外部接口更一致。</p>
+<p>一般情况下，统一返回数据格式没有固定的格式，只要能描述清楚返回的数据状态以及要返回的具体数据就可以。但是一般会包含<strong>状态码、返回消息、数据</strong>这三部分内容：</p>
+<pre><code class="json">{
+   &quot;code&quot; : 0,
+    &quot;message&quot; : &quot;success&quot;,
+    &quot;data&quot; : &quot;数据&quot;
+}</code></pre>
+<h2 id="二、定义统一返回结果"><a href="#二、定义统一返回结果" class="headerlink" title="二、定义统一返回结果"></a>二、定义统一返回结果</h2><h3 id="1-创建枚举"><a href="#1-创建枚举" class="headerlink" title="1. 创建枚举"></a>1. 创建枚举</h3><p>在 <strong>srb-common</strong> 项目下，新建 <strong>result</strong> 包，创建枚举类 <strong>ReponseEnum</strong></p>
+<pre><code class="java">package com.frankeleyn.common.result;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/21 15:38
+ */
+@Getter
+@AllArgsConstructor
+@ToString
+public enum ResponseEnum {
+
+    SUCCESS(0, &quot;成功&quot;),
+    ERROR(-1, &quot;服务器内部错误&quot;),
+
+    //-1xx 服务器错误
+    BAD_SQL_GRAMMAR_ERROR(-101, &quot;sql语法错误&quot;),
+    SERVLET_ERROR(-102, &quot;servlet请求异常&quot;), //-2xx 参数校验
+    UPLOAD_ERROR(-103, &quot;文件上传错误&quot;),
+    EXPORT_DATA_ERROR(104, &quot;数据导出失败&quot;),
+
+
+    //-2xx 参数校验
+    BORROW_AMOUNT_NULL_ERROR(-201, &quot;借款额度不能为空&quot;),
+    MOBILE_NULL_ERROR(-202, &quot;手机号码不能为空&quot;),
+    MOBILE_ERROR(-203, &quot;手机号码不正确&quot;),
+    PASSWORD_NULL_ERROR(204, &quot;密码不能为空&quot;),
+    CODE_NULL_ERROR(205, &quot;验证码不能为空&quot;),
+    CODE_ERROR(206, &quot;验证码错误&quot;),
+    MOBILE_EXIST_ERROR(207, &quot;手机号已被注册&quot;),
+    LOGIN_MOBILE_ERROR(208, &quot;用户不存在&quot;),
+    LOGIN_PASSWORD_ERROR(209, &quot;密码错误&quot;),
+    LOGIN_LOKED_ERROR(210, &quot;用户被锁定&quot;),
+    LOGIN_AUTH_ERROR(-211, &quot;未登录&quot;),
+
+
+    USER_BIND_IDCARD_EXIST_ERROR(-301, &quot;身份证号码已绑定&quot;),
+    USER_NO_BIND_ERROR(302, &quot;用户未绑定&quot;),
+    USER_NO_AMOUNT_ERROR(303, &quot;用户信息未审核&quot;),
+    USER_AMOUNT_LESS_ERROR(304, &quot;您的借款额度不足&quot;),
+    LEND_INVEST_ERROR(305, &quot;当前状态无法投标&quot;),
+    LEND_FULL_SCALE_ERROR(306, &quot;已满标，无法投标&quot;),
+    NOT_SUFFICIENT_FUNDS_ERROR(307, &quot;余额不足，请充值&quot;),
+
+    PAY_UNIFIEDORDER_ERROR(401, &quot;统一下单错误&quot;),
+
+    ALIYUN_SMS_LIMIT_CONTROL_ERROR(-502, &quot;短信发送过于频繁&quot;),//业务限流
+    ALIYUN_SMS_ERROR(-503, &quot;短信发送失败&quot;),//其他失败
+
+    WEIXIN_CALLBACK_PARAM_ERROR(-601, &quot;回调参数不正确&quot;),
+    WEIXIN_FETCH_ACCESSTOKEN_ERROR(-602, &quot;获取access_token失败&quot;),
+    WEIXIN_FETCH_USERINFO_ERROR(-603, &quot;获取用户信息失败&quot;),
+    ;
+
+    private Integer code;//状态码
+    private String message;//消息
+}</code></pre>
+<h3 id="2、定义统一结果类"><a href="#2、定义统一结果类" class="headerlink" title="2、定义统一结果类"></a>2、定义统一结果类</h3><pre><code class="java">package com.frankeleyn.common.result;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/21 15:38
+ */
+@Data
+public class R {
+
+    private Integer code;
+
+    private String message;
+
+    private Map&lt;String, Object&gt; data = new HashMap();
+
+    /**
+     * 构造器私有
+     */
+    private R(){}
+
+    /**
+     * 返回成功
+     */
+    public static R ok(){
+        R r = new R();
+        r.setCode(ResponseEnum.SUCCESS.getCode());
+        r.setMessage(ResponseEnum.SUCCESS.getMessage());
+        return r;
+    }
+
+    public static R ok(String message) {
+        return ok().message(message);
+    }
+
+    public static R ok(String key, Object value) {
+        return ok().data(key, value);
+    }
+
+    /**
+     * 返回失败
+     */
+    public static R error(){
+        R r = new R();
+        r.setCode(ResponseEnum.ERROR.getCode());
+        r.setMessage(ResponseEnum.ERROR.getMessage());
+        return r;
+    }
+
+    public static R error(String message) {
+        return error().message(message);
+    }
+
+    public static R error(Integer code, String message) {
+        return error(message).code(code);
+    }
+
+    /**
+     * 设置特定结果
+     */
+    public static R setResult(ResponseEnum responseEnum){
+        R r = new R();
+        r.setCode(responseEnum.getCode());
+        r.setMessage(responseEnum.getMessage());
+        return r;
+    }
+
+    public R message(String message){
+        this.setMessage(message);
+        return this;
+    }
+
+    public R code(Integer code){
+        this.setCode(code);
+        return this;
+    }
+
+    public R data(String key, Object value){
+        this.data.put(key, value);
+        return this;
+    }
+
+    public R data(Map&lt;String, Object&gt; map){
+        this.setData(map);
+        return this;
+    }
+}</code></pre>
+<h2 id="三、使用统一返回结果"><a href="#三、使用统一返回结果" class="headerlink" title="三、使用统一返回结果"></a>三、使用统一返回结果</h2><p>修改 <strong>IntegralGradeController</strong> 中的方法</p>
+<h3 id="1-修改-findAll"><a href="#1-修改-findAll" class="headerlink" title="1. 修改 findAll"></a>1. 修改 findAll</h3><pre><code class="java">@ApiOperation(&quot;获取积分等级列表&quot;)
+@GetMapping(&quot;/list&quot;)
+public R findAll() {
+    List&lt;IntegralGrade&gt; integralGradeList = integralGradeService.list();
+    return R.ok(&quot;integralGradeList&quot;, integralGradeList);
+}</code></pre>
+<h3 id="2-修改-removeById"><a href="#2-修改-removeById" class="headerlink" title="2. 修改 removeById"></a>2. 修改 removeById</h3><pre><code class="java">@ApiOperation(value = &quot;根据 id 删除积分等级&quot;, notes = &quot;逻辑删除&quot;)
+@DeleteMapping(&quot;/remove/{id}&quot;)
+public R removeById(@ApiParam(&quot;积分等级 id&quot;) @PathVariable Long id) {
+    boolean remove = integralGradeService.removeById(id);
+    if (remove)
+        return R.ok(&quot;删除积分等级成功&quot;);
+    else
+        return R.error(&quot;删除积分等级失败&quot;);
+}</code></pre>
+<h3 id="3-修改-save"><a href="#3-修改-save" class="headerlink" title="3. 修改 save"></a>3. 修改 save</h3><pre><code class="java">@ApiOperation(&quot;新增积分等级&quot;)
+@PostMapping(&quot;/save&quot;)
+public R save(@ApiParam(&quot;积分等级对象&quot;) @RequestBody IntegralGrade integralGrade) {
+    boolean save = integralGradeService.save(integralGrade);
+    if (save)
+        return R.ok(&quot;新增积分等级成功&quot;);
+    else
+        return R.error(&quot;新增积分等级失败&quot;);
+}</code></pre>
+<h3 id="4-修改-update"><a href="#4-修改-update" class="headerlink" title="4. 修改 update"></a>4. 修改 update</h3><pre><code class="java">@ApiOperation(&quot;修改积分等级&quot;)
+@PutMapping(&quot;/update&quot;)
+public R updateById(@ApiParam(&quot;积分等级对象&quot;) @RequestBody IntegralGrade integralGrade) {
+    boolean update = integralGradeService.updateById(integralGrade);
+    if (update)
+        return R.ok(&quot;修改积分等级成功&quot;);
+    else
+        return R.error(&quot;修改积分等级失败&quot;);
+}</code></pre>
+<h3 id="5-根据-id-查询"><a href="#5-根据-id-查询" class="headerlink" title="5. 根据 id 查询"></a>5. 根据 id 查询</h3><pre><code class="java">@ApiOperation(&quot;根据 id 查询积分等级&quot;)
+@GetMapping(&quot;/get/{id}&quot;)
+public R findById(@ApiParam(&quot;积分等级 id&quot;) @PathVariable Long id) {
+    IntegralGrade integralGrade = integralGradeService.getById(id);
+    if (Objects.nonNull(integralGrade)) 
+        return R.ok(&quot;integralGrade&quot;, integralGrade);
+    else 
+        return R.error(&quot;未查询到积分等级&quot;);
+}</code></pre>
+<h1 id="04-统一异常处理"><a href="#04-统一异常处理" class="headerlink" title="04-统一异常处理"></a>04-统一异常处理</h1><h2 id="一、介绍-1"><a href="#一、介绍-1" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>在接口发生异常时，一般是在 <strong>controller</strong> 抛出 <strong>exception</strong> 异常时，通过 <strong>aop</strong> 的异常通知处理接口的返回结果的全局设置，叫 <strong>统一异常处理</strong>。</p>
+<h2 id="二、功能实现"><a href="#二、功能实现" class="headerlink" title="二、功能实现"></a>二、功能实现</h2><h3 id="1-创建统一异常处理器"><a href="#1-创建统一异常处理器" class="headerlink" title="1. 创建统一异常处理器"></a>1. 创建统一异常处理器</h3><p>在 <strong>srb-common</strong> 中创建 <strong>exception</strong> 包，创建统一异常处理器类 <strong>UnifiedExceptionHandler</strong></p>
+<pre><code class="java">package com.frankeleyn.common.exception;
+
+@Component
+@RestControllerAdvice
+public class UnifiedExceptionHandler {
+
+    @ExceptionHandler(Exception.class)
+    public R handleException(Exception e) {
+        return R.error();
+    }
+
+}</code></pre>
+<h3 id="2-service-core-添加扫描"><a href="#2-service-core-添加扫描" class="headerlink" title="2. service-core 添加扫描"></a>2. service-core 添加扫描</h3><p><strong>UnifiedExceptionHandler</strong> 所在位置，是 <strong>service-core</strong> 服务启动器扫描不到的，所以需要在它的启动类中自定义扫描路径：</p>
+<pre><code class="java">@SpringBootApplication
+@ComponentScan(basePackages = {&quot;com.frankeleyn.srb&quot;,&quot;com.frankeleyn.common&quot;})
+public class ServiceCoreApplication {</code></pre>
+<h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h3><p>返回统一错误结果</p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/ExceptionHandler.png" srcset="/img/loading.gif" alt="ExceptionHandler"></p>
+<h2 id="三、处理特定异常"><a href="#三、处理特定异常" class="headerlink" title="三、处理特定异常"></a>三、处理特定异常</h2><p>如果我们不想显示统一的“服务器内部错误”，需要个性化的显示异常信息，那么需要针对特定的异常做处理</p>
+<h3 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h3><p>在 <strong>srb-common</strong> 项目的 pom 中</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="2-添加异常处理方法"><a href="#2-添加异常处理方法" class="headerlink" title="2. 添加异常处理方法"></a>2. 添加异常处理方法</h3><p>在 <strong>UnifiedExceptionHandler</strong> 中添加</p>
+<pre><code class="java">@ExceptionHandler(BadSqlGrammarException.class)
+public R handleSQLException(BadSqlGrammarException e) {
+    System.out.println(&quot;SQL 异常&quot; + e.getMessage());
+    return R.error(&quot;SQL 语法错误&quot;);
+}</code></pre>
+<h3 id="3-测试-1"><a href="#3-测试-1" class="headerlink" title="3. 测试"></a>3. 测试</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/ExceptionHandler2.png" srcset="/img/loading.gif" alt="SqlExceptionHandler"></p>
+<h2 id="四、自定义异常"><a href="#四、自定义异常" class="headerlink" title="四、自定义异常"></a>四、自定义异常</h2><p>有些数据，数据库认为它是合理的，但是不符合我们现实中的认知，比如我的积分等级将你的起始借款金额设置为负数，这明显不符合逻辑，哪里有借款额度是负数的，但是程序却不认为这是错的，此类情况在开发中还有很多，所以我们就需要自定义异常用于业务处理，易于维护。</p>
+<h3 id="1-创建自定义异常类"><a href="#1-创建自定义异常类" class="headerlink" title="1.  创建自定义异常类"></a>1.  创建自定义异常类</h3><p>在 <strong>srb-common</strong> 项目的 <strong>Exception</strong> 包下新建 <strong>BusinessException</strong></p>
+<pre><code class="java">package com.frankeleyn.common.exception;
+
+@Data
+@NoArgsConstructor
+public class BusinessException extends RuntimeException {
+
+    //状态码
+    private Integer code;
+
+    //错误消息
+    private String message;
+
+    /**
+     *
+     * @param message 错误消息
+     */
+    public BusinessException(String message) {
+        this.message = message;
+    }
+
+    /**
+     *
+     * @param message 错误消息
+     * @param code 错误码
+     */
+    public BusinessException(String message, Integer code) {
+        this.message = message;
+        this.code = code;
+    }
+
+    /**
+     *
+     * @param message 错误消息
+     * @param code 错误码
+     * @param cause 原始异常对象
+     */
+    public BusinessException(String message, Integer code, Throwable cause) {
+        super(cause);
+        this.message = message;
+        this.code = code;
+    }
+
+    /**
+     *
+     * @param resultCodeEnum 接收枚举类型
+     */
+    public BusinessException(ResponseEnum resultCodeEnum) {
+        this.message = resultCodeEnum.getMessage();
+        this.code = resultCodeEnum.getCode();
+    }
+
+    /**
+     *
+     * @param resultCodeEnum 接收枚举类型
+     * @param cause 原始异常对象
+     */
+    public BusinessException(ResponseEnum resultCodeEnum, Throwable cause) {
+        super(cause);
+        this.message = resultCodeEnum.getMessage();
+        this.code = resultCodeEnum.getCode();
+    }
+
+}</code></pre>
+<h3 id="2-修改-Controller"><a href="#2-修改-Controller" class="headerlink" title="2. 修改 Controller"></a>2. 修改 Controller</h3><p>修改 <strong>IntegralGradeController</strong> 中的 <strong>save</strong> 方法：</p>
+<pre><code class="java">@ApiOperation(&quot;新增积分等级&quot;)
+@PostMapping(&quot;/save&quot;)
+public R save(@ApiParam(&quot;积分等级对象&quot;) @RequestBody IntegralGrade integralGrade) {
+
+    BigDecimal borrowAmount = integralGrade.getBorrowAmount();
+    if (Objects.isNull(borrowAmount) || borrowAmount.intValue() &lt;= 0) {
+        // 借款额度小于等于0，此处抛出异常
+        throw new BusinessException(ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
+    }
+
+    boolean save = integralGradeService.save(integralGrade);
+    if (save)
+        return R.ok(&quot;新增积分等级成功&quot;);
+    else
+        return R.error(&quot;新增积分等级失败&quot;);
+}</code></pre>
+<h3 id="3-添加异常处理方法"><a href="#3-添加异常处理方法" class="headerlink" title="3. 添加异常处理方法"></a>3. 添加异常处理方法</h3><p><strong>UnifiedExceptionHandler</strong> 类中添加：</p>
+<pre><code class="java">/**
+ * 自定义异常
+ * @param e
+ * @return
+ */
+@ExceptionHandler(BusinessException.class)
+public R handleBusinessException(BusinessException e){
+    System.out.println(&quot;自定义异常&quot; + e.getMessage());
+    return R.error(e.getCode(), e.getMessage());
+}</code></pre>
+<h3 id="4-测试"><a href="#4-测试" class="headerlink" title="4. 测试"></a>4. 测试</h3><p><strong>参数</strong></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/ExceptionHandler3.png" srcset="/img/loading.gif" alt="BussinessExceptionHandler"></p>
+<p><strong>结果</strong></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/ExceptionHandler4.png" srcset="/img/loading.gif" alt="BussinessExceptionResult"></p>
+<h2 id="五、异常处理优化"><a href="#五、异常处理优化" class="headerlink" title="五、异常处理优化"></a>五、异常处理优化</h2><p>我们的项目中需要对参数进行校验，于是就有大量的 if else，其实我们可以使用优雅的 <strong>Assert(断言)</strong> 类来校验业务的异常情况，消除 if else。</p>
+<h3 id="1-断言示例"><a href="#1-断言示例" class="headerlink" title="1. 断言示例"></a>1. 断言示例</h3><pre><code class="java">package com.frankeleyn.srb.core;
+
+@SpringBootTest
+public class AssertTest {
+
+    @Test
+    public void testNotAssert() {
+        Object o = null;
+
+        if (o == null) {
+            throw new IllegalArgumentException(&quot;对象不能为空&quot;);
+        }
+    }
+
+    @Test
+    public void testAssert() {
+        Object o = null;
+        Assert.notNull(o, &quot;对象不能为空&quot;);
+    }
+}</code></pre>
+<p>上述两个方法是等价的结果，但是断言封装了 if else，让你代码看起来更干净。</p>
+<h3 id="2-自定义断言类"><a href="#2-自定义断言类" class="headerlink" title="2. 自定义断言类"></a>2. 自定义断言类</h3><p>在 <strong>srb-common</strong> 的 <strong>exception</strong> 包下新建 <strong>Assert</strong> 类</p>
+<pre><code class="java">package com.frankeleyn.common.exception;
+
+/**
+ * @author Frankeleyn
+ * @date 2022/1/22 10:52
+ */
+@Slf4j
+public abstract class Assert {
+
+    /**
+     * 断言对象不为空
+     * 如果对象obj为空，则抛出异常
+     * @param obj 待判断对象
+     */
+    public static void notNull(Object obj, ResponseEnum responseEnum) {
+        if (obj == null) {
+            log.info(&quot;obj is null...............&quot;);
+            throw new BusinessException(responseEnum);
+        }
+    }
+
+
+    /**
+     * 断言对象为空
+     * 如果对象obj不为空，则抛出异常
+     * @param object
+     * @param responseEnum
+     */
+    public static void isNull(Object object, ResponseEnum responseEnum) {
+        if (object != null) {
+            log.info(&quot;obj is not null......&quot;);
+            throw new BusinessException(responseEnum);
+        }
+    }
+
+    /**
+     * 断言表达式为真
+     * 如果不为真，则抛出异常
+     *
+     * @param expression 是否成功
+     */
+    public static void isTrue(boolean expression, ResponseEnum responseEnum) {
+        if (!expression) {
+            log.info(&quot;fail...............&quot;);
+            throw new BusinessException(responseEnum);
+        }
+    }
+
+    /**
+     * 断言两个对象不相等
+     * 如果相等，则抛出异常
+     * @param m1
+     * @param m2
+     * @param responseEnum
+     */
+    public static void notEquals(Object m1, Object m2,  ResponseEnum responseEnum) {
+        if (m1.equals(m2)) {
+            log.info(&quot;equals...............&quot;);
+            throw new BusinessException(responseEnum);
+        }
+    }
+
+    /**
+     * 断言两个对象相等
+     * 如果不相等，则抛出异常
+     * @param m1
+     * @param m2
+     * @param responseEnum
+     */
+    public static void equals(Object m1, Object m2,  ResponseEnum responseEnum) {
+        if (!m1.equals(m2)) {
+            log.info(&quot;not equals...............&quot;);
+            throw new BusinessException(responseEnum);
+        }
+    }
+
+    /**
+     * 断言参数不为空
+     * 如果为空，则抛出异常
+     * @param s
+     * @param responseEnum
+     */
+    public static void notEmpty(String s, ResponseEnum responseEnum) {
+        if (StringUtils.isEmpty(s)) {
+            log.info(&quot;is empty...............&quot;);
+            throw new BusinessException(responseEnum);
+        }
+    }
+}</code></pre>
+<h3 id="3-修改-Controller"><a href="#3-修改-Controller" class="headerlink" title="3. 修改 Controller"></a>3. 修改 Controller</h3><p>修改 <strong>IntegralGradeController</strong> 中的 <strong>save</strong> 方法：</p>
+<pre><code class="java">@ApiOperation(&quot;新增积分等级&quot;)
+@PostMapping(&quot;/save&quot;)
+public R save(@ApiParam(&quot;积分等级对象&quot;) @RequestBody IntegralGrade integralGrade) {
+    BigDecimal borrowAmount = integralGrade.getBorrowAmount();
+    // 借款额度不能为空
+    Assert.notNull(borrowAmount, ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
+    // 借款额读不嫩能为0
+    Assert.isTrue(0!=borrowAmount.intValue(), ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
+
+    boolean save = integralGradeService.save(integralGrade);
+    if (save)
+        return R.ok(&quot;新增积分等级成功&quot;);
+    else
+        return R.error(&quot;新增积分等级失败&quot;);
+}</code></pre>
+<h1 id="05-统一日志处理"><a href="#05-统一日志处理" class="headerlink" title="05-统一日志处理"></a>05-统一日志处理</h1><h2 id="一、Logback-日志"><a href="#一、Logback-日志" class="headerlink" title="一、Logback 日志"></a>一、Logback 日志</h2><h3 id="1、什么是日志"><a href="#1、什么是日志" class="headerlink" title="1、什么是日志"></a>1、什么是日志</h3><p>通过日志查看程序的运行过程，运行信息，异常信息等</p>
+<h3 id="2-日志级别"><a href="#2-日志级别" class="headerlink" title="2. 日志级别"></a>2. 日志级别</h3><p>日志记录器（Logger）的行为是分等级的。如下所示：</p>
+<p>分为：<strong>TRACE, DEBUG, INFO(默认), WARN, ERROR</strong></p>
+<p>以上日志级别，从左至右，内容量<strong>从多到少</strong></p>
+<h3 id="3-创建日志文件"><a href="#3-创建日志文件" class="headerlink" title="3. 创建日志文件"></a>3. 创建日志文件</h3><p>spring boot 内部使用 Logback 作为日志默认实现的框架。</p>
+<p><strong>先删除前面在配置文件中的日志级别配置</strong></p>
+<p><strong>resources</strong> 中创建 <strong>logback-spring.xml</strong> （默认日志文件的名字）</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration&gt;
+&lt;/configuration&gt;</code></pre>
+<h2 id="二、基本配置说明"><a href="#二、基本配置说明" class="headerlink" title="二、基本配置说明"></a>二、基本配置说明</h2><h3 id="1-configuration"><a href="#1-configuration" class="headerlink" title="1. configuration"></a>1. configuration</h3><p>日志配置的根节点</p>
+<pre><code class="xml">&lt;configuration&gt;&lt;/configuration&gt;</code></pre>
+<h3 id="2-contextName"><a href="#2-contextName" class="headerlink" title="2.contextName"></a>2.contextName</h3><p><strong>日志文件的名称</strong>，每个logger都关联到logger上下文，默认上下文名称为“default”，用于区分不同的应用程序。</p>
+<pre><code class="xml">&lt;contextName&gt;Srb&lt;/contextName&gt;</code></pre>
+<h3 id="3-property"><a href="#3-property" class="headerlink" title="3. property"></a>3. property</h3><p>日志的属性，相当于 Java 类的属性，用来存储颜色、大小、打印方式等。</p>
+<p>通过<property>定义的值会被插入到logger上下文中。定义变量后，可以使“${}”来使用变量。</p>
+<pre><code class="xml">&lt;!-- 日志的输出目录 --&gt;
+&lt;property name=&quot;log.path&quot; value=&quot;E:/WorkSpace/log/srb&quot;/&gt;
+
+&lt;!--控制台日志格式：彩色日志--&gt;
+&lt;!-- magenta:洋红 --&gt;
+&lt;!-- boldMagenta:粗红--&gt;
+&lt;!-- cyan:青色 --&gt;
+&lt;!-- white:白色 --&gt;
+&lt;!-- magenta:洋红 --&gt;
+&lt;property name=&quot;CONSOLE_LOG_PATTERN&quot;
+          value=&quot;%yellow(%date{yyyy-MM-dd HH:mm:ss}) %highlight([%-5level]) %green(%logger) %msg%n&quot;/&gt;
+
+&lt;!--文件日志格式--&gt;
+&lt;property name=&quot;FILE_LOG_PATTERN&quot;
+          value=&quot;%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n&quot; /&gt;
+
+&lt;!--编码--&gt;
+&lt;property name=&quot;ENCODING&quot; value=&quot;UTF-8&quot; /&gt;</code></pre>
+<h3 id="4-appender"><a href="#4-appender" class="headerlink" title="4.appender"></a>4.appender</h3><p><strong>日志对象</strong></p>
+<p><appender>有两个必要属性name和class：name指定appender名称，class指定appender的全限定名</p>
+<p><encoder>对日志进行格式化</p>
+<p><pattern>定义日志的具体输出格式</p>
+<p><charset>编码方式</p>
+<h4 id="控制台日志配置"><a href="#控制台日志配置" class="headerlink" title="控制台日志配置"></a>控制台日志配置</h4><pre><code class="xml">&lt;!-- 控制台日志：将日志打印在控制台中 --&gt;
+&lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+    &lt;encoder&gt;
+        &lt;pattern&gt;${CONSOLE_LOG_PATTERN}&lt;/pattern&gt;
+        &lt;charset&gt;${ENCODING}&lt;/charset&gt;
+    &lt;/encoder&gt;
+&lt;/appender&gt;</code></pre>
+<h4 id="文件日志配置"><a href="#文件日志配置" class="headerlink" title="文件日志配置"></a>文件日志配置</h4><p><file>表示日志文件的位置，如果上级目录不存在会自动创建，没有默认值。</p>
+<p><append>默认 true，日志被追加到文件结尾，如果是 false，服务重启后清空现存文件。</p>
+<pre><code class="xml">&lt;!-- 文件日志：可以将日志打印在文件中 --&gt;
+&lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.FileAppender&quot;&gt;
+    &lt;file&gt;${log.path}/log.log&lt;/file&gt;
+    &lt;append&gt;true&lt;/append&gt;
+    &lt;encoder&gt;
+        &lt;pattern&gt;${FILE_LOG_PATTERN}&lt;/pattern&gt;
+        &lt;charset&gt;${ENCODING}&lt;/charset&gt;
+    &lt;/encoder&gt;
+&lt;/appender&gt;</code></pre>
+<h3 id="5-logger"><a href="#5-logger" class="headerlink" title="5. logger"></a>5. logger</h3><p><strong>日志记录器</strong>，或者叫日志打印器</p>
+<p>用来设置某一个包或具体某一个类的日志打印级别、指定<appender></p>
+<p>name：用来指定受此logger约束的某一个包或者具体的某一个类</p>
+<p>level：用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF。默认继承上级的级别</p>
+<p><logger>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个 logger</p>
+<pre><code class="xml">&lt;!-- 日志记录器  --&gt;
+&lt;logger name=&quot;com.atguigu&quot; level=&quot;INFO&quot;&gt;
+    &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;
+    &lt;appender-ref ref=&quot;FILE&quot; /&gt;
+&lt;/logger&gt;</code></pre>
+<h3 id="6、测试"><a href="#6、测试" class="headerlink" title="6、测试"></a>6、测试</h3><p>测试日志记录的控制台输出、文件输出、以及日志级别</p>
+<h4 id="控制台日志结果"><a href="#控制台日志结果" class="headerlink" title="控制台日志结果"></a>控制台日志结果</h4><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/ConsoleLog.png" srcset="/img/loading.gif" alt="控制台日志"></p>
+<h4 id="文件中的日志"><a href="#文件中的日志" class="headerlink" title="文件中的日志"></a>文件中的日志</h4><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/FileLog.png" srcset="/img/loading.gif" alt="文件中的日志"></p>
+<h2 id="三、滚动日志"><a href="#三、滚动日志" class="headerlink" title="三、滚动日志"></a>三、滚动日志</h2><p>生产环境下，如果系统长时间运行，那么日志文件会变得越来越大，系统读取和写入日志的时间会越来越慢，严重的情况会耗尽系统内存，导致系统宕机。</p>
+<p>这个时候我们就可以设置 <strong>滚动日志</strong>。</p>
+<h3 id="1-设置-RollingFileAppender"><a href="#1-设置-RollingFileAppender" class="headerlink" title="1. 设置 RollingFileAppender"></a>1. 设置 RollingFileAppender</h3><pre><code class="xml">&lt;appender name=&quot;ROLLING_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+
+    &lt;!--  要区别于其他的appender中的文件名字  --&gt;
+    &lt;file&gt;${log.path}/log-rolling.log&lt;/file&gt;
+    &lt;encoder&gt;
+        &lt;pattern&gt;${FILE_LOG_PATTERN}&lt;/pattern&gt;
+        &lt;charset&gt;${ENCODING}&lt;/charset&gt;
+    &lt;/encoder&gt;
+
+
+    &lt;!-- 设置滚动日志记录的滚动策略 --&gt;
+    &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
+        &lt;!-- 日志归档路径以及格式 --&gt;
+        &lt;fileNamePattern&gt;${log.path}/info/log-rolling-%d{yyyy-MM-dd}.log&lt;/fileNamePattern&gt;
+    &lt;/rollingPolicy&gt;
+
+&lt;/appender&gt;</code></pre>
+<h3 id="2-设置触发滚动时机"><a href="#2-设置触发滚动时机" class="headerlink" title="2. 设置触发滚动时机"></a>2. 设置触发滚动时机</h3><p>放在<rollingPolicy>的子节点的位置，基于实践策略的触发滚动策略</p>
+<p><maxFileSize>设置触发滚动条件：单个文件大于100M时生成新的文件</p>
+<p><strong>注意：修改日志文件名</strong> 此时 <fileNamePattern>${log.path}/info/log-rolling-%d{yyyy-MM-dd}<strong>.%i</strong>.log</fileNamePattern></p>
+<pre><code class="xml">&lt;!-- 如果日志大小超过 1KB 就生成新日志 --&gt;
+&lt;timeBasedFileNamingAndTriggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP&quot;&gt;
+    &lt;maxFileSize&gt;1KB&lt;/maxFileSize&gt;
+&lt;/timeBasedFileNamingAndTriggeringPolicy&gt;</code></pre>
+<h3 id="3-结果"><a href="#3-结果" class="headerlink" title="3. 结果"></a>3. 结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/01/RollingLog.png" srcset="/img/loading.gif" alt="滚动日志"></p>
+<h2 id="四、完整的日志配置文件"><a href="#四、完整的日志配置文件" class="headerlink" title="四、完整的日志配置文件"></a>四、完整的日志配置文件</h2><p>一般开发的时候不会使用日志配置，一般会等项目上线后才设置。</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration&gt;
+    &lt;contextName&gt;Srb&lt;/contextName&gt;
+
+    &lt;!-- 日志的输出目录 --&gt;
+    &lt;property name=&quot;log.path&quot; value=&quot;E:/WorkSpace/log/srb&quot;/&gt;
+
+    &lt;!--控制台日志格式：彩色日志--&gt;
+    &lt;!-- magenta:洋红 --&gt;
+    &lt;!-- boldMagenta:粗红--&gt;
+    &lt;!-- cyan:青色 --&gt;
+    &lt;!-- white:白色 --&gt;
+    &lt;!-- magenta:洋红 --&gt;
+    &lt;property name=&quot;CONSOLE_LOG_PATTERN&quot;
+              value=&quot;%yellow(%date{yyyy-MM-dd HH:mm:ss}) %highlight([%-5level]) %green(%logger) %msg%n&quot;/&gt;
+
+    &lt;!--文件日志格式--&gt;
+    &lt;property name=&quot;FILE_LOG_PATTERN&quot;
+              value=&quot;%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n&quot; /&gt;
+
+    &lt;!--编码--&gt;
+    &lt;property name=&quot;ENCODING&quot; value=&quot;UTF-8&quot; /&gt;
+
+    &lt;!-- 控制台日志：将日志打印在控制台中 --&gt;
+    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;${CONSOLE_LOG_PATTERN}&lt;/pattern&gt;
+            &lt;charset&gt;${ENCODING}&lt;/charset&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;!-- 文件日志：可以将日志打印在文件中 --&gt;
+    &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.FileAppender&quot;&gt;
+        &lt;file&gt;${log.path}/log.log&lt;/file&gt;
+        &lt;append&gt;true&lt;/append&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;${FILE_LOG_PATTERN}&lt;/pattern&gt;
+            &lt;charset&gt;${ENCODING}&lt;/charset&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;!-- 滚动日志 --&gt;
+    &lt;appender name=&quot;ROLLING_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;!--  要区别于其他的appender中的文件名字  --&gt;
+        &lt;file&gt;${log.path}/log-rolling.log&lt;/file&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;${FILE_LOG_PATTERN}&lt;/pattern&gt;
+            &lt;charset&gt;${ENCODING}&lt;/charset&gt;
+        &lt;/encoder&gt;
+        &lt;!-- 设置滚动日志记录的滚动策略 --&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
+            &lt;!-- 日志归档路径以及格式: log-rolling-2022-01-22.1.log --&gt;
+            &lt;fileNamePattern&gt;${log.path}/info/log-rolling-%d{yyyy-MM-dd}.%i.log&lt;/fileNamePattern&gt;
+            &lt;!--归档日志文件保留的最大数量--&gt;
+            &lt;maxHistory&gt;15&lt;/maxHistory&gt;
+
+            &lt;timeBasedFileNamingAndTriggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP&quot;&gt;
+                &lt;maxFileSize&gt;1KB&lt;/maxFileSize&gt;
+            &lt;/timeBasedFileNamingAndTriggeringPolicy&gt;
+        &lt;/rollingPolicy&gt;
+
+    &lt;/appender&gt;
+
+    &lt;!-- 日志记录器 如果需要打印 Mybatis SQL 就需要将级别调整为 DEBUG, 将 namde 的值设置为 mapper 目录 --&gt;
+    &lt;logger name=&quot;com.frankeleyn&quot; level=&quot;INFO&quot;&gt;
+        &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;
+        &lt;appender-ref ref=&quot;FILE&quot; /&gt;
+        &lt;appender-ref ref=&quot;ROLLING_FILE&quot; /&gt;
+    &lt;/logger&gt;
+
+&lt;/configuration&gt;</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Srb">Srb</a>
+              
+              <span id="/2022/02/03/Srb-2-后端工程搭建/" class="visitors leancloud_visitors" data-flag-title="Srb(二):后端工程搭建">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Srb(二):后端工程搭建&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

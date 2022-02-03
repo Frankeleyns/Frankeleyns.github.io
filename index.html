@@ -128,6 +128,51 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/02/03/Srb-2-%E5%90%8E%E7%AB%AF%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA/" target="_self">
+          <img src="https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png" srcset="/img/loading.gif" alt="Srb(二):后端工程搭建" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/02/03/Srb-2-%E5%90%8E%E7%AB%AF%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA/">
+        <p class="h4 index-header">Srb(二):后端工程搭建</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Srb(二):后端工程搭建01-后台接口工程搭建基础框架结构Srb： 总工程，父依赖
+srb-common：工程通用包依赖，其他的工程都引入这个通用工程 ( 非微服务 )
+service-base：持久层的依赖 ( 非微服务 )
+service-core：核心业务 ( 具体的微服务 )
+
+一、创建父工程 Srb1. 新建一个文件夹 取名 Srb
+2. 添加一个pom.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xs</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-02-03&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Srb">Srb</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2022/01/22/Srb-1-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/" target="_self">
           <img src="https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png" srcset="/img/loading.gif" alt="Srb(一):项目介绍" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -595,58 +640,6 @@ public class WrapperTest {
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2022/01/18/MybatisPlus-4-%E6%8F%92%E4%BB%B6/" target="_self">
-          <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(四):插件" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2022/01/18/MybatisPlus-4-%E6%8F%92%E4%BB%B6/">
-        <p class="h4 index-header">MybatisPlus(四):插件</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">MybatisPlus(四):插件代码地址：Github
-一、分页插件1. 添加配置类package com.frankeleyn.config;
-
-import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-/**
- * @author Frankeleyn
- * @date 2022/1/17 15:22
- */
-@Configuration
-public class MybatisPlusConfig {</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-18&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Java">Java</a>&nbsp;
-          
-            <a href="/tags/Mybatis">Mybatis</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -655,7 +648,7 @@ public class MybatisPlusConfig {</div>
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/2/#board">下一页</a>
+          <a class="page-link" href="/page/2/#board">Next</a>
         </li>
       
     </ul>
@@ -683,7 +676,7 @@ public class MybatisPlusConfig {</div>
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -692,7 +685,7 @@ public class MybatisPlusConfig {</div>
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+                 for="local-search-input">keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

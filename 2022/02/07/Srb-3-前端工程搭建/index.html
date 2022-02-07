@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>Srb(三):前端工程搭建 ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Monday, February 7th 2022, 3:12 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Srb-三-前端工程搭建"><a href="#Srb-三-前端工程搭建" class="headerlink" title="Srb(三):前端工程搭建"></a>Srb(三):前端工程搭建</h1><h1 id="01-搭建-Srb-管理平台前端"><a href="#01-搭建-Srb-管理平台前端" class="headerlink" title="01-搭建 Srb 管理平台前端"></a>01-搭建 Srb 管理平台前端</h1><h2 id="一、vue-element-admin"><a href="#一、vue-element-admin" class="headerlink" title="一、vue-element-admin"></a>一、vue-element-admin</h2><p>vue-element-admin 是基于 element-ui 的一套后台管理系统集成方案。</p>
+<p><strong>GitHub地址</strong>: <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">https://github.com/PanJiaChen/vue-element-admin</a></p>
+<p><strong>项目在线预览</strong>: <a href="https://panjiachen.gitee.io/vue-element-admin/#/login?redirect=%2Fdashboard" target="_blank" rel="noopener">https://panjiachen.gitee.io/vue-element-admin</a></p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5Cvue-admin.png" srcset="/img/loading.gif" alt="vue-admin"></p>
+<h2 id="二、vue-admin-template"><a href="#二、vue-admin-template" class="headerlink" title="二、vue-admin-template"></a>二、vue-admin-template</h2><h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><p><strong>vue-Admin-template</strong> 是基于 vue-element-admin 的一套后台管理系统<strong>基础模板</strong>（最少精简版），可作为模板进行二次开发。</p>
+<p><strong>GitHub地址</strong>: <a href="https://github.com/PanJiaChen/vue-admin-template" target="_blank" rel="noopener">https://github.com/PanJiaChen/vue-admin-template</a></p>
+<p><strong>根据用户角色来动态生成侧边栏的分支</strong>: <a href="https://github.com/PanJiaChen/vue-admin-template/tree/permission-control" target="_blank" rel="noopener">https://github.com/PanJiaChen/vue-admin-template/tree/permission-control</a></p>
+<h3 id="2-安装和运行"><a href="#2-安装和运行" class="headerlink" title="2. 安装和运行"></a>2. 安装和运行</h3><pre><code class="bash"># 解压压缩包 vue-admin-template-permission-control.zip
+# 重命名为 srb-admin
+# 进入目录
+cd srb-admin
+
+# 安装依赖
+npm install --registry=https://registry.npm.taobao.org
+
+# 启动。执行后，浏览器自动弹出并访问 http://localhost:9528/
+npm run dev</code></pre>
+<h3 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3. 运行结果"></a>3. 运行结果</h3><p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5Cvue-admin-template.png" srcset="/img/loading.gif" alt="vue-admin-template"></p>
+<h2 id="三、前端小配置"><a href="#三、前端小配置" class="headerlink" title="三、前端小配置"></a>三、前端小配置</h2><h3 id="1-修改页面标题"><a href="#1-修改页面标题" class="headerlink" title="1. 修改页面标题"></a>1. 修改页面标题</h3><p><strong>src/settings.js</strong> 第3行</p>
+<pre><code class="json"> title: &#39;尚融宝管理平台&#39;,</code></pre>
+<h3 id="2-国际化设置"><a href="#2-国际化设置" class="headerlink" title="2. 国际化设置"></a>2. 国际化设置</h3><p><strong>src/main.js</strong> 第7行</p>
+<pre><code class="js">import locale from &#39;element-ui/lib/locale/lang/zh-CN&#39; // lang i18n</code></pre>
+<h3 id="3-修改导航功能"><a href="#3-修改导航功能" class="headerlink" title="3. 修改导航功能"></a>3. 修改导航功能</h3><p><strong>src/layout/components/Navbar.vue</strong></p>
+<pre><code class="html">&lt;el-dropdown-menu slot=&quot;dropdown&quot; class=&quot;user-dropdown&quot;&gt;
+    &lt;router-link to=&quot;/&quot;&gt;
+        &lt;el-dropdown-item&gt;
+            首页
+        &lt;/el-dropdown-item&gt;
+    &lt;/router-link&gt;
+    &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/PanJiaChen/vue-admin-template/&quot;&gt;
+        &lt;el-dropdown-item&gt;Github&lt;/el-dropdown-item&gt;
+    &lt;/a&gt;
+    &lt;a target=&quot;_blank&quot; href=&quot;https://panjiachen.github.io/vue-element-admin-site/#/&quot;&gt;
+        &lt;el-dropdown-item&gt;Docs&lt;/el-dropdown-item&gt;
+    &lt;/a&gt;
+    &lt;el-dropdown-item divided @click.native=&quot;logout&quot;&gt;
+        &lt;span style=&quot;display:block;&quot;&gt;登出&lt;/span&gt;
+    &lt;/el-dropdown-item&gt;
+&lt;/el-dropdown-menu&gt;</code></pre>
+<h3 id="4-修改登录页面"><a href="#4-修改登录页面" class="headerlink" title="4. 修改登录页面"></a>4. 修改登录页面</h3><p><strong>src/views/login/index.vue</strong> 44 行</p>
+<pre><code class="html">&lt;el-button :loading=&quot;loading&quot; type=&quot;primary&quot; style=&quot;width:100%;margin-bottom:30px;&quot; @click.native.prevent=&quot;handleLogin&quot;&gt;登录&lt;/el-button&gt;</code></pre>
+<h1 id="02-Srb-前端路由配置"><a href="#02-Srb-前端路由配置" class="headerlink" title="02-Srb 前端路由配置"></a>02-Srb 前端路由配置</h1><h2 id="一、路由定义"><a href="#一、路由定义" class="headerlink" title="一、路由定义"></a>一、路由定义</h2><p>在 <strong>src/router/index.js</strong> 中，增加积分等级管理的路由配置，找到 <strong>constantRoutes</strong>， 新增一个路由</p>
+<pre><code class="json">{
+    path: &quot;/core/integral-grade&quot;,
+    component: Layout,
+    redirect: &quot;/core/integral-grade/list&quot;,
+    name: &quot;coreIntegralGrade&quot;,
+    meta: { title: &quot;积分等级管理&quot;, icon: &quot;el-icon-s-marketing&quot; },
+    alwaysShow: true,
+    children: [
+        {
+            path: &quot;list&quot;,
+            name: &quot;list&quot;,
+            component: () =&gt; import(&quot;@/views/core/integral-grade/list&quot;),
+            meta: { title: &quot;积分等级列表&quot; },
+        },
+        {
+            path: &quot;create&quot;,
+            name: &quot;create&quot;,
+            component: () =&gt; import(&quot;@/views/core/integral-grade/form&quot;),
+            meta: { title: &quot;新增积分等级&quot; },
+        },
+    ],
+},</code></pre>
+<h2 id="二、组件定义"><a href="#二、组件定义" class="headerlink" title="二、组件定义"></a>二、组件定义</h2><h3 id="1-创建文件夹"><a href="#1-创建文件夹" class="headerlink" title="1. 创建文件夹"></a>1. 创建文件夹</h3><p>在 <strong>src/views</strong> 文件夹下创建以下文件夹和文件</p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C02-2-1.png" srcset="/img/loading.gif" alt="创建文件夹"></p>
+<h3 id="2-core-integral-grade-list-vue"><a href="#2-core-integral-grade-list-vue" class="headerlink" title="2. core/integral-grade/list.vue"></a>2. core/integral-grade/list.vue</h3><pre><code class="html">&lt;template&gt;
+    &lt;div&gt;积分等级列表&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+<h3 id="3-core-integral-grade-form-vue"><a href="#3-core-integral-grade-form-vue" class="headerlink" title="3. core/integral-grade/form.vue"></a>3. core/integral-grade/form.vue</h3><pre><code class="html">&lt;template&gt;
+    &lt;div&gt;积分等级表单&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+<h2 id="三、禁用ESLint语法检查"><a href="#三、禁用ESLint语法检查" class="headerlink" title="三、禁用ESLint语法检查"></a>三、禁用ESLint语法检查</h2><h3 id="1-报错"><a href="#1-报错" class="headerlink" title="1. 报错"></a>1. 报错</h3><p>在写完上面的代码后，控制台会报一个小错误</p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5CESlint.png" srcset="/img/loading.gif" alt="语法报错"></p>
+<p>这是由于语法检查太严格导致的。</p>
+<h3 id="2-解决"><a href="#2-解决" class="headerlink" title="2. 解决"></a>2. 解决</h3><p><strong>vue.config.js</strong> 第30行处禁用 ESLint 语法检查</p>
+<pre><code class="json">lintOnSave: false,</code></pre>
+<h1 id="03-前端项目开发流程"><a href="#03-前端项目开发流程" class="headerlink" title="03-前端项目开发流程"></a>03-前端项目开发流程</h1><h2 id="一、全栈开发流程"><a href="#一、全栈开发流程" class="headerlink" title="一、全栈开发流程"></a>一、全栈开发流程</h2><p>下图是开发过程中涉及到和几个核心的模块，我们已经完成了路由的配置和页面组件的创建，接下来我们需要进一步完善页面组件的模板 &lt;template&gt; 部分，以及脚本 &lt;script&gt; 等部分的开发，然后创建前后端对接需要的api模块，最后通过 api 模块向后端接口发起调用。</p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C03-1-1.png" srcset="/img/loading.gif" alt="前端调用流程"></p>
+<h2 id="二、前端组件开发"><a href="#二、前端组件开发" class="headerlink" title="二、前端组件开发"></a>二、前端组件开发</h2><h3 id="1-定义页面组件模板"><a href="#1-定义页面组件模板" class="headerlink" title="1. 定义页面组件模板"></a>1. 定义页面组件模板</h3><p>修改 <strong>src/views/core/integral-grade/list.vue</strong></p>
+<pre><code class="html">&lt;template&gt;
+  &lt;div class=&quot;app-container&quot;&gt;
+    &lt;!-- 表格 --&gt;
+    &lt;el-table :data=&quot;list&quot; border stripe&gt;
+      &lt;el-table-column type=&quot;index&quot; width=&quot;50&quot; /&gt;
+      &lt;el-table-column prop=&quot;borrowAmount&quot; label=&quot;借款额度&quot; /&gt;
+      &lt;el-table-column prop=&quot;integralStart&quot; label=&quot;积分区间开始&quot; /&gt;
+      &lt;el-table-column prop=&quot;integralEnd&quot; label=&quot;积分区间结束&quot; /&gt;
+    &lt;/el-table&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+<h3 id="2-定义-api-模块"><a href="#2-定义-api-模块" class="headerlink" title="2. 定义 api 模块"></a>2. 定义 api 模块</h3><p>创建文件 <strong>src/api/core/integral-grade.js</strong></p>
+<pre><code class="js">import request from &quot;@/utils/request&quot;;
+
+export default {
+  list() {
+    return request({
+      url: &quot;http://localhost:8110/admin/core/integralGrade/list&quot;,
+      method: &quot;get&quot;,
+    });
+  }
+}</code></pre>
+<h3 id="3-定义页面组件脚本"><a href="#3-定义页面组件脚本" class="headerlink" title="3. 定义页面组件脚本"></a>3. 定义页面组件脚本</h3><p><strong>src/views/core/integral-grade/list.vue</strong></p>
+<pre><code class="html">&lt;script&gt;
+import intergralGradeApi from &#39;@/api/core/integral-grade&#39;
+
+export default {
+    // 定义数据模型
+    data () {
+        return {
+            list : [] // 数据列表
+        }
+    },
+
+    methods : {
+        fetchData() {
+            intergralGradeApi.list().then(res =&gt; {
+                console.log(res);
+            })
+        }
+    },
+
+    created() {
+        this.fetchData()
+    }
+
+}
+&lt;/script&gt;</code></pre>
+<h3 id="4、axios响应拦截器修改"><a href="#4、axios响应拦截器修改" class="headerlink" title="4、axios响应拦截器修改"></a>4、axios响应拦截器修改</h3><p>上面的代码写完<strong>运行结果</strong></p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C03-4-1.png" srcset="/img/loading.gif" alt="响应拦截"></p>
+<p>这是因为 <strong>src/utils/request.js</strong> 里面 <strong>响应拦截的问题</strong></p>
+<p>我们需要将 <strong>src/utils/request.js</strong> 中 将第49行</p>
+<pre><code class="js">    if (res.code !== 20000) {</code></pre>
+<p>更改为：</p>
+<pre><code class="js">  if (res.code !== 20000 &amp;&amp; res.code != 0) { // 因为我们后台返回的 code 是 0</code></pre>
+<p>再次查看页面</p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C03-4-2.png" srcset="/img/loading.gif" alt="完成结果"></p>
+<h1 id="04-配置全局-url"><a href="#04-配置全局-url" class="headerlink" title="04-配置全局 url"></a>04-配置全局 url</h1><h2 id="一、全局-url"><a href="#一、全局-url" class="headerlink" title="一、全局 url"></a>一、全局 url</h2><p>文件 <strong>.env.development</strong> 配置了全局 url</p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C04-1-1.png" srcset="/img/loading.gif" alt="全局 url"></p>
+<p>默认的全局 url 是 <strong>localhost:9528/dev/api</strong></p>
+<p>我们需要修改成我们的后端接口地址：</p>
+<pre><code class="tex">VUE_APP_BASE_API = &#39;http://localhost:8110&#39;</code></pre>
+<p>修改 <strong>src/api/core/integral-grade.js</strong> </p>
+<pre><code class="js">import request from &quot;@/utils/request&quot;;
+
+export default {
+  list() {
+    return request({
+      url: &quot;/admin/core/integralGrade/list&quot;,
+      method: &quot;get&quot;,
+    });
+  }
+}</code></pre>
+<h2 id="二、mock-server"><a href="#二、mock-server" class="headerlink" title="二、mock-server"></a>二、mock-server</h2><p><strong>VUE_APP_BASE_API</strong> 的修改会影响到平台模拟登录功能的 mock 数据，因此需要修改 mock-server 的地址</p>
+<p>修改 <strong>mock/mock-server.js</strong> 文件 第37行</p>
+<pre><code class="js">url: new RegExp(`/dev-api${url}`),</code></pre>
+<p>修改 <strong>src/api/user.js</strong> 中的接口调用，为每一个远程调用添加配置</p>
+<pre><code class="js">baseURL: &#39;/dev-api&#39;,</code></pre>
+<h2 id="三、Nginx-反向代理"><a href="#三、Nginx-反向代理" class="headerlink" title="三、Nginx 反向代理"></a>三、Nginx 反向代理</h2><p>为了能够<strong>让前端程序能够同时对接多个后端服务</strong>，我们可以使用多种解决方案，例如 nginx 反向代理、微服务网关等。这里我们先使用nginx 作为前后端中间的反向代理层</p>
+<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5Cnginx.png" srcset="/img/loading.gif" alt="nginx"></p>
+<p>nginx的 反向代理配置</p>
+<pre><code class="nginx">server {
+    listen       80;
+    server_name  localhost;
+
+    location ~ /core/ {           
+        proxy_pass http://localhost:8110;
+    }
+    location ~ /sms/ {           
+        proxy_pass http://localhost:8120;
+    }
+    location ~ /oss/ {           
+        proxy_pass http://localhost:8130;
+    }
+}</code></pre>
+<p>nginx的命令</p>
+<pre><code class="bash">start nginx #启动
+nginx -s stop #停止
+nginx -s reload #重新加载配置</code></pre>
+<p>修改  <strong>.env.development</strong></p>
+<pre><code class="tex">VUE_APP_BASE_API = &#39;http://localhost&#39;</code></pre>
+<h1 id="05-完善积分等级模块"><a href="#05-完善积分等级模块" class="headerlink" title="05-完善积分等级模块"></a>05-完善积分等级模块</h1><h2 id="一、删除积分等级"><a href="#一、删除积分等级" class="headerlink" title="一、删除积分等级"></a>一、删除积分等级</h2><h3 id="1-页面模板"><a href="#1-页面模板" class="headerlink" title="1. 页面模板"></a>1. 页面模板</h3><p><strong>src/views/core/integral-grade/list.vue</strong>，在table组件中添加 <strong>删除列</strong></p>
+<pre><code class="html">&lt;el-table-column label=&quot;操作&quot; width=&quot;200&quot; align=&quot;center&quot;&gt;
+    &lt;template slot-scope=&quot;scope&quot;&gt;
+        &lt;el-button type=&quot;danger&quot; size=&quot;mini&quot; icon=&quot;el-icon-delete&quot; @click=&quot;removeById(scope.row.id)&quot;&gt;
+            删除
+        &lt;/el-button&gt;
+    &lt;/template&gt;
+&lt;/el-table-column&gt;</code></pre>
+<h3 id="2-Js"><a href="#2-Js" class="headerlink" title="2. Js"></a>2. Js</h3><p>在 <strong>list.vue</strong> 中增加 删除数据的 js </p>
+<pre><code class="js">removeById(id) {
+    this.$confirm(&#39;此操作将永久删除该记录, 是否继续?&#39;, &#39;提示&#39;, {
+        confirmButtonText: &#39;确定&#39;,
+        cancelButtonText: &#39;取消&#39;,
+        type: &#39;warning&#39;
+    })
+        .then(() =&gt; {
+        // 确认删除
+        intergralGradeApi.removeById(id).then(res =&gt; {
+            this.$message.success(res.message)
+            this.fetchData()
+        })
+    })
+        .catch( error =&gt; {
+        this.$message.info(&quot;取消删除&quot;)
+    })
+}</code></pre>
+<h3 id="3-api"><a href="#3-api" class="headerlink" title="3. api"></a>3. api</h3><p>在 <strong>src/api/core/integral-grade.js</strong> 中添加一个方法</p>
+<pre><code class="js">removeById(id) {
+    return request({
+        url: `/admin/core/integralGrade/remove/${id}`,
+        method: &#39;delete&#39;
+    });</code></pre>
+<h2 id="二、增加积分等级"><a href="#二、增加积分等级" class="headerlink" title="二、增加积分等级"></a>二、增加积分等级</h2><h3 id="1-页面模板-1"><a href="#1-页面模板-1" class="headerlink" title="1. 页面模板"></a>1. 页面模板</h3><p><strong>src/views/core/integral-grade/form.vue</strong>，完善 template</p>
+<pre><code class="html">&lt;template&gt;
+  &lt;div class=&quot;app-container&quot;&gt;
+    &lt;!-- 输入表单 --&gt;
+    &lt;el-form label-width=&quot;120px&quot;&gt;
+      &lt;el-form-item label=&quot;借款额度&quot;&gt;
+        &lt;el-input-number v-model=&quot;integralGrade.borrowAmount&quot; :min=&quot;0&quot; /&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;积分区间开始&quot;&gt;
+        &lt;el-input-number v-model=&quot;integralGrade.integralStart&quot; :min=&quot;0&quot; /&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;积分区间结束&quot;&gt;
+        &lt;el-input-number v-model=&quot;integralGrade.integralEnd&quot; :min=&quot;0&quot; /&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item&gt;
+        &lt;el-button :disabled=&quot;saveBtnDisabled&quot; type=&quot;primary&quot; @click=&quot;saveOrUpdate()&quot; &gt;
+          保存
+        &lt;/el-button&gt;
+      &lt;/el-form-item&gt;
+    &lt;/el-form&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+<h3 id="2-定义页面-data"><a href="#2-定义页面-data" class="headerlink" title="2. 定义页面 data"></a>2. 定义页面 data</h3><pre><code class="html">&lt;script&gt;
+export default {
+    // 定义数据模型
+    data() {
+        return {
+            integralGrade : {},
+            saveBtnDisabled: false
+        }
+    }
+}
+&lt;/script&gt;</code></pre>
+<h3 id="3-js"><a href="#3-js" class="headerlink" title="3. js"></a>3. js</h3><p>添加 增加积分等级的 js，引入 api</p>
+<pre><code class="js">import integralGradeApi from &#39;@/api/core/integral-grade&#39;</code></pre>
+<p>定义增加方法</p>
+<pre><code class="js">// 新增数据
+saveData() {
+    intergralGradeApi.save(this.integralGrade).then(res =&gt; {
+        this.$message.success(res.message)
+    })
+    // 跳转到查询积分等级列表的路由
+    this.$router.push(&#39;/core/integral-grade/list&#39;)
+}</code></pre>
+<h3 id="4-api"><a href="#4-api" class="headerlink" title="4. api"></a>4. api</h3><p>在 <strong>src/api/core/integral-grade.js</strong> 中添加 新增数据 方法</p>
+<pre><code class="js">save(integralGrade) {
+    return request({
+        url: `/admin/core/integralGrade/save`,
+        method: &#39;post&#39;,
+        data: integralGrade
+    })
+}</code></pre>
+<h2 id="三、回显数据"><a href="#三、回显数据" class="headerlink" title="三、回显数据"></a>三、回显数据</h2><h3 id="1-路由"><a href="#1-路由" class="headerlink" title="1. 路由"></a>1. 路由</h3><p>在 <strong>src/router/index.js</strong> 中 增加一个子路由</p>
+<pre><code class="js">{
+    path: &quot;edit/:id&quot;, // 路由传参也就是路径变量
+    name: &quot;edit&quot;,
+    component: () =&gt; import(&quot;@/views/core/integral-grade/form&quot;),
+    meta: { title: &quot;编辑积分等级&quot;, icon: &quot;el-icon-circle-plus&quot; },
+    hidden:true
+}</code></pre>
+<h3 id="2-页面模板"><a href="#2-页面模板" class="headerlink" title="2. 页面模板"></a>2. 页面模板</h3><p><strong>src/views/core/integral-grade/list.vue</strong>，表格“操作”列中<strong>增加 “修改”按钮</strong></p>
+<pre><code class="html">&lt;router-link :to=&quot;&#39;/core/integral-grade/edit/&#39; + scope.row.id&quot; style=&quot;margin-right: 5px&quot;&gt;
+    &lt;el-button type=&quot;primary&quot; size=&quot;mini&quot; icon=&quot;el-icon-edit&quot;&gt;
+        修改
+    &lt;/el-button&gt;
+&lt;/router-link&gt;</code></pre>
+<h3 id="3-Js"><a href="#3-Js" class="headerlink" title="3.Js"></a>3.Js</h3><p><strong>src/views/core/integral-grade/form.vue</strong>，methods 中定义回显方法</p>
+<pre><code class="js">// 根据id查询记录
+fetchDataById(id) {
+    integralGradeApi.getById(id).then(res =&gt; {
+        this.integralGrade = res.data.integralGrade
+    })
+}</code></pre>
+<p>因为已在路由中定义如下内容：<strong>path: ‘edit/:id’</strong>，因此可以使用 <strong>this.$route.params.id</strong> 获取路由中的id</p>
+<pre><code class="js">created() {
+    let id = this.$route.params.id
+    if(id) {
+        this.fetchDataById(id)
+    }
+}</code></pre>
+<h3 id="4-api-1"><a href="#4-api-1" class="headerlink" title="4. api"></a>4. api</h3><p>在 <strong>src/api/core/integral-grade.js</strong> 中添加 回显数据 方法</p>
+<pre><code class="js">getById(id) {
+    return request({
+        url: `/admin/core/integralGrade/get/${id}`,
+        method: &#39;get&#39;
+    })
+}</code></pre>
+<h2 id="四、更新数据"><a href="#四、更新数据" class="headerlink" title="四、更新数据"></a>四、更新数据</h2><h3 id="1-Js"><a href="#1-Js" class="headerlink" title="1. Js"></a>1. Js</h3><p><strong>src/views/core/integral-grade/form.vue</strong>，methods 中定义 更新方法</p>
+<pre><code class="js">updateData() {
+    integralGradeApi.updateById(this.integralGrade).then(res =&gt; {
+        this.$message.success(res.message)
+        this.$router.push(&#39;/core/integral-grade/list&#39;)
+    })
+}</code></pre>
+<p>完善 <strong>saveOrUpdate()</strong> 方法</p>
+<pre><code class="js">saveOrUpdate() {
+    this.saveBtnDisabled = true
+    if (this.integralGrade.id) {
+        this.updateData()
+    }else {
+        this.saveData()
+    }
+}</code></pre>
+<h3 id="2-api"><a href="#2-api" class="headerlink" title="2. api"></a>2. api</h3><p>在 <strong>src/api/core/integral-grade.js</strong> 中添加 更新数据 方法</p>
+<pre><code class="js">updateById(integralGrade) {
+    return request({
+        url: `/admin/core/integralGrade/update`,
+        method: &#39;put&#39;,
+        data: integralGrade
+    })
+}</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Srb">Srb</a>
+              
+              <span id="/2022/02/07/Srb-3-前端工程搭建/" class="visitors leancloud_visitors" data-flag-title="Srb(三):前端工程搭建">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Srb(三):前端工程搭建&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

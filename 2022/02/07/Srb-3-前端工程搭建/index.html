@@ -127,10 +127,13 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h1 id="Srb-三-前端工程搭建"><a href="#Srb-三-前端工程搭建" class="headerlink" title="Srb(三):前端工程搭建"></a>Srb(三):前端工程搭建</h1><h1 id="01-搭建-Srb-管理平台前端"><a href="#01-搭建-Srb-管理平台前端" class="headerlink" title="01-搭建 Srb 管理平台前端"></a>01-搭建 Srb 管理平台前端</h1><h2 id="一、vue-element-admin"><a href="#一、vue-element-admin" class="headerlink" title="一、vue-element-admin"></a>一、vue-element-admin</h2><p>vue-element-admin 是基于 element-ui 的一套后台管理系统集成方案。</p>
+            <h1 id="Srb-三-前端工程搭建"><a href="#Srb-三-前端工程搭建" class="headerlink" title="Srb(三):前端工程搭建"></a>Srb(三):前端工程搭建</h1><p>项目地址：</p>
+<p><a href="https://githubfast.com/Frankeleyns/srb-admin" target="_blank" rel="noopener">前端项目 srb-admin</a></p>
+<p><a href="https://githubfast.com/Frankeleyns/Srb" target="_blank" rel="noopener">后端项目 srb</a></p>
+<h1 id="01-搭建-Srb-管理平台前端"><a href="#01-搭建-Srb-管理平台前端" class="headerlink" title="01-搭建 Srb 管理平台前端"></a>01-搭建 Srb 管理平台前端</h1><h2 id="一、vue-element-admin"><a href="#一、vue-element-admin" class="headerlink" title="一、vue-element-admin"></a>一、vue-element-admin</h2><p>vue-element-admin 是基于 element-ui 的一套后台管理系统集成方案。</p>
 <p><strong>GitHub地址</strong>: <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">https://github.com/PanJiaChen/vue-element-admin</a></p>
 <p><strong>项目在线预览</strong>: <a href="https://panjiachen.gitee.io/vue-element-admin/#/login?redirect=%2Fdashboard" target="_blank" rel="noopener">https://panjiachen.gitee.io/vue-element-admin</a></p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5Cvue-admin.png" srcset="/img/loading.gif" alt="vue-admin"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/vue-admin.png" srcset="/img/loading.gif" alt="vue-admin"></p>
 <h2 id="二、vue-admin-template"><a href="#二、vue-admin-template" class="headerlink" title="二、vue-admin-template"></a>二、vue-admin-template</h2><h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><p><strong>vue-Admin-template</strong> 是基于 vue-element-admin 的一套后台管理系统<strong>基础模板</strong>（最少精简版），可作为模板进行二次开发。</p>
 <p><strong>GitHub地址</strong>: <a href="https://github.com/PanJiaChen/vue-admin-template" target="_blank" rel="noopener">https://github.com/PanJiaChen/vue-admin-template</a></p>
 <p><strong>根据用户角色来动态生成侧边栏的分支</strong>: <a href="https://github.com/PanJiaChen/vue-admin-template/tree/permission-control" target="_blank" rel="noopener">https://github.com/PanJiaChen/vue-admin-template/tree/permission-control</a></p>
@@ -144,7 +147,7 @@ npm install --registry=https://registry.npm.taobao.org
 
 # 启动。执行后，浏览器自动弹出并访问 http://localhost:9528/
 npm run dev</code></pre>
-<h3 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3. 运行结果"></a>3. 运行结果</h3><p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5Cvue-admin-template.png" srcset="/img/loading.gif" alt="vue-admin-template"></p>
+<h3 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3. 运行结果"></a>3. 运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/vue-admin-template.png" srcset="/img/loading.gif" alt="vue-admin-template"></p>
 <h2 id="三、前端小配置"><a href="#三、前端小配置" class="headerlink" title="三、前端小配置"></a>三、前端小配置</h2><h3 id="1-修改页面标题"><a href="#1-修改页面标题" class="headerlink" title="1. 修改页面标题"></a>1. 修改页面标题</h3><p><strong>src/settings.js</strong> 第3行</p>
 <pre><code class="json"> title: &#39;尚融宝管理平台&#39;,</code></pre>
 <h3 id="2-国际化设置"><a href="#2-国际化设置" class="headerlink" title="2. 国际化设置"></a>2. 国际化设置</h3><p><strong>src/main.js</strong> 第7行</p>
@@ -192,7 +195,7 @@ npm run dev</code></pre>
     ],
 },</code></pre>
 <h2 id="二、组件定义"><a href="#二、组件定义" class="headerlink" title="二、组件定义"></a>二、组件定义</h2><h3 id="1-创建文件夹"><a href="#1-创建文件夹" class="headerlink" title="1. 创建文件夹"></a>1. 创建文件夹</h3><p>在 <strong>src/views</strong> 文件夹下创建以下文件夹和文件</p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C02-2-1.png" srcset="/img/loading.gif" alt="创建文件夹"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/02-2-1.png" srcset="/img/loading.gif" alt="创建文件夹"></p>
 <h3 id="2-core-integral-grade-list-vue"><a href="#2-core-integral-grade-list-vue" class="headerlink" title="2. core/integral-grade/list.vue"></a>2. core/integral-grade/list.vue</h3><pre><code class="html">&lt;template&gt;
     &lt;div&gt;积分等级列表&lt;/div&gt;
 &lt;/template&gt;</code></pre>
@@ -200,12 +203,12 @@ npm run dev</code></pre>
     &lt;div&gt;积分等级表单&lt;/div&gt;
 &lt;/template&gt;</code></pre>
 <h2 id="三、禁用ESLint语法检查"><a href="#三、禁用ESLint语法检查" class="headerlink" title="三、禁用ESLint语法检查"></a>三、禁用ESLint语法检查</h2><h3 id="1-报错"><a href="#1-报错" class="headerlink" title="1. 报错"></a>1. 报错</h3><p>在写完上面的代码后，控制台会报一个小错误</p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5CESlint.png" srcset="/img/loading.gif" alt="语法报错"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/ESlint.png" srcset="/img/loading.gif" alt="语法报错"></p>
 <p>这是由于语法检查太严格导致的。</p>
 <h3 id="2-解决"><a href="#2-解决" class="headerlink" title="2. 解决"></a>2. 解决</h3><p><strong>vue.config.js</strong> 第30行处禁用 ESLint 语法检查</p>
 <pre><code class="json">lintOnSave: false,</code></pre>
 <h1 id="03-前端项目开发流程"><a href="#03-前端项目开发流程" class="headerlink" title="03-前端项目开发流程"></a>03-前端项目开发流程</h1><h2 id="一、全栈开发流程"><a href="#一、全栈开发流程" class="headerlink" title="一、全栈开发流程"></a>一、全栈开发流程</h2><p>下图是开发过程中涉及到和几个核心的模块，我们已经完成了路由的配置和页面组件的创建，接下来我们需要进一步完善页面组件的模板 &lt;template&gt; 部分，以及脚本 &lt;script&gt; 等部分的开发，然后创建前后端对接需要的api模块，最后通过 api 模块向后端接口发起调用。</p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C03-1-1.png" srcset="/img/loading.gif" alt="前端调用流程"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/03-1-1.png" srcset="/img/loading.gif" alt="前端调用流程"></p>
 <h2 id="二、前端组件开发"><a href="#二、前端组件开发" class="headerlink" title="二、前端组件开发"></a>二、前端组件开发</h2><h3 id="1-定义页面组件模板"><a href="#1-定义页面组件模板" class="headerlink" title="1. 定义页面组件模板"></a>1. 定义页面组件模板</h3><p>修改 <strong>src/views/core/integral-grade/list.vue</strong></p>
 <pre><code class="html">&lt;template&gt;
   &lt;div class=&quot;app-container&quot;&gt;
@@ -256,16 +259,16 @@ export default {
 }
 &lt;/script&gt;</code></pre>
 <h3 id="4、axios响应拦截器修改"><a href="#4、axios响应拦截器修改" class="headerlink" title="4、axios响应拦截器修改"></a>4、axios响应拦截器修改</h3><p>上面的代码写完<strong>运行结果</strong></p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C03-4-1.png" srcset="/img/loading.gif" alt="响应拦截"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/03-4-1.png" srcset="/img/loading.gif" alt="响应拦截"></p>
 <p>这是因为 <strong>src/utils/request.js</strong> 里面 <strong>响应拦截的问题</strong></p>
 <p>我们需要将 <strong>src/utils/request.js</strong> 中 将第49行</p>
 <pre><code class="js">    if (res.code !== 20000) {</code></pre>
 <p>更改为：</p>
 <pre><code class="js">  if (res.code !== 20000 &amp;&amp; res.code != 0) { // 因为我们后台返回的 code 是 0</code></pre>
 <p>再次查看页面</p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C03-4-2.png" srcset="/img/loading.gif" alt="完成结果"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/03-4-2.png" srcset="/img/loading.gif" alt="完成结果"></p>
 <h1 id="04-配置全局-url"><a href="#04-配置全局-url" class="headerlink" title="04-配置全局 url"></a>04-配置全局 url</h1><h2 id="一、全局-url"><a href="#一、全局-url" class="headerlink" title="一、全局 url"></a>一、全局 url</h2><p>文件 <strong>.env.development</strong> 配置了全局 url</p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5C04-1-1.png" srcset="/img/loading.gif" alt="全局 url"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/04-1-1.png" srcset="/img/loading.gif" alt="全局 url"></p>
 <p>默认的全局 url 是 <strong>localhost:9528/dev/api</strong></p>
 <p>我们需要修改成我们的后端接口地址：</p>
 <pre><code class="tex">VUE_APP_BASE_API = &#39;http://localhost:8110&#39;</code></pre>
@@ -286,7 +289,7 @@ export default {
 <p>修改 <strong>src/api/user.js</strong> 中的接口调用，为每一个远程调用添加配置</p>
 <pre><code class="js">baseURL: &#39;/dev-api&#39;,</code></pre>
 <h2 id="三、Nginx-反向代理"><a href="#三、Nginx-反向代理" class="headerlink" title="三、Nginx 反向代理"></a>三、Nginx 反向代理</h2><p>为了能够<strong>让前端程序能够同时对接多个后端服务</strong>，我们可以使用多种解决方案，例如 nginx 反向代理、微服务网关等。这里我们先使用nginx 作为前后端中间的反向代理层</p>
-<p><img src="E:%5CWorkSpace%5Csrb-admin%5Cimg%5Cnginx.png" srcset="/img/loading.gif" alt="nginx"></p>
+<p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/srb-admin/main/img/Nginx.png" srcset="/img/loading.gif" alt="nginx"></p>
 <p>nginx的 反向代理配置</p>
 <pre><code class="nginx">server {
     listen       80;

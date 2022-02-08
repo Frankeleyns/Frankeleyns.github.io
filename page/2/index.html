@@ -128,6 +128,68 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/01/20/Node.js%E5%85%A5%E9%97%A8/" target="_self">
+          <img src="https://i.loli.net/2020/01/29/Iz783Ruf5rNQGKj.jpg" srcset="/img/loading.gif" alt="Node.js 入门" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/01/20/Node.js%E5%85%A5%E9%97%A8/">
+        <p class="h4 index-header">Node.js 入门</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Node.js 入门代码地址：Github
+创建文件夹 01-node-demo
+1. Hello World① 新建一个 hello-world.js，输入如下代码：
+console.log(&quot;Hello World!&quot;)
+② 打开 cmd
+进入到程序所在目录，输入
+node ./hello-world.js
+然后就可以看到执行结果了！
+2. 文件读取① 新建一个 file.txt，放入数据
+{
+    &quot;name&quot; : &quot;frankeleyn&quot;,
+    &quot;age&quot; : 21
+}
+② 创建 02-read-file.js
+// 引入文件库
+const fs = require(&#39;fs&#39;)
+
+// 读取文件
+fs.readFile(&quot;./file.txt&quot;, (err, data) =&gt; {
+    if(err) {
+        console.log(err);
+        return;
+    }
+    // 打印文件中的数据
+    conso</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-20&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF">前端技术</a>&nbsp;
+          
+            <a href="/tags/Node">Node</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2022/01/18/MybatisPlus-5-%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" target="_self">
           <img src="https://baomidou.com/img/relationship-with-mybatis.png" srcset="/img/loading.gif" alt="MybatisPlus(五):条件构造器" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -585,60 +647,6 @@ public final class CaseInsensitiveString </div>
       <div>
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-30&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Java">Java</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/22/EffectiveJava-3-%E6%B6%88%E9%99%A4%E8%BF%87%E6%9C%9F%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8/" target="_self">
-          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(三)：消除过期的对象引用" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/08/22/EffectiveJava-3-%E6%B6%88%E9%99%A4%E8%BF%87%E6%9C%9F%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8/">
-        <p class="h4 index-header">Effective Java(三)：消除过期的对象引用</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">消除过期的对象引用Java比C好用的地方，就是java有GC（Carbge Collection），不用的对象系统会自动帮你回收，C用完内存需要程序员手工管理。这方便了程序员们工作，但你不能认为你不用考虑内存管理的事情。
-看一下用java实现简单的栈：
-public class Stack {
-    private Object[] elements;
-    private int top = 0;
-    private static final int DEFAULT_INITIAL_CAPACITY = 3;
-
-    public Stack(){
-        elements = new Object[DEFAULT_INITIAL_CAPACITY];
-    }
-
-    public void push(Object e){
-        ensureCapacity();
-        elements[top++] = e;
-    }
-
-    public Object pop(){
-        if(top == 0)
-            </div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-22&nbsp;&nbsp;
         
         
         

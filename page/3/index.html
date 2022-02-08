@@ -128,6 +128,60 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/22/EffectiveJava-3-%E6%B6%88%E9%99%A4%E8%BF%87%E6%9C%9F%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(三)：消除过期的对象引用" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/22/EffectiveJava-3-%E6%B6%88%E9%99%A4%E8%BF%87%E6%9C%9F%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8/">
+        <p class="h4 index-header">Effective Java(三)：消除过期的对象引用</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">消除过期的对象引用Java比C好用的地方，就是java有GC（Carbge Collection），不用的对象系统会自动帮你回收，C用完内存需要程序员手工管理。这方便了程序员们工作，但你不能认为你不用考虑内存管理的事情。
+看一下用java实现简单的栈：
+public class Stack {
+    private Object[] elements;
+    private int top = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 3;
+
+    public Stack(){
+        elements = new Object[DEFAULT_INITIAL_CAPACITY];
+    }
+
+    public void push(Object e){
+        ensureCapacity();
+        elements[top++] = e;
+    }
+
+    public Object pop(){
+        if(top == 0)
+            </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-22&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/08/17/EffectiveJava-2-%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8%E6%88%96%E6%9E%9A%E4%B8%BE%E5%BC%BA%E5%8C%96Singleton%E5%B1%9E%E6%80%A7/" target="_self">
           <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(二)：使用私有构造器或枚举强化Singleton属性" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -613,64 +667,6 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(一):vim与vi" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-1-vim%E4%B8%8Evi/">
-        <p class="h4 index-header">Linux(一):vim与vi</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">vim与vi什么是vim？
-Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。
-简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。
-连 vim 的官方网站 (http://www.vim.org) 自己也说 vim 是一个程序开发工具而不是文字处理软件。
-
-vi和vim的三种模式转化图如下:
-实际操作[root@localhost ~]# ll
-总用量 4
--rw-------. 1 root root 1416 9月   4 20:36 anaconda-ks.cfg
-[root@localhost ~]# 
-
-可以看出我没有Hello.java文件
-使用命令
-[root@localhost ~]# vim Hello.java
-随后进入一般模式
-
-此时还不能编辑，如果要编辑 需要按  Insert 或 按 i ，进入编辑模式
-
-当左下角出现插入的时候才能开始编辑，如图
-
-随后，如果要保存
-
-Shift + ; + wq(wq是 写入</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -681,6 +677,10 @@ Shift + ; + wq(wq是 写入</div>
           <a class="page-link" href="/page/2/#board">Previous</a>
         </li>
       
+      
+        <li class="page-item">
+          <a class="page-link" href="/page/4/#board">Next</a>
+        </li>
       
     </ul>
   </nav>

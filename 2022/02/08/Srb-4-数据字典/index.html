@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>Srb(四):数据字典 ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Tuesday, February 8th 2022, 8:12 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Srb-四-数据字典"><a href="#Srb-四-数据字典" class="headerlink" title="Srb(四):数据字典"></a>Srb(四):数据字典</h1><p>项目地址：</p>
+<p><a href="https://githubfast.com/Frankeleyns/srb-admin" target="_blank" rel="noopener">前端项目 srb-admin</a></p>
+<p><a href="https://githubfast.com/Frankeleyns/Srb" target="_blank" rel="noopener">后端项目 srb</a></p>
+<h1 id="01-数据字典介绍"><a href="#01-数据字典介绍" class="headerlink" title="01-数据字典介绍"></a>01-数据字典介绍</h1><h2 id="一、-简介"><a href="#一、-简介" class="headerlink" title="一、 简介"></a>一、 简介</h2><p>何为数据字典？数据字典负责管理系统常用的分类数据或者一些固定数据，例如：省市区三级联动数据、民族数据、行业数据、学历数据等，数据字典帮助我们方便的获取和适用这些通用数据。</p>
+<h2 id="二、数据字典的设计"><a href="#二、数据字典的设计" class="headerlink" title="二、数据字典的设计"></a>二、数据字典的设计</h2><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/02/DictSql.png" srcset="/img/loading.gif" alt="数据字典"></p>
+<ul>
+<li><strong>parent_id</strong>：上级id，通过id与parent_id构建上下级关系，例如：我们要获取所有行业数据，那么只需要查询parent_id=20000的数据</li>
+<li><strong>name</strong>：名称，例如：填写用户信息，我们要select标签选择民族，“汉族”就是数据字典的名称</li>
+<li><strong>value</strong>：值，例如：填写用户信息，我们要select标签选择民族，“1”（汉族的标识）就是数据字典的值</li>
+<li><strong>dict_code</strong>：编码，编码是我们自定义的，全局唯一，例如：我们要获取行业数据，我们可以通过parent_id获取，但是parent_id是不确定的，所以我们可以根据编码来获取行业数据</li>
+</ul>
+<h1 id="02-Excel-数据批量导入"><a href="#02-Excel-数据批量导入" class="headerlink" title="02-Excel 数据批量导入"></a>02-Excel 数据批量导入</h1><h2 id="一、前端页面"><a href="#一、前端页面" class="headerlink" title="一、前端页面"></a>一、前端页面</h2><h3 id="1-路由"><a href="#1-路由" class="headerlink" title="1. 路由"></a>1. 路由</h3><p>在 <strong>src/router/index.js</strong> 中添加 数据字典的路由</p>
+<pre><code class="js">  {
+    path: &quot;/core/dict&quot;,
+    component: Layout,
+    redirect: &#39;/core/dict/list&#39;,
+    meta: { title: &#39;系统设置&#39;, icon: &#39;el-icon-setting&#39; },
+    children: [
+      {
+        path: &quot;list&quot;,
+        name: &quot;数据字典&quot;,
+        component: () =&gt; import(&quot;@/views/core/dict/list&quot;),
+        meta: {title: &quot;数据字典&quot; }
+      }
+    ]
+  },</code></pre>
+<h3 id="2-页面"><a href="#2-页面" class="headerlink" title="2. 页面"></a>2. 页面</h3><p>创建 <strong>src/views/core/dict/list.vue</strong></p>
+<pre><code class="html">&lt;template&gt;
+  &lt;div class=&quot;app-container&quot;&gt;
+    &lt;div style=&quot;margin-bottom: 10px;&quot;&gt;
+      &lt;el-button
+        @click=&quot;dialogVisible = true&quot;
+        type=&quot;primary&quot;
+        size=&quot;mini&quot;
+        icon=&quot;el-icon-download&quot;
+      &gt;
+        导入Excel
+      &lt;/el-button&gt;
+    &lt;/div&gt;
+
+    &lt;el-dialog title=&quot;数据字典导入&quot; :visible.sync=&quot;dialogVisible&quot; width=&quot;30%&quot;&gt;
+      &lt;el-form&gt;
+        &lt;el-form-item label=&quot;请选择Excel文件&quot;&gt;
+          &lt;el-upload
+            :before-upload=&quot;beforeFileUpload&quot;
+            :auto-upload=&quot;true&quot;
+            :multiple=&quot;false&quot;
+            :limit=&quot;1&quot;
+            :on-exceed=&quot;fileUploadExceed&quot;
+            :on-success=&quot;fileUploadSuccess&quot;
+            :on-error=&quot;fileUploadError&quot;
+            :action=&quot;BASE_API + &#39;/admin/core/dict/import&#39;&quot;
+            name=&quot;file&quot;
+            accept=&quot;application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;
+          &gt;
+            &lt;el-button size=&quot;small&quot; type=&quot;primary&quot;&gt;点击上传&lt;/el-button&gt;
+          &lt;/el-upload&gt;
+        &lt;/el-form-item&gt;
+      &lt;/el-form&gt;                                                                                                                                                                                           
+      &lt;div slot=&quot;footer&quot; class=&quot;dialog-footer&quot;&gt;
+        &lt;el-button @click=&quot;dialogVisible = false&quot;&gt;
+          取消
+        &lt;/el-button&gt;
+      &lt;/div&gt;
+    &lt;/el-dialog&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+<h3 id="3-Js"><a href="#3-Js" class="headerlink" title="3. Js"></a>3. Js</h3><pre><code class="js">export default {
+    // 定义数据模型
+    data() {
+        return {
+            dialogVisible: false, // 上传文件对话框是否开启
+            BASE_API: process.env.VUE_APP_BASE_API //获取后端接口地址
+        }
+    },
+    methods: {
+        // 上传之前，判断文件类型，只能上传 Excel
+        beforeFileUpload(file) {
+            const fileType = file.type === &quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot; ||
+                        file.type === &quot;application/vnd.ms-excel&quot;;            
+            if(!fileType) {
+                this.$message.error(&quot;请上传 Excel 文件&quot;)
+            }
+            return fileType
+        },
+
+        // 文件上传超出
+        fileUploadExceed() {
+            this.$message.warning(&quot;只能上传一个文件&quot;)
+        },
+
+        // 文件上传成功
+        fileUploadSuccess(res) {
+            if(res.code == 0){
+                this.$message.success(&quot;数据导入成功&quot;)
+                this.dialogVisible = false
+            } else {
+                this.$meesage.error(res.message)
+            }
+
+        },
+
+        // 文件上传失败
+        fileUploadError(error) {
+            this.$message.error(&quot;数据导入失败&quot;)
+        }
+    }
+}</code></pre>
+<h3 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4. 运行结果"></a>4. 运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/02/FrontEnd.png" srcset="/img/loading.gif" alt="前端页面"></p>
+<h2 id="二、后端接口"><a href="#二、后端接口" class="headerlink" title="二、后端接口"></a>二、后端接口</h2><h3 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h3><p>在 <strong>srb-core</strong> 的 pom 中添加依赖</p>
+<pre><code class="xml">&lt;dependency&gt; 
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.xmlbeans&lt;/groupId&gt;
+    &lt;artifactId&gt;xmlbeans&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="2-创建-Excel-实体类"><a href="#2-创建-Excel-实体类" class="headerlink" title="2. 创建 Excel 实体类"></a>2. 创建 Excel 实体类</h3><pre><code class="java">package com.frankeleyn.srb.core.pojo.dto;
+
+@Data
+public class ExcelDictDTO {
+
+    @ExcelProperty(&quot;id&quot;)
+    private Long id;
+
+    @ExcelProperty(&quot;上级id&quot;)
+    private Long parentId;
+
+    @ExcelProperty(&quot;名称&quot;)
+    private String name;
+
+    @ExcelProperty(&quot;值&quot;)
+    private Integer value;
+
+    @ExcelProperty(&quot;编码&quot;)
+    private String dictCode;
+}</code></pre>
+<h3 id="3-Mapper-接口"><a href="#3-Mapper-接口" class="headerlink" title="3. Mapper 接口"></a>3. Mapper 接口</h3><p><strong>DictMapper</strong> 接口添加一个方法：</p>
+<pre><code class="java">// 批量插入
+void insertBatch(List&lt;ExcelDictDTO&gt; list);</code></pre>
+<p><strong>DictMapper.xml</strong></p>
+<pre><code class="xml">&lt;insert id=&quot;insertBatch&quot;&gt;
+    INSERT INTO dict(id,  parent_id,  name,  value,  dict_code)
+    VALUES
+    &lt;foreach collection=&quot;list&quot; item=&quot;item&quot; separator=&quot;,&quot;&gt;
+        (#{item.id}, #{item.parentId}, #{item.name}, #{item.value}, #{item.dictCode})
+    &lt;/foreach&gt;
+&lt;/insert&gt;</code></pre>
+<h3 id="4-创建监听器"><a href="#4-创建监听器" class="headerlink" title="4. 创建监听器"></a>4. 创建监听器</h3><pre><code class="java">package com.frankeleyn.srb.core.listener;
+
+public class ExcelDictDTOListener extends AnalysisEventListener&lt;ExcelDictDTO&gt; {
+
+    private DictMapper dictMapper;
+
+    private static final long BATCH_COUNT = 10;
+
+    List&lt;ExcelDictDTO&gt; dtoList = new ArrayList&lt;&gt;();
+
+    // 通过构造器传入 dictMapper
+    public ExcelDictDTOListener(DictMapper dictMapper) {
+        this.dictMapper = dictMapper;
+    }
+
+    @Override
+    public void invoke(ExcelDictDTO data, AnalysisContext context) {
+        System.out.println(&quot;读取到一条数据 &quot; + data.getName());
+        dtoList.add(data);
+        // 达到设定的阈值，就去存储数据库，清空 dtoList，防止 OOM
+        if (dtoList.size() &gt; BATCH_COUNT) {
+            saveData();
+            dtoList.clear();
+        }
+    }
+
+    @Override
+    public void doAfterAllAnalysed(AnalysisContext context) {
+        saveData();
+        System.out.println(&quot;已读完&quot;);
+    }
+
+    // 保存数据进数据库
+    private void saveData() {
+        dictMapper.insertBatch(dtoList);
+    }
+}
+</code></pre>
+<h3 id="5-创建-Service"><a href="#5-创建-Service" class="headerlink" title="5. 创建 Service"></a>5. 创建 Service</h3><p><strong>DictService</strong></p>
+<pre><code class="java">// 导入数据
+boolean importData(MultipartFile file);</code></pre>
+<p><strong>DictServiceImpl</strong> 实现</p>
+<pre><code class="java">@Override
+public boolean importData(MultipartFile file) {
+
+    try {
+        EasyExcel.read(file.getInputStream(), ExcelDictDTO.class, new ExcelDictDTOListener(baseMapper)).sheet(&quot;数据字典&quot;).doRead();
+    } catch (IOException e) {
+        e.printStackTrace();
+        return false;
+    }
+
+    return true;
+}</code></pre>
+<h3 id="6-Controller"><a href="#6-Controller" class="headerlink" title="6. Controller"></a>6. Controller</h3><p><strong>AdminDictController</strong> 接收客户端的上传：</p>
+<pre><code class="java">package com.frankeleyn.srb.core.controller.admin;
+
+@Api(tags = &quot;数据字典管理 Api&quot;)
+@RestController
+@RequestMapping(&quot;/admin/core/dict&quot;)
+@CrossOrigin
+public class AdminDictController {
+
+    @Autowired
+    DictService dictService;
+
+    @ApiOperation(&quot;Excel批量导入数据字典&quot;)
+    @PostMapping(&quot;import&quot;)
+    public R importFIle( @ApiParam(value = &quot;Excel文件&quot;, required = true) @RequestParam(&quot;file&quot;) MultipartFile file) {
+        Assert.isTrue(dictService.importData(file), ResponseEnum.UPLOAD_ERROR);
+        return R.ok();
+    }
+
+}</code></pre>
+<h3 id="7-解决找不到-Mapper-自定义方法的错误"><a href="#7-解决找不到-Mapper-自定义方法的错误" class="headerlink" title="7. 解决找不到 Mapper 自定义方法的错误"></a>7. 解决找不到 Mapper 自定义方法的错误</h3><p>上述这么写，运行的时候，会报一个错，找不到 <strong>DictMapper</strong> 自定义的方法：</p>
+<pre><code class="bash">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.frankeleyn.srb.core.mapper.DictMapper.insertBatch</code></pre>
+<p>这是<strong>因为我们自动生成 xml 的时候，生成在 src/main/java，而不是 src/main/resouce</strong>，需要改两个地方：</p>
+<p><strong>pom.xml</strong></p>
+<pre><code class="xml">&lt;build&gt;
+
+    &lt;resources&gt;
+        &lt;resource&gt;
+            &lt;directory&gt;src/main/java&lt;/directory&gt;
+            &lt;includes&gt;
+                &lt;include&gt;**/*.xml&lt;/include&gt;
+            &lt;/includes&gt;
+            &lt;filtering&gt;false&lt;/filtering&gt;
+        &lt;/resource&gt;
+    &lt;/resources&gt;
+&lt;/build&gt;</code></pre>
+<p><strong>application.propertites</strong></p>
+<pre><code class="properties"># ================ mybatis 配置 =========================
+# 驼峰命名
+mybatis-plus.configuration.map-underscore-to-camel-case=true
+mybatis-plus.mapper-locations=classpath:com/frankeleyn/srb/core/mapper/xml/*.xml</code></pre>
+<p>最好的解决方法是，直接将 xml 移动到你的 <strong>src/main/resouce</strong> 目录下</p>
+<h1 id="03-Excel-数据导出"><a href="#03-Excel-数据导出" class="headerlink" title="03-Excel 数据导出"></a>03-Excel 数据导出</h1><h2 id="一、前端页面-1"><a href="#一、前端页面-1" class="headerlink" title="一、前端页面"></a>一、前端页面</h2><h3 id="1-页面添加导出按钮"><a href="#1-页面添加导出按钮" class="headerlink" title="1. 页面添加导出按钮"></a>1. 页面添加导出按钮</h3><p><strong>src/views/core/dict/list.vue</strong></p>
+<pre><code class="html">&lt;el-button
+    @click=&quot;exportData&quot;
+    type=&quot;primary&quot;
+    size=&quot;mini&quot;
+    icon=&quot;el-icon-upload2&quot; &gt;导出Excel&lt;/el-button&gt;</code></pre>
+<h3 id="2-Js"><a href="#2-Js" class="headerlink" title="2. Js"></a>2. Js</h3><p>添加导出方法 Js</p>
+<pre><code class="js">//Excel数据导出
+exportData() {
+    window.location.href = this.BASE_API + &#39;/admin/core/dict/export&#39;
+}</code></pre>
+<h3 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3. 运行结果"></a>3. 运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/02/DictExport.png" srcset="/img/loading.gif" alt="数据导出"></p>
+<h2 id="二、后端接口-1"><a href="#二、后端接口-1" class="headerlink" title="二、后端接口"></a>二、后端接口</h2><h3 id="1-Service"><a href="#1-Service" class="headerlink" title="1. Service"></a>1. Service</h3><p><strong>DictService</strong> 接口添加一个方法：</p>
+<pre><code class="java">// 将 Dict 转为 ExcelDictDTO
+List&lt;ExcelDictDTO&gt; listDictData();</code></pre>
+<p><strong>DictServiceImpl</strong> 实现：</p>
+<pre><code class="java">@Override
+public List&lt;ExcelDictDTO&gt; listDictData() {
+    List&lt;Dict&gt; dictList = baseMapper.selectList(null);
+
+    List&lt;ExcelDictDTO&gt; list = dictList.stream().map(dict -&gt; {
+        ExcelDictDTO excelDictDTO = new ExcelDictDTO();
+        BeanUtils.copyProperties(dict, excelDictDTO);
+        return excelDictDTO;
+    }).collect(Collectors.toList());
+
+    return list;
+}</code></pre>
+<h3 id="2-Controller"><a href="#2-Controller" class="headerlink" title="2. Controller"></a>2. Controller</h3><p><strong>AdminDictController</strong> 添加一个方法：</p>
+<pre><code class="java">    @ApiOperation(&quot;Excel 批量导出数据字典&quot;)
+    @GetMapping(&quot;export&quot;)
+    public void export(HttpServletResponse response) {
+        try {
+            response.setCharacterEncoding(&quot;utf-8&quot;);
+            response.setContentType(&quot;application/vnd.ms-excel&quot;);
+            response.setHeader(&quot;Content-disposition&quot;, &quot;attachment;filename*=utf-8&#39;&#39;&quot; + &quot;mydict.xlsx&quot;);
+            EasyExcel.write(response.getOutputStream(), ExcelDictDTO.class).sheet(&quot;数据字典&quot;).doWrite(dictService.listDictData());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(ResponseEnum.EXPORT_DATA_ERROR);
+        }
+
+    }</code></pre>
+<h1 id="04-数据字典列表展示"><a href="#04-数据字典列表展示" class="headerlink" title="04-数据字典列表展示"></a>04-数据字典列表展示</h1><h2 id="一、前端页面-2"><a href="#一、前端页面-2" class="headerlink" title="一、前端页面"></a>一、前端页面</h2><h3 id="1-组件模板"><a href="#1-组件模板" class="headerlink" title="1. 组件模板"></a>1. 组件模板</h3><p><strong>src/views/core/dict/list.vue</strong></p>
+<p>添加一个列表：</p>
+<pre><code class="html">&lt;el-table :data=&quot;list&quot; border row-key=&quot;id&quot; lazy :load=&quot;load&quot;&gt;
+    &lt;el-table-column label=&quot;名称&quot; align=&quot;left&quot; prop=&quot;name&quot; /&gt;
+    &lt;el-table-column label=&quot;编码&quot; prop=&quot;dictCode&quot; /&gt;
+    &lt;el-table-column label=&quot;值&quot; align=&quot;left&quot; prop=&quot;value&quot; /&gt;
+&lt;/el-table&gt;</code></pre>
+<h3 id="2-组件脚本"><a href="#2-组件脚本" class="headerlink" title="2. 组件脚本"></a>2. 组件脚本</h3><h4 id="①-定义-data"><a href="#①-定义-data" class="headerlink" title="① 定义 data"></a>① 定义 data</h4><pre><code class="js">list: [] // 数据字典集合</code></pre>
+<h4 id="②-加载数据"><a href="#②-加载数据" class="headerlink" title="② 加载数据"></a>② 加载数据</h4><pre><code class="js">created() {
+    this.fatchData()
+},</code></pre>
+<h4 id="③-调用-api-获取数据库中的数据"><a href="#③-调用-api-获取数据库中的数据" class="headerlink" title="③ 调用 api 获取数据库中的数据"></a>③ 调用 api 获取数据库中的数据</h4><pre><code class="js">import dictApi from &#39;@/api/core/dict&#39;
+// 获取第一级数据字典列表
+fatchData() {
+    dictApi.listByParentId(1).then(res =&gt; {
+        this.list = res.data.list
+    })
+},
+
+// 查询子节点
+load(row, treeNode, resolve) {
+    dictApi.listByParentId(row.id).then(res =&gt; {
+        resolve(res.data.list)
+    })
+},</code></pre>
+<h3 id="3-Api"><a href="#3-Api" class="headerlink" title="3.Api"></a>3.Api</h3><p>创建 <strong>src/api/core/dict.js</strong></p>
+<pre><code class="js">import request from &quot;@/utils/request&quot;;
+
+export default{
+    listByParentId(id) {
+        return request({
+            url: `/admin/core/dict/listByParentId/${id}`,
+            method : &quot;get&quot;
+        })
+    }
+}</code></pre>
+<h3 id="4-流程优化"><a href="#4-流程优化" class="headerlink" title="4. 流程优化"></a>4. 流程优化</h3><p>数据导入成功后刷新页面数据列表</p>
+<pre><code class="js">fileUploadSuccess(res) {
+    if (res.code == 0) {
+        this.$message.success(&quot;数据导入成功&quot;);
+        this.dialogVisible = false;
+        this.fatchData();
+    } else {
+        this.$meesage.error(res.message);
+    }
+},</code></pre>
+<h3 id="5-运行结果"><a href="#5-运行结果" class="headerlink" title="5. 运行结果"></a>5. 运行结果</h3><p><img src="https://external.githubfast.com/https/raw.githubusercontent.com/Frankeleyns/Srb/main/doc/img/02/DictList.png" srcset="/img/loading.gif" alt="数据列表"></p>
+<h2 id="二、后端接口-2"><a href="#二、后端接口-2" class="headerlink" title="二、后端接口"></a>二、后端接口</h2><h3 id="1-实体类"><a href="#1-实体类" class="headerlink" title="1. 实体类"></a>1. 实体类</h3><p>在 <strong>Dcit</strong> 类中添加属性</p>
+<pre><code class="java">@ApiModelProperty(value = &quot;是否包含子节点&quot;)
+@TableField(exist = false)//在数据库表中忽略此列，非持久化字段
+private boolean hasChildren;</code></pre>
+<p> elementUi 的 el-table 中会根据该值，显示出一个 <strong>&gt;</strong> 符号</p>
+<h3 id="2-Service"><a href="#2-Service" class="headerlink" title="2. Service"></a>2. Service</h3><p><strong>DictService</strong> 接口添加方法：</p>
+<pre><code class="java">// 根据父 id 查询子节点数据列表
+List&lt;Dict&gt; listByParentId(Long parentId);</code></pre>
+<p><strong>DictServiceImpl</strong> 实现类：</p>
+<pre><code class="java">@Override
+public List&lt;Dict&gt; listByParentId(Long parentId) {
+    List&lt;Dict&gt; dictList = baseMapper.selectList(new QueryWrapper&lt;Dict&gt;().eq(&quot;parent_id&quot;, parentId));
+    dictList.forEach(dict -&gt; {
+        boolean hasChildren = this.hasChildren(dict.getId());
+        dict.setHasChildren(hasChildren);
+    });
+    return dictList;
+}
+
+// 判断是否有子节点
+private boolean hasChildren(Long id) {
+    Integer count = baseMapper.selectCount(new QueryWrapper&lt;Dict&gt;().eq(&quot;parent_id&quot;, id));
+    if (count &gt; 0) {
+        return true;
+    }
+    return false;
+}</code></pre>
+<h3 id="3-Controller"><a href="#3-Controller" class="headerlink" title="3. Controller"></a>3. Controller</h3><p><strong>AdminDictController</strong> 添加方法：</p>
+<pre><code class="java">@ApiOperation(&quot;根据父 id 获取子节点数据列表&quot;)
+@GetMapping(&quot;/listByParentId/{parentId}&quot;)
+public R listByParentId(@ApiParam(value = &quot;父 id&quot;, required = true) @PathVariable(&quot;parentId&quot;) Long parentId) {
+    return R.ok(&quot;list&quot;, dictService.listByParentId(parentId));
+}</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Srb">Srb</a>
+              
+              <span id="/2022/02/08/Srb-4-数据字典/" class="visitors leancloud_visitors" data-flag-title="Srb(四):数据字典">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Srb(四):数据字典&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

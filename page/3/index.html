@@ -128,6 +128,58 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/08/30/EffectiveJava-4-try-with-resources%E4%BC%98%E4%BA%8Etry-finally/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(四)：try-with-resources优于try-finally" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/08/30/EffectiveJava-4-try-with-resources%E4%BC%98%E4%BA%8Etry-finally/">
+        <p class="h4 index-header">Effective Java(四)：try-with-resources优于try-finally</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">try-with-resources优于try-finally许多java类库中都有通过调用close方法来手工关闭资源。比如java.sql.Connection、InputStream、OutputStream。
+通常我们都是使用try-finally来关闭资源：
+    /**
+     * 读取任意文件第一行
+     * @param path 文件路径
+     * @return  文件内容
+     * @throws IOException 抛出异常
+     */
+    public static String  firstLineOfFile(String path) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        try {
+            return br.readLine();
+        } finally {
+            br.close();
+        }
+    }
+看</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-30&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/08/22/EffectiveJava-3-%E6%B6%88%E9%99%A4%E8%BF%87%E6%9C%9F%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8/" target="_self">
           <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(三)：消除过期的对象引用" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -613,60 +665,6 @@ ls加-l可以以另外的列表形式显示
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(二):用户管理" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-2-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
-        <p class="h4 index-header">Linux(二):用户管理</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">用户管理Linux用户基本介绍
- Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 
-用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。
-每个用户账号都拥有一个唯一的用户名和各自的口令。
-用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录
-
-
-添加用户useradd [选项] 用户名
-接下来，添加一个用户 dl
-[root@localhost ~]# useradd dl
-可能界面看不出什么效果，其实系统已经创建了一个叫dl的用户并创建了同名的组和 /home/dl目录
-
-[root@localhost /]# cd /home/
-[root@localhost home]# ll
-总用量 0
-drwx------. 2 dl dl 62 9月  27 16:08 dl
-drwx------. 2 lj lj 83 9月   5 09:02 lj
-
-如果你不想创建在home目录下，你</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -674,12 +672,12 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/2/#board">Previous</a>
+          <a class="page-link" href="/page/2/#board">上一页</a>
         </li>
       
       
         <li class="page-item">
-          <a class="page-link" href="/page/4/#board">Next</a>
+          <a class="page-link" href="/page/4/#board">下一页</a>
         </li>
       
     </ul>
@@ -707,7 +705,7 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -716,7 +714,7 @@ drwx------. 2 lj lj 83 9月   5 09:02 lj
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>

@@ -15,7 +15,7 @@
   <meta name="description" content="personal blog">
   <meta name="author" content="Frankeleyn">
   <meta name="keywords" content="">
-  <title>Effective Java(六)：使可变性最小 ~ Frankeleyn Blog</title>
+  <title>Srb(五):Redis缓存 ~ Frankeleyn Blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -94,7 +94,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg')no-repeat center center;
+         style="background: url('https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -106,7 +106,7 @@
 
             
               <br>
-              <p class="mt-3">Saturday, September 26th 2020, 10:02 am</p>
+              <p class="mt-3">Thursday, February 10th 2022, 9:48 am</p>
             
           </div>
 
@@ -127,76 +127,142 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h2 id="使可变性最小"><a href="#使可变性最小" class="headerlink" title="使可变性最小"></a>使可变性最小</h2><p><strong>Java</strong>类库包含许多不可变类，其中有<strong>String</strong>、基本类型的包装类、<strong>BigInteger</strong>和<strong>BigDecimal</strong>。这些不可变类比可变类更加易于设计、实现和使用。</p>
-<p>使类要不可变，有五条原则：</p>
-<ol>
-<li><p><strong>不要提供任何会修改对象状态的方法(也称设值的方法，比如Setter)</strong>。</p>
-</li>
-<li><p><strong>保证类不会被扩展。</strong></p>
-</li>
-<li><p><strong>声明所有的域都是final的。</strong></p>
-</li>
-<li><p><strong>声明所有的域都是私有的。</strong></p>
-</li>
-<li><p><strong>确保对于任何可变组件的互斥访问。</strong></p>
-</li>
-</ol>
-<p>下面举一个例子：</p>
-<pre><code class="java">public final class Complex {
-    private final double re;
-    private final double im;
+            <h1 id="Srb-五-Redis缓存"><a href="#Srb-五-Redis缓存" class="headerlink" title="Srb(五):Redis缓存"></a>Srb(五):Redis缓存</h1><p>项目地址：</p>
+<p><a href="https://githubfast.com/Frankeleyns/srb-admin" target="_blank" rel="noopener">前端项目 srb-admin</a></p>
+<p><a href="https://githubfast.com/Frankeleyns/Srb" target="_blank" rel="noopener">后端项目 srb</a></p>
+<h1 id="01-集成-Redis-缓存"><a href="#01-集成-Redis-缓存" class="headerlink" title="01-集成 Redis 缓存"></a>01-集成 Redis 缓存</h1><h2 id="一、场景"><a href="#一、场景" class="headerlink" title="一、场景"></a>一、场景</h2><p>由于数据字典的变化不是很频繁，而且系统对数据字典访问较为频繁，所以我们有必要将数据字典的数据存入缓存，提高系统访问速度，这里我选择的是 <strong>Redis</strong> ( 不知道 Redis 的可自行百度) 作为缓存插件。</p>
+<h2 id="二、引入-Redis"><a href="#二、引入-Redis" class="headerlink" title="二、引入 Redis"></a>二、引入 Redis</h2><h3 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1. 引入依赖"></a>1. 引入依赖</h3><p>在 <strong>service-base</strong> 中引入 redis 的依赖：</p>
+<pre><code class="xml">&lt;!-- spring boot redis缓存引入 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;!-- 缓存连接池--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
+&lt;/dependency&gt;
 
-    public Complex(double re, double im) {
-        this.re = re;
-        this.im = im;
+&lt;!-- redis 存储 json序列化 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.datatype&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-datatype-jsr310&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="2-配置-redis"><a href="#2-配置-redis" class="headerlink" title="2. 配置 redis"></a>2. 配置 redis</h3><p>在 <strong>service-core</strong> 的配置文件 <strong>applicaiton.properties</strong> 加入 redis 配置</p>
+<pre><code class="properties"># redis 服务器地址
+spring.redis.host=192.168.209.125
+spring.redis.port=6379
+spring.redis.database=0
+spring.redis.timeout=3000
+#最大连接数，负值表示没有限制，默认8
+spring.redis.lettuce.pool.max-active=20
+#最大阻塞等待时间，负值表示没限制，默认-1
+spring.redis.lettuce.pool.max-wait=-1
+#最大空闲连接，默认8
+spring.redis.lettuce.pool.max-idle=8
+#最小空闲连接，默认0
+spring.redis.lettuce.pool.min-idle=0</code></pre>
+<h3 id="3-Redis-序列化配置"><a href="#3-Redis-序列化配置" class="headerlink" title="3. Redis 序列化配置"></a>3. Redis 序列化配置</h3><p>在 <strong>com.frankeleyn.srb.core.config</strong> 包下新建类 <strong>RedisConfig</strong>：</p>
+<pre><code class="java">package com.frankeleyn.srb.core.config;
+
+@Configuration
+public class RedisConfig {
+
+    @Bean
+    public RedisTemplate&lt;String, Object&gt; redisTemplate(LettuceConnectionFactory redisConnectionFactory) {
+
+        RedisTemplate&lt;String, Object&gt; redisTemplate = new RedisTemplate&lt;&gt;();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+
+        //首先解决key的序列化方式
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringRedisSerializer);
+        redisTemplate.setHashKeySerializer(stringRedisSerializer);
+
+        //解决value的序列化方式
+        Jackson2JsonRedisSerializer&lt;Object&gt; jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer&lt;&gt;(Object.class);
+
+        //序列化时将类的数据类型存入json，以便反序列化的时候转换成正确的类型
+        ObjectMapper objectMapper = new ObjectMapper();
+        //objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+
+        // 解决jackson2无法反序列化LocalDateTime的问题
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.registerModule(new JavaTimeModule());
+
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+
+
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+
+        return redisTemplate;
     }
-
-    public double realPart(){ return re; }
-    public double imaginaryPart(){ return im; }
-
-    public Complex plus(Complex c){
-        return new Complex(re + c.re, im + c.im);
-    }
-
-    public Complex minus(Complex c){
-        return new Complex(re - c.re, im - c.im);
-    }
-
-    public Complex times(Complex c){
-        return new Complex(re * c.re - im * c.im,
-                           re * c.im + im * c.re);
-    }
-
-    public Complex dividedBy(Complex c){
-        double tmp = c.re * c.re + c.im * c.im;
-        return new Complex((re * c.re + im * c.im) / tmp,
-                               (im * c.re - re * c.im) / tmp);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Complex)) return false;
-        Complex c = (Complex) o;
-        return Double.compare(c.re, re) == 0 &amp;&amp; Double.compare(c.im, im) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return 31 * Double.hashCode(re) + Double.hashCode(im);
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Complex{&quot; +
-                &quot;re=&quot; + re +
-                &quot;, im=&quot; + im +
-                &#39;}&#39;;
-    }
-
 }</code></pre>
-<p>这个类表示一个<strong>复数</strong>（complex number，有实部和虚部）。里面有四个基本算术运算：加、减、乘、除。需要注意的是这些算术运算都是<strong>返回新的实例，而不是修改现有的实例</strong>。这种方式被称为<strong>函数的（functional）</strong>的方法，这些方法返回的是一个函数的结果，这些函数对操作数运算但不修改它。</p>
-<p>​    <strong>不可变对象本质上是线程安全的，它们不要求同步。</strong>当多个线程并发访问这样的对象时，它们不会遭到破坏。这无疑是获得线程安全最容易的办法。</p>
+<p>一定要进行 redis 的序列化配置，如果不设置，redis 默认是使用 jdk 的序列化方式存储数据，</p>
+<pre><code class="java">@Test
+public void testSetKey() {
+    redisTemplate.opsForValue().set(&quot;key1&quot;, &quot;value1&quot;);
+}</code></pre>
+<p>redis服务器中 jdk 序列号后长这样：</p>
+<p> <strong>key: \xAC\xED\x00\x05t\x00\x08key1</strong></p>
+<p> <strong>value: \xAC\xED\x00\x05t\x00\x0Dvalue1</strong></p>
+<h3 id="4-测试-Redis"><a href="#4-测试-Redis" class="headerlink" title="4. 测试 Redis"></a>4. 测试 Redis</h3><p>新建测试类 <strong>RedisTest</strong> :</p>
+<pre><code class="java">package com.frankeleyn.srb.core;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class RedisTest {
+
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    @Test
+    public void testSetKey() {
+        redisTemplate.opsForValue().set(&quot;key1&quot;, &quot;value1&quot;);
+    }
+
+    @Test
+    public void testGetKey() {
+        Object key1 = redisTemplate.opsForValue().get(&quot;key1&quot;);
+        System.out.println(key1);
+    }
+}</code></pre>
+<p>设置 redis 序列化后， key 使用了字符串存储，value 使用了 json 存储。</p>
+<h1 id="02-使用缓存存取数据"><a href="#02-使用缓存存取数据" class="headerlink" title="02-使用缓存存取数据"></a>02-使用缓存存取数据</h1><h2 id="将数据字典存入-Redis"><a href="#将数据字典存入-Redis" class="headerlink" title="将数据字典存入 Redis"></a>将数据字典存入 Redis</h2><p>修改 <strong>DictServiceImpl</strong> 中的 listByParentId() 方法：</p>
+<pre><code class="java">@Autowired
+private RedisTemplate redisTemplate;
+
+@Override
+public List&lt;Dict&gt; listByParentId(Long parentId) {
+
+    List&lt;Dict&gt; dictList;
+
+    // 1. 先查询 Redis 缓存中中是否有数据字典
+    dictList = (List&lt;Dict&gt;) redisTemplate.opsForValue().get(&quot;srb:core:dictList:&quot; + parentId);
+    if (Objects.nonNull(dictList)) {
+        return dictList;
+    }
+
+    // 2. 缓存为空就查询  DB
+    dictList = baseMapper.selectList(new QueryWrapper&lt;Dict&gt;().eq(&quot;parent_id&quot;, parentId));
+    dictList.forEach(dict -&gt; {
+        boolean hasChildren = this.hasChildren(dict.getId());
+        dict.setHasChildren(hasChildren);
+    });
+
+    // 3. 数据库不为空，同步缓存
+    if (Objects.nonNull(dictList)) {
+        redisTemplate.opsForValue().set(&quot;srb:core:dictList:&quot; + parentId, dictList);
+    }
+
+    return dictList;
+}</code></pre>
 
             <hr>
           </div>
@@ -206,9 +272,9 @@
             <p>
               <i class="iconfont icon-tag"></i>
               
-                <a class="hover-with-bg" href="/tags/Java">Java</a>
+                <a class="hover-with-bg" href="/tags/Srb">Srb</a>
               
-              <span id="/2020/09/26/EffectiveJava-6-使可变性最小/" class="visitors leancloud_visitors" data-flag-title="Effective Java(六)：使可变性最小">
+              <span id="/2022/02/10/Srb-5-Redis缓存/" class="visitors leancloud_visitors" data-flag-title="Srb(五):Redis缓存">
                 <em id="visitors-text" class="post-meta-item-text"></em>
                 <i id="visitors-count"></i>
               </span>
@@ -316,7 +382,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Effective Java(六)：使可变性最小&nbsp;",
+        "Srb(五):Redis缓存&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

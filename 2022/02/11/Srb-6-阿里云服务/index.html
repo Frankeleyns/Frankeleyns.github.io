@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>Srb(六):阿里云服务 ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Friday, February 11th 2022, 9:47 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Srb-六-阿里云服务"><a href="#Srb-六-阿里云服务" class="headerlink" title="Srb(六):阿里云服务"></a>Srb(六):阿里云服务</h1><p>项目地址：</p>
+<p><a href="https://githubfast.com/Frankeleyns/srb-admin" target="_blank" rel="noopener">前端项目 srb-admin</a></p>
+<p><a href="https://githubfast.com/Frankeleyns/Srb" target="_blank" rel="noopener">后端项目 srb</a></p>
+<h1 id="01-阿里云短信"><a href="#01-阿里云短信" class="headerlink" title="01-阿里云短信"></a>01-阿里云短信</h1><h2 id="一、创建短信微服务"><a href="#一、创建短信微服务" class="headerlink" title="一、创建短信微服务"></a>一、创建短信微服务</h2><h3 id="1-创建模块-service-sms"><a href="#1-创建模块-service-sms" class="headerlink" title="1. 创建模块 service-sms"></a>1. 创建模块 service-sms</h3><h3 id="2-引入依赖"><a href="#2-引入依赖" class="headerlink" title="2. 引入依赖"></a>2. 引入依赖</h3><p>配置 <strong>pom.xml</strong></p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.frankeleyn&lt;/groupId&gt;
+    &lt;artifactId&gt;service-base&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!--阿里云短信--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+    &lt;artifactId&gt;aliyun-java-sdk-core&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3. 配置文件"></a>3. 配置文件</h3><p>在 resource 目录下创建 <strong>application.properties</strong></p>
+<pre><code class="properties">server.port=8120
+
+# =============== redis 配置 =================
+# redis 服务器地址
+spring.redis.host=你的 redis 服务器地址
+spring.redis.port=你的 redis 端口
+spring.redis.database=0
+spring.redis.timeout=3000
+#最大连接数，负值表示没有限制，默认8
+spring.redis.lettuce.pool.max-active=20
+#最大阻塞等待时间，负值表示没限制，默认-1
+spring.redis.lettuce.pool.max-wait=-1
+#最大空闲连接，默认8
+spring.redis.lettuce.pool.max-idle=8
+#最小空闲连接，默认0
+spring.redis.lettuce.pool.min-idle=0
+
+# =============== 阿里云短信配置 ===============
+aliyun.sms.region-id=地区
+aliyun.sms.key-id=你的keyid
+aliyun.sms.key-secret=你的keysecret
+aliyun.sms.template-code=你的短信模板code
+aliyun.sms.sign-name=你的短信模板签名</code></pre>
+<h3 id="4-启动类"><a href="#4-启动类" class="headerlink" title="4. 启动类"></a>4. 启动类</h3><p>创建 SpringBoot 启动类：</p>
+<pre><code class="java">package com.frankeleyn.srb.sms;
+
+// 该程序启动时会自动读取数据源配置（service-base 中有数据源依赖），如果不需要数据源，exclude 可以将自动配置类屏蔽
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@ComponentScan(basePackages = {&quot;com.frankeleyn.srb&quot;,&quot;com.frankeleyn.common&quot;})
+public class ServiceSmsApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceSmsApplication.class, args);
+    }
+}</code></pre>
+<h3 id="5-读取常量"><a href="#5-读取常量" class="headerlink" title="5. 读取常量"></a>5. 读取常量</h3><p>创建类 <strong>SmsProperties</strong></p>
+<pre><code class="java">package com.frankeleyn.srb.sms.utils;
+
+@Component
+@Data
+@EnableConfigurationProperties(SmsProperties.class)
+@ConfigurationProperties(prefix = &quot;aliyun.sms&quot;)
+public class SmsProperties implements InitializingBean {
+
+    private String regionId;
+    private String keyId;
+    private String keySecret;
+    private String templateCode;
+    private String signName;
+
+    public static String REGION_Id;
+    public static String KEY_ID;
+    public static String KEY_SECRET;
+    public static String TEMPLATE_CODE;
+    public static String SIGN_NAME;
+
+    //当私有成员被赋值后，此方法自动被调用，从而初始化常量
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        REGION_Id = regionId;
+        KEY_ID = keyId;
+        KEY_SECRET = keySecret;
+        TEMPLATE_CODE = templateCode;
+        SIGN_NAME = signName;
+    }
+
+}</code></pre>
+<h2 id="二、发送短信"><a href="#二、发送短信" class="headerlink" title="二、发送短信"></a>二、发送短信</h2><h3 id="1-业务"><a href="#1-业务" class="headerlink" title="1. 业务"></a>1. 业务</h3><h4 id="①-创建-SmsService"><a href="#①-创建-SmsService" class="headerlink" title="① 创建 SmsService"></a>① 创建 <strong>SmsService</strong></h4><pre><code class="java">package com.frankeleyn.srb.sms.service;
+
+public interface SmsService {
+    /**
+     * 发送验证码
+     * @param mobile
+     * @param fourBitRandom
+     */
+    void send(String mobile, String fourBitRandom);
+}</code></pre>
+<h4 id="②-创建-SmsServiceImpl"><a href="#②-创建-SmsServiceImpl" class="headerlink" title="② 创建 SmsServiceImpl"></a>② 创建 <strong>SmsServiceImpl</strong></h4><pre><code class="java">package com.frankeleyn.srb.sms.service.Impl;
+
+@Service
+public class SmsServiceImpl implements SmsService {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Override
+    public void send(String mobile) {
+        // 1. 生成4位随机验证码
+        String fourBitRandom = RandomUtils.getFourBitRandom();
+        // 2. 存入 redis
+        redisTemplate.opsForValue().set(&quot;srb:sms:code:&quot; + mobile, fourBitRandom);
+        // 3. 通过阿里云发送短信
+        aliSend(mobile, fourBitRandom);
+    }
+
+    public void aliSend(String mobile, String verCode) {
+        // 配置类配置信息，公共参数，每次请求都相同的参数
+        DefaultProfile profile = DefaultProfile.getProfile(SmsProperties.REGION_Id,SmsProperties.KEY_ID, SmsProperties.KEY_SECRET);
+
+        // 发送短信, 携带验证码
+        IAcsClient iAcsClient = new DefaultAcsClient(profile);
+
+        // 创建请求参数，每次请求不同的参数
+        CommonRequest commonRequest = new CommonRequest();
+        commonRequest.setSysMethod(MethodType.POST);
+        // Domain 阿里云短信网关(必加，官方文档没提示，不加就会报错)
+        commonRequest.setSysDomain(&quot;dysmsapi.aliyuncs.com&quot;);
+        // Version 版本(必加，官方文档没提示，不加就会报错)
+        commonRequest.setSysVersion(&quot;2017-05-25&quot;);
+        commonRequest.setSysAction(&quot;SendSms&quot;);
+        commonRequest.putQueryParameter(&quot;PhoneNumbers&quot;, mobile);
+        commonRequest.putQueryParameter(&quot;SignName&quot;, SmsProperties.SIGN_NAME);
+        commonRequest.putQueryParameter(&quot;TemplateCode&quot;, SmsProperties.TEMPLATE_CODE);
+
+        /* 将 {&quot;code&quot;, &quot;验证码&quot;} 转为 json
+         * 也可以直接：
+         * commonRequest.putQueryParameter(&quot;TemplateParam&quot;, &quot;{\&quot;code\&quot; : \&quot; &quot;+ fourBitRandom + &quot; \&quot;}&quot;);
+         * */
+        Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
+        map.put(&quot;code&quot;, verCode);
+        Gson gson = new Gson();
+        String code = gson.toJson(map);
+        commonRequest.putQueryParameter(&quot;TemplateParam&quot;, code);
+
+        // 发送请求
+        try {
+            CommonResponse commonResponse = iAcsClient.getCommonResponse(commonRequest);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+    }
+
+}</code></pre>
+<h3 id="2-引入工具类"><a href="#2-引入工具类" class="headerlink" title="2. 引入工具类"></a>2. 引入工具类</h3><h4 id="①-在-srb-common-项目中新建-util-包"><a href="#①-在-srb-common-项目中新建-util-包" class="headerlink" title="① 在 srb-common 项目中新建 util 包"></a>① 在 <strong>srb-common</strong> 项目中新建 <strong>util</strong> 包</h4><h4 id="②-新建-RandomUtils-类-生成4位或6位随机验证码"><a href="#②-新建-RandomUtils-类-生成4位或6位随机验证码" class="headerlink" title="② 新建 RandomUtils 类: 生成4位或6位随机验证码"></a>② 新建 RandomUtils 类: 生成4位或6位随机验证码</h4><pre><code class="java">package com.frankeleyn.common.util;
+
+public class RandomUtils {
+
+    private static final Random random = new Random();
+
+    private static final DecimalFormat fourdf = new DecimalFormat(&quot;0000&quot;);
+
+    private static final DecimalFormat sixdf = new DecimalFormat(&quot;000000&quot;);
+
+    public static String getFourBitRandom() {
+        return fourdf.format(random.nextInt(10000));
+    }
+
+    public static String getSixBitRandom() {
+        return sixdf.format(random.nextInt(1000000));
+    }
+
+    /**
+     * 给定数组，抽取n个数据
+     * @param list
+     * @param n
+     * @return
+     */
+    public static ArrayList getRandom(List list, int n) {
+
+        Random random = new Random();
+
+        HashMap&lt;Object, Object&gt; hashMap = new HashMap&lt;Object, Object&gt;();
+
+        // 生成随机数字并存入HashMap
+        for (int i = 0; i &lt; list.size(); i++) {
+
+            int number = random.nextInt(100) + 1;
+
+            hashMap.put(number, i);
+        }
+
+        // 从HashMap导入数组
+        Object[] robjs = hashMap.values().toArray();
+
+        ArrayList r = new ArrayList();
+
+        // 遍历数组并打印数据
+        for (int i = 0; i &lt; n; i++) {
+            r.add(list.get((int) robjs[i]));
+            System.out.print(list.get((int) robjs[i]) + &quot;\t&quot;);
+        }
+        System.out.print(&quot;\n&quot;);
+        return r;
+    }
+}</code></pre>
+<h4 id="③-新建-RegexValidateUtils-类-校验手机号"><a href="#③-新建-RegexValidateUtils-类-校验手机号" class="headerlink" title="③ 新建 RegexValidateUtils 类: 校验手机号"></a>③ 新建 RegexValidateUtils 类: 校验手机号</h4><pre><code class="java">package com.frankeleyn.common.util;
+
+public class RegexValidateUtils {
+
+    static boolean flag = false;
+    static String regex = &quot;&quot;;
+
+    public static boolean check(String str, String regex) {
+        try {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(str);
+            flag = matcher.matches();
+        } catch (Exception e) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    /**
+     * 验证邮箱
+     *
+     * @param email
+     * @return
+     */
+    public static boolean checkEmail(String email) {
+        String regex = &quot;^\\w+[-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$ &quot;;
+        return check(email, regex);
+    }
+
+    /**
+     * 验证手机号码
+     *
+     * 移动号码段:139、138、137、136、135、134、150、151、152、157、158、159、182、183、187、188、147
+     * 联通号码段:130、131、132、136、185、186、145
+     * 电信号码段:133、153、180、189
+     *
+     * @param cellphone
+     * @return
+     */
+    public static boolean checkCellphone(String cellphone) {
+        String regex = &quot;^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$&quot;;
+        return check(cellphone, regex);
+    }
+
+    /**
+     * 验证固话号码
+     *
+     * @param telephone
+     * @return
+     */
+    public static boolean checkTelephone(String telephone) {
+        String regex = &quot;^(0\\d{2}-\\d{8}(-\\d{1,4})?)|(0\\d{3}-\\d{7,8}(-\\d{1,4})?)$&quot;;
+        return  check(telephone, regex);
+    }
+
+    /**
+     * 验证传真号码
+     *
+     * @param fax
+     * @return
+     */
+    public static boolean checkFax(String fax) {
+        String regex = &quot;^(0\\d{2}-\\d{8}(-\\d{1,4})?)|(0\\d{3}-\\d{7,8}(-\\d{1,4})?)$&quot;;
+        return check(fax, regex);
+    }
+
+    /**
+     * 验证QQ号码
+     *
+     * @param QQ
+     * @return
+     */
+    public static boolean checkQQ(String QQ) {
+        String regex = &quot;^[1-9][0-9]{4,} $&quot;;
+        return check(QQ, regex);
+    }
+}</code></pre>
+<h3 id="3-接口"><a href="#3-接口" class="headerlink" title="3. 接口"></a>3. 接口</h3><p>创建 <strong>ApiSmsController</strong></p>
+<pre><code class="java">package com.frankeleyn.srb.sms.controller.api;
+
+@Api(&quot;短信接口&quot;)
+@RestController
+@CrossOrigin
+@RequestMapping(&quot;/api/sms&quot;)
+public class ApiSmsController {
+
+    @Autowired
+    private SmsService smsService;
+
+    @ApiOperation(&quot;获取验证码&quot;)
+    @GetMapping(&quot;/send/{mobile}&quot;)
+    public R send(@ApiParam(&quot;手机号码&quot;) @PathVariable(&quot;mobile&quot;) String mobile) {
+        // 校验手机号
+        boolean checkCellphone = RegexValidateUtils.checkCellphone(mobile);
+        Assert.isTrue(checkCellphone, ResponseEnum.MOBILE_ERROR);
+        // 调用业务层的发送短信流程
+        smsService.send(mobile);
+        return R.ok();
+    }
+
+}
+</code></pre>
+<h2 id="三、配置-Swagger"><a href="#三、配置-Swagger" class="headerlink" title="三、配置 Swagger"></a>三、配置 Swagger</h2><h3 id="1-在-serive-sms-配置"><a href="#1-在-serive-sms-配置" class="headerlink" title="1. 在 serive-sms 配置"></a>1. 在 serive-sms 配置</h3><pre><code class="java">package com.frankeleyn.srb.sms.config;
+
+@EnableSwagger2
+@Configuration
+public class Swagger2Config {
+
+    @Bean
+    public Docket coreApiConfig() {
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+                  .apiInfo(adminApiInfo())
+                  .groupName(&quot;smsApi&quot;)
+                  .select()
+                   // 扫描 Controller 下面的 admin 包
+                  .paths(Predicates.and(PathSelectors.regex(&quot;/.*&quot;)))
+                  .build();
+        return docket;
+    }
+
+    private ApiInfo adminApiInfo(){
+
+        return new ApiInfoBuilder()
+                .title(&quot;尚融宝短信系统-API文档&quot;)
+                .description(&quot;本文档描述了尚融宝短信系统接口&quot;)
+                .version(&quot;1.0&quot;)
+                .contact(new Contact(&quot;Frankeleyn&quot;, &quot;https://githubfast.com/Frankeleyns/&quot;, &quot;2582726641@qq.com&quot;))
+                .build();
+    }
+
+}</code></pre>
+<h3 id="2-测试"><a href="#2-测试" class="headerlink" title="2. 测试"></a>2. 测试</h3><p>打开 <a href="http://localhost:8120/swagger-ui.html#/，查看是否生成了" target="_blank" rel="noopener">http://localhost:8120/swagger-ui.html#/，查看是否生成了</a> Swagger2 文档</p>
+<h1 id="02-阿里云文件存储"><a href="#02-阿里云文件存储" class="headerlink" title="02-阿里云文件存储"></a>02-阿里云文件存储</h1><h2 id="一、创建云存储微服务"><a href="#一、创建云存储微服务" class="headerlink" title="一、创建云存储微服务"></a>一、创建云存储微服务</h2><h3 id="1-创建模块-service-oss"><a href="#1-创建模块-service-oss" class="headerlink" title="1. 创建模块 service-oss"></a>1. 创建模块 service-oss</h3><h3 id="2-引入依赖-1"><a href="#2-引入依赖-1" class="headerlink" title="2. 引入依赖"></a>2. 引入依赖</h3><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.frankeleyn&lt;/groupId&gt;
+    &lt;artifactId&gt;service-base&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!-- 单元测试 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;!-- 阿里云 OSS --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.aliyun.oss&lt;/groupId&gt;
+    &lt;artifactId&gt;aliyun-sdk-oss&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;!-- 日期工具栏依赖 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;joda-time&lt;/groupId&gt;
+    &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="3-配置文件-1"><a href="#3-配置文件-1" class="headerlink" title="3. 配置文件"></a>3. 配置文件</h3><pre><code class="properties">server.port=8130
+
+# =============== 阿里云 OSS 配置 ===============
+aliyun.sms.endpoint=你的endpoint
+aliyun.sms.key-id=你的keyid
+aliyun.sms.key-secret=你的keysecret</code></pre>
+<h3 id="4-启动类-1"><a href="#4-启动类-1" class="headerlink" title="4. 启动类"></a>4. 启动类</h3><pre><code class="java">package com.frankeleyn.srb.oss;
+
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@ComponentScan(basePackages = {&quot;com.frankeleyn.srb&quot;,&quot;com.frankeleyn.common&quot;})
+public class ServiceOssApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceOssApplication.class, args);
+    }
+}</code></pre>
+<h3 id="5-读取常量-1"><a href="#5-读取常量-1" class="headerlink" title="5. 读取常量"></a>5. 读取常量</h3><p>创建类 <strong>OssProperties</strong> </p>
+<pre><code class="java">package com.frankeleyn.srb.oss.utils;
+
+@Data
+@Component
+@ConfigurationProperties(prefix = &quot;aliyun.oss&quot;)
+public class OssProperties implements InitializingBean {
+
+    private String endpoint;
+    private String keyId;
+    private String keySecret;
+    private String bucketName;
+
+    public static String ENDPOINT;
+    public static String KEY_ID;
+    public static String KEY_SECRET;
+    public static String BUCKET_NAME;
+
+    //当私有成员被赋值后，此方法自动被调用，从而初始化常量
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        ENDPOINT = endpoint;
+        KEY_ID = keyId;
+        KEY_SECRET = keySecret;
+        BUCKET_NAME = bucketName;
+    }
+}</code></pre>
+<h2 id="二、文件上传"><a href="#二、文件上传" class="headerlink" title="二、文件上传"></a>二、文件上传</h2><h3 id="1-业务-1"><a href="#1-业务-1" class="headerlink" title="1. 业务"></a>1. 业务</h3><h4 id="①-创建-OssService"><a href="#①-创建-OssService" class="headerlink" title="① 创建 OssService"></a>① 创建 OssService</h4><pre><code class="java">package com.frankeleyn.srb.oss.service;
+
+public interface FileService {
+
+    /**
+     * 文件上传
+     * @param file
+     * @param module
+     * @return 上传地址
+     */
+    String upload(MultipartFile file, String module);
+}</code></pre>
+<h4 id="②-创建-OssServiceImpl"><a href="#②-创建-OssServiceImpl" class="headerlink" title="② 创建 OssServiceImpl"></a>② 创建 OssServiceImpl</h4><pre><code class="java">package com.frankeleyn.srb.oss.service.impl;
+
+@Service
+public class FileServiceImpl implements FileService {
+
+    private String urlPre = &quot;https://&quot; + OssProperties.BUCKET_NAME + &quot;.&quot; + OssProperties.ENDPOINT + &quot;/&quot;;
+
+    @Override
+    public String upload(MultipartFile file, String module) {
+        // 1. 创建 OSS 连接
+        OSS client = new OSSClientBuilder().build(OssProperties.ENDPOINT, OssProperties.KEY_ID, OssProperties.KEY_SECRET);
+
+        // 2. 定义上传路径规则: 模块名/日期/文件名,例 user/2022/02/11/uuid.png
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern(&quot;yyyy/MM/dd&quot;));
+        String uuid = UUID.randomUUID().toString();
+        String ext = StringUtils.getFilenameExtension(file.getOriginalFilename());
+        String path = module + &quot;/&quot; + date + &quot;/&quot; + uuid + &quot;.&quot; + ext;
+
+        // 3. 上传文件
+        boolean exist = client.doesBucketExist(OssProperties.BUCKET_NAME);
+        if(!exist) {
+            // 如果桶不存在则创建
+            client.createBucket(OssProperties.BUCKET_NAME);
+            client.setBucketAcl(OssProperties.BUCKET_NAME, CannedAccessControlList.PublicRead);
+        }
+        try {
+            client.putObject(OssProperties.BUCKET_NAME, path, file.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 4. 关闭连接
+        client.shutdown();
+
+        // 5. 返回文件上传地址 https://桶名.节点名/模块名/日期/文件名 例: https://bucket.shenzhen/user/2022/02/11/uuid.png
+        return  urlPre + path;
+    }
+
+}</code></pre>
+<h3 id="2-接口"><a href="#2-接口" class="headerlink" title="2. 接口"></a>2. 接口</h3><p>创建 <strong>FileController</strong></p>
+<pre><code class="java">package com.frankeleyn.srb.oss.controller.api;
+
+@Api(&quot;文件接口&quot;)
+@CrossOrigin
+@RestController
+@RequestMapping(&quot;/api/file&quot;)
+public class FileController {
+
+    @Autowired
+    private FileService fileService;
+
+    @ApiOperation(&quot;文件上传&quot;)
+    @PostMapping(&quot;/upload&quot;)
+    public R upload(@ApiParam(&quot;待上传的文件&quot;) MultipartFile file, @ApiParam(&quot;模块，表示上传的文件属于哪个项目&quot;) String module) {
+        String uploadUrl = fileService.upload(file, module);
+        return R.ok(&quot;fileUrl&quot;, uploadUrl);
+    }
+}</code></pre>
+<h2 id="三、文件删除"><a href="#三、文件删除" class="headerlink" title="三、文件删除"></a>三、文件删除</h2><h3 id="1-业务-2"><a href="#1-业务-2" class="headerlink" title="1. 业务"></a>1. 业务</h3><h4 id="①-修改-OssService"><a href="#①-修改-OssService" class="headerlink" title="① 修改 OssService"></a>① 修改 OssService</h4><p>添加删除文件的方法</p>
+<pre><code class="java">/**
+ * 删除文件
+ * @param url
+ */
+void removeFile(String url);</code></pre>
+<h4 id="②-修改-OssServiceImpl"><a href="#②-修改-OssServiceImpl" class="headerlink" title="② 修改 OssServiceImpl"></a>② 修改 OssServiceImpl</h4><p>添加删除文件的方法</p>
+<pre><code class="java">@Override
+public void removeFile(String url) {
+    // 1. 创建 OSS 实例
+    OSS client = new OSSClientBuilder().build(OssProperties.ENDPOINT, OssProperties.KEY_ID, OssProperties.KEY_SECRET);
+
+    // 2. 删除文件
+    String objectName = url.substring(urlPre.length());
+    client.deleteObject(OssProperties.BUCKET_NAME, objectName);
+
+    // 3. 关闭 OSS
+    client.shutdown();
+}</code></pre>
+<h3 id="2-接口-1"><a href="#2-接口-1" class="headerlink" title="2. 接口"></a>2. 接口</h3><p>在 <strong>FileController</strong> 中添加删除的方法：</p>
+<pre><code class="java">@ApiOperation(&quot;文件删除&quot;)
+@DeleteMapping(&quot;/remove&quot;)
+public R remove(@ApiParam(&quot;待删除文件的 url&quot;) String url) {
+    fileService.removeFile(url);
+    return R.ok();
+}</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Srb">Srb</a>
+              
+              <span id="/2022/02/11/Srb-6-阿里云服务/" class="visitors leancloud_visitors" data-flag-title="Srb(六):阿里云服务">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Srb(六):阿里云服务&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

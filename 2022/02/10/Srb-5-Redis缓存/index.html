@@ -130,7 +130,7 @@
             <h1 id="Srb-五-Redis缓存"><a href="#Srb-五-Redis缓存" class="headerlink" title="Srb(五):Redis缓存"></a>Srb(五):Redis缓存</h1><p>项目地址：</p>
 <p><a href="https://githubfast.com/Frankeleyns/srb-admin" target="_blank" rel="noopener">前端项目 srb-admin</a></p>
 <p><a href="https://githubfast.com/Frankeleyns/Srb" target="_blank" rel="noopener">后端项目 srb</a></p>
-<h1 id="01-集成-Redis-缓存"><a href="#01-集成-Redis-缓存" class="headerlink" title="01-集成 Redis 缓存"></a>01-集成 Redis 缓存</h1><h2 id="一、场景"><a href="#一、场景" class="headerlink" title="一、场景"></a>一、场景</h2><p>由于数据字典的变化不是很频繁，而且系统对数据字典访问较为频繁，所以我们有必要将数据字典的数据存入缓存，提高系统访问速度，这里我选择的是 <strong>Redis</strong> ( 不知道 Redis 的可自行百度) 作为缓存插件。</p>
+<h1 id="01-集成-Redis-缓存"><a href="#01-集成-Redis-缓存" class="headerlink" title="01-集成 Redis 缓存"></a>01-集成 Redis 缓存</h1><h2 id="一、场景"><a href="#一、场景" class="headerlink" title="一、场景"></a>一、场景</h2><p>由于数据字典的变化不是很频繁，而且系统对数据字典访问较为频繁，所以我们有必要将数据字典的数据存入缓存，提高系统访问速度，这里我选择的是 <strong>Redis</strong> 作为缓存插件。</p>
 <h2 id="二、引入-Redis"><a href="#二、引入-Redis" class="headerlink" title="二、引入 Redis"></a>二、引入 Redis</h2><h3 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1. 引入依赖"></a>1. 引入依赖</h3><p>在 <strong>service-base</strong> 中引入 redis 的依赖：</p>
 <pre><code class="xml">&lt;!-- spring boot redis缓存引入 --&gt;
 &lt;dependency&gt;

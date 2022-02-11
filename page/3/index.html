@@ -128,6 +128,52 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/09/20/EffectiveJava-5-%E8%A6%86%E7%9B%96equals%E6%97%B6%E8%AF%B7%E9%81%B5%E5%AE%88%E7%BA%A6%E5%AE%9A/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(五)：覆盖equals时请遵守约定" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/09/20/EffectiveJava-5-%E8%A6%86%E7%9B%96equals%E6%97%B6%E8%AF%B7%E9%81%B5%E5%AE%88%E7%BA%A6%E5%AE%9A/">
+        <p class="h4 index-header">Effective Java(五)：覆盖equals时请遵守约定</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">覆盖equals时请遵守约定在你覆盖类的equals方法时需要遵守一定的约定：
+
+自反性（reflexive）：对于任何非null的引用值x,x.equals(x)必须返回true。
+对称性（symmetric）：对于任何非null的引用值x和y，当且仅当y.equals(x)返回true时，x.equals(y)必须返回true。
+传递性（transitive）：对于任何非null的引用值x,y **和z，如果x.equals(y)返回true，并且y.equals(z)也返回true，那么x.equals(z)也必须返回true**。
+一致性（consistent）：对于任何非null的引用值x和y，只要equals的比较操作在对象中所用的信息没有被修改，多次调用x.equals(y)就会一致的返回true，或一致的返回false。
+对于任何非null的引用值x，x.equals(null)必须返回false。
+
+下面有一个破坏对称性的例子：
+//Broken - violates symmetry
+public final class CaseInsensitiveString </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-20&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/08/30/EffectiveJava-4-try-with-resources%E4%BC%98%E4%BA%8Etry-finally/" target="_self">
           <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(四)：try-with-resources优于try-finally" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -578,87 +624,6 @@ publ</div>
           <i class="iconfont icon-tag"></i>
           
             <a href="/tags/%E9%9D%A2%E8%AF%95">面试</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/02/Linux-3-%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/" target="_self">
-          <img src="https://i.loli.net/2019/11/02/moOZsLvjhH2XtqS.jpg" srcset="/img/loading.gif" alt="Linux(三):实用指令" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/02/Linux-3-%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/">
-        <p class="h4 index-header">Linux(三):实用指令</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">实用指令Linux系统的运行级别0:关机  
-1:单用户(找回丢失密码)
-2:多用户无网络服务
-3:多用户有网络服务
-4:保留
-5:图形界面
-6:重启
-
-命令 init [0||num]
-
-系统运行级别配置文件： /etc/inittab
-
-如何修改已经忘记密码
-首先，在进入启动页面的时候按e键，然后会进入下面这个页面
-
-将光标移动到下图那一行
-
-在行尾添加 init=/bin/sh,
-
-添加完，按Ctrl + X执行，即可进入单用户模式
-
-然后，就可以修改密码了
-
-这里可以看见会字符不可见，你需要输入LANG=en，才能让字符可见
-
-最后,执行exec /sbin/init即可退出单用户模式
-
-
-帮助命令介绍当你对某个指令不收悉的时候，就可以使用帮助指令
-获得帮助信息
-语法
-man [命令||配置文件]
-
-命令演示
-[root@localhost ~]# man ls
-输入命令按回车,
-
-
-
-ls加-a可以显示隐藏文件
-
-ls加-l可以以另外的列表形式显示
-
-[root@localhost home]# ls -a
-.  ..  crg  qy
-[root@localhost hom</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Linux">Linux</a>&nbsp;
           
         
       </div>

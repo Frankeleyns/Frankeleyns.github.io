@@ -128,6 +128,69 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/09/26/EffectiveJava-6-%E4%BD%BF%E5%8F%AF%E5%8F%98%E6%80%A7%E6%9C%80%E5%B0%8F/" target="_self">
+          <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(六)：使可变性最小" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2020/09/26/EffectiveJava-6-%E4%BD%BF%E5%8F%AF%E5%8F%98%E6%80%A7%E6%9C%80%E5%B0%8F/">
+        <p class="h4 index-header">Effective Java(六)：使可变性最小</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">使可变性最小Java类库包含许多不可变类，其中有String、基本类型的包装类、BigInteger和BigDecimal。这些不可变类比可变类更加易于设计、实现和使用。
+使类要不可变，有五条原则：
+
+不要提供任何会修改对象状态的方法(也称设值的方法，比如Setter)。
+
+保证类不会被扩展。
+
+声明所有的域都是final的。
+
+声明所有的域都是私有的。
+
+确保对于任何可变组件的互斥访问。
+
+
+下面举一个例子：
+public final class Complex {
+    private final double re;
+    private final double im;
+
+    public Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+
+    public double realPart(){ return re; }
+    public double imaginaryPart(){ return im; }
+
+    public Complex</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-26&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/09/20/EffectiveJava-5-%E8%A6%86%E7%9B%96equals%E6%97%B6%E8%AF%B7%E9%81%B5%E5%AE%88%E7%BA%A6%E5%AE%9A/" target="_self">
           <img src="https://i.loli.net/2019/12/02/PB4Ty2JlYiqWDCn.jpg" srcset="/img/loading.gif" alt="Effective Java(五)：覆盖equals时请遵守约定" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -562,68 +625,6 @@ ArrayList不需要定义数组长度，在默认长度（默认长度为10）不
           <i class="iconfont icon-tag"></i>
           
             <a href="/tags/Java">Java</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/17/%E9%9D%A2%E8%AF%95-1/" target="_self">
-          <img src="https://i.loli.net/2019/11/17/HubsPjzmlQtqX2c.jpg" srcset="/img/loading.gif" alt="面试题(一)" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/17/%E9%9D%A2%E8%AF%95-1/">
-        <p class="h4 index-header">面试题(一)</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">面试题我一个好朋友，在BOSS上投简历收到了面试邀请，这是他面试回来说的面试题，我整理了一下并查了答案，以免自己去面试的时候不会
-下面是面试问题：
-
-1.JAVA数据类型以及所占字节
-2.手写三个单例模式
-3.ArrayList与LinkList区别
-4.HashSet原理
-5.常用的Linux命令
-6.JAVA反射机制
-7.手画一个线程状态图
-8.手写三个线程交替打印ABC
-9.什么是TCP三次握手，为什么四次挥手断开连接，为什么
-10.手写一个冒泡算法
-11.SpringMVC是怎么运行的？
-12.索引类型及作用
-
-下面面试答案：
-1.JAVA数据类型及所占字节整型:  byte--1字节    short--2字节    int--4字节    long--8字节
-浮点型:  float--4字节    double--8字节
-字符型:  char--2字节
-布尔型:  boolean--1字节
-2.单例模式的三种实现/**
-* 1.懒汉式,默认不实例化，什么时候用什么时候创建对象
-* 优点：懒加载启动快，资源占用小，使用时才实例化，无锁。
-* 缺点：非线程安全。
-*/
-publ</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-17&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E9%9D%A2%E8%AF%95">面试</a>&nbsp;
           
         
       </div>

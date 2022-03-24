@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="personal blog">
+  <meta name="author" content="Frankeleyn">
+  <meta name="keywords" content="">
+  <title>Redis 缓存问题与分布式锁 ~ Frankeleyn Blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Frankeleyn Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">主页</a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://s2.loli.net/2022/03/23/IFBAtlWoXUkxSJN.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">Wednesday, March 23rd 2022, 4:30 pm</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Redis-缓存问题与分布式锁"><a href="#Redis-缓存问题与分布式锁" class="headerlink" title="Redis 缓存问题与分布式锁"></a>Redis 缓存问题与分布式锁</h1><h2 id="一、缓存问题"><a href="#一、缓存问题" class="headerlink" title="一、缓存问题"></a>一、缓存问题</h2><h3 id="1-什么是缓存穿透？"><a href="#1-什么是缓存穿透？" class="headerlink" title="1. 什么是缓存穿透？"></a>1. 什么是缓存穿透？</h3><p>缓存穿透是由于 <strong>key 不存在</strong>导致的。</p>
+<p><strong>解决办法：</strong></p>
+<p>如果 key 在 redis 中没有数据，数据库也没有数据，我们就将这个不存在的 key 创建出来，并设置它的值为空。考虑到一种情况，后面 key 所对应的数据在数据库中有了数据，而此时 redis 中没有数据，数据不一致，为了避免这种情况，我们在<strong>将 redis 的 key 设置为空的同时，还会给它设置较短的过期时间</strong>。</p>
+<h3 id="2-什么是缓存击穿？"><a href="#2-什么是缓存击穿？" class="headerlink" title="2. 什么是缓存击穿？"></a>2. 什么是缓存击穿？</h3><p>缓存击穿是由于 <strong>key 过期</strong>导致的，即 key 在 redis 中有数据，但是这个 key 过期了，所有请求都跑去获取数据库中的数据。</p>
+<p><strong>解决办法：</strong></p>
+<p>如果有 1000 个请求，原本查询 redis 而现在都去查询数据库，这样数据库压力就会很大。我们会只放一个请求去查询数据库，让剩下 999 个请求先等待，等那一个请求查询完，并将数据存入 redis 后，剩下的 999 个请求都去请求 redis。</p>
+<h3 id="3-什么是缓存雪崩？"><a href="#3-什么是缓存雪崩？" class="headerlink" title="3. 什么是缓存雪崩？"></a>3. 什么是缓存雪崩？</h3><p>缓存雪崩则是由于 <strong>大量 key 过期</strong>导致的。</p>
+<p><strong>解决办法：</strong></p>
+<p>让 redis 的 key 过期时间不一致，不要设置同一个时间过期。</p>
+<h2 id="二、分布式锁的演进过程"><a href="#二、分布式锁的演进过程" class="headerlink" title="二、分布式锁的演进过程"></a>二、分布式锁的演进过程</h2><p>要学习分布式锁，我们就要知道它是怎么来的，为什么要用分布式锁，下面我就来演示一下：</p>
+<p>现在，我有这样一个需求，每当我访问一次我的微服务，redis 中的值就 +1。</p>
+<h3 id="1-不加锁"><a href="#1-不加锁" class="headerlink" title="1. 不加锁"></a>1. 不加锁</h3><h4 id="1-1-编写测试代码"><a href="#1-1-编写测试代码" class="headerlink" title="1.1 编写测试代码"></a>1.1 编写测试代码</h4><p>创建一个接口</p>
+<pre><code class="java">/**
+ * 测试 Redis 并发问题的接口
+ */
+public interface RedisTestService {
+
+    /**
+     * redis 锁测试 demo1
+     */
+    void redisLockDemo1();
+}</code></pre>
+<p>创建一个实现类</p>
+<pre><code class="java">/**
+ * 测试 Redis 并发问题的实现类
+ */
+@Service
+public class RedisTestServiceImpl implements RedisTestService {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    /**
+     * Redis 锁测试 Demo1
+     */
+    @Override
+    public void redisLockDemo1() {
+        Integer java = (Integer) redisTemplate.opsForValue().get(&quot;java&quot;);
+        // 判断是否为空，空直接返回
+        if (Objects.isNull(java))
+            return;
+        // 不为空，自增后，存到 redis
+        java++;
+        redisTemplate.opsForValue().set(&quot;java&quot;, java);
+    }
+}</code></pre>
+<p>创建一个 Controller</p>
+<pre><code class="java">/**
+ * 测试 redis 分布式锁
+ */
+@RestController
+@RequestMapping(&quot;/api/product/redisTest&quot;)
+public class RedisTestController {
+
+    @Autowired
+    private RedisTestService redisTestService;
+
+    @GetMapping
+    public Result testSetRedis() {
+        redisTestService.redisLockDemo1();
+        return Result.ok();
+    }
+
+}</code></pre>
+<h4 id="1-2-测试"><a href="#1-2-测试" class="headerlink" title="1.2 测试"></a>1.2 测试</h4><p>我们使用 <strong>ab 测试工具</strong>，ab 测试工具是一个 apache 的压力测试工具，可以通过 <strong>yum install -y httpd-tools</strong> 安装。</p>
+<p>在发送请求前，先通过 redis 客户端，将 java 这个 key 的值设置为 0。</p>
+<pre><code class="bash"># 使用 ab 工具发送 5000 次请求，并发数 100
+# 请求地址 http://192.168.200.1:8206/api/product/redisTest
+ab -n 5000 -c 100 http://192.168.200.1:8206/api/product/redisTest</code></pre>
+<p><img src="https://s2.loli.net/2022/03/24/Q2lmEaFJjdorNwI.png" srcset="/img/loading.gif" alt="LockDemo1-1.png"></p>
+<p>查看 redis 中的结果：</p>
+<p><img src="https://s2.loli.net/2022/03/24/Q7CvRxHlBYFqaZX.png" srcset="/img/loading.gif" alt="LockDemo1-2.png"></p>
+<p>明明是 5000 次请求，结果却是 227。</p>
+<h4 id="1-3-问题"><a href="#1-3-问题" class="headerlink" title="1.3 问题"></a>1.3 问题</h4><p>出现 227，这是<strong>因为时间差的关系</strong>，假设有三个线程，线程1，线程2，线程3，因为没加锁，所以它们三就会前后脚获取到了 java 这个 key，线程1 拿到的值为 0，接着自增并将 1 存了进去，线程2 拿到的值也是 0，自增然后将 1 存了进去，线程3 拿到值的还是 0，自增并存进了 redis，最后 redis 的结果就是只有 1。这就是为什么 100 个线程并发，最后却只有 227。</p>
+<h3 id="2-本地锁"><a href="#2-本地锁" class="headerlink" title="2. 本地锁"></a>2. 本地锁</h3><h4 id="2-1-编写测试代码"><a href="#2-1-编写测试代码" class="headerlink" title="2.1 编写测试代码"></a>2.1 编写测试代码</h4><p>给 <strong>RedisTestServiceImpl</strong>  添加一个新方法：</p>
+<pre><code class="java">    /**
+     * redis 锁测试 demo2 --&gt; 本地锁
+     */
+    @Override
+    public synchronized void redisLockDemo2() {
+        Integer java = (Integer) redisTemplate.opsForValue().get(&quot;java&quot;);
+        // 判断是否为空，空直接返回
+        if (Objects.isNull(java))
+            return;
+        // 不为空，自增后，存到 redis
+        java++;
+        redisTemplate.opsForValue().set(&quot;java&quot;, java);
+    }</code></pre>
+<h4 id="2-2-测试"><a href="#2-2-测试" class="headerlink" title="2.2 测试"></a>2.2 测试</h4><p>将 java 这个 key 的值重新设置为 0，再使用 ab工具请求：</p>
+<p><img src="https://s2.loli.net/2022/03/24/Q2lmEaFJjdorNwI.png" srcset="/img/loading.gif" alt="LockDemo1-1.png"></p>
+<p>查看 redis 结果：</p>
+<p><img src="https://s2.loli.net/2022/03/24/Yzx5BNFeOQDuTiy.png" srcset="/img/loading.gif" alt="LockDemo-5000.png"></p>
+<p>这次结果和预期的一样，但这样就没有问题了吗？</p>
+<h4 id="2-3-问题"><a href="#2-3-问题" class="headerlink" title="2.3 问题"></a>2.3 问题</h4><p>上面的是微服务单实例结果没问题，现在我们部署微服务，一般都是部署为集群，然后用网关进行反向代理。</p>
+<p>所以，接下来启动 8206，8207，8208 三个实例：</p>
+<p><img src="https://s2.loli.net/2022/03/24/T8SteVCIK7jvgaN.png" srcset="/img/loading.gif" alt="ThreeServies.png"></p>
+<p>再次 ab 测试：</p>
+<pre><code class="bash">ab -n 5000 -c 100 http://192.168.200.1/api/product/redisTest</code></pre>
+<p>结果：</p>
+<p><img src="https://s2.loli.net/2022/03/24/KGQrEnp4glm6CM2.png" srcset="/img/loading.gif" alt="LockDemo2-1Problem.png"></p>
+<p>出事了，微服务成为集群后，本地锁就会失效。</p>
+<h3 id="3-分布式锁"><a href="#3-分布式锁" class="headerlink" title="3. 分布式锁"></a>3. 分布式锁</h3><p>随着业务发展的需要，现在的互联网项目大多从单体系统转为分布式集群系统，而分布式系统多线程，多进程，还大多部署在不同机器上，连 jvm 都不是同一个，所以我们就需要跨JVM的互斥机制来控制共享资源的访问，这就是分布式锁要解决的问题。</p>
+<p><strong>分布式锁主流的实现方案：</strong></p>
+<ol>
+<li><p>基于数据库实现分布式锁</p>
+</li>
+<li><p>基于缓存（Redis等）</p>
+</li>
+<li><p>基于Zookeeper</p>
+</li>
+</ol>
+<p><strong>每一种分布式锁解决方案都有各自的优缺点：</strong></p>
+<ol>
+<li><p>性能：redis最高</p>
+</li>
+<li><p>可靠性：zookeeper最高(了解)</p>
+</li>
+</ol>
+<p>这里我们就是使用基于 redis 的分布式锁实现。</p>
+<p><img src="https://s2.loli.net/2022/03/24/JVGl3XPM6r24AFC.png" srcset="/img/loading.gif" alt="Redis分布式锁1流程.png"></p>
+<h4 id="3-1-Redis-实现分布式锁"><a href="#3-1-Redis-实现分布式锁" class="headerlink" title="3.1 Redis 实现分布式锁"></a>3.1 Redis 实现分布式锁</h4><p>给 <strong>RedisTestServiceImpl</strong>  添加一个新方法：</p>
+<pre><code class="java">    /**
+     * redis 锁测试 Demo3 --&gt; 分布式锁
+     */
+    @Override
+    public void redisLockDemo3() {
+        Boolean lock = redisTemplate.opsForValue().setIfAbsent(&quot;lock&quot;, &quot;111&quot;);
+
+        if (lock) {
+            // 获取到锁
+            Integer java = (Integer) redisTemplate.opsForValue().get(&quot;java&quot;);
+            // 判断是否为空，空直接返回
+            if (Objects.isNull(java))
+                return;
+            // 不为空，自增后，存到 redis
+            java++;
+            redisTemplate.opsForValue().set(&quot;java&quot;, java);
+
+            // 释放锁
+            redisTemplate.delete(&quot;lock&quot;);
+        } else {
+
+            try {
+                // 没有获取到锁睡 100 毫秒
+                TimeUnit.MILLISECONDS.sleep(1_00L);
+                // 重试获取锁
+                redisLockDemo3();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }</code></pre>
+<p>测试</p>
+<p>重启服务集群，将 key 设置为 0，重新进行 ab 测试：</p>
+<p><img src="https://s2.loli.net/2022/03/24/Q2lmEaFJjdorNwI.png" srcset="/img/loading.gif" alt="LockDemo1-1.png"></p>
+<p>查看结果：</p>
+<p><img src="https://s2.loli.net/2022/03/24/Yzx5BNFeOQDuTiy.png" srcset="/img/loading.gif" alt="LockDemo-5000.png"></p>
+<p>与预期结果一样。</p>
+<h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><p>如果我们在获取锁后的执行<strong>业务逻辑</strong>中出现了异常，这个时候就会出现<strong>死锁</strong>的问题。</p>
+<h4 id="3-2-优化：设置锁的过期时间"><a href="#3-2-优化：设置锁的过期时间" class="headerlink" title="3.2 优化：设置锁的过期时间"></a>3.2 优化：设置锁的过期时间</h4><p>为了解决，死锁的问题，所以我们在设置锁的时候，设置一下过期时间：</p>
+<p><img src="https://s2.loli.net/2022/03/24/5PCklVhxWpc7MIK.png" srcset="/img/loading.gif" alt="Redis分布式锁2流程.png"></p>
+<p>给 <strong>RedisTestServiceImpl</strong>  添加一个新方法：</p>
+<pre><code class="java">    /**
+     * redis 锁测试 Demo4 --&gt; 分布式锁，设置过期时间
+     */
+    @Override
+    public void redisLockDemo4() {
+        Boolean lock = redisTemplate.opsForValue().setIfAbsent(&quot;lock&quot;, &quot;111&quot;, 8, TimeUnit.SECONDS);
+
+        if (lock) {
+            // 获取到锁
+            Integer java = (Integer) redisTemplate.opsForValue().get(&quot;java&quot;);
+            // 判断是否为空，空直接返回
+            if (Objects.isNull(java))
+                return;
+            // 不为空，自增后，存到 redis
+            java++;
+            redisTemplate.opsForValue().set(&quot;java&quot;, java);
+
+            // 释放锁
+            redisTemplate.delete(&quot;lock&quot;);
+        } else {
+
+            try {
+                // 没有获取到锁睡 100 毫秒
+                TimeUnit.MILLISECONDS.sleep(1_00L);
+                // 重试获取锁
+                redisLockDemo3();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }</code></pre>
+<h5 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h5><p>但这个时候可能会出现这样一种情况：</p>
+<p>① 访问实例1，在执行业务逻辑的时候卡住了( 不是崩了 )，8秒后业务流程没执行完锁过期了。</p>
+<p>② 访问实例2，获取到锁执行业务逻辑</p>
+<p>③ 访问实例1又恢复了，开始调用释放锁，这时它释放的是访问实例2的锁，导致访问实例2只执行了1秒钟，锁就被释放了，</p>
+<p>④ 访问实例3发现它可以加锁成功，然后就执行业务流程，执行完它的结果覆盖了访问实例2，等于没加锁</p>
+<p>这就是 <strong>锁误删</strong></p>
+<h4 id="3-3-优化：设置-uuid"><a href="#3-3-优化：设置-uuid" class="headerlink" title="3.3 优化：设置 uuid"></a>3.3 优化：设置 uuid</h4><p>要解决锁误删的问题，我们在设置锁的时候，给这个锁指定唯一值，只有该线程中存的值与redis锁的值一样才能删这个锁。</p>
+<p><img src="https://s2.loli.net/2022/03/24/rQUyIvG2FPStXfY.png" srcset="/img/loading.gif" alt="Redis分布式锁3流程.png"></p>
+<p>给 <strong>RedisTestServiceImpl</strong>  添加一个新方法：</p>
+<pre><code class="java">    /**
+     * redis 锁测试 Demo5 --&gt; 分布式锁，设置过期时间和 UUID
+     */
+    @Override
+    public void redisLockDemo5() {
+        // 设置锁的值为 uuid
+        String uuid = UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;);
+        Boolean lock = redisTemplate.opsForValue().setIfAbsent(&quot;lock&quot;, uuid, 8, TimeUnit.SECONDS);
+
+        if (lock) {
+            // 获取到锁
+            Integer java = (Integer) redisTemplate.opsForValue().get(&quot;java&quot;);
+            // 判断是否为空，空直接返回
+            if (Objects.isNull(java))
+                return;
+            // 不为空，自增后，存到 redis
+            java++;
+            redisTemplate.opsForValue().set(&quot;java&quot;, java);
+
+            // 判断是否是自己的锁
+            if(redisTemplate.opsForValue().get(&quot;lock&quot;).equals(uuid)) {
+                // 释放锁
+                redisTemplate.delete(&quot;lock&quot;);
+            }
+        } else {
+
+            try {
+                // 没有获取到锁睡 100 毫秒
+                TimeUnit.MILLISECONDS.sleep(1_00L);
+                // 重试获取锁
+                redisLockDemo3();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }</code></pre>
+<h5 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h5><p>还是那个流程：</p>
+<p>① 访问实例1，此时锁 uuid 为 1，在执行完判断是自己的锁，准备释放锁的时候卡住了（气人不气人），8秒后锁过期了。</p>
+<p>② 访问实例2，获取到锁 uuid 为 2，执行业务逻辑</p>
+<p>③ 访问实例1又恢复了，因为访问实例1已经进入了判断自己的锁的 if 里面，所以它可以释放锁，但它此时释放的是访问实例2的锁，导致访问实例2没执行完，锁就被释放了，又和没加锁一样</p>
+<p>这是因为判断是否自己锁，然后删除锁是两个步骤，会有时间差，也就是这个操作<strong>不保证原子性</strong>。</p>
+<h4 id="3-4-优化：LUA-脚本"><a href="#3-4-优化：LUA-脚本" class="headerlink" title="3.4 优化：LUA 脚本"></a>3.4 优化：LUA 脚本</h4><p>要解决删除锁的原子性问题，我们就要使用 <strong>LUA脚本</strong>，它可以把那两步一步化，就像事务一样，要么两步一起成功，要么两步一起失败。</p>
+<p>给 <strong>RedisTestServiceImpl</strong>  添加一个新方法：</p>
+<pre><code class="java">    /**
+     * redis 锁测试 Demo6 --&gt; 分布式锁，设置过期时间和 UUID, 使用 LUA 脚本释放锁
+     */
+    @Override
+    public void redisLockDemo6() {
+        // 设置锁的值为 uuid
+        String uuid = UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;);
+        Boolean lock = redisTemplate.opsForValue().setIfAbsent(&quot;lock&quot;, uuid, 8, TimeUnit.SECONDS);
+
+        if (lock) {
+            // 获取到锁
+            Integer java = (Integer) redisTemplate.opsForValue().get(&quot;java&quot;);
+            // 判断是否为空，空直接返回
+            if (Objects.isNull(java))
+                return;
+            // 不为空，自增后，存到 redis
+            java++;
+            redisTemplate.opsForValue().set(&quot;java&quot;, java);
+            //设置 lua 脚本，判断是否自己的锁，用脚本可以保证原子性
+            DefaultRedisScript&lt;Long&gt; script = new DefaultRedisScript();
+            script.setScriptText(&quot;if redis.call(&#39;get&#39;, KEYS[1]) == ARGV[1] then &quot; +
+                                &quot;return redis.call(&#39;del&#39;, KEYS[1]) &quot; +
+                                &quot;else &quot; +
+                                &quot;return 0 end&quot;);
+            //设置返回类型
+            script.setResultType(Long.class);
+            /*
+             * @param1 script: 脚本
+             * @param2 keys: 要对比的键
+             * @param3 args: 参数
+             */
+            redisTemplate.execute(script, Arrays.asList(&quot;lock&quot;), uuid);
+        } else {
+
+            try {
+                // 没有获取到锁睡 100 毫秒
+                TimeUnit.MILLISECONDS.sleep(1_00L);
+                // 重试获取锁
+                redisLockDemo3();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }</code></pre>
+<h5 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h5><p>用了 LUA 脚本还没完，因为 redis 本身也是有集群的：</p>
+<p>① 如果客户端A 将锁写在了 master 上</p>
+<p>② 在master 将锁同步到 slave 之前，此时好巧不巧，master 挂了</p>
+<p>② 此时 slave 没锁，锁失效</p>
+<h2 id="三、Redisson-解决分布式锁"><a href="#三、Redisson-解决分布式锁" class="headerlink" title="三、Redisson 解决分布式锁"></a>三、Redisson 解决分布式锁</h2><p>Redisson是一个在Redis的基础上实现的Java驻内存数据网格（In-Memory Data Grid）。它可以帮我们管理 Redis，Redisson 和 Redis 的关系，就像 Mycat 和 Mysql，我们可以通过 Redisson 解决我们的分布式锁问题。</p>
+<h3 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1. 引入依赖"></a>1. 引入依赖</h3><pre><code class="xml">&lt;!-- redisson 分布式锁--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.redisson&lt;/groupId&gt;
+    &lt;artifactId&gt;redisson&lt;/artifactId&gt;
+    &lt;version&gt;3.11.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="2-配置文件"><a href="#2-配置文件" class="headerlink" title="2. 配置文件"></a>2. 配置文件</h3><pre><code class="java">/**
+ * redisson配置信息
+ */
+@Data
+@Configuration
+@ConfigurationProperties(&quot;spring.redis&quot;)
+public class RedissonConfig {
+
+    private String host;
+
+    private String addresses;
+
+    private String password;
+
+    private String port;
+
+    private int timeout = 3000;
+    private int connectionPoolSize = 64;
+    private int connectionMinimumIdleSize=10;
+    private int pingConnectionInterval = 60000;
+    private static String ADDRESS_PREFIX = &quot;redis://&quot;;
+
+    /**
+     * 自动装配
+     *
+     */
+    @Bean
+    RedissonClient redissonSingle() {
+        Config config = new Config();
+
+        if(StringUtils.isEmpty(host)){
+            throw new RuntimeException(&quot;host is  empty&quot;);
+        }
+        SingleServerConfig serverConfig = config.useSingleServer()
+                .setAddress(ADDRESS_PREFIX + this.host + &quot;:&quot; + port)
+                .setTimeout(this.timeout)
+                .setPingConnectionInterval(pingConnectionInterval)
+                .setConnectionPoolSize(this.connectionPoolSize)
+                .setConnectionMinimumIdleSize(this.connectionMinimumIdleSize);
+        if(!StringUtils.isEmpty(this.password)) {
+            serverConfig.setPassword(this.password);
+        }
+        return Redisson.create(config);
+    }
+}</code></pre>
+<h3 id="3-使用-Redisson"><a href="#3-使用-Redisson" class="headerlink" title="3. 使用 Redisson"></a>3. 使用 Redisson</h3><p>给 <strong>RedisTestServiceImpl</strong>  添加一个新方法：</p>
+<pre><code class="java">    @Autowired
+    private RedissonClient redissonClient;
+
+    /**
+     * redis 锁测试 Demo7 --&gt; 分布式锁，使用 Redisson 解决分布式锁问题
+     */
+    @Override
+    public void redisLockDemo7() {
+        // 获取锁
+        RLock lock = redissonClient.getLock(&quot;lock&quot;);
+        try {
+            // 抢锁，10秒内一直尝试加锁，加锁成功锁有效期为 10秒
+            if (lock.tryLock(10, 10, TimeUnit.SECONDS)) {
+                try {
+                    // 加锁成功开始操作
+                    Integer java = (Integer) redisTemplate.opsForValue().get(&quot;java&quot;);
+                    // 判断是否为空，空直接返回
+                    if (Objects.isNull(java))
+                        return;
+                    java++;
+                    redisTemplate.opsForValue().set(&quot;java&quot;, java);
+                } catch (Exception e) {
+                    System.out.println(&quot;加锁成功后，出现了异常&quot;);
+                    e.printStackTrace();
+                } finally {
+                    // 释放锁 --&gt; 底层也是使用 LUA 脚本
+                    lock.unlock();
+                }
+            }
+        } catch (InterruptedException e) {
+            System.out.println(&quot;加锁失败&quot;);
+            e.printStackTrace();
+        }
+    }</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Redis">Redis</a>
+              
+              <span id="/2022/03/23/Redis 缓存与分布式锁/" class="visitors leancloud_visitors" data-flag-title="Redis 缓存问题与分布式锁">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Redis 缓存问题与分布式锁&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+
+</body>
+</html>

@@ -128,6 +128,50 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2022/03/23/Redis%20%E7%BC%93%E5%AD%98%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
+          <img src="https://s2.loli.net/2022/03/23/IFBAtlWoXUkxSJN.png" srcset="/img/loading.gif" alt="Redis 缓存问题与分布式锁" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2022/03/23/Redis%20%E7%BC%93%E5%AD%98%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+        <p class="h4 index-header">Redis 缓存问题与分布式锁</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Redis 缓存问题与分布式锁一、缓存问题1. 什么是缓存穿透？缓存穿透是由于 key 不存在导致的。
+解决办法：
+如果 key 在 redis 中没有数据，数据库也没有数据，我们就将这个不存在的 key 创建出来，并设置它的值为空。考虑到一种情况，后面 key 所对应的数据在数据库中有了数据，而此时 redis 中没有数据，数据不一致，为了避免这种情况，我们在将 redis 的 key 设置为空的同时，还会给它设置较短的过期时间。
+2. 什么是缓存击穿？缓存击穿是由于 key 过期导致的，即 key 在 redis 中有数据，但是这个 key 过期了，所有请求都跑去获取数据库中的数据。
+解决办法：
+如果有 1000 个请求，原本查询 redis 而现在都去查询数据库，这样数据库压力就会很大。我们会只放一个请求去查询数据库，让剩下 999 个请求先等待，等那一个请求查询完，并将数据存入 redis 后，剩下的 999 个请求都去请求 redis。
+3. 什么是缓存雪崩？缓存雪崩则是由于 大量 key 过期导致的。
+解决办法：
+让 redis 的 key 过期时间不一致，不要设置同一个时</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2022-03-23&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Redis">Redis</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2022/02/11/Srb-6-%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" target="_self">
           <img src="https://s2.loli.net/2022/01/22/P9IkmlXJwjzu6e1.png" srcset="/img/loading.gif" alt="Srb(六):阿里云服务" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -574,54 +618,6 @@ axios：一个发送Ajax请求的工具</div>
             <a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF">前端技术</a>&nbsp;
           
             <a href="/tags/Vue">Vue</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2022/01/20/%E6%A8%A1%E5%9D%97%E5%8C%96/" target="_self">
-          <img src="https://s2.loli.net/2022/01/20/m9fGiqIxNd3Mgcj.jpg" srcset="/img/loading.gif" alt="模块化" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2022/01/20/%E6%A8%A1%E5%9D%97%E5%8C%96/">
-        <p class="h4 index-header">模块化</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">模块化一、简介js 的模块化就像封装 java 框架一样，在 js 封装的过程叫 模块化。
-1. 案例① 创建 04-module-demo 目录，创建 no-module 目录，创建 a.js
-let name = &#39;奥巴马&#39;
-② 创建 b.js
-let name = &#39;暴暴&#39;
-③ 创建 demo.html
-从这个例子可以看出，name 的值的不确定性很大，a和b两个 js 文件中的同名变量互相干扰。
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scal</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2022-01-20&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF">前端技术</a>&nbsp;
           
         
       </div>
